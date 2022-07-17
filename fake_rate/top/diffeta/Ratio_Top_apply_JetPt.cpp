@@ -29,7 +29,7 @@ void for_doubleflavor_jet(int flavor1, int flavor2, int hadronflavor, float tmp,
         h_tmp->Fill(tmp, Weight);
     }
 }
-void Ratio_Top_apply_nTrack()
+void Ratio_Top_apply_JetPt()
 {
     TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTTo2L2Nu.root");
     TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTWJetsToLNu.root");
@@ -94,95 +94,95 @@ void Ratio_Top_apply_nTrack()
     //-------------
     //  nTracks
     //-------------
-    TH1D *h_Top_btrk_region1_bybin_CR = new TH1D("h_Top_btrk_region1_bybin_CR", "", 30, 0, 30);
-    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_btrk_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_bJetPt_region1_bybin_CR = new TH1D("h_Top_bJetPt_region1_bybin_CR", "", 50, 0, 500);
+    h_Top_bJetPt_region1_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_bJetPt_region1_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_bJetPt_region1_bybin_CR->Sumw2();
 
-    TH1D *h_Top_btrk_region1_SR = new TH1D("h_Top_btrk_region1_SR", "", 30, 0, 30);
-    h_Top_btrk_region1_SR->GetXaxis()->SetTitle("");
-    h_Top_btrk_region1_SR->GetYaxis()->SetTitle("");
-    h_Top_btrk_region1_SR->Sumw2();
+    TH1D *h_Top_bJetPt_region1_SR = new TH1D("h_Top_bJetPt_region1_SR", "", 50, 0, 500);
+    h_Top_bJetPt_region1_SR->GetXaxis()->SetTitle("");
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetTitle("");
+    h_Top_bJetPt_region1_SR->Sumw2();
 
-    TH1D *h_Top_btrk_region2_bybin_CR = new TH1D("h_Top_btrk_region2_bybin_CR", "", 30, 0, 30);
-    h_Top_btrk_region2_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_btrk_region2_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_btrk_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_bJetPt_region2_bybin_CR = new TH1D("h_Top_bJetPt_region2_bybin_CR", "", 50, 0, 500);
+    h_Top_bJetPt_region2_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_bJetPt_region2_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_bJetPt_region2_bybin_CR->Sumw2();
 
-    TH1D *h_Top_btrk_region2_SR = new TH1D("h_Top_btrk_region2_SR", "", 30, 0, 30);
-    h_Top_btrk_region2_SR->GetXaxis()->SetTitle("");
-    h_Top_btrk_region2_SR->GetYaxis()->SetTitle("");
-    h_Top_btrk_region2_SR->Sumw2();
+    TH1D *h_Top_bJetPt_region2_SR = new TH1D("h_Top_bJetPt_region2_SR", "", 50, 0, 500);
+    h_Top_bJetPt_region2_SR->GetXaxis()->SetTitle("");
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetTitle("");
+    h_Top_bJetPt_region2_SR->Sumw2();
 
-    TH1D *h_Top_btrk_region3_bybin_CR = new TH1D("h_Top_btrk_region3_bybin_CR", "", 30, 0, 30);
-    h_Top_btrk_region3_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_btrk_region3_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_btrk_region3_bybin_CR->Sumw2();
+    TH1D *h_Top_bJetPt_region3_bybin_CR = new TH1D("h_Top_bJetPt_region3_bybin_CR", "", 50, 0, 500);
+    h_Top_bJetPt_region3_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_bJetPt_region3_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_bJetPt_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_btrk_region3_SR = new TH1D("h_Top_btrk_region3_SR", "", 30, 0, 30);
-    h_Top_btrk_region3_SR->GetXaxis()->SetTitle("");
-    h_Top_btrk_region3_SR->GetYaxis()->SetTitle("");
-    h_Top_btrk_region3_SR->Sumw2();
+    TH1D *h_Top_bJetPt_region3_SR = new TH1D("h_Top_bJetPt_region3_SR", "", 50, 0, 500);
+    h_Top_bJetPt_region3_SR->GetXaxis()->SetTitle("");
+    h_Top_bJetPt_region3_SR->GetYaxis()->SetTitle("");
+    h_Top_bJetPt_region3_SR->Sumw2();
 
-    TH1D *h_Top_ctrk_region1_bybin_CR = new TH1D("h_Top_ctrk_region1_bybin_CR", "", 30, 0, 30);
-    h_Top_ctrk_region1_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_ctrk_region1_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_ctrk_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_cJetPt_region1_bybin_CR = new TH1D("h_Top_cJetPt_region1_bybin_CR", "", 50, 0, 500);
+    h_Top_cJetPt_region1_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_cJetPt_region1_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_cJetPt_region1_bybin_CR->Sumw2();
 
-    TH1D *h_Top_ctrk_region1_SR = new TH1D("h_Top_ctrk_region1_SR", "", 30, 0, 30);
-    h_Top_ctrk_region1_SR->GetXaxis()->SetTitle("");
-    h_Top_ctrk_region1_SR->GetYaxis()->SetTitle("");
-    h_Top_ctrk_region1_SR->Sumw2();
+    TH1D *h_Top_cJetPt_region1_SR = new TH1D("h_Top_cJetPt_region1_SR", "", 50, 0, 500);
+    h_Top_cJetPt_region1_SR->GetXaxis()->SetTitle("");
+    h_Top_cJetPt_region1_SR->GetYaxis()->SetTitle("");
+    h_Top_cJetPt_region1_SR->Sumw2();
 
-    TH1D *h_Top_ctrk_region2_bybin_CR = new TH1D("h_Top_ctrk_region2_bybin_CR", "", 30, 0, 30);
-    h_Top_ctrk_region2_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_ctrk_region2_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_ctrk_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_cJetPt_region2_bybin_CR = new TH1D("h_Top_cJetPt_region2_bybin_CR", "", 50, 0, 500);
+    h_Top_cJetPt_region2_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_cJetPt_region2_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_cJetPt_region2_bybin_CR->Sumw2();
 
-    TH1D *h_Top_ctrk_region2_SR = new TH1D("h_Top_ctrk_region2_SR", "", 30, 0, 30);
-    h_Top_ctrk_region2_SR->GetXaxis()->SetTitle("");
-    h_Top_ctrk_region2_SR->GetYaxis()->SetTitle("");
-    h_Top_ctrk_region2_SR->Sumw2();
+    TH1D *h_Top_cJetPt_region2_SR = new TH1D("h_Top_cJetPt_region2_SR", "", 50, 0, 500);
+    h_Top_cJetPt_region2_SR->GetXaxis()->SetTitle("");
+    h_Top_cJetPt_region2_SR->GetYaxis()->SetTitle("");
+    h_Top_cJetPt_region2_SR->Sumw2();
 
-    TH1D *h_Top_ctrk_region3_bybin_CR = new TH1D("h_Top_ctrk_region3_bybin_CR", "", 30, 0, 30);
-    h_Top_ctrk_region3_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_ctrk_region3_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_ctrk_region3_bybin_CR->Sumw2();
+    TH1D *h_Top_cJetPt_region3_bybin_CR = new TH1D("h_Top_cJetPt_region3_bybin_CR", "", 50, 0, 500);
+    h_Top_cJetPt_region3_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_cJetPt_region3_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_cJetPt_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_ctrk_region3_SR = new TH1D("h_Top_ctrk_region3_SR", "", 30, 0, 30);
-    h_Top_ctrk_region3_SR->GetXaxis()->SetTitle("");
-    h_Top_ctrk_region3_SR->GetYaxis()->SetTitle("");
-    h_Top_ctrk_region3_SR->Sumw2();
+    TH1D *h_Top_cJetPt_region3_SR = new TH1D("h_Top_cJetPt_region3_SR", "", 50, 0, 500);
+    h_Top_cJetPt_region3_SR->GetXaxis()->SetTitle("");
+    h_Top_cJetPt_region3_SR->GetYaxis()->SetTitle("");
+    h_Top_cJetPt_region3_SR->Sumw2();
 
-    TH1D *h_Top_ltrk_region1_bybin_CR = new TH1D("h_Top_ltrk_region1_bybin_CR", "", 30, 0, 30);
-    h_Top_ltrk_region1_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_ltrk_region1_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_ltrk_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_lJetPt_region1_bybin_CR = new TH1D("h_Top_lJetPt_region1_bybin_CR", "", 50, 0, 500);
+    h_Top_lJetPt_region1_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_lJetPt_region1_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_lJetPt_region1_bybin_CR->Sumw2();
 
-    TH1D *h_Top_ltrk_region1_SR = new TH1D("h_Top_ltrk_region1_SR", "", 30, 0, 30);
-    h_Top_ltrk_region1_SR->GetXaxis()->SetTitle("");
-    h_Top_ltrk_region1_SR->GetYaxis()->SetTitle("");
-    h_Top_ltrk_region1_SR->Sumw2();
+    TH1D *h_Top_lJetPt_region1_SR = new TH1D("h_Top_lJetPt_region1_SR", "", 50, 0, 500);
+    h_Top_lJetPt_region1_SR->GetXaxis()->SetTitle("");
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetTitle("");
+    h_Top_lJetPt_region1_SR->Sumw2();
 
-    TH1D *h_Top_ltrk_region2_bybin_CR = new TH1D("h_Top_ltrk_region2_bybin_CR", "", 30, 0, 30);
-    h_Top_ltrk_region2_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_ltrk_region2_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_ltrk_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_lJetPt_region2_bybin_CR = new TH1D("h_Top_lJetPt_region2_bybin_CR", "", 50, 0, 500);
+    h_Top_lJetPt_region2_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_lJetPt_region2_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_lJetPt_region2_bybin_CR->Sumw2();
 
-    TH1D *h_Top_ltrk_region2_SR = new TH1D("h_Top_ltrk_region2_SR", "", 30, 0, 30);
-    h_Top_ltrk_region2_SR->GetXaxis()->SetTitle("");
-    h_Top_ltrk_region2_SR->GetYaxis()->SetTitle("");
-    h_Top_ltrk_region2_SR->Sumw2();
+    TH1D *h_Top_lJetPt_region2_SR = new TH1D("h_Top_lJetPt_region2_SR", "", 50, 0, 500);
+    h_Top_lJetPt_region2_SR->GetXaxis()->SetTitle("");
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetTitle("");
+    h_Top_lJetPt_region2_SR->Sumw2();
 
-    TH1D *h_Top_ltrk_region3_bybin_CR = new TH1D("h_Top_ltrk_region3_bybin_CR", "", 30, 0, 30);
-    h_Top_ltrk_region3_bybin_CR->GetXaxis()->SetTitle("");
-    h_Top_ltrk_region3_bybin_CR->GetYaxis()->SetTitle("");
-    h_Top_ltrk_region3_bybin_CR->Sumw2();
+    TH1D *h_Top_lJetPt_region3_bybin_CR = new TH1D("h_Top_lJetPt_region3_bybin_CR", "", 50, 0, 500);
+    h_Top_lJetPt_region3_bybin_CR->GetXaxis()->SetTitle("");
+    h_Top_lJetPt_region3_bybin_CR->GetYaxis()->SetTitle("");
+    h_Top_lJetPt_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_ltrk_region3_SR = new TH1D("h_Top_ltrk_region3_SR", "", 30, 0, 30);
-    h_Top_ltrk_region3_SR->GetXaxis()->SetTitle("");
-    h_Top_ltrk_region3_SR->GetYaxis()->SetTitle("");
-    h_Top_ltrk_region3_SR->Sumw2();
+    TH1D *h_Top_lJetPt_region3_SR = new TH1D("h_Top_lJetPt_region3_SR", "", 50, 0, 500);
+    h_Top_lJetPt_region3_SR->GetXaxis()->SetTitle("");
+    h_Top_lJetPt_region3_SR->GetYaxis()->SetTitle("");
+    h_Top_lJetPt_region3_SR->Sumw2();
 
     Int_t I_TTTo2L2Nu_nThinJets;
     Int_t I_ST_tW_top_nThinJets;
@@ -422,19 +422,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region1 = Top_cfakeRate_eta1->GetBinContent((*v_TTTo2L2Nu_nTrack)[i] + 1) * TTTo2L2Nu_eventWeight;
                 double lWeightbybin_region1 = Top_lfakeRate_eta1->GetBinContent((*v_TTTo2L2Nu_nTrack)[i] + 1) * TTTo2L2Nu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], bWeightbybin_region1, h_Top_btrk_region1_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], bWeightbybin_region1, h_Top_bJetPt_region1_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], cWeightbybin_region1, h_Top_ctrk_region1_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], cWeightbybin_region1, h_Top_cJetPt_region1_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], lWeightbybin_region1, h_Top_ltrk_region1_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], lWeightbybin_region1, h_Top_lJetPt_region1_bybin_CR);
                 if ((*v_TTTo2L2Nu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_btrk_region1_SR);
+                    for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_bJetPt_region1_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_ctrk_region1_SR);
+                    for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_cJetPt_region1_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_ltrk_region1_SR);
+                    for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_lJetPt_region1_SR);
                 }
             }
             // Region 2
@@ -447,19 +447,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region2 = Top_cfakeRate_eta2->GetBinContent((*v_TTTo2L2Nu_nTrack)[i] + 1) * TTTo2L2Nu_eventWeight;
                 double lWeightbybin_region2 = Top_lfakeRate_eta2->GetBinContent((*v_TTTo2L2Nu_nTrack)[i] + 1) * TTTo2L2Nu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], bWeightbybin_region2, h_Top_btrk_region2_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], bWeightbybin_region2, h_Top_bJetPt_region2_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], cWeightbybin_region2, h_Top_ctrk_region2_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], cWeightbybin_region2, h_Top_cJetPt_region2_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], lWeightbybin_region2, h_Top_ltrk_region2_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], lWeightbybin_region2, h_Top_lJetPt_region2_bybin_CR);
                 if ((*v_TTTo2L2Nu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_btrk_region2_SR);
+                    for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_bJetPt_region2_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_ctrk_region2_SR);
+                    for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_cJetPt_region2_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_ltrk_region2_SR);
+                    for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_lJetPt_region2_SR);
                 }
             }
             // Region 3
@@ -472,19 +472,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region3 = Top_cfakeRate_eta3->GetBinContent((*v_TTTo2L2Nu_nTrack)[i] + 1) * TTTo2L2Nu_eventWeight;
                 double lWeightbybin_region3 = Top_lfakeRate_eta3->GetBinContent((*v_TTTo2L2Nu_nTrack)[i] + 1) * TTTo2L2Nu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], bWeightbybin_region3, h_Top_btrk_region3_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], bWeightbybin_region3, h_Top_bJetPt_region3_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], cWeightbybin_region3, h_Top_ctrk_region3_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], cWeightbybin_region3, h_Top_cJetPt_region3_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], lWeightbybin_region3, h_Top_ltrk_region3_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], lWeightbybin_region3, h_Top_lJetPt_region3_bybin_CR);
                 if ((*v_TTTo2L2Nu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_btrk_region3_SR);
+                    for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_bJetPt_region3_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_ctrk_region3_SR);
+                    for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_cJetPt_region3_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_ltrk_region3_SR);
+                    for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight, h_Top_lJetPt_region3_SR);
                 }
             }
         }
@@ -522,19 +522,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region1 = Top_cfakeRate_eta1->GetBinContent((*v_ST_tW_top_nTrack)[i] + 1) * ST_tW_top_eventWeight;
                 double lWeightbybin_region1 = Top_lfakeRate_eta1->GetBinContent((*v_ST_tW_top_nTrack)[i] + 1) * ST_tW_top_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], bWeightbybin_region1, h_Top_btrk_region1_bybin_CR);
+                for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], bWeightbybin_region1, h_Top_bJetPt_region1_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], cWeightbybin_region1, h_Top_ctrk_region1_bybin_CR);
+                for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], cWeightbybin_region1, h_Top_cJetPt_region1_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], lWeightbybin_region1, h_Top_ltrk_region1_bybin_CR);
+                for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], lWeightbybin_region1, h_Top_lJetPt_region1_bybin_CR);
                 if ((*v_ST_tW_top_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_btrk_region1_SR);
+                    for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_bJetPt_region1_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_ctrk_region1_SR);
+                    for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_cJetPt_region1_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_ltrk_region1_SR);
+                    for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_lJetPt_region1_SR);
                 }
             }
             // Region 2
@@ -547,19 +547,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region2 = Top_cfakeRate_eta2->GetBinContent((*v_ST_tW_top_nTrack)[i] + 1) * ST_tW_top_eventWeight;
                 double lWeightbybin_region2 = Top_lfakeRate_eta2->GetBinContent((*v_ST_tW_top_nTrack)[i] + 1) * ST_tW_top_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], bWeightbybin_region2, h_Top_btrk_region2_bybin_CR);
+                for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], bWeightbybin_region2, h_Top_bJetPt_region2_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], cWeightbybin_region2, h_Top_ctrk_region2_bybin_CR);
+                for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], cWeightbybin_region2, h_Top_cJetPt_region2_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], lWeightbybin_region2, h_Top_ltrk_region2_bybin_CR);
+                for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], lWeightbybin_region2, h_Top_lJetPt_region2_bybin_CR);
                 if ((*v_ST_tW_top_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_btrk_region2_SR);
+                    for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_bJetPt_region2_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_ctrk_region2_SR);
+                    for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_cJetPt_region2_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_ltrk_region2_SR);
+                    for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_lJetPt_region2_SR);
                 }
             }
             // Region 3
@@ -572,19 +572,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region3 = Top_cfakeRate_eta3->GetBinContent((*v_ST_tW_top_nTrack)[i] + 1) * ST_tW_top_eventWeight;
                 double lWeightbybin_region3 = Top_lfakeRate_eta3->GetBinContent((*v_ST_tW_top_nTrack)[i] + 1) * ST_tW_top_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], bWeightbybin_region3, h_Top_btrk_region3_bybin_CR);
+                for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], bWeightbybin_region3, h_Top_bJetPt_region3_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], cWeightbybin_region3, h_Top_ctrk_region3_bybin_CR);
+                for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], cWeightbybin_region3, h_Top_cJetPt_region3_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], lWeightbybin_region3, h_Top_ltrk_region3_bybin_CR);
+                for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], lWeightbybin_region3, h_Top_lJetPt_region3_bybin_CR);
                 if ((*v_ST_tW_top_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_btrk_region3_SR);
+                    for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_bJetPt_region3_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_ctrk_region3_SR);
+                    for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_cJetPt_region3_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_ltrk_region3_SR);
+                    for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight, h_Top_lJetPt_region3_SR);
                 }
             }
         }
@@ -621,19 +621,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region1 = Top_cfakeRate_eta1->GetBinContent((*v_ST_tW_antitop_nTrack)[i] + 1) * ST_tW_antitop_eventWeight;
                 double lWeightbybin_region1 = Top_lfakeRate_eta1->GetBinContent((*v_ST_tW_antitop_nTrack)[i] + 1) * ST_tW_antitop_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], bWeightbybin_region1, h_Top_btrk_region1_bybin_CR);
+                for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], bWeightbybin_region1, h_Top_bJetPt_region1_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], cWeightbybin_region1, h_Top_ctrk_region1_bybin_CR);
+                for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], cWeightbybin_region1, h_Top_cJetPt_region1_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], lWeightbybin_region1, h_Top_ltrk_region1_bybin_CR);
+                for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], lWeightbybin_region1, h_Top_lJetPt_region1_bybin_CR);
                 if ((*v_ST_tW_antitop_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_btrk_region1_SR);
+                    for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_bJetPt_region1_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_ctrk_region1_SR);
+                    for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_cJetPt_region1_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_ltrk_region1_SR);
+                    for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_lJetPt_region1_SR);
                 }
             }
             // Region 2
@@ -646,19 +646,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region2 = Top_cfakeRate_eta2->GetBinContent((*v_ST_tW_antitop_nTrack)[i] + 1) * ST_tW_antitop_eventWeight;
                 double lWeightbybin_region2 = Top_lfakeRate_eta2->GetBinContent((*v_ST_tW_antitop_nTrack)[i] + 1) * ST_tW_antitop_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], bWeightbybin_region2, h_Top_btrk_region2_bybin_CR);
+                for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], bWeightbybin_region2, h_Top_bJetPt_region2_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], cWeightbybin_region2, h_Top_ctrk_region2_bybin_CR);
+                for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], cWeightbybin_region2, h_Top_cJetPt_region2_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], lWeightbybin_region2, h_Top_ltrk_region2_bybin_CR);
+                for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], lWeightbybin_region2, h_Top_lJetPt_region2_bybin_CR);
                 if ((*v_ST_tW_antitop_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_btrk_region2_SR);
+                    for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_bJetPt_region2_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_ctrk_region2_SR);
+                    for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_cJetPt_region2_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_ltrk_region2_SR);
+                    for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_lJetPt_region2_SR);
                 }
             }
             // Region 3
@@ -671,19 +671,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region3 = Top_cfakeRate_eta3->GetBinContent((*v_ST_tW_antitop_nTrack)[i] + 1) * ST_tW_antitop_eventWeight;
                 double lWeightbybin_region3 = Top_lfakeRate_eta3->GetBinContent((*v_ST_tW_antitop_nTrack)[i] + 1) * ST_tW_antitop_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], bWeightbybin_region3, h_Top_btrk_region3_bybin_CR);
+                for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], bWeightbybin_region3, h_Top_bJetPt_region3_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], cWeightbybin_region3, h_Top_ctrk_region3_bybin_CR);
+                for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], cWeightbybin_region3, h_Top_cJetPt_region3_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], lWeightbybin_region3, h_Top_ltrk_region3_bybin_CR);
+                for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], lWeightbybin_region3, h_Top_lJetPt_region3_bybin_CR);
                 if ((*v_ST_tW_antitop_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_btrk_region3_SR);
+                    for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_bJetPt_region3_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_ctrk_region3_SR);
+                    for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_cJetPt_region3_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_ltrk_region3_SR);
+                    for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight, h_Top_lJetPt_region3_SR);
                 }
             }
         }
@@ -721,19 +721,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region1 = Top_cfakeRate_eta1->GetBinContent((*v_TTWJetsToLNu_nTrack)[i] + 1) * TTWJetsToLNu_eventWeight;
                 double lWeightbybin_region1 = Top_lfakeRate_eta1->GetBinContent((*v_TTWJetsToLNu_nTrack)[i] + 1) * TTWJetsToLNu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], bWeightbybin_region1, h_Top_btrk_region1_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], bWeightbybin_region1, h_Top_bJetPt_region1_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], cWeightbybin_region1, h_Top_ctrk_region1_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], cWeightbybin_region1, h_Top_cJetPt_region1_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], lWeightbybin_region1, h_Top_ltrk_region1_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], lWeightbybin_region1, h_Top_lJetPt_region1_bybin_CR);
                 if ((*v_TTWJetsToLNu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_btrk_region1_SR);
+                    for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_bJetPt_region1_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_ctrk_region1_SR);
+                    for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_cJetPt_region1_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_ltrk_region1_SR);
+                    for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_lJetPt_region1_SR);
                 }
             }
             // Region 2
@@ -746,19 +746,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region2 = Top_cfakeRate_eta2->GetBinContent((*v_TTWJetsToLNu_nTrack)[i] + 1) * TTWJetsToLNu_eventWeight;
                 double lWeightbybin_region2 = Top_lfakeRate_eta2->GetBinContent((*v_TTWJetsToLNu_nTrack)[i] + 1) * TTWJetsToLNu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], bWeightbybin_region2, h_Top_btrk_region2_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], bWeightbybin_region2, h_Top_bJetPt_region2_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], cWeightbybin_region2, h_Top_ctrk_region2_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], cWeightbybin_region2, h_Top_cJetPt_region2_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], lWeightbybin_region2, h_Top_ltrk_region2_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], lWeightbybin_region2, h_Top_lJetPt_region2_bybin_CR);
                 if ((*v_TTWJetsToLNu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_btrk_region2_SR);
+                    for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_bJetPt_region2_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_ctrk_region2_SR);
+                    for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_cJetPt_region2_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_ltrk_region2_SR);
+                    for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_lJetPt_region2_SR);
                 }
             }
             // Region 3
@@ -771,19 +771,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region3 = Top_cfakeRate_eta3->GetBinContent((*v_TTWJetsToLNu_nTrack)[i] + 1) * TTWJetsToLNu_eventWeight;
                 double lWeightbybin_region3 = Top_lfakeRate_eta3->GetBinContent((*v_TTWJetsToLNu_nTrack)[i] + 1) * TTWJetsToLNu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], bWeightbybin_region3, h_Top_btrk_region3_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], bWeightbybin_region3, h_Top_bJetPt_region3_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], cWeightbybin_region3, h_Top_ctrk_region3_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], cWeightbybin_region3, h_Top_cJetPt_region3_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], lWeightbybin_region3, h_Top_ltrk_region3_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], lWeightbybin_region3, h_Top_lJetPt_region3_bybin_CR);
                 if ((*v_TTWJetsToLNu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_btrk_region3_SR);
+                    for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_bJetPt_region3_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_ctrk_region3_SR);
+                    for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_cJetPt_region3_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_ltrk_region3_SR);
+                    for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight, h_Top_lJetPt_region3_SR);
                 }
             }
         }
@@ -821,19 +821,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region1 = Top_cfakeRate_eta1->GetBinContent((*v_TTWJetsToQQ_nTrack)[i] + 1) * TTWJetsToQQ_eventWeight;
                 double lWeightbybin_region1 = Top_lfakeRate_eta1->GetBinContent((*v_TTWJetsToQQ_nTrack)[i] + 1) * TTWJetsToQQ_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], bWeightbybin_region1, h_Top_btrk_region1_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], bWeightbybin_region1, h_Top_bJetPt_region1_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], cWeightbybin_region1, h_Top_ctrk_region1_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], cWeightbybin_region1, h_Top_cJetPt_region1_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], lWeightbybin_region1, h_Top_ltrk_region1_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], lWeightbybin_region1, h_Top_lJetPt_region1_bybin_CR);
                 if ((*v_TTWJetsToQQ_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_btrk_region1_SR);
+                    for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_bJetPt_region1_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_ctrk_region1_SR);
+                    for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_cJetPt_region1_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_ltrk_region1_SR);
+                    for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_lJetPt_region1_SR);
                 }
             }
             // Region 2
@@ -846,19 +846,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region2 = Top_cfakeRate_eta2->GetBinContent((*v_TTWJetsToQQ_nTrack)[i] + 1) * TTWJetsToQQ_eventWeight;
                 double lWeightbybin_region2 = Top_lfakeRate_eta2->GetBinContent((*v_TTWJetsToQQ_nTrack)[i] + 1) * TTWJetsToQQ_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], bWeightbybin_region2, h_Top_btrk_region2_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], bWeightbybin_region2, h_Top_bJetPt_region2_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], cWeightbybin_region2, h_Top_ctrk_region2_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], cWeightbybin_region2, h_Top_cJetPt_region2_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], lWeightbybin_region2, h_Top_ltrk_region2_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], lWeightbybin_region2, h_Top_lJetPt_region2_bybin_CR);
                 if ((*v_TTWJetsToQQ_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_btrk_region2_SR);
+                    for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_bJetPt_region2_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_ctrk_region2_SR);
+                    for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_cJetPt_region2_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_ltrk_region2_SR);
+                    for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_lJetPt_region2_SR);
                 }
             }
             // Region 3
@@ -871,19 +871,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region3 = Top_cfakeRate_eta3->GetBinContent((*v_TTWJetsToQQ_nTrack)[i] + 1) * TTWJetsToQQ_eventWeight;
                 double lWeightbybin_region3 = Top_lfakeRate_eta3->GetBinContent((*v_TTWJetsToQQ_nTrack)[i] + 1) * TTWJetsToQQ_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], bWeightbybin_region3, h_Top_btrk_region3_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], bWeightbybin_region3, h_Top_bJetPt_region3_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], cWeightbybin_region3, h_Top_ctrk_region3_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], cWeightbybin_region3, h_Top_cJetPt_region3_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], lWeightbybin_region3, h_Top_ltrk_region3_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], lWeightbybin_region3, h_Top_lJetPt_region3_bybin_CR);
                 if ((*v_TTWJetsToQQ_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_btrk_region3_SR);
+                    for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_bJetPt_region3_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_ctrk_region3_SR);
+                    for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_cJetPt_region3_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_ltrk_region3_SR);
+                    for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jetpartonflavor)[i], (*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight, h_Top_lJetPt_region3_SR);
                 }
             }
         }
@@ -921,19 +921,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region1 = Top_cfakeRate_eta1->GetBinContent((*v_TTZToQQ_nTrack)[i] + 1) * TTZToQQ_eventWeight;
                 double lWeightbybin_region1 = Top_lfakeRate_eta1->GetBinContent((*v_TTZToQQ_nTrack)[i] + 1) * TTZToQQ_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], bWeightbybin_region1, h_Top_btrk_region1_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], bWeightbybin_region1, h_Top_bJetPt_region1_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], cWeightbybin_region1, h_Top_ctrk_region1_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], cWeightbybin_region1, h_Top_cJetPt_region1_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], lWeightbybin_region1, h_Top_ltrk_region1_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], lWeightbybin_region1, h_Top_lJetPt_region1_bybin_CR);
                 if ((*v_TTZToQQ_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_btrk_region1_SR);
+                    for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_bJetPt_region1_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_ctrk_region1_SR);
+                    for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_cJetPt_region1_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_ltrk_region1_SR);
+                    for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_lJetPt_region1_SR);
                 }
             }
             // Region 2
@@ -946,19 +946,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region2 = Top_cfakeRate_eta2->GetBinContent((*v_TTZToQQ_nTrack)[i] + 1) * TTZToQQ_eventWeight;
                 double lWeightbybin_region2 = Top_lfakeRate_eta2->GetBinContent((*v_TTZToQQ_nTrack)[i] + 1) * TTZToQQ_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], bWeightbybin_region2, h_Top_btrk_region2_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], bWeightbybin_region2, h_Top_bJetPt_region2_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], cWeightbybin_region2, h_Top_ctrk_region2_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], cWeightbybin_region2, h_Top_cJetPt_region2_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], lWeightbybin_region2, h_Top_ltrk_region2_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], lWeightbybin_region2, h_Top_lJetPt_region2_bybin_CR);
                 if ((*v_TTZToQQ_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_btrk_region2_SR);
+                    for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_bJetPt_region2_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_ctrk_region2_SR);
+                    for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_cJetPt_region2_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_ltrk_region2_SR);
+                    for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_lJetPt_region2_SR);
                 }
             }
             // Region 3
@@ -971,19 +971,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region3 = Top_cfakeRate_eta3->GetBinContent((*v_TTZToQQ_nTrack)[i] + 1) * TTZToQQ_eventWeight;
                 double lWeightbybin_region3 = Top_lfakeRate_eta3->GetBinContent((*v_TTZToQQ_nTrack)[i] + 1) * TTZToQQ_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], bWeightbybin_region3, h_Top_btrk_region3_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], bWeightbybin_region3, h_Top_bJetPt_region3_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], cWeightbybin_region3, h_Top_ctrk_region3_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], cWeightbybin_region3, h_Top_cJetPt_region3_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], lWeightbybin_region3, h_Top_ltrk_region3_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], lWeightbybin_region3, h_Top_lJetPt_region3_bybin_CR);
                 if ((*v_TTZToQQ_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_btrk_region3_SR);
+                    for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_bJetPt_region3_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_ctrk_region3_SR);
+                    for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_cJetPt_region3_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_ltrk_region3_SR);
+                    for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight, h_Top_lJetPt_region3_SR);
                 }
             }
         }
@@ -1021,19 +1021,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region1 = Top_cfakeRate_eta1->GetBinContent((*v_TTZToLLNuNu_nTrack)[i] + 1) * TTZToLLNuNu_eventWeight;
                 double lWeightbybin_region1 = Top_lfakeRate_eta1->GetBinContent((*v_TTZToLLNuNu_nTrack)[i] + 1) * TTZToLLNuNu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], bWeightbybin_region1, h_Top_btrk_region1_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], bWeightbybin_region1, h_Top_bJetPt_region1_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], cWeightbybin_region1, h_Top_ctrk_region1_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], cWeightbybin_region1, h_Top_cJetPt_region1_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], lWeightbybin_region1, h_Top_ltrk_region1_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], lWeightbybin_region1, h_Top_lJetPt_region1_bybin_CR);
                 if ((*v_TTZToLLNuNu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_btrk_region1_SR);
+                    for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_bJetPt_region1_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_ctrk_region1_SR);
+                    for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_cJetPt_region1_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_ltrk_region1_SR);
+                    for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_lJetPt_region1_SR);
                 }
             }
             // Region 2
@@ -1046,19 +1046,19 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region2 = Top_cfakeRate_eta2->GetBinContent((*v_TTZToLLNuNu_nTrack)[i] + 1) * TTZToLLNuNu_eventWeight;
                 double lWeightbybin_region2 = Top_lfakeRate_eta2->GetBinContent((*v_TTZToLLNuNu_nTrack)[i] + 1) * TTZToLLNuNu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], bWeightbybin_region2, h_Top_btrk_region2_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], bWeightbybin_region2, h_Top_bJetPt_region2_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], cWeightbybin_region2, h_Top_ctrk_region2_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], cWeightbybin_region2, h_Top_cJetPt_region2_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], lWeightbybin_region2, h_Top_ltrk_region2_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], lWeightbybin_region2, h_Top_lJetPt_region2_bybin_CR);
                 if ((*v_TTZToLLNuNu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_btrk_region2_SR);
+                    for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_bJetPt_region2_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_ctrk_region2_SR);
+                    for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_cJetPt_region2_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_ltrk_region2_SR);
+                    for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_lJetPt_region2_SR);
                 }
             }
             // Region 3
@@ -1071,52 +1071,151 @@ void Ratio_Top_apply_nTrack()
                 double cWeightbybin_region3 = Top_cfakeRate_eta3->GetBinContent((*v_TTZToLLNuNu_nTrack)[i] + 1) * TTZToLLNuNu_eventWeight;
                 double lWeightbybin_region3 = Top_lfakeRate_eta3->GetBinContent((*v_TTZToLLNuNu_nTrack)[i] + 1) * TTZToLLNuNu_eventWeight;
                 // b
-                for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], bWeightbybin_region3, h_Top_btrk_region3_bybin_CR);
+                for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], bWeightbybin_region3, h_Top_bJetPt_region3_bybin_CR);
                 // c
-                for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], cWeightbybin_region3, h_Top_ctrk_region3_bybin_CR);
+                for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], cWeightbybin_region3, h_Top_cJetPt_region3_bybin_CR);
                 // l
-                for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], lWeightbybin_region3, h_Top_ltrk_region3_bybin_CR);
+                for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], lWeightbybin_region3, h_Top_lJetPt_region3_bybin_CR);
                 if ((*v_TTZToLLNuNu_alpha)[i] < 0.1)
                 {
                     // b
-                    for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_btrk_region3_SR);
+                    for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_bJetPt_region3_SR);
                     // c
-                    for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_ctrk_region3_SR);
+                    for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_cJetPt_region3_SR);
                     // l
-                    for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_ltrk_region3_SR);
+                    for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight, h_Top_lJetPt_region3_SR);
                 }
             }
         }
     } // End of TTZToLLNuNu
 
-    h_Top_btrk_region1_bybin_CR->SetLineWidth(2);
-    h_Top_btrk_region1_SR->SetLineWidth(2);
-    h_Top_btrk_region2_bybin_CR->SetLineWidth(2);
-    h_Top_btrk_region2_SR->SetLineWidth(2);
-    h_Top_btrk_region3_bybin_CR->SetLineWidth(2);
-    h_Top_btrk_region3_SR->SetLineWidth(2);
-    h_Top_ctrk_region1_bybin_CR->SetLineWidth(2);
-    h_Top_ctrk_region1_SR->SetLineWidth(2);
-    h_Top_ctrk_region2_bybin_CR->SetLineWidth(2);
-    h_Top_ctrk_region2_SR->SetLineWidth(2);
-    h_Top_ctrk_region3_bybin_CR->SetLineWidth(2);
-    h_Top_ctrk_region3_SR->SetLineWidth(2);
-    h_Top_ltrk_region1_bybin_CR->SetLineWidth(2);
-    h_Top_ltrk_region1_SR->SetLineWidth(2);
-    h_Top_ltrk_region2_bybin_CR->SetLineWidth(2);
-    h_Top_ltrk_region2_SR->SetLineWidth(2);
-    h_Top_ltrk_region3_bybin_CR->SetLineWidth(2);
-    h_Top_ltrk_region3_SR->SetLineWidth(2);
+    h_Top_bJetPt_region1_bybin_CR->SetLineWidth(2);
+    h_Top_bJetPt_region1_SR->SetLineWidth(2);
+    h_Top_bJetPt_region2_bybin_CR->SetLineWidth(2);
+    h_Top_bJetPt_region2_SR->SetLineWidth(2);
+    h_Top_bJetPt_region3_bybin_CR->SetLineWidth(2);
+    h_Top_bJetPt_region3_SR->SetLineWidth(2);
+    h_Top_cJetPt_region1_bybin_CR->SetLineWidth(2);
+    h_Top_cJetPt_region1_SR->SetLineWidth(2);
+    h_Top_cJetPt_region2_bybin_CR->SetLineWidth(2);
+    h_Top_cJetPt_region2_SR->SetLineWidth(2);
+    h_Top_cJetPt_region3_bybin_CR->SetLineWidth(2);
+    h_Top_cJetPt_region3_SR->SetLineWidth(2);
+    h_Top_lJetPt_region1_bybin_CR->SetLineWidth(2);
+    h_Top_lJetPt_region1_SR->SetLineWidth(2);
+    h_Top_lJetPt_region2_bybin_CR->SetLineWidth(2);
+    h_Top_lJetPt_region2_SR->SetLineWidth(2);
+    h_Top_lJetPt_region3_bybin_CR->SetLineWidth(2);
+    h_Top_lJetPt_region3_SR->SetLineWidth(2);
 
-    h_Top_btrk_region1_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_btrk_region2_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_btrk_region3_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_ctrk_region1_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_ctrk_region2_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_ctrk_region3_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_ltrk_region1_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_ltrk_region2_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_ltrk_region3_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_bJetPt_region1_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_bJetPt_region2_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_bJetPt_region3_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_cJetPt_region1_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_cJetPt_region2_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_cJetPt_region3_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_lJetPt_region1_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_lJetPt_region2_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_lJetPt_region3_bybin_CR->SetLineColor(kGreen + 3);
+
+    h_Top_bJetPt_region1_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_bJetPt_region2_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_bJetPt_region3_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_cJetPt_region1_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_cJetPt_region2_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_cJetPt_region3_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_lJetPt_region1_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_lJetPt_region2_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_lJetPt_region3_SR->GetXaxis()->SetTitle("Jet PT");
+
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_bJetPt_region3_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_cJetPt_region1_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_cJetPt_region2_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_cJetPt_region3_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_lJetPt_region3_SR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_bJetPt_region1_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region2_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region3_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_cJetPt_region1_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_cJetPt_region2_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_cJetPt_region3_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_lJetPt_region1_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_lJetPt_region2_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_lJetPt_region3_SR->GetXaxis()->SetNdivisions(6, 5, 0);
+
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region3_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_cJetPt_region1_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_cJetPt_region2_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_cJetPt_region3_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_lJetPt_region3_SR->GetYaxis()->SetNdivisions(6, 5, 0);
+
+    h_Top_bJetPt_region1_SR->GetXaxis()->SetTitleSize(0.04);
+    h_Top_bJetPt_region2_SR->GetXaxis()->SetTitleSize(0.04);
+    h_Top_bJetPt_region3_SR->GetXaxis()->SetTitleSize(0.04);
+    h_Top_cJetPt_region1_SR->GetXaxis()->SetTitleSize(0.04);
+    h_Top_cJetPt_region2_SR->GetXaxis()->SetTitleSize(0.04);
+    h_Top_cJetPt_region3_SR->GetXaxis()->SetTitleSize(0.04);
+    h_Top_lJetPt_region1_SR->GetXaxis()->SetTitleSize(0.04);
+    h_Top_lJetPt_region2_SR->GetXaxis()->SetTitleSize(0.04);
+    h_Top_lJetPt_region3_SR->GetXaxis()->SetTitleSize(0.04);
+
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetTitleSize(0.04);
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetTitleSize(0.04);
+    h_Top_bJetPt_region3_SR->GetYaxis()->SetTitleSize(0.04);
+    h_Top_cJetPt_region1_SR->GetYaxis()->SetTitleSize(0.04);
+    h_Top_cJetPt_region2_SR->GetYaxis()->SetTitleSize(0.04);
+    h_Top_cJetPt_region3_SR->GetYaxis()->SetTitleSize(0.04);
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetTitleSize(0.04);
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetTitleSize(0.04);
+    h_Top_lJetPt_region3_SR->GetYaxis()->SetTitleSize(0.04);
+
+    h_Top_bJetPt_region1_SR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region2_SR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region3_SR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_cJetPt_region1_SR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_cJetPt_region2_SR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_cJetPt_region3_SR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_lJetPt_region1_SR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_lJetPt_region2_SR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_lJetPt_region3_SR->GetXaxis()->SetLabelSize(0.04);
+
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region3_SR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_cJetPt_region1_SR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_cJetPt_region2_SR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_cJetPt_region3_SR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_lJetPt_region3_SR->GetYaxis()->SetLabelSize(0.04);
+
+    h_Top_bJetPt_region1_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_bJetPt_region2_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_bJetPt_region3_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_bJetPt_region1_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_bJetPt_region2_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_bJetPt_region3_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_bJetPt_region1_bybin_CR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region2_bybin_CR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region3_bybin_CR->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region1_bybin_CR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region2_bybin_CR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region3_bybin_CR->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_Top_bJetPt_region1_bybin_CR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region2_bybin_CR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region3_bybin_CR->GetXaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region1_bybin_CR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region2_bybin_CR->GetYaxis()->SetLabelSize(0.04);
+    h_Top_bJetPt_region3_bybin_CR->GetYaxis()->SetLabelSize(0.04);
 
     int W = 800;
     int H = 600;
@@ -1140,29 +1239,41 @@ void Ratio_Top_apply_nTrack()
     c1->SetTickx(0);
     c1->SetTicky(0);
 
-    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetNdivisions(6, 5, 0);
-    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetTitleOffset(1.5);
-    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetTitle("nJet");
-    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetTitleSize(0.04);
-    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetLabelSize(0.04);
-    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetNdivisions(6, 5, 0);
-    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetTitle("nTrack");
-    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetTitleSize(0.04);
-    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetLabelSize(0.04);
-
     c1->Divide(3, 1);
     c1->cd(1);
-
-    h_Top_ltrk_region1_SR->Draw();
-    h_Top_ltrk_region1_bybin_CR->Draw("same");
+    h_Top_bJetPt_region1_bybin_CR->Draw("h ");
+    h_Top_bJetPt_region1_SR->Draw("same");
 
     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l0->SetHeader("Top process (b Jet)");
+    l0->SetHeader("Top process (b Jet in |eta| < 1)");
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
-    l0->AddEntry(h_Top_btrk_region1_SR, "Top SR", "l");
-    l0->AddEntry(h_Top_btrk_region1_bybin_CR, "Top apply bin by bin result", "l");
+    l0->AddEntry(h_Top_bJetPt_region1_SR, "Top SR", "l");
+    l0->AddEntry(h_Top_bJetPt_region1_bybin_CR, "Top apply bin by bin result", "l");
     l0->Draw();
+    c1->cd(2);
+
+    h_Top_bJetPt_region2_bybin_CR->Draw("h");
+    h_Top_bJetPt_region2_SR->Draw(" same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetHeader("Top process (b Jet in 1 < |eta| < 2)");
+    l1->SetBorderSize(0);
+    l1->SetTextSize(0.03);
+    l1->AddEntry(h_Top_bJetPt_region2_SR, "Top SR", "l");
+    l1->AddEntry(h_Top_bJetPt_region2_bybin_CR, "Top apply bin by bin result", "l");
+    l1->Draw();
+    c1->cd(3);
+
+    h_Top_bJetPt_region3_SR->Draw();
+    h_Top_bJetPt_region3_bybin_CR->Draw("h same");
+    TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l2->SetHeader("Top process (b Jet in 2 < |eta| < 2.5)");
+    l2->SetBorderSize(0);
+    l2->SetTextSize(0.03);
+    l2->AddEntry(h_Top_bJetPt_region3_SR, "Top SR", "l");
+    l2->AddEntry(h_Top_bJetPt_region3_bybin_CR, "Top apply bin by bin result", "l");
+    l2->Draw();
 
     gStyle->SetOptStat(0);
 }
