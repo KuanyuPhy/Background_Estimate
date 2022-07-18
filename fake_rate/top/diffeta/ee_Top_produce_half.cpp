@@ -76,6 +76,15 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
     double TTZToQQWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTZToQQ / (TTZToQQ_totevt)) * 1000 * 2;
     double TTZToLLNuNuWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTZToLLNuNu / (TTZToLLNuNu_totevt)) * 1000 * 2;
 
+    cout << "TTTo2L2NuWeight = " << TTTo2L2NuWeight << endl;
+    cout << "ST_tW_topWeight = " << ST_tW_topWeight << endl;
+    cout << "ST_tW_antitopWeight = " << ST_tW_antitopWeight << endl;
+    cout << "TTWJetsToLNuWeight = " << TTWJetsToLNuWeight << endl;
+    cout << "TTWJetsToQQWeight = " << TTWJetsToQQWeight << endl;
+    cout << "ST_tW_topWeight = " << ST_tW_topWeight << endl;
+    cout << "TTZToQQWeight = " << TTZToQQWeight << endl;
+    cout << "TTZToLLNuNuWeight = " << TTZToLLNuNuWeight << endl;
+
     //--------------------------------------------------------------
     // Hist: 0 : |eta| < 1, 1 : 1 < |eta| < 2, 2 : 2 < |eta| < 2.5
     //--------------------------------------------------------------
@@ -95,6 +104,12 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
         h_Top_nTracks_cjet_cut[i] = new TH1D(Form("h_Top_nTracks_cjet_cut_%i", i + 1), "", 30, 0, 30);
         h_Top_nTracks_ljet[i] = new TH1D(Form("h_Top_nTracks_ljet_%i", i + 1), "", 30, 0, 30);
         h_Top_nTracks_ljet_cut[i] = new TH1D(Form("h_Top_nTracks_ljet_cut_%i", i + 1), "", 30, 0, 30);
+        h_Top_nTracks_bjet[i]->Sumw2();
+        h_Top_nTracks_bjet_cut[i]->Sumw2();
+        h_Top_nTracks_cjet[i]->Sumw2();
+        h_Top_nTracks_cjet_cut[i]->Sumw2();
+        h_Top_nTracks_ljet[i]->Sumw2();
+        h_Top_nTracks_ljet_cut[i]->Sumw2();
     }
 
     TH1D *h_Top_Met = new TH1D("h_Top_Met", "", 50, 0, 500);
@@ -251,7 +266,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
     v_TTWJetsToQQ_JetEta->clear();
     v_TTZToQQ_JetEta->clear();
     v_TTZToLLNuNu_JetEta->clear();
-
+    
     TTree *T_TTTo2L2Nu_tree;
     TTTo2L2Nufile_1->GetObject("h1", T_TTTo2L2Nu_tree);
     T_TTTo2L2Nu_tree->SetBranchAddress("I_weight", &I_TTTo2L2Nu_weight);
@@ -272,7 +287,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
         {
             continue;
         }
-        double TTTo2L2Nu_eventWeight = I_TTTo2L2Nu_weight * TTTo2L2NuWeight;
+        //double TTTo2L2Nu_eventWeight = I_TTTo2L2Nu_weight * TTTo2L2NuWeight;
+        double TTTo2L2Nu_eventWeight = 1.;
         //-----------------
         // Event var : Met
         //-----------------
@@ -344,7 +360,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             }
         }
     } // End of TTTo2L2Nu
-
+    
+    
     TTree *T_ST_tW_top_tree;
     Top_tW_topfile_1->GetObject("h1", T_ST_tW_top_tree);
     T_ST_tW_top_tree->SetBranchAddress("I_weight", &I_ST_tW_top_weight);
@@ -365,7 +382,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
         {
             continue;
         }
-        double ST_tW_top_eventWeight = I_ST_tW_top_weight * ST_tW_topWeight;
+        //double ST_tW_top_eventWeight = I_ST_tW_top_weight * ST_tW_topWeight;
+        double ST_tW_top_eventWeight = 1.;
         //-----------------
         // Event var : Met
         //-----------------
@@ -435,7 +453,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             }
         }
     } // End of ST_tW_top_tree
-
+    
+    
     TTree *T_ST_tW_antitop_tree;
     Top_tW_antitopfile_1->GetObject("h1", T_ST_tW_antitop_tree);
     T_ST_tW_antitop_tree->SetBranchAddress("I_weight", &I_ST_tW_antitop_weight);
@@ -456,7 +475,9 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
         {
             continue;
         }
-        double ST_tW_antitop_eventWeight = I_ST_tW_antitop_weight * ST_tW_antitopWeight;
+        //double ST_tW_antitop_eventWeight = I_ST_tW_antitop_weight * ST_tW_antitopWeight;
+        double ST_tW_antitop_eventWeight = 1.;
+        
         //-----------------
         // Event var : Met
         //-----------------
@@ -527,7 +548,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             }
         }
     } // End of ST_tW_antitop
-
+    
+    
     TTree *T_TTWJetsToLNu_tree;
     Top_TTWJetsToLNufile_1->GetObject("h1", T_TTWJetsToLNu_tree);
     T_TTWJetsToLNu_tree->SetBranchAddress("I_weight", &I_TTWJetsToLNu_weight);
@@ -548,7 +570,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
         {
             continue;
         }
-        double TTWJetsToLNu_eventWeight = I_TTWJetsToLNu_weight * TTWJetsToLNuWeight;
+        //double TTWJetsToLNu_eventWeight = I_TTWJetsToLNu_weight * TTWJetsToLNuWeight;
+        double TTWJetsToLNu_eventWeight = 1.;
         //-----------------
         // Event var : Met
         //-----------------
@@ -621,7 +644,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             }
         }
     } // End of TTWJetsToLNu
-
+    
+    
     TTree *T_TTWJetsToQQ_tree;
     Top_TTWJetsToQQfile_1->GetObject("h1", T_TTWJetsToQQ_tree);
     T_TTWJetsToQQ_tree->SetBranchAddress("I_weight", &I_TTWJetsToQQ_weight);
@@ -642,7 +666,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
         {
             continue;
         }
-        double TTWJetsToQQ_eventWeight = I_TTWJetsToQQ_weight * TTWJetsToQQWeight;
+        //double TTWJetsToQQ_eventWeight = I_TTWJetsToQQ_weight * TTWJetsToQQWeight;
+        double TTWJetsToQQ_eventWeight = 1.;
         //-----------------
         // Event var : Met
         //-----------------
@@ -713,7 +738,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             }
         }
     } // End of TTWJetsToQQ
-
+    
+    
     TTree *T_TTZToQQ_tree;
     Top_TTZToQQfile_1->GetObject("h1", T_TTZToQQ_tree);
     T_TTZToQQ_tree->SetBranchAddress("I_weight", &I_TTZToQQ_weight);
@@ -734,7 +760,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
         {
             continue;
         }
-        double TTZToQQ_eventWeight = I_TTZToQQ_weight * TTZToQQWeight;
+        //double TTZToQQ_eventWeight = I_TTZToQQ_weight * TTZToQQWeight;
+        double TTZToQQ_eventWeight = 1.;
         //-----------------
         // Event var : Met
         //-----------------
@@ -805,7 +832,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             }
         }
     } // End of TTZToQQ
-
+    
+    
     TTree *T_TTZToLLNuNu_tree;
     Top_TTZToLLNuNufile_1->GetObject("h1", T_TTZToLLNuNu_tree);
     T_TTZToLLNuNu_tree->SetBranchAddress("I_weight", &I_TTZToLLNuNu_weight);
@@ -826,7 +854,8 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
         {
             continue;
         }
-        double TTZToLLNuNu_eventWeight = I_TTZToLLNuNu_weight * TTZToLLNuNuWeight;
+        //double TTZToLLNuNu_eventWeight = I_TTZToLLNuNu_weight * TTZToLLNuNuWeight;
+        double TTZToLLNuNu_eventWeight = 1.;
         //-----------------
         // Event var : Met
         //-----------------
@@ -896,6 +925,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             }
         }
     } // End of TTZToLLNuNu
+    
 
     //-----------------------
     // Fake rate : nTracks
@@ -945,7 +975,6 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
     */
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     outfile_HT0->cd();
-
     Top_bfakeRate_eta1->Write();
     Top_cfakeRate_eta1->Write();
     Top_lfakeRate_eta1->Write();
@@ -955,7 +984,15 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
     Top_bfakeRate_eta3->Write();
     Top_cfakeRate_eta3->Write();
     Top_lfakeRate_eta3->Write();
-
+    for (int i = 0; i < 3; i++)
+    {
+        h_Top_nTracks_bjet[i]->Write();
+        h_Top_nTracks_bjet_cut[i]->Write();
+        h_Top_nTracks_cjet[i]->Write();
+        h_Top_nTracks_cjet_cut[i]->Write();
+        h_Top_nTracks_ljet[i]->Write();
+        h_Top_nTracks_ljet_cut[i]->Write();
+    }
     outfile_HT0->Close();
 }
 /*
