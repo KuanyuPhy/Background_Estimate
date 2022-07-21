@@ -14,7 +14,7 @@
 #include <TError.h>
 #include "TLegend.h"
 #include <cstring>
-#include "./../../../lib/Cross_section.h"
+#include "./../../../../lib/Cross_section.h"
 using namespace std;
 
 //------------------
@@ -88,7 +88,7 @@ void for_doubleflavor_jet(int flavor1, int flavor2, int hadronflavor, float tmp,
         h_tmp->Fill(tmp, Weight);
     }
 }
-void ee_Top_half_fakerate(TString file = "tmp.root", TString outputfile = "output.root")
+void ee_Top_half(TString file = "tmp.root", TString outputfile = "output.root")
 {
     TFile *Topfile = TFile::Open(file);
     cout << "Top weight = " << getWeight(file) << endl;
@@ -162,8 +162,8 @@ void ee_Top_half_fakerate(TString file = "tmp.root", TString outputfile = "outpu
         {
             continue;
         }
-        // double Top_weight = getWeight(file) * I_Top_weight;
-        double Top_weight = 1.;
+        double Top_weight = getWeight(file) * I_Top_weight;
+        // double Top_weight = 1.;
         //-------------------------------------------------------------
         // Jet var : different flavor  nTracks
         //-------------------------------------------------------------
@@ -284,11 +284,11 @@ int main(int argc, char **argv)
 {
     if (argc == 1)
     {
-        ee_Top_half_fakerate();
+        ee_Top_half();
     }
     else if (argc == 3)
     {
-        ee_Top_half_fakerate(argv[1], argv[2]);
+        ee_Top_half(argv[1], argv[2]);
     }
     else
     {

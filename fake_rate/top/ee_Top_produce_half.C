@@ -10,7 +10,7 @@
 #include <TCanvas.h>
 #include <TAttLine.h>
 #include <TStyle.h>
-#include "./../../../lib/Cross_section.h"
+#include "./../../lib/Cross_section.h"
 using namespace std;
 
 void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, float Weight, TH1D *h_tmp)
@@ -103,57 +103,57 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
                                   17., 18., 19., 20., 50.};
     // const int TTBins = sizeof(TTxbins) / sizeof(double);
 
-    TH1D *h_Top_nTracks = new TH1D("h_Top_nTracks", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks = new TH1D("h_Top_nTracks", "", 50, 0, 50);
     h_Top_nTracks->GetXaxis()->SetTitle("");
     h_Top_nTracks->GetYaxis()->SetTitle("");
     h_Top_nTracks->Sumw2();
 
-    TH1D *h_Top_nTracks_tmp = new TH1D("h_Top_nTracks_tmp", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_tmp = new TH1D("h_Top_nTracks_tmp", "", 50, 0, 50);
     h_Top_nTracks_tmp->GetXaxis()->SetTitle("");
     h_Top_nTracks_tmp->GetYaxis()->SetTitle("");
     h_Top_nTracks_tmp->Sumw2();
 
-    TH1D *h_Top_nTracks_heavy = new TH1D("h_Top_nTracks_heavy", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_heavy = new TH1D("h_Top_nTracks_heavy", "", 50, 0, 50);
     h_Top_nTracks_heavy->GetXaxis()->SetTitle("");
     h_Top_nTracks_heavy->GetYaxis()->SetTitle("");
     h_Top_nTracks_heavy->Sumw2();
 
-    TH1D *h_Top_nTracks_bjet = new TH1D("h_Top_nTracks_bjet", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_bjet = new TH1D("h_Top_nTracks_bjet", "", 50, 0, 50);
     h_Top_nTracks_bjet->GetXaxis()->SetTitle("");
     h_Top_nTracks_bjet->GetYaxis()->SetTitle("");
     h_Top_nTracks_bjet->Sumw2();
 
-    TH1D *h_Top_nTracks_cjet = new TH1D("h_Top_nTracks_cjet", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_cjet = new TH1D("h_Top_nTracks_cjet", "", 50, 0, 50);
     h_Top_nTracks_cjet->GetXaxis()->SetTitle("");
     h_Top_nTracks_cjet->GetYaxis()->SetTitle("");
     h_Top_nTracks_cjet->Sumw2();
 
-    TH1D *h_Top_nTracks_light = new TH1D("h_Top_nTracks_light", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_light = new TH1D("h_Top_nTracks_light", "", 50, 0, 50);
     h_Top_nTracks_light->GetXaxis()->SetTitle("");
     h_Top_nTracks_light->GetYaxis()->SetTitle("");
     h_Top_nTracks_light->Sumw2();
 
-    TH1D *h_Top_nTracks_cut = new TH1D("h_Top_nTracks_cut", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_cut = new TH1D("h_Top_nTracks_cut", "", 50, 0, 50);
     h_Top_nTracks_cut->GetXaxis()->SetTitle("");
     h_Top_nTracks_cut->GetYaxis()->SetTitle("");
     h_Top_nTracks_cut->Sumw2();
 
-    TH1D *h_Top_nTracks_heavy_cut = new TH1D("h_Top_nTracks_heavy_cut", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_heavy_cut = new TH1D("h_Top_nTracks_heavy_cut", "", 50, 0, 50);
     h_Top_nTracks_heavy_cut->GetXaxis()->SetTitle("");
     h_Top_nTracks_heavy_cut->GetYaxis()->SetTitle("");
     h_Top_nTracks_heavy_cut->Sumw2();
 
-    TH1D *h_Top_nTracks_bjet_cut = new TH1D("h_Top_nTracks_bjet_cut", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_bjet_cut = new TH1D("h_Top_nTracks_bjet_cut", "", 50, 0, 50);
     h_Top_nTracks_bjet_cut->GetXaxis()->SetTitle("");
     h_Top_nTracks_bjet_cut->GetYaxis()->SetTitle("");
     h_Top_nTracks_bjet_cut->Sumw2();
 
-    TH1D *h_Top_nTracks_cjet_cut = new TH1D("h_Top_nTracks_cjet_cut", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_cjet_cut = new TH1D("h_Top_nTracks_cjet_cut", "", 50, 0, 50);
     h_Top_nTracks_cjet_cut->GetXaxis()->SetTitle("");
     h_Top_nTracks_cjet_cut->GetYaxis()->SetTitle("");
     h_Top_nTracks_cjet_cut->Sumw2();
 
-    TH1D *h_Top_nTracks_light_cut = new TH1D("h_Top_nTracks_light_cut", "", XBINS, xEdges);
+    TH1D *h_Top_nTracks_light_cut = new TH1D("h_Top_nTracks_light_cut", "", 50, 0, 50);
     h_Top_nTracks_light_cut->GetXaxis()->SetTitle("");
     h_Top_nTracks_light_cut->GetYaxis()->SetTitle("");
     h_Top_nTracks_light_cut->Sumw2();
@@ -518,7 +518,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             //---------------------
             // Signal Region
             //---------------------
-            if ((*v_TTTo2L2Nu_alpha)[i] < 0.15)
+            if ((*v_TTTo2L2Nu_alpha)[i] < 0.1)
             {
                 h_Top_nTracks_cut->Fill((*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight);
                 h_Top_jetpt_cut->Fill((*v_TTTo2L2Nu_JetPT)[i], TTTo2L2Nu_eventWeight);
@@ -617,7 +617,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             //---------------------
             // Signal Region
             //---------------------
-            if ((*v_ST_tW_top_alpha)[i] < 0.15)
+            if ((*v_ST_tW_top_alpha)[i] < 0.1)
             {
                 h_Top_nTracks_cut->Fill((*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight);
                 h_Top_jetpt_cut->Fill((*v_ST_tW_top_JetPT)[i], ST_tW_top_eventWeight);
@@ -717,7 +717,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             //---------------------
             // Signal Region
             //---------------------
-            if ((*v_ST_tW_antitop_alpha)[i] < 0.15)
+            if ((*v_ST_tW_antitop_alpha)[i] < 0.1)
             {
                 h_Top_nTracks_cut->Fill((*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight);
                 h_Top_jetpt_cut->Fill((*v_ST_tW_antitop_JetPT)[i], ST_tW_antitop_eventWeight);
@@ -816,7 +816,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             //---------------------
             // Signal Region
             //---------------------
-            if ((*v_TTWJetsToLNu_alpha)[i] < 0.15)
+            if ((*v_TTWJetsToLNu_alpha)[i] < 0.1)
             {
                 h_Top_nTracks_cut->Fill((*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight);
                 h_Top_jetpt_cut->Fill((*v_TTWJetsToLNu_JetPT)[i], TTWJetsToLNu_eventWeight);
@@ -916,7 +916,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             //---------------------
             // Signal Region
             //---------------------
-            if ((*v_TTWJetsToQQ_alpha)[i] < 0.15)
+            if ((*v_TTWJetsToQQ_alpha)[i] < 0.1)
             {
                 h_Top_nTracks_cut->Fill((*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight);
                 h_Top_jetpt_cut->Fill((*v_TTWJetsToQQ_JetPT)[i], TTWJetsToQQ_eventWeight);
@@ -1015,7 +1015,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             //---------------------
             // Signal Region
             //---------------------
-            if ((*v_TTZToQQ_alpha)[i] < 0.15)
+            if ((*v_TTZToQQ_alpha)[i] < 0.1)
             {
                 h_Top_nTracks_cut->Fill((*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight);
                 h_Top_jetpt_cut->Fill((*v_TTZToQQ_JetPT)[i], TTZToQQ_eventWeight);
@@ -1114,7 +1114,7 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
             //---------------------
             // Signal Region
             //---------------------
-            if ((*v_TTZToLLNuNu_alpha)[i] < 0.15)
+            if ((*v_TTZToLLNuNu_alpha)[i] < 0.1)
             {
                 h_Top_nTracks_cut->Fill((*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight);
                 h_Top_jetpt_cut->Fill((*v_TTZToLLNuNu_JetPT)[i], TTZToLLNuNu_eventWeight);

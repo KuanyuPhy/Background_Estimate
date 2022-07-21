@@ -9,7 +9,7 @@
 #include <TAttLine.h>
 #include <TStyle.h>
 #include <TCanvas.h>
-#include "./../../lib/Cross_section.h"
+#include "./../../../lib/Cross_section.h"
 using namespace std;
 //---------------------------------------
 // Define the HTWeight and Cross_section
@@ -254,13 +254,6 @@ void for_var_jet(float tmp, double Weight, TH1D *h_tmp)
 }
 void ee_HT_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_DYincli.root", TString outputfile1 = "./ee_DY_emjet_half.root")
 {
-    cout <<"ht100 = " << HT100Weight<<endl;
-    cout <<"ht200 = " << HT200Weight<<endl;
-    cout <<"ht400 = " << HT400Weight<<endl;
-    cout <<"ht600 = " << HT600Weight<<endl;
-    cout <<"ht800 = " << HT800Weight<<endl;
-    cout <<"ht1200 = " << HT1200Weight<<endl;
-    cout <<"ht2500 = " << HT2500Weight<<endl;
     //-------------
     // Open Tree
     //-------------

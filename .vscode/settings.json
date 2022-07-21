@@ -1,6 +1,27 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
-        "tcanvas.h": "c"
+        "tcanvas.h": "c",
+        "iostream": "cpp",
+        "atomic": "cpp",
+        "cwchar": "cpp",
+        "string": "cpp",
+        "exception": "cpp",
+        "functional": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "ee_Top_produce_half.C": "cpp",
+        "Ratio_Top_apply_nTrack.C": "cpp",
+        "ee_Diboson_half.C": "cpp",
+        "ee_diboson_produce_half.C": "cpp",
+        "ee_HT_produce_half.C": "cpp"
     }
 }

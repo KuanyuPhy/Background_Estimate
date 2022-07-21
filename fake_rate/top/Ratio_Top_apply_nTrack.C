@@ -13,8 +13,8 @@
 #include "TLegend.h"
 #include "RooRealVar.h"
 #include "RooDataSet.h"
-#include "./../../../lib/setNCUStyle.C"
-#include "./../../../lib/Cross_section.h"
+#include "./../../lib/setNCUStyle.C"
+#include "./../../lib/Cross_section.h"
 using namespace std;
 void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, double Weight, TH1D *h_tmp)
 {
@@ -491,7 +491,7 @@ void Ratio_Top_apply_nTrack()
             for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], rootfit_bjetWeight, h_Top_nTracks_bjet_CR);
             for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], rootfit_cjetWeight, h_Top_nTracks_cjet_CR);
             for_signalflavor_jet(0, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], rootfit_lightjetWeight, h_Top_nTracks_light_CR);
-            if ((*v_TTTo2L2Nu_alpha)[i] < 0.15)
+            if ((*v_TTTo2L2Nu_alpha)[i] < 0.1)
             {
                 for_signalflavor_jet(5, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_nTracks_bjet_cut);
                 for_signalflavor_jet(4, (*v_TTTo2L2Nu_Jethadronflavor)[i], (*v_TTTo2L2Nu_nTrack)[i], TTTo2L2Nu_eventWeight, h_Top_nTracks_cjet_cut);
@@ -543,7 +543,7 @@ void Ratio_Top_apply_nTrack()
             for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], rootfit_bjetWeight, h_Top_nTracks_bjet_CR);
             for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], rootfit_cjetWeight, h_Top_nTracks_cjet_CR);
             for_signalflavor_jet(0, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], rootfit_lightjetWeight, h_Top_nTracks_light_CR);
-            if ((*v_ST_tW_top_alpha)[i] < 0.15)
+            if ((*v_ST_tW_top_alpha)[i] < 0.1)
             {
                 for_signalflavor_jet(5, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_nTracks_bjet_cut);
                 for_signalflavor_jet(4, (*v_ST_tW_top_Jethadronflavor)[i], (*v_ST_tW_top_nTrack)[i], ST_tW_top_eventWeight, h_Top_nTracks_cjet_cut);
@@ -594,7 +594,7 @@ void Ratio_Top_apply_nTrack()
             for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], rootfit_bjetWeight, h_Top_nTracks_bjet_CR);
             for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], rootfit_cjetWeight, h_Top_nTracks_cjet_CR);
             for_signalflavor_jet(0, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], rootfit_lightjetWeight, h_Top_nTracks_light_CR);
-            if ((*v_ST_tW_antitop_alpha)[i] < 0.15)
+            if ((*v_ST_tW_antitop_alpha)[i] < 0.1)
             {
                 for_signalflavor_jet(5, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_nTracks_bjet_cut);
                 for_signalflavor_jet(4, (*v_ST_tW_antitop_Jethadronflavor)[i], (*v_ST_tW_antitop_nTrack)[i], ST_tW_antitop_eventWeight, h_Top_nTracks_cjet_cut);
@@ -646,7 +646,7 @@ void Ratio_Top_apply_nTrack()
             for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], rootfit_bjetWeight, h_Top_nTracks_bjet_CR);
             for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], rootfit_cjetWeight, h_Top_nTracks_cjet_CR);
             for_signalflavor_jet(0, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], rootfit_lightjetWeight, h_Top_nTracks_light_CR);
-            if ((*v_TTWJetsToLNu_alpha)[i] < 0.15)
+            if ((*v_TTWJetsToLNu_alpha)[i] < 0.1)
             {
                 for_signalflavor_jet(5, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_nTracks_bjet_cut);
                 for_signalflavor_jet(4, (*v_TTWJetsToLNu_Jethadronflavor)[i], (*v_TTWJetsToLNu_nTrack)[i], TTWJetsToLNu_eventWeight, h_Top_nTracks_cjet_cut);
@@ -698,7 +698,7 @@ void Ratio_Top_apply_nTrack()
             for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jethadronflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], rootfit_bjetWeight, h_Top_nTracks_bjet_CR);
             for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jethadronflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], rootfit_cjetWeight, h_Top_nTracks_cjet_CR);
             for_signalflavor_jet(0, (*v_TTWJetsToQQ_Jethadronflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], rootfit_lightjetWeight, h_Top_nTracks_light_CR);
-            if ((*v_TTWJetsToQQ_alpha)[i] < 0.15)
+            if ((*v_TTWJetsToQQ_alpha)[i] < 0.1)
             {
                 for_signalflavor_jet(5, (*v_TTWJetsToQQ_Jethadronflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_nTracks_bjet_cut);
                 for_signalflavor_jet(4, (*v_TTWJetsToQQ_Jethadronflavor)[i], (*v_TTWJetsToQQ_nTrack)[i], TTWJetsToQQ_eventWeight, h_Top_nTracks_cjet_cut);
@@ -750,7 +750,7 @@ void Ratio_Top_apply_nTrack()
             for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], rootfit_bjetWeight, h_Top_nTracks_bjet_CR);
             for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], rootfit_cjetWeight, h_Top_nTracks_cjet_CR);
             for_signalflavor_jet(0, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], rootfit_lightjetWeight, h_Top_nTracks_light_CR);
-            if ((*v_TTZToQQ_alpha)[i] < 0.15)
+            if ((*v_TTZToQQ_alpha)[i] < 0.1)
             {
                 for_signalflavor_jet(5, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_nTracks_bjet_cut);
                 for_signalflavor_jet(4, (*v_TTZToQQ_Jethadronflavor)[i], (*v_TTZToQQ_nTrack)[i], TTZToQQ_eventWeight, h_Top_nTracks_cjet_cut);
@@ -802,7 +802,7 @@ void Ratio_Top_apply_nTrack()
             for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], rootfit_bjetWeight, h_Top_nTracks_bjet_CR);
             for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], rootfit_cjetWeight, h_Top_nTracks_cjet_CR);
             for_signalflavor_jet(0, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], rootfit_lightjetWeight, h_Top_nTracks_light_CR);
-            if ((*v_TTZToLLNuNu_alpha)[i] < 0.15)
+            if ((*v_TTZToLLNuNu_alpha)[i] < 0.1)
             {
                 for_signalflavor_jet(5, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_nTracks_bjet_cut);
                 for_signalflavor_jet(4, (*v_TTZToLLNuNu_Jethadronflavor)[i], (*v_TTZToLLNuNu_nTrack)[i], TTZToLLNuNu_eventWeight, h_Top_nTracks_cjet_cut);
@@ -818,7 +818,7 @@ void Ratio_Top_apply_nTrack()
     h_Top_nTracks_light_cut->GetXaxis()->SetTitle("Jet track multiplicity");
     // h_Top_nTracks_light_cut->GetXaxis()->SetTitleOffset(1.5);
 
-    //h_Top_nTracks_light_CR->SetTitle("light jet (Top)");
+    // h_Top_nTracks_light_CR->SetTitle("light jet (Top)");
     h_Top_nTracks_light_CR->GetYaxis()->SetTitle("nJet");
     h_Top_nTracks_light_CR->GetXaxis()->SetTitle("Jet track multiplicity");
     h_Top_nTracks_light_CR->GetXaxis()->SetTitleOffset(1.5);
@@ -832,7 +832,7 @@ void Ratio_Top_apply_nTrack()
     h_Top_nTracks_bjet_cut->GetXaxis()->SetTitle("Jet track multiplicity");
     // h_Top_nTracks_bjet_cut->GetXaxis()->SetTitleOffset(1.5);
 
-    //h_Top_nTracks_bjet_CR->SetTitle("b jet (Top)");
+    // h_Top_nTracks_bjet_CR->SetTitle("b jet (Top)");
     h_Top_nTracks_bjet_CR->GetYaxis()->SetTitle("nJet");
     h_Top_nTracks_bjet_CR->GetXaxis()->SetTitle("Jet track multiplicity");
     h_Top_nTracks_bjet_CR->GetXaxis()->SetTitleOffset(1.5);
@@ -859,38 +859,38 @@ void Ratio_Top_apply_nTrack()
     // double lightXbinmax = h_Top_nTracks_light_cut->GetXaxis()->GetBinLabel(lightbinmax);
     // cout<<lightXbinmax<<endl;
     auto c1 = new TCanvas("c1", "", 700, 700);
-    c1->Divide(1, 2, 0.01, 0);
-    c1->cd(1);
+    // c1->Divide(1, 2, 0.01, 0);
+    // c1->cd(1);
     gPad->SetTopMargin(0 - 0.3);
     gPad->SetBottomMargin(0.02);
     gPad->SetRightMargin(0.04);
     TH1D *Ratioresult = (TH1D *)h_Top_nTracks_light_CR->Clone("Ratioresult");
-    
+
     h_Top_nTracks_cjet_CR->SetLineColor(kRed);
     h_Top_nTracks_bjet_CR->SetLineColor(kRed);
     h_Top_nTracks_light_CR->SetLineColor(kRed);
-    h_Top_nTracks_bjet_bybin_CR->SetLineColor(kGreen + 3);
-    h_Top_nTracks_cjet_bybin_CR->SetLineColor(kGreen + 3);
+    h_Top_nTracks_cjet_cut->SetLineColor(kGreen + 3);
+    // h_Top_nTracks_cjet_bybin_CR->SetLineColor(kGreen + 3);
     h_Top_nTracks_light_bybin_CR->SetLineColor(kGreen + 3);
     h_Top_nTracks_bjet_CR->SetLabelSize(0);
     h_Top_nTracks_cjet_CR->SetLabelSize(0);
     h_Top_nTracks_light_CR->SetLabelSize(0);
     h_Top_nTracks_light_CR->GetXaxis()->SetRangeUser(0, lightbinmax);
-    h_Top_nTracks_light_CR->Draw("hist e ");
-    h_Top_nTracks_light_cut->Draw("hist e same");
-    h_Top_nTracks_light_bybin_CR->Draw("hist e  same");
+    // h_Top_nTracks_light_CR->Draw("hist e ");
+    h_Top_nTracks_cjet_cut->Draw("hist e same");
+    h_Top_nTracks_cjet_bybin_CR->Draw("hist e  same");
     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l0->SetHeader("Top process (light Jet)");
+    l0->SetHeader("Top process (c Jet)");
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
     l0->AddEntry(h_Top_nTracks_bjet_cut, "Top SR", "l");
-    l0->AddEntry(h_Top_nTracks_bjet_CR, "Top apply fit result", "l");
+    // l0->AddEntry(h_Top_nTracks_bjet_CR, "Top apply fit result", "l");
     l0->AddEntry(h_Top_nTracks_bjet_bybin_CR, "Top apply bin by bin result", "l");
     l0->Draw();
     gStyle->SetOptStat(0);
     Ratioresult->Divide(h_Top_nTracks_light_CR, h_Top_nTracks_light_cut);
     Ratioresult->SetLineWidth(2);
-    c1->cd(2);
+    // c1->cd(2);
     gPad->SetRightMargin(0.04);
     gPad->SetTopMargin(0);
     gPad->SetBottomMargin(0.2);
@@ -901,7 +901,7 @@ void Ratio_Top_apply_nTrack()
     Ratioresult->GetYaxis()->SetTitle("Fit / MC");
     Ratioresult->GetXaxis()->SetRangeUser(0, lightbinmax);
     Ratioresult->GetYaxis()->SetRangeUser(-0.5, 2);
-    Ratioresult->Draw();
+    // Ratioresult->Draw();
     /*
     c1->cd(2);
     gStyle->SetStatW(0.3);
