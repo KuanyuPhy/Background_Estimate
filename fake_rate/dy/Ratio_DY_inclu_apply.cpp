@@ -100,6 +100,138 @@ int getfakerate(float tmp1, float start, float Binwidth)
 
     return quotient + 1;
 }
+void for_inclusive_DY_sigle_flavor_jetvar(float HT, int flavor, float hadronflavor, float tmp, double Weight, TH1D *h_tmp)
+{
+    if (HT < 70)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT0Weight);
+        }
+    }
+    else if (HT >= 70 && HT < 100)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT70Weight);
+        }
+    }
+    else if (HT >= 100 && HT < 200)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT100Weight);
+        }
+    }
+    else if (HT >= 200 && HT < 400)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT200Weight);
+        }
+    }
+    else if (HT >= 400 && HT < 600)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT400Weight);
+        }
+    }
+    else if (HT >= 600 && HT < 800)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT600Weight);
+        }
+    }
+    else if (HT >= 800 && HT < 1200)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT800Weight);
+        }
+    }
+    else if (HT >= 1200 && HT < 2500)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT1200Weight);
+        }
+    }
+    else if (HT >= 2500)
+    {
+        if (hadronflavor == flavor)
+        {
+            h_tmp->Fill(tmp, Weight * HT2500Weight);
+        }
+    }
+}
+void for_inclusive_DY_two_flavor_jetvar(float HT, int flavor1, int flavor2, float hadronflavor, float tmp, double Weight, TH1D *h_tmp)
+{
+    if (HT < 70)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT0Weight);
+        }
+    }
+    else if (HT >= 70 && HT < 100)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT70Weight);
+        }
+    }
+    else if (HT >= 100 && HT < 200)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT100Weight);
+        }
+    }
+    else if (HT >= 200 && HT < 400)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT200Weight);
+        }
+    }
+    else if (HT >= 400 && HT < 600)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT400Weight);
+        }
+    }
+    else if (HT >= 600 && HT < 800)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT600Weight);
+        }
+    }
+    else if (HT >= 800 && HT < 1200)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT800Weight);
+        }
+    }
+    else if (HT >= 1200 && HT < 2500)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT1200Weight);
+        }
+    }
+    else if (HT >= 2500)
+    {
+        if (hadronflavor == flavor1 || hadronflavor == flavor2)
+        {
+            h_tmp->Fill(tmp, Weight * HT2500Weight);
+        }
+    }
+}
 void for_inclusive_DY_var(float HT, float tmp, double Weight, TH1D *h_tmp)
 {
     if (HT < 70)
@@ -325,44 +457,27 @@ void Ratio_DY_inclu_apply(TString file = "tmp.root", TString outputfile = "outpu
 
             // Not Consider eta
             for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], fakerate, h_DY_trk_bybin_CR);
-            if ((*v_DY_Jethadronflavor)[i] == 5)
-            {
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], b_fakerate, h_DY_btrk_bybin_CR);
-                cout << "(*v_DY_nTrack)[i] = "<<(*v_DY_nTrack)[i] << endl;
-                cout << "b_fakerate = "<<b_fakerate << endl;
-            }
-            else if ((*v_DY_Jethadronflavor)[i] == 4)
-            {
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], c_fakerate, h_DY_ctrk_bybin_CR);
-            }
-            else if ((*v_DY_Jethadronflavor)[i] == 0)
-            {
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], l_fakerate, h_DY_ltrk_bybin_CR);
-            }
-            else if ((*v_DY_Jethadronflavor)[i] == 5 || (*v_DY_Jethadronflavor)[i] == 4)
-            {
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], h_fakerate, h_DY_htrk_bybin_CR);
-            }
+            // For b jet
+            for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], b_fakerate, h_DY_btrk_bybin_CR);
+            // For c jet
+            for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], c_fakerate, h_DY_ctrk_bybin_CR);
+            // For l jet
+            for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], l_fakerate, h_DY_ltrk_bybin_CR);
+            // For h jet
+            for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], h_fakerate, h_DY_htrk_bybin_CR);
+
             if ((*v_DY_alpha)[i] < 0.1)
             {
                 // Not Consider eta
                 for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_trk_SR);
-                if ((*v_DY_Jethadronflavor)[i] == 5)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_SR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 4)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_SR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 0)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_SR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 5 || (*v_DY_Jethadronflavor)[i] == 4)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_SR);
-                }
+                // For b jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_SR);
+                // For c jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_SR);
+                // For l jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_SR);
+                // For h jet
+                for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_SR);
             }
             //---------------------------------------------------------
             // Different eta
@@ -372,42 +487,27 @@ void Ratio_DY_inclu_apply(TString file = "tmp.root", TString outputfile = "outpu
             {
                 // Not Consider eta
                 for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], fakerate, h_DY_trk_region1_bybin_CR);
-                if ((*v_DY_Jethadronflavor)[i] == 5)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], b_fakerate, h_DY_btrk_region1_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 4)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], c_fakerate, h_DY_ctrk_region1_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 0)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], l_fakerate, h_DY_ltrk_region1_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 5 || (*v_DY_Jethadronflavor)[i] == 4)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], h_fakerate, h_DY_htrk_region1_bybin_CR);
-                }
+                // For b jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], b_fakerate, h_DY_btrk_region1_bybin_CR);
+                // For c jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], c_fakerate, h_DY_ctrk_region1_bybin_CR);
+                // For l jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], l_fakerate, h_DY_ltrk_region1_bybin_CR);
+                // For h jet
+                for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], h_fakerate, h_DY_htrk_region1_bybin_CR);
+
                 if ((*v_DY_alpha)[i] < 0.1)
                 {
                     // Not Consider eta
                     for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_trk_region1_SR);
-                    if ((*v_DY_Jethadronflavor)[i] == 5)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region1_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 4)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region1_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 0)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region1_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 5 || (*v_DY_Jethadronflavor)[i] == 4)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region1_SR);
-                    }
+                    // For b jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region1_SR);
+                    // For c jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region1_SR);
+                    // For l jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region1_SR);
+                    // For h jet
+                    for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region1_SR);
                 }
             }
             // For Region 1 < |eta| < 2
@@ -415,85 +515,55 @@ void Ratio_DY_inclu_apply(TString file = "tmp.root", TString outputfile = "outpu
             {
                 // Not Consider eta
                 for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], fakerate, h_DY_trk_region2_bybin_CR);
-                if ((*v_DY_Jethadronflavor)[i] == 5)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], b_fakerate, h_DY_btrk_region2_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 4)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], c_fakerate, h_DY_ctrk_region2_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 0)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], l_fakerate, h_DY_ltrk_region2_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 5 || (*v_DY_Jethadronflavor)[i] == 4)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], h_fakerate, h_DY_htrk_region2_bybin_CR);
-                }
+                // For b jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], b_fakerate, h_DY_btrk_region2_bybin_CR);
+                // For c jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], c_fakerate, h_DY_ctrk_region2_bybin_CR);
+                // For l jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], l_fakerate, h_DY_ltrk_region2_bybin_CR);
+                // For h jet
+                for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], h_fakerate, h_DY_htrk_region2_bybin_CR);
+
                 if ((*v_DY_alpha)[i] < 0.1)
                 {
                     // Not Consider eta
                     for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_trk_region2_SR);
-                    if ((*v_DY_Jethadronflavor)[i] == 5)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region2_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 4)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region2_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 0)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region2_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 5 || (*v_DY_Jethadronflavor)[i] == 4)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region2_SR);
-                    }
+                    // For b jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region2_SR);
+                    // For c jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region2_SR);
+                    // For l jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region2_SR);
+                    // For h jet
+                    for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region2_SR);
                 }
             }
             // For Region 2 < |eta| < 2.5
             else if (abs((*v_DY_JetEta)[i]) > 2 && abs((*v_DY_JetEta)[i]) < 2.5)
             {
                 // Not Consider eta
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], fakerate, h_DY_trk_region2_bybin_CR);
-                if ((*v_DY_Jethadronflavor)[i] == 5)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], b_fakerate, h_DY_btrk_region2_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 4)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], c_fakerate, h_DY_ctrk_region2_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 0)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], l_fakerate, h_DY_ltrk_region2_bybin_CR);
-                }
-                else if ((*v_DY_Jethadronflavor)[i] == 5 || (*v_DY_Jethadronflavor)[i] == 4)
-                {
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], h_fakerate, h_DY_htrk_region2_bybin_CR);
-                }
+                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], fakerate, h_DY_trk_region3_bybin_CR);
+                // For b jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], b_fakerate, h_DY_btrk_region3_bybin_CR);
+                // For c jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], c_fakerate, h_DY_ctrk_region3_bybin_CR);
+                // For l jet
+                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], l_fakerate, h_DY_ltrk_region3_bybin_CR);
+                // For h jet
+                for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], h_fakerate, h_DY_htrk_region3_bybin_CR);
+
                 if ((*v_DY_alpha)[i] < 0.1)
                 {
                     // Not Consider eta
                     for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_trk_region3_SR);
-                    if ((*v_DY_Jethadronflavor)[i] == 5)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region3_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 4)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region3_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 0)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region3_SR);
-                    }
-                    else if ((*v_DY_Jethadronflavor)[i] == 5 || (*v_DY_Jethadronflavor)[i] == 4)
-                    {
-                        for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region3_SR);
-                    }
+                    // For b jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region3_SR);
+                    // For c jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region3_SR);
+                    // For l jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region3_SR);
+                    // For h jet
+                    for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region3_SR);
                 }
             }
         }

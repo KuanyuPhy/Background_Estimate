@@ -95,28 +95,67 @@ void ee_Top_half(TString file = "tmp.root", TString outputfile = "output.root")
     //--------------------------------------------------------------
     // Hist: 0 : |eta| < 1, 1 : 1 < |eta| < 2, 2 : 2 < |eta| < 2.5
     //--------------------------------------------------------------
-    TH1D *h_Top_nTracks_bjet[3];
-    TH1D *h_Top_nTracks_bjet_cut[3];
-    TH1D *h_Top_nTracks_cjet[3];
-    TH1D *h_Top_nTracks_cjet_cut[3];
-    TH1D *h_Top_nTracks_ljet[3];
-    TH1D *h_Top_nTracks_ljet_cut[3];
+    TH1D *h_Top_nTrk_difeta[3];
+    TH1D *h_Top_nTrk_cut_difeta[3];
+    TH1D *h_Top_nTrk_bjet_difeta[3];
+    TH1D *h_Top_nTrk_bjet_cut_difeta[3];
+    TH1D *h_Top_nTrk_cjet_difeta[3];
+    TH1D *h_Top_nTrk_cjet_cut_difeta[3];
+    TH1D *h_Top_nTrk_ljet_difeta[3];
+    TH1D *h_Top_nTrk_ljet_cut_difeta[3];
+    TH1D *h_Top_nTrk_hjet_difeta[3];
+    TH1D *h_Top_nTrk_hjet_cut_difeta[3];
 
     for (int i = 0; i < 3; i++)
     {
-        h_Top_nTracks_bjet[i] = new TH1D(Form("h_Top_nTracks_bjet_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_bjet_cut[i] = new TH1D(Form("h_Top_nTracks_bjet_cut_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_cjet[i] = new TH1D(Form("h_Top_nTracks_cjet_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_cjet_cut[i] = new TH1D(Form("h_Top_nTracks_cjet_cut_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_ljet[i] = new TH1D(Form("h_Top_nTracks_ljet_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_ljet_cut[i] = new TH1D(Form("h_Top_nTracks_ljet_cut_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_bjet[i]->Sumw2();
-        h_Top_nTracks_bjet_cut[i]->Sumw2();
-        h_Top_nTracks_cjet[i]->Sumw2();
-        h_Top_nTracks_cjet_cut[i]->Sumw2();
-        h_Top_nTracks_ljet[i]->Sumw2();
-        h_Top_nTracks_ljet_cut[i]->Sumw2();
+
+        h_Top_nTrk_difeta[i] = new TH1D(Form("h_Top_nTrk_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cut_difeta[i] = new TH1D(Form("h_Top_nTrk_cut_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_bjet_difeta[i] = new TH1D(Form("h_Top_nTrk_bjet_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_bjet_cut_difeta[i] = new TH1D(Form("h_Top_nTrk_bjet_cut_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cjet_difeta[i] = new TH1D(Form("h_Top_nTrk_cjet_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cjet_cut_difeta[i] = new TH1D(Form("h_Top_nTrk_cjet_cut_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_ljet_difeta[i] = new TH1D(Form("h_Top_nTrk_ljet_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_ljet_cut_difeta[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_hjet_difeta[i] = new TH1D(Form("h_Top_nTrk_hjet_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_hjet_cut_difeta[i] = new TH1D(Form("h_Top_nTrk_hjet_cut_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_difeta[i]->Sumw2();
+        h_Top_nTrk_cut_difeta[i]->Sumw2();
+        h_Top_nTrk_bjet_difeta[i]->Sumw2();
+        h_Top_nTrk_bjet_cut_difeta[i]->Sumw2();
+        h_Top_nTrk_cjet_difeta[i]->Sumw2();
+        h_Top_nTrk_cjet_cut_difeta[i]->Sumw2();
+        h_Top_nTrk_ljet_difeta[i]->Sumw2();
+        h_Top_nTrk_ljet_cut_difeta[i]->Sumw2();
+        h_Top_nTrk_hjet_difeta[i]->Sumw2();
+        h_Top_nTrk_hjet_cut_difeta[i]->Sumw2();
     }
+    //-----------------------------
+    // Not consider eta
+    //-----------------------------
+    TH1D *h_Top_nTrk_bjet = new TH1D("h_Top_nTrk_bjet", "", 30, 1, 30);
+    TH1D *h_Top_nTrk_bjet_cut = new TH1D("h_Top_nTrk_bjet_cut", "", 30, 1, 30);
+    TH1D *h_Top_nTrk_cjet = new TH1D("h_Top_nTrk_cjet", "", 30, 1, 30);
+    TH1D *h_Top_nTrk_cjet_cut = new TH1D("h_Top_nTrk_cjet_cut", "", 30, 1, 30);
+    TH1D *h_Top_nTrk_ljet = new TH1D("h_Top_nTrk_ljet", "", 30, 1, 30);
+    TH1D *h_Top_nTrk_ljet_cut = new TH1D("h_Top_nTrk_ljet_cut", "", 30, 1, 30);
+    TH1D *h_Top_nTrk_hjet = new TH1D("h_Top_nTrk_hjet", "", 30, 1, 30);
+    TH1D *h_Top_nTrk_hjet_cut = new TH1D("h_Top_nTrk_hjet_cut", "", 30, 1, 30);
+    h_Top_nTrk_bjet->Sumw2();
+    h_Top_nTrk_bjet_cut->Sumw2();
+    h_Top_nTrk_cjet->Sumw2();
+    h_Top_nTrk_cjet_cut->Sumw2();
+    h_Top_nTrk_ljet->Sumw2();
+    h_Top_nTrk_ljet_cut->Sumw2();
+    h_Top_nTrk_hjet->Sumw2();
+    h_Top_nTrk_hjet_cut->Sumw2();
+    //-----------------------------
+    // Not consider flavor
+    //-----------------------------
+    TH1D *h_Top_nTrk = new TH1D("h_Top_nTrk", "", 30, 1, 30);
+    TH1D *h_Top_nTrk_cut = new TH1D("h_Top_nTrk_cut", "", 30, 1, 30);
+    h_Top_nTrk->Sumw2();
+    h_Top_nTrk_cut->Sumw2();
 
     Int_t I_Top_nJets;
 
@@ -169,64 +208,113 @@ void ee_Top_half(TString file = "tmp.root", TString outputfile = "output.root")
         //-------------------------------------------------------------
         for (size_t i = 0; i < v_Top_nTrack->size(); i++)
         {
+            // Not Consider eta
+            h_Top_nTrk->Fill((*v_Top_nTrack)[i], Top_weight);
+            //  For b jet
+            for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet);
+            // For c jet
+            for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet);
+            // For light flavor
+            for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet);
+            // For heavy flavor
+            for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet);
+            if ((*v_Top_alpha)[i] < 0.1)
+            {
+                // Not Consider eta
+                h_Top_nTrk_cut->Fill((*v_Top_nTrack)[i], Top_weight);
+                //  For b jet
+                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut);
+                // For c jet
+                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut);
+                // For light flavor
+                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut);
+                // For heavy flavor
+                for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet_cut);
+            }
+            //--------------------
+            // Consider eta
+            //--------------------
             // For Region |eta| < 1
             if (abs((*v_Top_JetEta)[i]) < 1)
             {
+                // Not consider flavor
+                h_Top_nTrk_difeta[0]->Fill((*v_Top_nTrack)[i], Top_weight);
                 // For b jet
-                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_bjet[0]);
+                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta[0]);
                 // For c jet
-                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_cjet[0]);
+                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta[0]);
                 // For light flavor
-                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_ljet[0]);
-                // For SR cut
+                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta[0]);
+                // For heavy flavor
+                for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet_difeta[0]);
                 if ((*v_Top_alpha)[i] < 0.1)
                 {
+                    // Not consider flavor
+                    h_Top_nTrk_cut_difeta[0]->Fill((*v_Top_nTrack)[i], Top_weight);
                     // For b jet
-                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_bjet_cut[0]);
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta[0]);
                     // For c jet
-                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_cjet_cut[0]);
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta[0]);
                     // For light flavor
-                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_ljet_cut[0]);
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta[0]);
+                    // For heavy flavor
+                    for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet_cut_difeta[0]);
                 }
             }
             // For Region 1 < |eta| < 2
             else if (abs((*v_Top_JetEta)[i]) > 1 && abs((*v_Top_JetEta)[i]) < 2)
             {
+                // Not consider flavor
+                h_Top_nTrk_difeta[1]->Fill((*v_Top_nTrack)[i], Top_weight);
                 // For b jet
-                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_bjet[1]);
+                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta[1]);
                 // For c jet
-                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_cjet[1]);
+                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta[1]);
                 // For light flavor
-                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_ljet[1]);
+                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta[1]);
+                // For heavy flavor
+                for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet_difeta[1]);
                 // For SR cut
                 if ((*v_Top_alpha)[i] < 0.1)
                 {
+                    // Not consider flavor
+                    h_Top_nTrk_cut_difeta[1]->Fill((*v_Top_nTrack)[i], Top_weight);
                     // For b jet
-                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_bjet_cut[1]);
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta[1]);
                     // For c jet
-                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_cjet_cut[1]);
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta[1]);
                     // For light flavor
-                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_ljet_cut[1]);
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta[1]);
+                    // For heavy flavor
+                    for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet_cut_difeta[1]);
                 }
             }
             // For Region 2 < |eta| < 2.5
             else if (abs((*v_Top_JetEta)[i]) > 2 && abs((*v_Top_JetEta)[i]) < 2.5)
-            {
+            { // Not consider flavor
+                h_Top_nTrk_difeta[2]->Fill((*v_Top_nTrack)[i], Top_weight);
                 // For b jet
-                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_bjet[2]);
+                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta[2]);
                 // For c jet
-                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_cjet[2]);
+                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta[2]);
                 // For light flavor
-                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_ljet[2]);
+                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta[2]);
+                // For heavy flavor
+                for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet_difeta[2]);
+
                 // For SR cut
                 if ((*v_Top_alpha)[i] < 0.1)
                 {
+                    // Not consider flavor
+                    h_Top_nTrk_cut_difeta[2]->Fill((*v_Top_nTrack)[i], Top_weight);
                     // For b jet
-                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_bjet_cut[2]);
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta[2]);
                     // For c jet
-                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_cjet_cut[2]);
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta[2]);
                     // For light flavor
-                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTracks_ljet_cut[2]);
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta[2]);
+                    // For heavy flavor
+                    for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet_cut_difeta[2]);
                 }
             }
         }
@@ -259,22 +347,27 @@ void ee_Top_half(TString file = "tmp.root", TString outputfile = "output.root")
     outfile->cd();
     for (int i = 0; i < 3; i++)
     {
-        h_Top_nTracks_bjet[i]->Write();
-        h_Top_nTracks_bjet_cut[i]->Write();
-        h_Top_nTracks_cjet[i]->Write();
-        h_Top_nTracks_cjet_cut[i]->Write();
-        h_Top_nTracks_ljet[i]->Write();
-        h_Top_nTracks_ljet_cut[i]->Write();
+        h_Top_nTrk_difeta[i]->Write();
+        h_Top_nTrk_cut_difeta[i]->Write();
+        h_Top_nTrk_bjet_difeta[i]->Write();
+        h_Top_nTrk_bjet_cut_difeta[i]->Write();
+        h_Top_nTrk_cjet_difeta[i]->Write();
+        h_Top_nTrk_cjet_cut_difeta[i]->Write();
+        h_Top_nTrk_ljet_difeta[i]->Write();
+        h_Top_nTrk_ljet_cut_difeta[i]->Write();
+        h_Top_nTrk_hjet_difeta[i]->Write();
+        h_Top_nTrk_hjet_cut_difeta[i]->Write();
     }
-    // Top_bfakeRate_eta1->Write();
-    // Top_cfakeRate_eta1->Write();
-    // Top_lfakeRate_eta1->Write();
-    // Top_bfakeRate_eta2->Write();
-    // Top_cfakeRate_eta2->Write();
-    // Top_lfakeRate_eta2->Write();
-    // Top_bfakeRate_eta3->Write();
-    // Top_cfakeRate_eta3->Write();
-    // Top_lfakeRate_eta3->Write();
+    h_Top_nTrk_bjet->Write();
+    h_Top_nTrk_bjet_cut->Write();
+    h_Top_nTrk_cjet->Write();
+    h_Top_nTrk_cjet_cut->Write();
+    h_Top_nTrk_ljet->Write();
+    h_Top_nTrk_ljet_cut->Write();
+    h_Top_nTrk_hjet->Write();
+    h_Top_nTrk_hjet_cut->Write();
+    h_Top_nTrk->Write();
+    h_Top_nTrk_cut->Write();
     outfile->Close();
 
     // cout << getWeight(file) << endl;

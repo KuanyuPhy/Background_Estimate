@@ -132,8 +132,8 @@ void quick_draw(TString file = "./Ratio_DY_apply.root")
     h_DY_trk_region1_bybin_CR->Draw("h same");
 
     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l0->AddEntry(h_DY_btrk_bybin_CR, "CR", "l");
-    l0->AddEntry(h_DY_btrk_SR, "SR", "l");
+    l0->AddEntry(h_DY_trk_region1_bybin_CR, "CR", "l");
+    l0->AddEntry(h_DY_trk_region1_SR, "SR", "l");
     l0->Draw();
 
     c1->cd(2);
@@ -141,8 +141,8 @@ void quick_draw(TString file = "./Ratio_DY_apply.root")
     h_DY_trk_region2_bybin_CR->Draw("same");
 
     TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l1->AddEntry(h_DY_ctrk_bybin_CR, "CR", "l");
-    l1->AddEntry(h_DY_ctrk_SR, "SR", "l");
+    l1->AddEntry(h_DY_trk_region2_bybin_CR, "CR", "l");
+    l1->AddEntry(h_DY_trk_region2_SR, "SR", "l");
     l1->Draw();
 
     c1->cd(3);
@@ -150,8 +150,8 @@ void quick_draw(TString file = "./Ratio_DY_apply.root")
     h_DY_trk_region3_bybin_CR->Draw("same");
 
     TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l2->AddEntry(h_DY_ltrk_bybin_CR, "CR", "l");
-    l2->AddEntry(h_DY_ltrk_SR, "SR", "l");
+    l2->AddEntry(h_DY_trk_region3_bybin_CR, "CR", "l");
+    l2->AddEntry(h_DY_trk_region3_SR, "SR", "l");
     l2->Draw();
     
 

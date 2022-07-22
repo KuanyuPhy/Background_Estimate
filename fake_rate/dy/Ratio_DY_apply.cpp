@@ -355,11 +355,11 @@ void Ratio_DY_inclu_apply(TString file = "tmp.root", TString outputfile = "outpu
             if ((*v_DY_alpha)[i] < 0.1)
             {
                 // Not Consider eta
-                h_DY_trk_SR->Fill((*v_DY_nTrack)[i], I_DY_weight);
-                for_signalflavor_jet(5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_SR);
-                for_signalflavor_jet(4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_SR);
-                for_signalflavor_jet(0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_SR);
-                for_doubleflavor_jet(5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_SR);
+                h_DY_trk_SR->Fill((*v_DY_nTrack)[i], DY_weight);
+                for_signalflavor_jet(5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_btrk_SR);
+                for_signalflavor_jet(4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_ctrk_SR);
+                for_signalflavor_jet(0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_ltrk_SR);
+                for_doubleflavor_jet(5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_htrk_SR);
             }
             //---------------------------------------------------------
             // Different eta
@@ -375,11 +375,11 @@ void Ratio_DY_inclu_apply(TString file = "tmp.root", TString outputfile = "outpu
                 if ((*v_DY_alpha)[i] < 0.1)
                 {
                     // Not Consider eta
-                    h_DY_trk_region1_SR->Fill((*v_DY_nTrack)[i], I_DY_weight);
-                    for_signalflavor_jet(5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region1_SR);
-                    for_signalflavor_jet(4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region1_SR);
-                    for_signalflavor_jet(0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region1_SR);
-                    for_doubleflavor_jet(5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region1_SR);
+                    h_DY_trk_region1_SR->Fill((*v_DY_nTrack)[i], DY_weight);
+                    for_signalflavor_jet(5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_btrk_region1_SR);
+                    for_signalflavor_jet(4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_ctrk_region1_SR);
+                    for_signalflavor_jet(0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_ltrk_region1_SR);
+                    for_doubleflavor_jet(5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_htrk_region1_SR);
                 }
             }
             // For Region 1 < |eta| < 2
@@ -393,11 +393,11 @@ void Ratio_DY_inclu_apply(TString file = "tmp.root", TString outputfile = "outpu
                 if ((*v_DY_alpha)[i] < 0.1)
                 {
                     // Not Consider eta
-                    h_DY_trk_region2_SR->Fill((*v_DY_nTrack)[i], I_DY_weight);
-                    for_signalflavor_jet(5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region2_SR);
-                    for_signalflavor_jet(4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region2_SR);
-                    for_signalflavor_jet(0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region2_SR);
-                    for_doubleflavor_jet(5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region2_SR);
+                    h_DY_trk_region2_SR->Fill((*v_DY_nTrack)[i], DY_weight);
+                    for_signalflavor_jet(5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_btrk_region2_SR);
+                    for_signalflavor_jet(4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_ctrk_region2_SR);
+                    for_signalflavor_jet(0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_ltrk_region2_SR);
+                    for_doubleflavor_jet(5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_htrk_region2_SR);
                 }
             }
             // For Region 2 < |eta| < 2.5
@@ -411,11 +411,11 @@ void Ratio_DY_inclu_apply(TString file = "tmp.root", TString outputfile = "outpu
                 if ((*v_DY_alpha)[i] < 0.1)
                 {
                     // Not Consider eta
-                    h_DY_trk_region3_SR->Fill((*v_DY_nTrack)[i], I_DY_weight);
-                    for_signalflavor_jet(5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_btrk_region3_SR);
-                    for_signalflavor_jet(4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ctrk_region3_SR);
-                    for_signalflavor_jet(0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_ltrk_region3_SR);
-                    for_doubleflavor_jet(5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_htrk_region3_SR);
+                    h_DY_trk_region3_SR->Fill((*v_DY_nTrack)[i], DY_weight);
+                    for_signalflavor_jet(5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_btrk_region3_SR);
+                    for_signalflavor_jet(4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_ctrk_region3_SR);
+                    for_signalflavor_jet(0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_ltrk_region3_SR);
+                    for_doubleflavor_jet(5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], DY_weight, h_DY_htrk_region3_SR);
                 }
             }
         }

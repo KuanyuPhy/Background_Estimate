@@ -28,25 +28,25 @@ for file in ${HT_list_1[*]}; do
 done
 rm DY_all.root
 hadd DY_all.root ./output/*.root
-#rm ./output/*.root
-#wait
-#root -q ee_DY_half_fk_produce.cpp
-#wait
-#for file in ${HT_inclusive_1[*]}; do
-#    DY_outputfile="$(basename -s ".root" "$file")"
-#    echo $DY_outputfile
-#    ./Ratio_DY_inclu_apply.o "$file" "./output/${DY_outputfile}_output.root" 
-#    #echo ./$outputfile;
-#done
-#wait
-#for file in ${HT_list_1[*]}; do
-#    DY_outputfile="$(basename -s ".root" "$file")"
-#    echo $DY_outputfile
-#    ./Ratio_DY_apply.o "$file" "./output/${DY_outputfile}_output.root" 
-#    #echo ./$outputfile;
-#done
-#rm Ratio_DY_apply.root
-#hadd Ratio_DY_apply.root ./output/*.root
-#rm ./output/*.root
+rm ./output/*.root
+wait
+root -q ee_DY_half_fk_produce.cpp
+wait
+for file in ${HT_inclusive_1[*]}; do
+    DY_outputfile="$(basename -s ".root" "$file")"
+    echo $DY_outputfile
+    ./Ratio_DY_inclu_apply.o "$file" "./output/${DY_outputfile}_output.root" 
+    #echo ./$outputfile;
+done
+wait
+for file in ${HT_list_1[*]}; do
+    DY_outputfile="$(basename -s ".root" "$file")"
+    echo $DY_outputfile
+    ./Ratio_DY_apply.o "$file" "./output/${DY_outputfile}_output.root" 
+    #echo ./$outputfile;
+done
+rm Ratio_DY_apply.root
+hadd Ratio_DY_apply.root ./output/*.root
+rm ./output/*.root
 root -l quick_draw.cpp
 

@@ -301,62 +301,62 @@ void ee_HT_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Zt
     const Int_t XBINS = 20;
     Double_t xEdges[XBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13., 14., 15., 16.,
                                   17., 18., 19., 20., 50.};
-    TH1D *h_DY_nTracks = new TH1D("h_DY_nTracks", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks = new TH1D("h_DY_nTracks", "", 30,1,30);
     h_DY_nTracks->GetXaxis()->SetTitle("");
     h_DY_nTracks->GetYaxis()->SetTitle("");
     h_DY_nTracks->Sumw2();
 
-    TH1D *h_DY_nTracks_heavy = new TH1D("h_DY_nTracks_heavy", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_heavy = new TH1D("h_DY_nTracks_heavy", "", 30,1,30);
     h_DY_nTracks_heavy->GetXaxis()->SetTitle("");
     h_DY_nTracks_heavy->GetYaxis()->SetTitle("");
     h_DY_nTracks_heavy->Sumw2();
 
-    TH1D *h_DY_nTracks_bjet = new TH1D("h_DY_nTracks_bjet", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_bjet = new TH1D("h_DY_nTracks_bjet", "", 30,1,30);
     h_DY_nTracks_bjet->GetXaxis()->SetTitle("");
     h_DY_nTracks_bjet->GetYaxis()->SetTitle("");
     h_DY_nTracks_bjet->Sumw2();
 
-    TH1D *h_DY_nTracks_cjet = new TH1D("h_DY_nTracks_cjet", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_cjet = new TH1D("h_DY_nTracks_cjet", "", 30,1,30);
     h_DY_nTracks_cjet->GetXaxis()->SetTitle("");
     h_DY_nTracks_cjet->GetYaxis()->SetTitle("");
     h_DY_nTracks_cjet->Sumw2();
 
-    TH1D *h_DY_nTracks_heavy_cut = new TH1D("h_DY_nTracks_heavy_cut", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_heavy_cut = new TH1D("h_DY_nTracks_heavy_cut", "", 30,1,30);
     h_DY_nTracks_heavy_cut->GetXaxis()->SetTitle("");
     h_DY_nTracks_heavy_cut->GetYaxis()->SetTitle("");
     h_DY_nTracks_heavy_cut->Sumw2();
 
-    TH1D *h_DY_nTracks_bjet_cut = new TH1D("h_DY_nTracks_bjet_cut", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_bjet_cut = new TH1D("h_DY_nTracks_bjet_cut", "", 30,1,30);
     h_DY_nTracks_bjet_cut->GetXaxis()->SetTitle("");
     h_DY_nTracks_bjet_cut->GetYaxis()->SetTitle("");
     h_DY_nTracks_bjet_cut->Sumw2();
 
-    TH1D *h_DY_nTracks_cjet_cut = new TH1D("h_DY_nTracks_cjet_cut", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_cjet_cut = new TH1D("h_DY_nTracks_cjet_cut", "", 30,1,30);
     h_DY_nTracks_cjet_cut->GetXaxis()->SetTitle("");
     h_DY_nTracks_cjet_cut->GetYaxis()->SetTitle("");
     h_DY_nTracks_cjet_cut->Sumw2();
 
-    TH1D *h_DY_nTracks_heavy_nogluon = new TH1D("h_DY_nTracks_heavy_nogluon", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_heavy_nogluon = new TH1D("h_DY_nTracks_heavy_nogluon", "", 30,1,30);
     h_DY_nTracks_heavy_nogluon->GetXaxis()->SetTitle("");
     h_DY_nTracks_heavy_nogluon->GetYaxis()->SetTitle("");
     h_DY_nTracks_heavy_nogluon->Sumw2();
 
-    TH1D *h_DY_nTracks_heavy_nogluon_cut = new TH1D("h_DY_nTracks_heavy_nogluon_cut", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_heavy_nogluon_cut = new TH1D("h_DY_nTracks_heavy_nogluon_cut", "", 30,1,30);
     h_DY_nTracks_heavy_nogluon_cut->GetXaxis()->SetTitle("");
     h_DY_nTracks_heavy_nogluon_cut->GetYaxis()->SetTitle("");
     h_DY_nTracks_heavy_nogluon_cut->Sumw2();
 
-    TH1D *h_DY_nTracks_light = new TH1D("h_DY_nTracks_light", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_light = new TH1D("h_DY_nTracks_light", "", 30,1,30);
     h_DY_nTracks_light->GetXaxis()->SetTitle("");
     h_DY_nTracks_light->GetYaxis()->SetTitle("");
     h_DY_nTracks_light->Sumw2();
 
-    TH1D *h_DY_nTracks_light_cut = new TH1D("h_DY_nTracks_light_cut", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_light_cut = new TH1D("h_DY_nTracks_light_cut", "", 30,1,30);
     h_DY_nTracks_light_cut->GetXaxis()->SetTitle("");
     h_DY_nTracks_light_cut->GetYaxis()->SetTitle("");
     h_DY_nTracks_light_cut->Sumw2();
 
-    TH1D *h_DY_nTracks_cut = new TH1D("h_DY_nTracks_cut", "", XBINS, xEdges);
+    TH1D *h_DY_nTracks_cut = new TH1D("h_DY_nTracks_cut", "", 30,1,30);
     h_DY_nTracks_cut->GetXaxis()->SetTitle("");
     h_DY_nTracks_cut->GetYaxis()->SetTitle("");
     h_DY_nTracks_cut->Sumw2();
