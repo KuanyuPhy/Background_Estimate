@@ -29,16 +29,6 @@ TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2
 TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_tW_antitop.root");
 TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_tW_top.root");
 
-//----------------------
-// Get fake rate
-//----------------------
-TFile *Top_fakerate_topfile = new TFile("./top_fakerate.root");
-TH1D *h_Top_nTrk_bjet = ((TH1D *)Top_fakerate_topfile->Get("h_Top_nTrk_bjet"));
-TH1D *h_Top_eta_bjet = ((TH1D *)Top_fakerate_topfile->Get("h_Top_eta_bjet"));
-TH2D *h_Top_nTrk_eta_bfakerate = ((TH2D *)Top_fakerate_topfile->Get("h_Top_nTrk_eta_bfakerate"));
-TH2D *h_Top_nTrk_eta_cfakerate = ((TH2D *)Top_fakerate_topfile->Get("h_Top_nTrk_eta_cfakerate"));
-TH2D *h_Top_nTrk_eta_lfakerate = ((TH2D *)Top_fakerate_topfile->Get("h_Top_nTrk_eta_lfakerate"));
-
 TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToQQ_sumevt = ((TH1D *)Top_TTWJetsToQQfile->Get("Event_Variable/h_totevent"));
@@ -82,13 +72,6 @@ double getWeight(const char *file_name_tmp)
     return -100000;
 }
 
-int getfakerate(float tmp1, float start, float Binwidth)
-{
-    int quotient;
-    quotient = floor((tmp1 - start) / (Binwidth));
-
-    return quotient+1;
-}
 //---------------
 // void Function
 //---------------
@@ -113,37 +96,49 @@ void for_doubleflavor_jet(int flavor1, int flavor2, int hadronflavor, float tmp,
         h_tmp->Fill(tmp, Weight);
     }
 }
-
-void Ratio_Top_apply_JetPt(TString file = "/home/kuanyu/Documents/root_file/BgEstimation/top_TTTo2L2Nu_2.root", TString outputfile = "output.root")
+void ee_Top_2dhalf(TString file = "tmp.root", TString outputfile = "output.root")
 {
     TFile *Topfile = TFile::Open(file);
     cout << "Top weight = " << getWeight(file) << endl;
 
-    TH1D *h_Top_JetPt_bjet_CR = new TH1D("h_Top_JetPt_bjet_CR", "", 50, 0, 500);
-    h_Top_JetPt_bjet_CR->Sumw2();
-    TH1D *h_Top_JetPt_bjet_SR = new TH1D("h_Top_JetPt_bjet_SR", "", 50, 0, 500);
-    h_Top_JetPt_bjet_SR->Sumw2();
-    TH1D *h_Top_JetPt_cjet_CR = new TH1D("h_Top_JetPt_cjet_CR", "", 50, 0, 500);
-    h_Top_JetPt_cjet_CR->Sumw2();
-    TH1D *h_Top_JetPt_cjet_SR = new TH1D("h_Top_JetPt_cjet_SR", "", 50, 0, 500);
-    h_Top_JetPt_cjet_SR->Sumw2();
-    TH1D *h_Top_JetPt_ljet_CR = new TH1D("h_Top_JetPt_ljet_CR", "", 50, 0, 500);
-    h_Top_JetPt_ljet_CR->Sumw2();
-    TH1D *h_Top_JetPt_ljet_SR = new TH1D("h_Top_JetPt_ljet_SR", "", 50, 0, 500);
-    h_Top_JetPt_ljet_SR->Sumw2();
+    TH1D *h_Top_nTrk_bjet = new TH1D("h_Top_nTrk_bjet", "", 30, 1, 30);
+    h_Top_nTrk_bjet->Sumw2();
+    TH1D *h_Top_nTrk_bjet_cut = new TH1D("h_Top_nTrk_bjet_cut", "", 30, 1, 30);
+    h_Top_nTrk_bjet_cut->Sumw2();
+    TH1D *h_Top_nTrk_cjet = new TH1D("h_Top_nTrk_cjet", "", 30, 1, 30);
+    h_Top_nTrk_cjet->Sumw2();
+    TH1D *h_Top_nTrk_cjet_cut = new TH1D("h_Top_nTrk_cjet_cut", "", 30, 1, 30);
+    h_Top_nTrk_cjet_cut->Sumw2();
+    TH1D *h_Top_nTrk_ljet = new TH1D("h_Top_nTrk_ljet", "", 30, 1, 30);
+    h_Top_nTrk_ljet->Sumw2();
+    TH1D *h_Top_nTrk_ljet_cut = new TH1D("h_Top_nTrk_ljet_cut", "", 30, 1, 30);
+    h_Top_nTrk_ljet_cut->Sumw2();
 
-    TH1D *h_Top_nTrk_bjet_CR = new TH1D("h_Top_nTrk_bjet_CR", "", 30, 1, 30);
-    h_Top_nTrk_bjet_CR->Sumw2();
-    TH1D *h_Top_nTrk_bjet_SR = new TH1D("h_Top_nTrk_bjet_SR", "", 30, 1, 30);
-    h_Top_nTrk_bjet_SR->Sumw2();
-    TH1D *h_Top_nTrk_cjet_CR = new TH1D("h_Top_nTrk_cjet_CR", "", 30, 1, 30);
-    h_Top_nTrk_cjet_CR->Sumw2();
-    TH1D *h_Top_nTrk_cjet_SR = new TH1D("h_Top_nTrk_cjet_SR", "", 30, 1, 30);
-    h_Top_nTrk_cjet_SR->Sumw2();
-    TH1D *h_Top_nTrk_ljet_CR = new TH1D("h_Top_nTrk_ljet_CR", "", 30, 1, 30);
-    h_Top_nTrk_ljet_CR->Sumw2();
-    TH1D *h_Top_nTrk_ljet_SR = new TH1D("h_Top_nTrk_ljet_SR", "", 30, 1, 30);
-    h_Top_nTrk_ljet_SR->Sumw2();
+    TH1D *h_Top_eta_bjet = new TH1D("h_Top_eta_bjet", "", 30, -3.0, 3.0);
+    h_Top_eta_bjet->Sumw2();
+    TH1D *h_Top_eta_bjet_cut = new TH1D("h_Top_eta_bjet_cut", "", 30, -3.0, 3.0);
+    h_Top_eta_bjet_cut->Sumw2();
+    TH1D *h_Top_eta_cjet = new TH1D("h_Top_eta_cjet", "", 30, -3.0, 3.0);
+    h_Top_eta_cjet->Sumw2();
+    TH1D *h_Top_eta_cjet_cut = new TH1D("h_Top_eta_cjet_cut", "", 30, -3.0, 3.0);
+    h_Top_eta_cjet_cut->Sumw2();
+    TH1D *h_Top_eta_ljet = new TH1D("h_Top_eta_ljet", "", 30, -3.0, 3.0);
+    h_Top_eta_ljet->Sumw2();
+    TH1D *h_Top_eta_ljet_cut = new TH1D("h_Top_eta_ljet_cut", "", 30, -3.0, 3.0);
+    h_Top_eta_ljet_cut->Sumw2();
+
+    TH2D *h_Top_nTrk_eta_bjet = new TH2D("h_Top_nTrk_eta_bjet", "", 30, 1, 30, 30, -3.0, 3.0);
+    h_Top_nTrk_eta_bjet->Sumw2();
+    TH2D *h_Top_nTrk_eta_bjet_cut = new TH2D("h_Top_nTrk_eta_bjet_cut", "", 30, 1, 30, 30, -3.0, 3.0);
+    h_Top_nTrk_eta_bjet_cut->Sumw2();
+    TH2D *h_Top_nTrk_eta_cjet = new TH2D("h_Top_nTrk_eta_cjet", "", 30, 1, 30, 30, -3.0, 3.0);
+    h_Top_nTrk_eta_cjet->Sumw2();
+    TH2D *h_Top_nTrk_eta_cjet_cut = new TH2D("h_Top_nTrk_eta_cjet_cut", "", 30, 1, 30, 30, -3.0, 3.0);
+    h_Top_nTrk_eta_cjet_cut->Sumw2();
+    TH2D *h_Top_nTrk_eta_ljet = new TH2D("h_Top_nTrk_eta_ljet", "", 30, 1, 30, 30, -3.0, 3.0);
+    h_Top_nTrk_eta_ljet->Sumw2();
+    TH2D *h_Top_nTrk_eta_ljet_cut = new TH2D("h_Top_nTrk_eta_ljet_cut", "", 30, 1, 30, 30, -3.0, 3.0);
+    h_Top_nTrk_eta_ljet_cut->Sumw2();
 
     Int_t I_Top_nJets;
 
@@ -170,7 +165,7 @@ void Ratio_Top_apply_JetPt(TString file = "/home/kuanyu/Documents/root_file/BgEs
     v_Top_JetEta->clear();
 
     TTree *T_Top_tree;
-    Topfile->GetObject("h2", T_Top_tree);
+    Topfile->GetObject("h1", T_Top_tree);
     T_Top_tree->SetBranchAddress("I_weight", &I_Top_weight);
     T_Top_tree->SetBranchAddress("I_nJets", &I_Top_nJets);
     T_Top_tree->SetBranchAddress("v_N_Tracks", &v_Top_nTrack);
@@ -191,53 +186,47 @@ void Ratio_Top_apply_JetPt(TString file = "/home/kuanyu/Documents/root_file/BgEs
         }
         double Top_weight = getWeight(file) * I_Top_weight;
         // double Top_weight = 1.;
-
-        double bxBinwidth = h_Top_nTrk_bjet->GetBinWidth(5);
-        double byBinwidth = h_Top_eta_bjet->GetBinWidth(5);
         for (int i = 0; i < v_Top_nTrack->size(); i++)
         {
-            int bxBin_local = getfakerate((*v_Top_nTrack)[i], 1., bxBinwidth);
-            int byBin_local = getfakerate((*v_Top_JetEta)[i], -3., byBinwidth);
-            int cxBin_local = getfakerate((*v_Top_nTrack)[i], 1., bxBinwidth);
-            int cyBin_local = getfakerate((*v_Top_JetEta)[i], -3., byBinwidth);
-            int lxBin_local = getfakerate((*v_Top_nTrack)[i], 1., bxBinwidth);
-            int lyBin_local = getfakerate((*v_Top_JetEta)[i], -3., byBinwidth);
-            // cout << "xBin_local = " << xBin_local << endl;
-            // cout << "yBin_local = " << yBin_local << endl;
-            double bjetake_rate2d = h_Top_nTrk_eta_bfakerate->GetBinContent(bxBin_local, byBin_local) * Top_weight;
-            double cjetake_rate2d = h_Top_nTrk_eta_cfakerate->GetBinContent(cxBin_local, cyBin_local) * Top_weight;
-            double ljetake_rate2d = h_Top_nTrk_eta_lfakerate->GetBinContent(lxBin_local, lyBin_local) * Top_weight;
-            // cout << "fake_rate2d = " << fake_rate2d << endl;
+            for_signalflavor_jet2d(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_nTrk_eta_bjet);
+            for_signalflavor_jet2d(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_nTrk_eta_cjet);
+            for_signalflavor_jet2d(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_nTrk_eta_ljet);
             //----------
-            //  JetPt
+            // nTrk
             //----------
-            for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], bjetake_rate2d, h_Top_JetPt_bjet_CR);
-            for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], cjetake_rate2d, h_Top_JetPt_cjet_CR);
-            for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], ljetake_rate2d, h_Top_JetPt_ljet_CR);
-            for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], bjetake_rate2d, h_Top_nTrk_bjet_CR);
-            for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], cjetake_rate2d, h_Top_nTrk_cjet_CR);
-            for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], ljetake_rate2d, h_Top_nTrk_ljet_CR);
+            for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet);
+            for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet);
+            for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet);
+            //----------
+            // eta
+            //----------
+            for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_eta_bjet);
+            for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_eta_cjet);
+            for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_eta_ljet);
+            if (abs((*v_Top_JetEta)[i]) > 2.5)
+            {
+                cout << "eta = " << (*v_Top_JetEta)[i] << endl;
+            }
             if ((*v_Top_alpha)[i] < 0.1)
             {
+                for_signalflavor_jet2d(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_nTrk_eta_bjet_cut);
+                for_signalflavor_jet2d(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_nTrk_eta_cjet_cut);
+                for_signalflavor_jet2d(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_nTrk_eta_ljet_cut);
                 //----------
-                // JetPt
+                // nTrk
                 //----------
-                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_JetPt_bjet_SR);
-                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_JetPt_cjet_SR);
-                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_JetPt_ljet_SR);
-                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_SR);
-                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_SR);
-                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_SR);
+                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut);
+                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut);
+                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut);
+                //----------
+                // eta
+                //----------
+                for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_eta_bjet_cut);
+                for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_eta_cjet_cut);
+                for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_eta_ljet_cut);
             }
         }
     } // End of Top loop
-
-    auto c1 = new TCanvas("c1", "");
-    c1->Divide(2, 1);
-    c1->cd(1);
-    h_Top_JetPt_cjet_SR->Draw();
-    c1->cd(2);
-    h_Top_JetPt_cjet_CR->Draw();
     //---------------------
     // Calculate fake rate
     //---------------------
@@ -264,20 +253,26 @@ void Ratio_Top_apply_JetPt(TString file = "/home/kuanyu/Documents/root_file/BgEs
 
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
     outfile->cd();
-    h_Top_JetPt_bjet_CR->Write();
-    h_Top_JetPt_cjet_CR->Write();
-    h_Top_JetPt_ljet_CR->Write();
-    h_Top_JetPt_bjet_SR->Write();
-    h_Top_JetPt_cjet_SR->Write();
-    h_Top_JetPt_ljet_SR->Write();
-    h_Top_nTrk_bjet_CR->Write();
-    h_Top_nTrk_cjet_CR->Write();
-    h_Top_nTrk_ljet_CR->Write();
-    h_Top_nTrk_bjet_SR->Write();
-    h_Top_nTrk_cjet_SR->Write();
-    h_Top_nTrk_ljet_SR->Write();
+    h_Top_nTrk_eta_bjet->Write();
+    h_Top_nTrk_eta_bjet_cut->Write();
+    h_Top_nTrk_eta_cjet->Write();
+    h_Top_nTrk_eta_cjet_cut->Write();
+    h_Top_nTrk_eta_ljet->Write();
+    h_Top_nTrk_eta_ljet_cut->Write();
+    h_Top_nTrk_bjet->Write();
+    h_Top_nTrk_bjet_cut->Write();
+    h_Top_nTrk_cjet->Write();
+    h_Top_nTrk_cjet_cut->Write();
+    h_Top_nTrk_ljet->Write();
+    h_Top_nTrk_ljet_cut->Write();
+    h_Top_eta_bjet->Write();
+    h_Top_eta_bjet_cut->Write();
+    h_Top_eta_cjet->Write();
+    h_Top_eta_cjet_cut->Write();
+    h_Top_eta_ljet->Write();
+    h_Top_eta_ljet_cut->Write();
+
     outfile->Close();
-    // h_Top_JetPt_bjet_SR->Draw();
 
     // cout << getWeight(file) << endl;
     // cout << "TTTo2L2NuWeight = " << TTTo2L2NuWeight << endl;
@@ -286,11 +281,11 @@ int main(int argc, char **argv)
 {
     if (argc == 1)
     {
-        Ratio_Top_apply_JetPt();
+        ee_Top_2dhalf();
     }
     else if (argc == 3)
     {
-        Ratio_Top_apply_JetPt(argv[1], argv[2]);
+        ee_Top_2dhalf(argv[1], argv[2]);
     }
     else
     {

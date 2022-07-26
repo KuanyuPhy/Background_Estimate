@@ -23,6 +23,8 @@
         "ee_Diboson_half.C": "cpp",
         "ee_diboson_produce_half.C": "cpp",
         "ee_HT_produce_half.C": "cpp",
-        "ee_met.C": "cpp"
+        "ee_met.C": "cpp",
+        "ee_Top_half.C": "cpp",
+        "ee_HT_metcut.C": "cpp"
     }
 }

@@ -50,7 +50,7 @@ void Ratio_Top_apply_JetPt()
     TFile *Top_tW_antitopfile_1 = new TFile("/home/kuanyu/Documents/root_file/BgEstimation/top_tW_antitop_2.root");
     TFile *Top_tW_topfile_1 = new TFile("/home/kuanyu/Documents/root_file/BgEstimation/top_tW_top_2.root");
 
-    TFile *Topfile = new TFile("./ee_diffeta_Top_emjet_half.root");
+    TFile *Topfile = new TFile("./new_macro/top_fakerate.root");
 
     TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
     TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
@@ -60,17 +60,17 @@ void Ratio_Top_apply_JetPt()
     TH1D *tW_antitop_sumevt = ((TH1D *)Top_tW_antitopfile->Get("Event_Variable/h_totevent"));
     TH1D *tW_top_sumevt = ((TH1D *)Top_tW_topfile->Get("Event_Variable/h_totevent"));
 
-    TH1D *Top_bfakeRate_eta1 = ((TH1D *)Topfile->Get("Top_bfakeRate_eta1"));
-    TH1D *Top_cfakeRate_eta1 = ((TH1D *)Topfile->Get("Top_cfakeRate_eta1"));
-    TH1D *Top_lfakeRate_eta1 = ((TH1D *)Topfile->Get("Top_lfakeRate_eta1"));
+    TH1D *Top_bfakeRate_eta1 = ((TH1D *)Topfile->Get("Top_nTrk_bfakeRate_difeta_1"));
+    TH1D *Top_cfakeRate_eta1 = ((TH1D *)Topfile->Get("Top_nTrk_cfakeRate_difeta_1"));
+    TH1D *Top_lfakeRate_eta1 = ((TH1D *)Topfile->Get("Top_nTrk_lfakeRate_difeta_1"));
 
-    TH1D *Top_bfakeRate_eta2 = ((TH1D *)Topfile->Get("Top_bfakeRate_eta2"));
-    TH1D *Top_cfakeRate_eta2 = ((TH1D *)Topfile->Get("Top_cfakeRate_eta2"));
-    TH1D *Top_lfakeRate_eta2 = ((TH1D *)Topfile->Get("Top_lfakeRate_eta2"));
+    TH1D *Top_bfakeRate_eta2 = ((TH1D *)Topfile->Get("Top_nTrk_bfakeRate_difeta_2"));
+    TH1D *Top_cfakeRate_eta2 = ((TH1D *)Topfile->Get("Top_nTrk_cfakeRate_difeta_2"));
+    TH1D *Top_lfakeRate_eta2 = ((TH1D *)Topfile->Get("Top_nTrk_lfakeRate_difeta_2"));
 
-    TH1D *Top_bfakeRate_eta3 = ((TH1D *)Topfile->Get("Top_bfakeRate_eta3"));
-    TH1D *Top_cfakeRate_eta3 = ((TH1D *)Topfile->Get("Top_cfakeRate_eta3"));
-    TH1D *Top_lfakeRate_eta3 = ((TH1D *)Topfile->Get("Top_lfakeRate_eta3"));
+    TH1D *Top_bfakeRate_eta3 = ((TH1D *)Topfile->Get("Top_nTrk_bfakeRate_difeta_3"));
+    TH1D *Top_cfakeRate_eta3 = ((TH1D *)Topfile->Get("Top_nTrk_cfakeRate_difeta_3"));
+    TH1D *Top_lfakeRate_eta3 = ((TH1D *)Topfile->Get("Top_nTrk_lfakeRate_difeta_3"));
 
     int TTTo2L2Nu_totevt = TTTo2L2Nu_sumevt->Integral();
     int TTWJetsToLNu_totevt = TTWJetsToLNu_sumevt->Integral();

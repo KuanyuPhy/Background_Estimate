@@ -170,7 +170,7 @@ void Ratio_Top_apply_JetPt(TString file = "/home/kuanyu/Documents/root_file/BgEs
     v_Top_JetEta->clear();
 
     TTree *T_Top_tree;
-    Topfile->GetObject("h2", T_Top_tree);
+    Topfile->GetObject("h1", T_Top_tree);
     T_Top_tree->SetBranchAddress("I_weight", &I_Top_weight);
     T_Top_tree->SetBranchAddress("I_nJets", &I_Top_nJets);
     T_Top_tree->SetBranchAddress("v_N_Tracks", &v_Top_nTrack);

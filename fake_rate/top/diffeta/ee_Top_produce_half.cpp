@@ -98,12 +98,12 @@ void ee_Top_produce_half(TString inputfile = "/home/kuanyu/Documents/root_file/Z
 
     for (int i = 0; i < 3; i++)
     {
-        h_Top_nTracks_bjet[i] = new TH1D(Form("h_Top_nTracks_bjet_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_bjet_cut[i] = new TH1D(Form("h_Top_nTracks_bjet_cut_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_cjet[i] = new TH1D(Form("h_Top_nTracks_cjet_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_cjet_cut[i] = new TH1D(Form("h_Top_nTracks_cjet_cut_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_ljet[i] = new TH1D(Form("h_Top_nTracks_ljet_%i", i + 1), "", 30, 0, 30);
-        h_Top_nTracks_ljet_cut[i] = new TH1D(Form("h_Top_nTracks_ljet_cut_%i", i + 1), "", 30, 0, 30);
+        h_Top_nTracks_bjet[i] = new TH1D(Form("h_Top_nTracks_bjet_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTracks_bjet_cut[i] = new TH1D(Form("h_Top_nTracks_bjet_cut_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTracks_cjet[i] = new TH1D(Form("h_Top_nTracks_cjet_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTracks_cjet_cut[i] = new TH1D(Form("h_Top_nTracks_cjet_cut_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTracks_ljet[i] = new TH1D(Form("h_Top_nTracks_ljet_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTracks_ljet_cut[i] = new TH1D(Form("h_Top_nTracks_ljet_cut_%i", i + 1), "", 30, 1, 30);
         h_Top_nTracks_bjet[i]->Sumw2();
         h_Top_nTracks_bjet_cut[i]->Sumw2();
         h_Top_nTracks_cjet[i]->Sumw2();
