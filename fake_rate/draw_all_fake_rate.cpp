@@ -290,6 +290,7 @@ void draw_all_fake_rate()
     float R = 0.04 * W_ref;
 
     auto c1 = new TCanvas("c1", "c1", 50, 50, W, H);
+
     c1->SetFillColor(0);
     c1->SetBorderMode(0);
     c1->SetFrameFillStyle(0);
@@ -301,55 +302,80 @@ void draw_all_fake_rate()
     c1->SetTickx(0);
     c1->SetTicky(0);
 
+
+    /*
+    Top_nTrk_cfakeRate->SetLineColor(kBlack);
+    Top_nTrk_lfakeRate->SetLineColor(kRed);
+
+    Top_nTrk_bfakeRate->GetYaxis()->SetTitle("fake rate");
+    Top_nTrk_bfakeRate->GetXaxis()->SetTitle("Track multiplicity");
+
+    Top_nTrk_bfakeRate->Draw();
+    Top_nTrk_cfakeRate->Draw("same");
+    Top_nTrk_lfakeRate->Draw("same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("Top process");
+    l0->SetBorderSize(0);
+    l0->SetTextSize(0.04);
+    l0->AddEntry(Top_nTrk_bfakeRate, "b jet", "EL");
+    l0->AddEntry(Top_nTrk_cfakeRate, "c jet", "EL");
+    l0->AddEntry(Top_nTrk_lfakeRate, "light jet", "EL");
+    l0->Draw();
+    */
+
+    
     c1->Divide(3, 1);
     c1->cd(1);
 
-    Top_nTrk_lfakeRate_difeta_1->GetXaxis()->SetTitle("ntrk");
-    Top_nTrk_lfakeRate_difeta_1->GetYaxis()->SetTitle("fake rate");
+    Top_nTrk_bfakeRate_difeta_1->GetXaxis()->SetTitle("Track multiplicity");
+    Top_nTrk_bfakeRate_difeta_1->GetYaxis()->SetTitle("fake rate");
 
-    Top_nTrk_lfakeRate_difeta_1->Draw("h text");
-    Top_emu_nTrk_lfakeRate_difeta_1->Draw("h same text");
+    Top_nTrk_bfakeRate_difeta_1->Draw("h ");
+    Top_emu_nTrk_bfakeRate_difeta_1->Draw("h same ");
 
     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l0->SetHeader("light flavor, |#eta| < 1");
+    l0->SetHeader("b flavor, |#eta| < 1");
     l0->SetBorderSize(0);
-    l0->SetTextSize(0.03);
-    l0->AddEntry(Top_nTrk_bfakeRate_difeta_1, "Top (Z to ee)", "l");
-    l0->AddEntry(Top_emu_nTrk_bfakeRate_difeta_1, "Top to e mu", "l");
+    l0->SetTextSize(0.04);
+    l0->AddEntry(Top_nTrk_bfakeRate_difeta_1, "Top to e e", "El");
+    l0->AddEntry(Top_emu_nTrk_bfakeRate_difeta_1, "Top to e mu", "El");
     l0->Draw();
 
     c1->cd(2);
 
-    Top_nTrk_lfakeRate_difeta_2->GetXaxis()->SetTitle("ntrk");
-    Top_nTrk_lfakeRate_difeta_2->GetYaxis()->SetTitle("fake rate");
+    Top_nTrk_bfakeRate_difeta_2->GetXaxis()->SetTitle("Track multiplicity");
+    Top_nTrk_bfakeRate_difeta_2->GetYaxis()->SetTitle("fake rate");
 
-    Top_nTrk_lfakeRate_difeta_2->Draw("h text");
-    Top_emu_nTrk_lfakeRate_difeta_2->Draw("h same text");
+    Top_nTrk_bfakeRate_difeta_2->Draw("h ");
+    Top_emu_nTrk_bfakeRate_difeta_2->Draw("h same ");
 
     TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l1->SetHeader("light flavor, 1 < |#eta| < 2");
+    l1->SetHeader("b flavor, 1 < |#eta| < 2");
     l1->SetBorderSize(0);
-    l1->SetTextSize(0.03);
-    l1->AddEntry(Top_nTrk_bfakeRate_difeta_1, "Top (Z to ee)", "l");
-    l1->AddEntry(Top_emu_nTrk_bfakeRate_difeta_1, "Top to e mu", "l");
+    l1->SetTextSize(0.04);
+    l1->AddEntry(Top_nTrk_bfakeRate_difeta_1, "Top to e e", "El");
+    l1->AddEntry(Top_emu_nTrk_bfakeRate_difeta_1, "Top to e mu", "El");
     l1->Draw();
 
     c1->cd(3);
 
-    Top_nTrk_lfakeRate_difeta_3->GetXaxis()->SetTitle("ntrk");
-    Top_nTrk_lfakeRate_difeta_3->GetYaxis()->SetTitle("fake rate");
+    Top_emu_nTrk_bfakeRate_difeta_3->GetXaxis()->SetTitle("Track multiplicity");
+    Top_emu_nTrk_bfakeRate_difeta_3->GetYaxis()->SetTitle("fake rate");
 
-    Top_nTrk_lfakeRate_difeta_3->Draw("h text");
-    Top_emu_nTrk_lfakeRate_difeta_3->Draw("h same text");
+    Top_emu_nTrk_bfakeRate_difeta_3->Draw("h  ");
+    Top_nTrk_bfakeRate_difeta_3->Draw("h same");
+
 
 
     TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l2->SetHeader("light flavor, 2 < |#eta| < 2.5");
+    l2->SetHeader("b flavor, 2 < |#eta| < 2.5");
     l2->SetBorderSize(0);
-    l2->SetTextSize(0.03);
-    l2->AddEntry(Top_nTrk_bfakeRate_difeta_1, "Top (Z to ee)", "l");
-    l2->AddEntry(Top_emu_nTrk_bfakeRate_difeta_1, "Top to e mu", "l");
+    l2->SetTextSize(0.04);
+    l2->AddEntry(Top_nTrk_bfakeRate_difeta_1, "Top to e e", "El");
+    l2->AddEntry(Top_emu_nTrk_bfakeRate_difeta_1, "Top to e mu", "El");
     l2->Draw();
+    
 
     /*
     c1->Divide(4, 1);
@@ -427,5 +453,6 @@ void draw_all_fake_rate()
     l0->AddEntry(Top_nTrk_bfakeRate, "Top (Z to ee)", "l");
     l0->Draw();
     */
+
     gStyle->SetOptStat(0);
 }

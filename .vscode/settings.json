@@ -25,6 +25,9 @@
         "ee_HT_produce_half.C": "cpp",
         "ee_met.C": "cpp",
         "ee_Top_half.C": "cpp",
-        "ee_HT_metcut.C": "cpp"
+        "ee_HT_metcut.C": "cpp",
+        "ee_Diboson_var.C": "cpp",
+        "HT_var.C": "cpp",
+        "ee_HT_var.C": "cpp"
     }
 }

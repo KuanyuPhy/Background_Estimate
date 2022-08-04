@@ -219,7 +219,7 @@ void ee_Top_half(TString file = "tmp.root", TString outputfile = "output.root")
             // For heavy flavor
             for_doubleflavor_jet(5, 4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_hjet);
             if ((*v_Top_alpha)[i] < 0.1)
-            {
+            {           
                 // Not Consider eta
                 h_Top_nTrk_cut->Fill((*v_Top_nTrack)[i], Top_weight);
                 //  For b jet

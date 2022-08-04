@@ -11,7 +11,7 @@ for file in ${HT_list[*]}; do
     outputfile="$(basename -s ".root" "$file")"
     echo $file
     #echo ${outputfile}
-    #./ee_HT_metcut.o "$file" "/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/${outputfile}.root"
+    ./ee_HT_metcut.o "$file" "/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/${outputfile}.root"
     #echo ./$outputfile;
 done
 wait
@@ -43,7 +43,7 @@ for file in ${Topemu_list[*]}; do
     outputfile="$(basename -s ".root" "$file")"
     echo $file
     echo ${outputfile}
-    ./ee_HT_metcut.o "$file" "/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/passmetcut/${outputfile}.root"
-    echo ./$outputfile;
+    #./ee_HT_metcut.o "$file" "/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/passmetcut/${outputfile}.root"
+    #echo ./$outputfile;
 done
 

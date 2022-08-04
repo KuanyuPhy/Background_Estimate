@@ -580,8 +580,8 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l0->SetHeader("b flavor");
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
-    l0->AddEntry(h_Top_bJetEta_bybin_CR, "CR", "l");
-    l0->AddEntry(h_Top_bJetEta_SR, "SR", "l");
+    l0->AddEntry(h_Top_bJetEta_bybin_CR, "CR", "El");
+    l0->AddEntry(h_Top_bJetEta_SR, "SR", "El");
     l0->Draw();
 
     h_Top_cJetEta_diffregion_SR->GetXaxis()->SetTitle("Jet #eta");
@@ -596,8 +596,8 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l1->SetHeader("c flavor");
     l1->SetBorderSize(0);
     l1->SetTextSize(0.03);
-    l1->AddEntry(h_Top_cJetEta_bybin_CR, "CR", "l");
-    l1->AddEntry(h_Top_cJetEta_SR, "SR", "l");
+    l1->AddEntry(h_Top_cJetEta_bybin_CR, "CR", "El");
+    l1->AddEntry(h_Top_cJetEta_SR, "SR", "El");
     l1->Draw();
 
     h_Top_lJetEta_diffregion_SR->GetXaxis()->SetTitle("Jet #eta");
@@ -612,58 +612,58 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->SetHeader("light flavor");
     l2->SetBorderSize(0);
     l2->SetTextSize(0.03);
-    l2->AddEntry(h_Top_lJetEta_bybin_CR, "CR", "l");
-    l2->AddEntry(h_Top_lJetEta_SR, "SR", "l");
+    l2->AddEntry(h_Top_lJetEta_bybin_CR, "CR", "El");
+    l2->AddEntry(h_Top_lJetEta_SR, "SR", "El");
     l2->Draw();
     */
+
     c1->Divide(3, 1);
     c1->cd(1);
 
-    h_Top_bJetPt_region1_bybin_CR->GetXaxis()->SetTitle("Jet PT");
-    h_Top_bJetPt_region1_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_lJetPt_region1_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetTitle("nJet");
 
-    h_Top_bJetPt_region1_bybin_CR->Draw("");
-    h_Top_bJetPt_region1_SR->Draw("h same");
+    h_Top_lJetPt_region1_SR->Draw("h ");
+    h_Top_lJetPt_region1_bybin_CR->Draw("same");
 
     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l0->SetHeader("b flavor, |#eta| < 1");
+    l0->SetHeader("light flavor, |#eta| < 1");
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
-    l0->AddEntry(h_Top_JetPt_region1_bybin_CR, "CR", "l");
-    l0->AddEntry(h_Top_JetPt_region1_SR, "SR", "l");
+    l0->AddEntry(h_Top_lJetPt_region1_bybin_CR, "CR", "El");
+    l0->AddEntry(h_Top_lJetPt_region1_SR, "SR", "El");
     l0->Draw();
 
-    h_Top_bJetPt_region2_bybin_CR->GetXaxis()->SetTitle("Jet PT");
-    h_Top_bJetPt_region2_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_lJetPt_region2_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetTitle("nJet");
 
     c1->cd(2);
 
-    h_Top_bJetPt_region2_bybin_CR->Draw("");
-    h_Top_bJetPt_region2_SR->Draw(" h same");
-
+    h_Top_lJetPt_region2_SR->Draw(" h ");
+    h_Top_lJetPt_region2_bybin_CR->Draw("same");
 
     TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l1->SetHeader("b flavor, 1 < |#eta| < 2");
+    l1->SetHeader("light flavor, 1 < |#eta| < 2");
     l1->SetBorderSize(0);
     l1->SetTextSize(0.03);
-    l1->AddEntry(h_Top_cJetPt_bybin_CR, "CR", "l");
-    l1->AddEntry(h_Top_cJetPt_SR, "SR", "l");
+    l1->AddEntry(h_Top_lJetPt_region2_bybin_CR, "CR", "El");
+    l1->AddEntry(h_Top_lJetPt_region2_SR, "SR", "El");
     l1->Draw();
 
-    h_Top_bJetPt_region3_SR->GetXaxis()->SetTitle("Jet PT");
-    h_Top_bJetPt_region3_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_lJetPt_region3_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_lJetPt_region3_SR->GetYaxis()->SetTitle("nJet");
 
     c1->cd(3);
 
-    h_Top_bJetPt_region3_SR->Draw("h ");
-    h_Top_bJetPt_region3_bybin_CR->Draw("same ");
+    h_Top_lJetPt_region3_SR->Draw("h ");
+    h_Top_lJetPt_region3_bybin_CR->Draw("same ");
 
     TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l2->SetHeader("b flavor, 2 < |#eta| < 2.5");
+    l2->SetHeader("light flavor, 2 < |#eta| < 2.5");
     l2->SetBorderSize(0);
     l2->SetTextSize(0.03);
-    l2->AddEntry(h_Top_lJetPt_bybin_CR, "CR", "l");
-    l2->AddEntry(h_Top_lJetPt_SR, "SR", "l");
+    l2->AddEntry(h_Top_lJetPt_region3_bybin_CR, "CR", "El");
+    l2->AddEntry(h_Top_lJetPt_region3_SR, "SR", "El");
     l2->Draw();
 
     gStyle->SetOptStat(0);
