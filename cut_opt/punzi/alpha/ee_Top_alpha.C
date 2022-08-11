@@ -12,13 +12,13 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTTo2L2Nu.root");
-TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTWJetsToLNu.root");
-TFile *Top_TTWJetsToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTWJetsToQQ.root");
-TFile *Top_TTZToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTZToQQ.root");
-TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTZToLLNuNu.root");
-TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_tW_antitop.root");
-TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_tW_top.root");
+TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTTo2L2Nu.root");
+TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTWJetsToLNu.root");
+TFile *Top_TTWJetsToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTWJetsToQQ.root");
+TFile *Top_TTZToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTZToQQ.root");
+TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTZToLLNuNu.root");
+TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_tW_antitop.root");
+TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_tW_top.root");
 
 TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
@@ -135,7 +135,7 @@ void ee_Top_alpha()
         TTTo2L2Nufile->GetObject("T_tree", T_TTTo2L2Nu_tree);
         T_TTTo2L2Nu_tree->SetBranchAddress("I_weight", &I_TTTo2L2Nu_weight);
         T_TTTo2L2Nu_tree->SetBranchAddress("f_Met", &f_TTTo2L2Nu_met);
-        T_TTTo2L2Nu_tree->SetBranchAddress("v_fakealpha", &v_TTTo2L2Nu_alpha);
+        T_TTTo2L2Nu_tree->SetBranchAddress("v_fakealpha3", &v_TTTo2L2Nu_alpha);
         T_TTTo2L2Nu_tree->SetBranchAddress("f_thinjetCSV", &v_TTTo2L2Nu_jetCSV);
         T_TTTo2L2Nu_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTTo2L2Nu_Jethadronflavor);
         for (int evt = 0; evt < T_TTTo2L2Nu_tree->GetEntries(); evt++)
@@ -160,7 +160,7 @@ void ee_Top_alpha()
         Top_tW_topfile->GetObject("T_tree", T_ST_tW_top_tree);
         T_ST_tW_top_tree->SetBranchAddress("I_weight", &I_ST_tW_top_weight);
         T_ST_tW_top_tree->SetBranchAddress("f_Met", &f_ST_tW_top_met);
-        T_ST_tW_top_tree->SetBranchAddress("v_fakealpha", &v_ST_tW_top_alpha);
+        T_ST_tW_top_tree->SetBranchAddress("v_fakealpha3", &v_ST_tW_top_alpha);
         T_ST_tW_top_tree->SetBranchAddress("f_thinjetCSV", &v_ST_tW_top_jetCSV);
         T_ST_tW_top_tree->SetBranchAddress("v_fakeJethadronflavor", &v_ST_tW_top_Jethadronflavor);
         for (int evt = 0; evt < T_ST_tW_top_tree->GetEntries(); evt++)
@@ -185,7 +185,7 @@ void ee_Top_alpha()
         Top_tW_antitopfile->GetObject("T_tree", T_ST_tW_antitop_tree);
         T_ST_tW_antitop_tree->SetBranchAddress("I_weight", &I_ST_tW_antitop_weight);
         T_ST_tW_antitop_tree->SetBranchAddress("f_Met", &f_ST_tW_antitop_met);
-        T_ST_tW_antitop_tree->SetBranchAddress("v_fakealpha", &v_ST_tW_antitop_alpha);
+        T_ST_tW_antitop_tree->SetBranchAddress("v_fakealpha3", &v_ST_tW_antitop_alpha);
         T_ST_tW_antitop_tree->SetBranchAddress("f_thinjetCSV", &v_ST_tW_antitop_jetCSV);
         T_ST_tW_antitop_tree->SetBranchAddress("v_fakeJethadronflavor", &v_ST_tW_antitop_Jethadronflavor);
         for (int evt = 0; evt < T_ST_tW_antitop_tree->GetEntries(); evt++)
@@ -210,7 +210,7 @@ void ee_Top_alpha()
         Top_TTWJetsToLNufile->GetObject("T_tree", T_TTWJetsToLNu_tree);
         T_TTWJetsToLNu_tree->SetBranchAddress("I_weight", &I_TTWJetsToLNu_weight);
         T_TTWJetsToLNu_tree->SetBranchAddress("f_Met", &f_TTWJetsToLNu_met);
-        T_TTWJetsToLNu_tree->SetBranchAddress("v_fakealpha", &v_TTWJetsToLNu_alpha);
+        T_TTWJetsToLNu_tree->SetBranchAddress("v_fakealpha3", &v_TTWJetsToLNu_alpha);
         T_TTWJetsToLNu_tree->SetBranchAddress("f_thinjetCSV", &v_TTWJetsToLNu_jetCSV);
         T_TTWJetsToLNu_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTWJetsToLNu_Jethadronflavor);
         for (int evt = 0; evt < T_TTWJetsToLNu_tree->GetEntries(); evt++)
@@ -235,7 +235,7 @@ void ee_Top_alpha()
         Top_TTWJetsToQQfile->GetObject("T_tree", T_TTWJetsToQQ_tree);
         T_TTWJetsToQQ_tree->SetBranchAddress("I_weight", &I_TTWJetsToQQ_weight);
         T_TTWJetsToQQ_tree->SetBranchAddress("f_Met", &f_TTWJetsToQQ_met);
-        T_TTWJetsToQQ_tree->SetBranchAddress("v_fakealpha", &v_TTWJetsToQQ_alpha);
+        T_TTWJetsToQQ_tree->SetBranchAddress("v_fakealpha3", &v_TTWJetsToQQ_alpha);
         T_TTWJetsToQQ_tree->SetBranchAddress("f_thinjetCSV", &v_TTWJetsToQQ_jetCSV);
         T_TTWJetsToQQ_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTWJetsToQQ_Jethadronflavor);
         for (int evt = 0; evt < T_TTWJetsToQQ_tree->GetEntries(); evt++)
@@ -260,7 +260,7 @@ void ee_Top_alpha()
         Top_TTZToQQfile->GetObject("T_tree", T_TTZToQQ_tree);
         T_TTZToQQ_tree->SetBranchAddress("I_weight", &I_TTZToQQ_weight);
         T_TTZToQQ_tree->SetBranchAddress("f_Met", &f_TTZToQQ_met);
-        T_TTZToQQ_tree->SetBranchAddress("v_fakealpha", &v_TTZToQQ_alpha);
+        T_TTZToQQ_tree->SetBranchAddress("v_fakealpha3", &v_TTZToQQ_alpha);
         T_TTZToQQ_tree->SetBranchAddress("f_thinjetCSV", &v_TTZToQQ_jetCSV);
         T_TTZToQQ_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTZToQQ_Jethadronflavor);
         for (int evt = 0; evt < T_TTZToQQ_tree->GetEntries(); evt++)
@@ -285,7 +285,7 @@ void ee_Top_alpha()
         Top_TTZToLLNuNufile->GetObject("T_tree", T_TTZToLLNuNu_tree);
         T_TTZToLLNuNu_tree->SetBranchAddress("I_weight", &I_TTZToLLNuNu_weight);
         T_TTZToLLNuNu_tree->SetBranchAddress("f_Met", &f_TTZToLLNuNu_met);
-        T_TTZToLLNuNu_tree->SetBranchAddress("v_fakealpha", &v_TTZToLLNuNu_alpha);
+        T_TTZToLLNuNu_tree->SetBranchAddress("v_fakealpha3", &v_TTZToLLNuNu_alpha);
         T_TTZToLLNuNu_tree->SetBranchAddress("f_thinjetCSV", &v_TTZToLLNuNu_jetCSV);
         T_TTZToLLNuNu_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTZToLLNuNu_Jethadronflavor);
         for (int evt = 0; evt < T_TTZToLLNuNu_tree->GetEntries(); evt++)

@@ -11,9 +11,9 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_WWZ.root");
-TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_WZZ.root");
-TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_ZZZ.root");
+TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/triboson/passmetcut/uu_triboson_WWZ.root");
+TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/triboson/passmetcut/uu_triboson_WZZ.root");
+TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/triboson/passmetcut/uu_triboson_ZZZ.root");
 
 TH1D *WWZ_sumevt = ((TH1D *)triboson_WWZfile->Get("Event_Variable/h_totevent"));
 TH1D *WZZ_sumevt = ((TH1D *)triboson_WZZfile->Get("Event_Variable/h_totevent"));
@@ -59,7 +59,7 @@ void ee_Triboson_alpha()
         triboson_WWZfile->GetObject("T_tree", T_tree);
         T_tree->SetBranchAddress("I_weight", &I_WWZ_weight);
         T_tree->SetBranchAddress("f_Met", &f_WWZ_met);
-        T_tree->SetBranchAddress("v_fakealpha", &v_WWZ_alpha);
+        T_tree->SetBranchAddress("v_fakealpha3", &v_WWZ_alpha);
         for (int evt = 0; evt < T_tree->GetEntries(); evt++)
         {
             T_tree->GetEntry(evt);
@@ -82,7 +82,7 @@ void ee_Triboson_alpha()
         triboson_WZZfile->GetObject("T_tree", T_tree2);
         T_tree2->SetBranchAddress("I_weight", &I_WZZ_weight);
         T_tree2->SetBranchAddress("f_Met", &f_WZZ_met);
-        T_tree2->SetBranchAddress("v_fakealpha", &v_WZZ_alpha);
+        T_tree2->SetBranchAddress("v_fakealpha3", &v_WZZ_alpha);
         for (int evt = 0; evt < T_tree2->GetEntries(); evt++)
         {
             T_tree2->GetEntry(evt);
@@ -106,7 +106,7 @@ void ee_Triboson_alpha()
         triboson_ZZZfile->GetObject("T_tree", T_tree3);
         T_tree3->SetBranchAddress("I_weight", &I_ZZZ_weight);
         T_tree3->SetBranchAddress("f_Met", &f_ZZZ_met);
-        T_tree3->SetBranchAddress("v_fakealpha", &v_ZZZ_alpha);
+        T_tree3->SetBranchAddress("v_fakealpha3", &v_ZZZ_alpha);
         for (int evt = 0; evt < T_tree3->GetEntries(); evt++)
         {
             T_tree3->GetEntry(evt);

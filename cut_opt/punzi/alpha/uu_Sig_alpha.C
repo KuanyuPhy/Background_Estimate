@@ -20,13 +20,13 @@ double punzi(double sigeff, double bg)
 
 int sumstep = 20;
 
-TFile *Mx2_1 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_1_old_remove_0alpha.root");
-TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_50_old_remove_0alpha.root");
-TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_150_old_remove_0alpha.root");
-TFile *Bgall = new TFile("./output/ee_bg_alpha3cut.root");
+TFile *Mx2_1 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/Mu_Mx1_old_remove_0alpha.root");
+TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/Mu_Mx50_old_remove_0alpha.root");
+TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/Mu_Mx150_old_remove_0alpha.root");
+TFile *Bgall = new TFile("./output/uu_bg_alpha3cut.root");
 TH1D *h_bgall_alpha = ((TH1D *)Bgall->Get("h_Bg_alpha"));
 
-void ee_Sig_alpha()
+void uu_Sig_alpha()
 {
     setTDRStyle();
 
@@ -88,7 +88,7 @@ void ee_Sig_alpha()
         {
             T_Mx2_1->GetEntry(evt);
             int jet_passalpha_cut = 0;
-            if (f_Mx1_Met < 140)
+            if (f_Mx1_Met < 120)
             {
                 continue;
             }
@@ -104,7 +104,7 @@ void ee_Sig_alpha()
             {
                 continue;
             }
-            h_Sig1_nJet[i]->Fill(jet_passalpha_cut, I_Mx1_weight);
+            h_Sig1_nJet[i]->Fill(I_Mx1_nThinJets, I_Mx1_weight);
             if (jet_passalpha_cut < 2)
             {
                 continue;
@@ -121,7 +121,7 @@ void ee_Sig_alpha()
         {
             T_Mx2_50->GetEntry(evt);
             int jet_passalpha_cut = 0;
-            if (f_Mx50_Met < 140)
+            if (f_Mx50_Met < 120)
             {
                 continue;
             }
@@ -137,15 +137,10 @@ void ee_Sig_alpha()
             {
                 continue;
             }
-            h_Sig50_nJet[i]->Fill(jet_passalpha_cut, I_Mx50_weight);
+            h_Sig50_nJet[i]->Fill(I_Mx50_nThinJets, I_Mx50_weight);
             if (jet_passalpha_cut < 2)
             {
                 continue;
-            }
-            if (i == 5)
-            {
-                cout << "jet_passalpha_cut = " << jet_passalpha_cut << endl;
-                cout << "Weight" << I_Mx50_weight << endl;
             }
             h_Sig50_nJet_cut[i]->Fill(jet_passalpha_cut, I_Mx50_weight);
         } // End of Mx2_50 Entries loop
@@ -159,7 +154,7 @@ void ee_Sig_alpha()
         {
             T_Mx2_150->GetEntry(evt);
             int jet_passalpha_cut = 0;
-            if (f_Mx150_Met < 140)
+            if (f_Mx150_Met < 120)
             {
                 continue;
             }
@@ -175,7 +170,7 @@ void ee_Sig_alpha()
             {
                 continue;
             }
-            h_Sig150_nJet[i]->Fill(jet_passalpha_cut, I_Mx150_weight);
+            h_Sig150_nJet[i]->Fill(I_Mx150_nThinJets, I_Mx150_weight);
             if (jet_passalpha_cut < 2)
             {
                 continue;
@@ -193,19 +188,12 @@ void ee_Sig_alpha()
         double sig50eff = (h_Sig50_nJet_cut[i]->Integral() / (h_Sig50_nJet[i]->Integral()));
         double sig150eff = (h_Sig150_nJet_cut[i]->Integral() / (h_Sig150_nJet[i]->Integral()));
         double nbg = h_Bgall[i]->Integral();
-        if (sig50eff < 0)
-        {
-            cout << "i = " << i << endl;
-            cout << "sig50eff = " << sig50eff << endl;
-            cout << "h_Sig50_nJet_cut[i]->Integral() = " << h_Sig50_nJet_cut[i]->Integral() << endl;
-            cout << "h_Sig50_nJet[i]->Integral() = " << h_Sig50_nJet[i]->Integral() << endl;
-        }
 
-        // cout << "nbg" << nbg << endl;
+        cout << "nbg" << nbg << endl;
         h_punzisig1->SetBinContent(i + 1, punzi(sig1eff, nbg));
         h_punzisig50->SetBinContent(i + 1, punzi(sig50eff, nbg));
         h_punzisig150->SetBinContent(i + 1, punzi(sig150eff, nbg));
-        // cout << "punzi = " << punzi(sig50eff, nbg) << endl;
+        cout << "punzi = " << punzi(sig150eff, nbg) << endl;
     }
     h_punzisig1->SetLineWidth(2);
     h_punzisig50->SetLineWidth(2);
@@ -269,6 +257,16 @@ void ee_Sig_alpha()
     h_punzisig1->GetXaxis()->SetTitleSize(0.04);
     h_punzisig1->GetXaxis()->SetLabelSize(0.04);
 
+    h_punzisig150->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_punzisig150->GetYaxis()->SetTitleOffset(1.7);
+    h_punzisig150->GetYaxis()->SetTitle("punzi significance");
+    h_punzisig150->GetYaxis()->SetTitleSize(0.04);
+    h_punzisig150->GetYaxis()->SetLabelSize(0.04);
+    h_punzisig150->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_punzisig150->GetXaxis()->SetTitle("nStep");
+    h_punzisig150->GetXaxis()->SetTitleSize(0.04);
+    h_punzisig150->GetXaxis()->SetLabelSize(0.04);
+
     h_Sig50_alpha->GetYaxis()->SetNdivisions(6, 5, 0);
     h_Sig50_alpha->GetYaxis()->SetTitleOffset(1.5);
     h_Sig50_alpha->GetYaxis()->SetTitle("nJet/Normalized");
@@ -281,10 +279,10 @@ void ee_Sig_alpha()
 
     // h_punzisig50->Draw();
     // h_punzisig150->Draw("same");
-     h_punzisig50->Draw("same");
-     h_punzisig1->Draw("same");
-     h_punzisig150->Draw("same");
-    // h_Sig50_nJet_cut[5]->Draw("same");
+
+    //h_punzisig50->Draw("same");
+    h_punzisig150->Draw("same");
+    //h_punzisig1->Draw("same");
 
     // h_Sig50_alpha->DrawNormalized("h ");
     // h_bgall_alpha->DrawNormalized("h same");
@@ -296,8 +294,8 @@ void ee_Sig_alpha()
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
     l0->AddEntry(h_punzisig1, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "l");
-    l0->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "l");
-    l0->AddEntry(h_punzisig150, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "l");
+    //l0->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "l");
+    //l0->AddEntry(h_punzisig150, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "l");
     // l0->AddEntry(h_bgall_alpha, "2016 MC background", "l");
     l0->Draw();
 

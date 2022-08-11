@@ -524,8 +524,18 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->Draw();
     */
 
+    auto c1 = new TCanvas("c1", "c1", 50, 50, W, H);
+    c1->SetFillColor(0);
+    c1->SetBorderMode(0);
+    c1->SetFrameFillStyle(0);
+    c1->SetFrameBorderMode(0);
+    c1->SetLeftMargin(L / W);
+    c1->SetRightMargin(R / W);
+    c1->SetTopMargin(T / H);
+    c1->SetBottomMargin(B / H);
+    c1->SetTickx(0);
+    c1->SetTicky(0);
     /*
-    auto c1 = new TCanvas("c1", "");
     c1->Divide(3, 1);
     c1->cd(1);
     h_Top_btrk_bybin_CR->Draw();
@@ -554,6 +564,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->AddEntry(h_Top_ltrk_SR, "SR", "l");
     l2->Draw();
     */
+    /*
     auto c1 = new TCanvas("c1", "c1", 50, 50, W, H);
     c1->SetFillColor(0);
     c1->SetBorderMode(0);
@@ -566,7 +577,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     c1->SetTickx(0);
     c1->SetTicky(0);
 
-    /*
+       
     c1->Divide(3, 1);
     c1->cd(1);
 
@@ -580,7 +591,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l0->SetHeader("b flavor");
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
-    l0->AddEntry(h_Top_bJetEta_bybin_CR, "CR", "El");
+    l0->AddEntry(h_Top_bJetEta_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
     l0->AddEntry(h_Top_bJetEta_SR, "SR", "El");
     l0->Draw();
 
@@ -596,7 +607,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l1->SetHeader("c flavor");
     l1->SetBorderSize(0);
     l1->SetTextSize(0.03);
-    l1->AddEntry(h_Top_cJetEta_bybin_CR, "CR", "El");
+    l1->AddEntry(h_Top_cJetEta_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
     l1->AddEntry(h_Top_cJetEta_SR, "SR", "El");
     l1->Draw();
 
@@ -612,11 +623,12 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->SetHeader("light flavor");
     l2->SetBorderSize(0);
     l2->SetTextSize(0.03);
-    l2->AddEntry(h_Top_lJetEta_bybin_CR, "CR", "El");
+    l2->AddEntry(h_Top_lJetEta_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
     l2->AddEntry(h_Top_lJetEta_SR, "SR", "El");
     l2->Draw();
-    */
+    */    
 
+    /*
     c1->Divide(3, 1);
     c1->cd(1);
 
@@ -630,7 +642,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l0->SetHeader("light flavor, |#eta| < 1");
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
-    l0->AddEntry(h_Top_lJetPt_region1_bybin_CR, "CR", "El");
+    l0->AddEntry(h_Top_lJetPt_region1_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
     l0->AddEntry(h_Top_lJetPt_region1_SR, "SR", "El");
     l0->Draw();
 
@@ -646,7 +658,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l1->SetHeader("light flavor, 1 < |#eta| < 2");
     l1->SetBorderSize(0);
     l1->SetTextSize(0.03);
-    l1->AddEntry(h_Top_lJetPt_region2_bybin_CR, "CR", "El");
+    l1->AddEntry(h_Top_lJetPt_region2_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
     l1->AddEntry(h_Top_lJetPt_region2_SR, "SR", "El");
     l1->Draw();
 
@@ -662,8 +674,58 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->SetHeader("light flavor, 2 < |#eta| < 2.5");
     l2->SetBorderSize(0);
     l2->SetTextSize(0.03);
-    l2->AddEntry(h_Top_lJetPt_region3_bybin_CR, "CR", "El");
+    l2->AddEntry(h_Top_lJetPt_region3_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
     l2->AddEntry(h_Top_lJetPt_region3_SR, "SR", "El");
+    l2->Draw();
+    */
+
+    c1->Divide(3, 1);
+    c1->cd(1);
+
+    h_Top_btrk_region1_SR->GetXaxis()->SetTitle("nTrk");
+    h_Top_btrk_region1_SR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_btrk_region1_SR->Draw("h ");
+    h_Top_btrk_region1_bybin_CR->Draw("same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor, |#eta| < 1");
+    l0->SetBorderSize(0);
+    l0->SetTextSize(0.03);
+    l0->AddEntry(h_Top_btrk_region1_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
+    l0->AddEntry(h_Top_btrk_region1_SR, "SR", "El");
+    l0->Draw();
+
+    h_Top_btrk_region2_SR->GetXaxis()->SetTitle("nTrk");
+    h_Top_btrk_region2_SR->GetYaxis()->SetTitle("nJet");
+
+    c1->cd(2);
+
+    h_Top_btrk_region2_SR->Draw(" h ");
+    h_Top_btrk_region2_bybin_CR->Draw("same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetHeader("b flavor, 1 < |#eta| < 2");
+    l1->SetBorderSize(0);
+    l1->SetTextSize(0.03);
+    l1->AddEntry(h_Top_btrk_region2_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
+    l1->AddEntry(h_Top_btrk_region2_SR, "SR", "El");
+    l1->Draw();
+
+    h_Top_btrk_region3_SR->GetXaxis()->SetTitle("nTrk");
+    h_Top_btrk_region3_SR->GetYaxis()->SetTitle("nJet");
+
+    c1->cd(3);
+
+    h_Top_btrk_region3_SR->Draw("h ");
+    h_Top_btrk_region3_bybin_CR->Draw("same ");
+
+    TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l2->SetHeader("b flavor, 2 < |#eta| < 2.5");
+    l2->SetBorderSize(0);
+    l2->SetTextSize(0.03);
+    l2->AddEntry(h_Top_btrk_region3_bybin_CR, "CR (Top to ee apply emu fake rate)", "El");
+    l2->AddEntry(h_Top_btrk_region3_SR, "SR", "El");
     l2->Draw();
 
     gStyle->SetOptStat(0);

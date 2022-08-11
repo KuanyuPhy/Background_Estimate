@@ -11,21 +11,21 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *diboson_gg_ZZ_2e2mu = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2e2mu.root");
-TFile *diboson_gg_ZZ_2e2nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2e2nu.root");
-TFile *diboson_gg_ZZ_2e2tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2e2tau.root");
-TFile *diboson_gg_ZZ_2mu2nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2mu2nu.root");
-TFile *diboson_gg_ZZ_2mu2tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2mu2tau.root");
-TFile *diboson_gg_ZZ_4e = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_4e.root");
-TFile *diboson_gg_ZZ_4mu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_4mu.root");
-TFile *diboson_gg_ZZ_4tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_4tau.root");
-TFile *diboson_gg_WW_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_WW_2L2Nu.root");
-TFile *diboson_qq_WW_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_WW_2L2Nu.root");
-TFile *diboson_qq_WZ_2L2Q = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_WZ_2L2Q.root");
-TFile *diboson_qq_WZ_3LNu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_WZ_3LNu.root");
-TFile *diboson_qq_ZZ_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_ZZ_2L2Nu.root");
-TFile *diboson_qq_ZZ_2L2Q = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_ZZ_2L2Q.root");
-TFile *diboson_qq_ZZ_4L = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_ZZ_4L.root");
+TFile *diboson_gg_ZZ_2e2mu = TFile::Open("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_ZZ_2e2mu.root");
+TFile *diboson_gg_ZZ_2e2nu = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_ZZ_2e2nu.root");
+TFile *diboson_gg_ZZ_2e2tau = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_ZZ_2e2tau.root");
+TFile *diboson_gg_ZZ_2mu2nu = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_ZZ_2mu2nu.root");
+TFile *diboson_gg_ZZ_2mu2tau = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_ZZ_2mu2tau.root");
+TFile *diboson_gg_ZZ_4e = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_ZZ_4e.root");
+TFile *diboson_gg_ZZ_4mu = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_ZZ_4mu.root");
+TFile *diboson_gg_ZZ_4tau = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_ZZ_4tau.root");
+TFile *diboson_gg_WW_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_gg_WW_2L2Nu.root");
+TFile *diboson_qq_WW_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_qq_WW_2L2Nu.root");
+TFile *diboson_qq_WZ_2L2Q = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_qq_WZ_2L2Q.root");
+TFile *diboson_qq_WZ_3LNu = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_qq_WZ_3LNu.root");
+TFile *diboson_qq_ZZ_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_qq_ZZ_2L2Nu.root");
+TFile *diboson_qq_ZZ_2L2Q = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_qq_ZZ_2L2Q.root");
+TFile *diboson_qq_ZZ_4L = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/diboson/passmetcut/uu_diboson_qq_ZZ_4L.root");
 
 TH1D *gg_ZZ_2e2mu_sumevt = ((TH1D *)diboson_gg_ZZ_2e2mu->Get("Event_Variable/h_totevent"));
 TH1D *gg_ZZ_2e2nu_sumevt = ((TH1D *)diboson_gg_ZZ_2e2nu->Get("Event_Variable/h_totevent"));
@@ -210,7 +210,7 @@ void ee_Diboson_alpha()
         diboson_gg_ZZ_2e2mu->GetObject("T_tree", T_event);
         T_event->SetBranchAddress("I_weight", &f_gg_ZZ_2e2mu_weight);
         T_event->SetBranchAddress("f_Met", &f_gg_ZZ_2e2mu_met);
-        T_event->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2e2mu_alpha);
+        T_event->SetBranchAddress("v_fakealpha3", &v_gg_ZZ_2e2mu_alpha);
         T_event->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2e2mu_jetCSV);
         T_event->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2e2mu_Jethadronflavor);
         for (int evt = 0; evt < T_event->GetEntries(); evt++)
@@ -236,7 +236,7 @@ void ee_Diboson_alpha()
         diboson_gg_ZZ_2e2nu->GetObject("T_tree", T_event1);
         T_event1->SetBranchAddress("I_weight", &f_gg_ZZ_2e2nu_weight);
         T_event1->SetBranchAddress("f_Met", &f_gg_ZZ_2e2nu_met);
-        T_event1->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2e2nu_alpha);
+        T_event1->SetBranchAddress("v_fakealpha3", &v_gg_ZZ_2e2nu_alpha);
         T_event1->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2e2nu_jetCSV);
         T_event1->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2e2nu_Jethadronflavor);
         for (int evt = 0; evt < T_event1->GetEntries(); evt++)
@@ -262,7 +262,7 @@ void ee_Diboson_alpha()
         diboson_gg_ZZ_2e2tau->GetObject("T_tree", T_event2);
         T_event2->SetBranchAddress("I_weight", &f_gg_ZZ_2e2tau_weight);
         T_event2->SetBranchAddress("f_Met", &f_gg_ZZ_2e2tau_met);
-        T_event2->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2e2tau_alpha);
+        T_event2->SetBranchAddress("v_fakealpha3", &v_gg_ZZ_2e2tau_alpha);
         T_event2->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2e2tau_jetCSV);
         T_event2->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2e2tau_Jethadronflavor);
 
@@ -290,17 +290,15 @@ void ee_Diboson_alpha()
         diboson_gg_ZZ_2mu2nu->GetObject("T_tree", T_event3);
         T_event3->SetBranchAddress("I_weight", &f_gg_ZZ_2mu2nu_weight);
         T_event3->SetBranchAddress("f_Met", &f_gg_ZZ_2mu2nu_met);
-        T_event3->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2mu2nu_alpha);
+        T_event3->SetBranchAddress("v_fakealpha3", &v_gg_ZZ_2mu2nu_alpha);
         T_event3->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2mu2nu_jetCSV);
         T_event3->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2mu2nu_Jethadronflavor);
-
         for (int evt = 0; evt < T_event3->GetEntries(); evt++)
         {
             T_event3->GetEntry(evt);
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_gg_ZZ_2mu2nu_alpha->size(); i++)
             {
-
                 h_Bg_alpha->Fill((*v_gg_ZZ_2mu2nu_alpha)[i], f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
                 if ((*v_gg_ZZ_2mu2nu_alpha)[i] < alphacut)
                 {
@@ -318,7 +316,7 @@ void ee_Diboson_alpha()
         diboson_gg_ZZ_2mu2tau->GetObject("T_tree", T_event4);
         T_event4->SetBranchAddress("I_weight", &f_gg_ZZ_2mu2tau_weight);
         T_event4->SetBranchAddress("f_Met", &f_gg_ZZ_2mu2tau_met);
-        T_event4->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2mu2tau_alpha);
+        T_event4->SetBranchAddress("v_fakealpha3", &v_gg_ZZ_2mu2tau_alpha);
         T_event4->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2mu2tau_jetCSV);
         T_event4->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2mu2tau_Jethadronflavor);
 
@@ -346,7 +344,7 @@ void ee_Diboson_alpha()
         diboson_gg_ZZ_4e->GetObject("T_tree", T_event5);
         T_event5->SetBranchAddress("I_weight", &f_gg_ZZ_4e_weight);
         T_event5->SetBranchAddress("f_Met", &f_gg_ZZ_4e_met);
-        T_event5->SetBranchAddress("v_fakealpha", &v_gg_ZZ_4e_alpha);
+        T_event5->SetBranchAddress("v_fakealpha3", &v_gg_ZZ_4e_alpha);
         T_event5->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_4e_jetCSV);
         T_event5->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_4e_Jethadronflavor);
 
@@ -374,7 +372,7 @@ void ee_Diboson_alpha()
         diboson_gg_ZZ_4mu->GetObject("T_tree", T_event6);
         T_event6->SetBranchAddress("I_weight", &f_gg_ZZ_4mu_weight);
         T_event6->SetBranchAddress("f_Met", &f_gg_ZZ_4mu_met);
-        T_event6->SetBranchAddress("v_fakealpha", &v_gg_ZZ_4mu_alpha);
+        T_event6->SetBranchAddress("v_fakealpha3", &v_gg_ZZ_4mu_alpha);
         T_event6->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_4mu_jetCSV);
         T_event6->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_4mu_Jethadronflavor);
 
@@ -402,7 +400,7 @@ void ee_Diboson_alpha()
         diboson_gg_ZZ_4tau->GetObject("T_tree", T_event7);
         T_event7->SetBranchAddress("I_weight", &f_gg_ZZ_4tau_weight);
         T_event7->SetBranchAddress("f_Met", &f_gg_ZZ_4tau_met);
-        T_event7->SetBranchAddress("v_fakealpha", &v_gg_ZZ_4tau_alpha);
+        T_event7->SetBranchAddress("v_fakealpha3", &v_gg_ZZ_4tau_alpha);
         T_event7->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_4tau_jetCSV);
         T_event7->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_4tau_Jethadronflavor);
 
@@ -430,7 +428,7 @@ void ee_Diboson_alpha()
         diboson_gg_WW_2L2Nu->GetObject("T_tree", T_event8);
         T_event8->SetBranchAddress("I_weight", &f_gg_WW_2L2Nu_weight);
         T_event8->SetBranchAddress("f_Met", &f_gg_WW_2L2Nu_met);
-        T_event8->SetBranchAddress("v_fakealpha", &v_gg_WW_2L2Nu_alpha);
+        T_event8->SetBranchAddress("v_fakealpha3", &v_gg_WW_2L2Nu_alpha);
         T_event8->SetBranchAddress("f_thinjetCSV", &v_gg_WW_2L2Nu_jetCSV);
         T_event8->SetBranchAddress("v_fakeJethadronflavor", &v_gg_WW_2L2Nu_Jethadronflavor);
 
@@ -458,7 +456,7 @@ void ee_Diboson_alpha()
         diboson_qq_WW_2L2Nu->GetObject("T_tree", T_event9);
         T_event9->SetBranchAddress("I_weight", &f_qq_WW_2L2Nu_weight);
         T_event9->SetBranchAddress("f_Met", &f_qq_WW_2L2Nu_met);
-        T_event9->SetBranchAddress("v_fakealpha", &v_qq_WW_2L2Nu_alpha);
+        T_event9->SetBranchAddress("v_fakealpha3", &v_qq_WW_2L2Nu_alpha);
         T_event9->SetBranchAddress("f_thinjetCSV", &v_qq_WW_2L2Nu_jetCSV);
         T_event9->SetBranchAddress("v_fakeJethadronflavor", &v_qq_WW_2L2Nu_Jethadronflavor);
 
@@ -486,7 +484,7 @@ void ee_Diboson_alpha()
         diboson_qq_WZ_2L2Q->GetObject("T_tree", T_event10);
         T_event10->SetBranchAddress("I_weight", &f_qq_WZ_2L2Q_weight);
         T_event10->SetBranchAddress("f_Met", &f_qq_WZ_2L2Q_met);
-        T_event10->SetBranchAddress("v_fakealpha", &v_qq_WZ_2L2Q_alpha);
+        T_event10->SetBranchAddress("v_fakealpha3", &v_qq_WZ_2L2Q_alpha);
         T_event10->SetBranchAddress("f_thinjetCSV", &v_qq_WZ_2L2Q_jetCSV);
         T_event10->SetBranchAddress("v_fakeJethadronflavor", &v_qq_WZ_2L2Q_Jethadronflavor);
 
@@ -514,7 +512,7 @@ void ee_Diboson_alpha()
         diboson_qq_WZ_3LNu->GetObject("T_tree", T_event11);
         T_event11->SetBranchAddress("I_weight", &f_qq_WZ_3LNu_weight);
         T_event11->SetBranchAddress("f_Met", &f_qq_WZ_3LNu_met);
-        T_event11->SetBranchAddress("v_fakealpha", &v_qq_WZ_3LNu_alpha);
+        T_event11->SetBranchAddress("v_fakealpha3", &v_qq_WZ_3LNu_alpha);
         T_event11->SetBranchAddress("f_thinjetCSV", &v_qq_WZ_3LNu_jetCSV);
         T_event11->SetBranchAddress("v_fakeJethadronflavor", &v_qq_WZ_3LNu_Jethadronflavor);
 
@@ -542,7 +540,7 @@ void ee_Diboson_alpha()
         diboson_qq_ZZ_2L2Nu->GetObject("T_tree", T_event12);
         T_event12->SetBranchAddress("I_weight", &f_qq_ZZ_2L2Nu_weight);
         T_event12->SetBranchAddress("f_Met", &f_qq_ZZ_2L2Nu_met);
-        T_event12->SetBranchAddress("v_fakealpha", &v_qq_ZZ_2L2Nu_alpha);
+        T_event12->SetBranchAddress("v_fakealpha3", &v_qq_ZZ_2L2Nu_alpha);
         T_event12->SetBranchAddress("f_thinjetCSV", &v_qq_ZZ_2L2Nu_jetCSV);
         T_event12->SetBranchAddress("v_fakeJethadronflavor", &v_qq_ZZ_2L2Nu_Jethadronflavor);
 
@@ -570,7 +568,7 @@ void ee_Diboson_alpha()
         diboson_qq_ZZ_2L2Q->GetObject("T_tree", T_event13);
         T_event13->SetBranchAddress("I_weight", &f_qq_ZZ_2L2Q_weight);
         T_event13->SetBranchAddress("f_Met", &f_qq_ZZ_2L2Q_met);
-        T_event13->SetBranchAddress("v_fakealpha", &v_qq_ZZ_2L2Q_alpha);
+        T_event13->SetBranchAddress("v_fakealpha3", &v_qq_ZZ_2L2Q_alpha);
         T_event13->SetBranchAddress("f_thinjetCSV", &v_qq_ZZ_2L2Q_jetCSV);
         T_event13->SetBranchAddress("v_fakeJethadronflavor", &v_qq_ZZ_2L2Q_Jethadronflavor);
 
@@ -598,7 +596,7 @@ void ee_Diboson_alpha()
         diboson_qq_ZZ_4L->GetObject("T_tree", T_event14);
         T_event14->SetBranchAddress("I_weight", &f_qq_ZZ_4L_weight);
         T_event14->SetBranchAddress("f_Met", &f_qq_ZZ_4L_met);
-        T_event14->SetBranchAddress("v_fakealpha", &v_qq_ZZ_4L_alpha);
+        T_event14->SetBranchAddress("v_fakealpha3", &v_qq_ZZ_4L_alpha);
         T_event14->SetBranchAddress("f_thinjetCSV", &v_qq_ZZ_4L_jetCSV);
         T_event14->SetBranchAddress("v_fakeJethadronflavor", &v_qq_ZZ_4L_Jethadronflavor);
         for (int evt = 0; evt < T_event14->GetEntries(); evt++)

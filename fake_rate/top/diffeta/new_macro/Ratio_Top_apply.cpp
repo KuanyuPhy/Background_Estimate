@@ -32,7 +32,7 @@ TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BK
 //----------------------
 // Get fake rate
 //----------------------
-TFile *Top_fakerate_topfile = new TFile("./top_fakerate.root");
+TFile *Top_fakerate_topfile = new TFile("./../../../top_emu/top_emu_fakerate.root");
 TH1D *Top_nTrk_fakeRate_difeta_1 = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_difeta_1"));
 TH1D *Top_nTrk_bfakeRate_difeta_1 = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_bfakeRate_difeta_1"));
 TH1D *Top_nTrk_cfakeRate_difeta_1 = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_cfakeRate_difeta_1"));

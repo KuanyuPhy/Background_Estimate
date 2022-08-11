@@ -11,14 +11,14 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *DYincli = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_DYincli.root");
-TFile *DYHT100 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht100.root");
-TFile *DYHT200 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht200.root");
-TFile *DYHT400 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht400.root");
-TFile *DYHT600 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht600.root");
-TFile *DYHT800 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht800.root");
-TFile *DYHT1200 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht1200.root");
-TFile *DYHT2500 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht2500.root");
+TFile *DYincli = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_DYincli.root");
+TFile *DYHT100 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht100.root");
+TFile *DYHT200 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht200.root");
+TFile *DYHT400 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht400.root");
+TFile *DYHT600 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht600.root");
+TFile *DYHT800 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht800.root");
+TFile *DYHT1200 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht1200.root");
+TFile *DYHT2500 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht2500.root");
 
 TH1D *h_HT_eventCout = ((TH1D *)DYincli->Get("Event_Variable/h_HT_eventCout"));
 TH1D *DYHT100_sumevt = ((TH1D *)DYHT100->Get("Event_Variable/h_totevent"));
@@ -184,7 +184,6 @@ void ee_HT_alpha()
     {
         float alphacut = (i + 1) * 0.05;
         cout << "alphacut = " << alphacut << endl;
-
         h_Bg_nJet_cut[i] = new TH1D(Form("h_Bg_nJet_%i", i + 1), "", 30, 0, 30);
 
         // TH1D *h_Bg_nJet_cut = new TH1D("h_Bg_nJet_cut", "", 50, 0, 50);
@@ -267,7 +266,7 @@ void ee_HT_alpha()
         T_inclusive->SetBranchAddress("f_HT", &HT);
         T_inclusive->SetBranchAddress("f_Met", &f_ht0_Met);
         T_inclusive->SetBranchAddress("I_nJets", &I_ht0_nJet);
-        T_inclusive->SetBranchAddress("v_fakealpha", &v_ht0_alpha);
+        T_inclusive->SetBranchAddress("v_fakealpha3", &v_ht0_alpha);
         T_inclusive->SetBranchAddress("f_thinjetCSV", &v_ht0_jetcsv);
         T_inclusive->SetBranchAddress("v_fakeJethadronflavor", &v_ht0_Jethadronflavor);
         for (int evt = 0; evt < T_inclusive->GetEntries(); evt++)
@@ -276,13 +275,13 @@ void ee_HT_alpha()
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_ht0_alpha->size(); i++)
             {
-                for_inclusive_sample(HT, (*v_ht0_alpha)[i] , I_ht0_weight, h_Bg_alpha);
+                for_inclusive_sample(HT, (*v_ht0_alpha)[i], I_ht0_weight, h_Bg_alpha);
                 if ((*v_ht0_alpha)[i] < alphacut)
                 {
                     jet_passalpha_cut++;
                 }
             }
-            if(jet_passalpha_cut ==0)
+            if (jet_passalpha_cut == 0)
             {
                 continue;
             }
@@ -295,7 +294,7 @@ void ee_HT_alpha()
         T_HT100->SetBranchAddress("I_weight", &I_ht100_weight);
         T_HT100->SetBranchAddress("f_Met", &f_ht100_Met);
         T_HT100->SetBranchAddress("I_nJets", &I_ht100_nJet);
-        T_HT100->SetBranchAddress("v_fakealpha", &v_ht100_alpha);
+        T_HT100->SetBranchAddress("v_fakealpha3", &v_ht100_alpha);
         T_HT100->SetBranchAddress("f_thinjetCSV", &v_ht100_jetcsv);
         T_HT100->SetBranchAddress("v_fakeJethadronflavor", &v_ht100_Jethadronflavor);
         for (int evt = 0; evt < T_HT100->GetEntries(); evt++)
@@ -304,13 +303,13 @@ void ee_HT_alpha()
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_ht100_alpha->size(); i++)
             {
-                h_Bg_alpha->Fill((*v_ht100_alpha)[i] , I_ht100_weight * HT100Weight);
+                h_Bg_alpha->Fill((*v_ht100_alpha)[i], I_ht100_weight * HT100Weight);
                 if ((*v_ht100_alpha)[i] < alphacut)
                 {
                     jet_passalpha_cut++;
                 }
             }
-            if(jet_passalpha_cut ==0)
+            if (jet_passalpha_cut == 0)
             {
                 continue;
             }
@@ -321,7 +320,7 @@ void ee_HT_alpha()
         T_HT200->SetBranchAddress("I_weight", &I_ht200_weight);
         T_HT200->SetBranchAddress("f_Met", &f_ht200_Met);
         T_HT200->SetBranchAddress("I_nJets", &I_ht200_nJet);
-        T_HT200->SetBranchAddress("v_fakealpha", &v_ht200_alpha);
+        T_HT200->SetBranchAddress("v_fakealpha3", &v_ht200_alpha);
         T_HT200->SetBranchAddress("f_thinjetCSV", &v_ht200_jetcsv);
         T_HT200->SetBranchAddress("v_fakeJethadronflavor", &v_ht200_Jethadronflavor);
         for (int evt = 0; evt < T_HT200->GetEntries(); evt++)
@@ -330,13 +329,13 @@ void ee_HT_alpha()
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_ht200_alpha->size(); i++)
             {
-                h_Bg_alpha->Fill((*v_ht200_alpha)[i] , I_ht200_weight * HT200Weight);
+                h_Bg_alpha->Fill((*v_ht200_alpha)[i], I_ht200_weight * HT200Weight);
                 if ((*v_ht200_alpha)[i] < alphacut)
                 {
                     jet_passalpha_cut++;
                 }
             }
-            if(jet_passalpha_cut ==0)
+            if (jet_passalpha_cut == 0)
             {
                 continue;
             }
@@ -347,7 +346,7 @@ void ee_HT_alpha()
         T_HT400->SetBranchAddress("I_weight", &I_ht400_weight);
         T_HT400->SetBranchAddress("f_Met", &f_ht400_Met);
         T_HT400->SetBranchAddress("I_nJets", &I_ht400_nJet);
-        T_HT400->SetBranchAddress("v_fakealpha", &v_ht400_alpha);
+        T_HT400->SetBranchAddress("v_fakealpha3", &v_ht400_alpha);
         T_HT400->SetBranchAddress("f_thinjetCSV", &v_ht400_jetcsv);
         T_HT400->SetBranchAddress("v_fakeJethadronflavor", &v_ht400_Jethadronflavor);
         for (int evt = 0; evt < T_HT400->GetEntries(); evt++)
@@ -356,13 +355,13 @@ void ee_HT_alpha()
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_ht400_alpha->size(); i++)
             {
-                h_Bg_alpha->Fill((*v_ht400_alpha)[i] , I_ht400_weight * HT400Weight);
+                h_Bg_alpha->Fill((*v_ht400_alpha)[i], I_ht400_weight * HT400Weight);
                 if ((*v_ht400_alpha)[i] < alphacut)
                 {
                     jet_passalpha_cut++;
                 }
             }
-            if(jet_passalpha_cut ==0)
+            if (jet_passalpha_cut == 0)
             {
                 continue;
             }
@@ -373,7 +372,7 @@ void ee_HT_alpha()
         T_HT600->SetBranchAddress("I_weight", &I_ht600_weight);
         T_HT600->SetBranchAddress("f_Met", &f_ht600_Met);
         T_HT600->SetBranchAddress("I_nJets", &I_ht600_nJet);
-        T_HT600->SetBranchAddress("v_fakealpha", &v_ht600_alpha);
+        T_HT600->SetBranchAddress("v_fakealpha3", &v_ht600_alpha);
         T_HT600->SetBranchAddress("f_thinjetCSV", &v_ht600_jetcsv);
         T_HT600->SetBranchAddress("v_fakeJethadronflavor", &v_ht600_Jethadronflavor);
         for (int evt = 0; evt < T_HT600->GetEntries(); evt++)
@@ -382,13 +381,13 @@ void ee_HT_alpha()
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_ht600_alpha->size(); i++)
             {
-                h_Bg_alpha->Fill((*v_ht600_alpha)[i] , I_ht600_weight * HT600Weight);
+                h_Bg_alpha->Fill((*v_ht600_alpha)[i], I_ht600_weight * HT600Weight);
                 if ((*v_ht600_alpha)[i] < alphacut)
                 {
                     jet_passalpha_cut++;
                 }
             }
-            if(jet_passalpha_cut ==0)
+            if (jet_passalpha_cut == 0)
             {
                 continue;
             }
@@ -399,7 +398,7 @@ void ee_HT_alpha()
         T_HT800->SetBranchAddress("I_weight", &I_ht800_weight);
         T_HT800->SetBranchAddress("f_Met", &f_ht800_Met);
         T_HT800->SetBranchAddress("I_nJets", &I_ht800_nJet);
-        T_HT800->SetBranchAddress("v_fakealpha", &v_ht800_alpha);
+        T_HT800->SetBranchAddress("v_fakealpha3", &v_ht800_alpha);
         T_HT800->SetBranchAddress("f_thinjetCSV", &v_ht800_jetcsv);
         T_HT800->SetBranchAddress("v_fakeJethadronflavor", &v_ht800_Jethadronflavor);
         for (int evt = 0; evt < T_HT800->GetEntries(); evt++)
@@ -408,13 +407,13 @@ void ee_HT_alpha()
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_ht800_alpha->size(); i++)
             {
-                h_Bg_alpha->Fill((*v_ht800_alpha)[i] , I_ht800_weight * HT800Weight);
+                h_Bg_alpha->Fill((*v_ht800_alpha)[i], I_ht800_weight * HT800Weight);
                 if ((*v_ht800_alpha)[i] < alphacut)
                 {
                     jet_passalpha_cut++;
                 }
             }
-            if(jet_passalpha_cut ==0)
+            if (jet_passalpha_cut == 0)
             {
                 continue;
             }
@@ -425,7 +424,7 @@ void ee_HT_alpha()
         T_HT1200->SetBranchAddress("I_weight", &I_ht1200_weight);
         T_HT1200->SetBranchAddress("f_Met", &f_ht1200_Met);
         T_HT1200->SetBranchAddress("I_nJets", &I_ht1200_nJet);
-        T_HT1200->SetBranchAddress("v_fakealpha", &v_ht1200_alpha);
+        T_HT1200->SetBranchAddress("v_fakealpha3", &v_ht1200_alpha);
         T_HT1200->SetBranchAddress("f_thinjetCSV", &v_ht1200_jetcsv);
         T_HT1200->SetBranchAddress("v_fakeJethadronflavor", &v_ht1200_Jethadronflavor);
         for (int evt = 0; evt < T_HT1200->GetEntries(); evt++)
@@ -434,13 +433,13 @@ void ee_HT_alpha()
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_ht1200_alpha->size(); i++)
             {
-                h_Bg_alpha->Fill((*v_ht1200_alpha)[i] , I_ht1200_weight * HT1200Weight);
+                h_Bg_alpha->Fill((*v_ht1200_alpha)[i], I_ht1200_weight * HT1200Weight);
                 if ((*v_ht1200_alpha)[i] < alphacut)
                 {
                     jet_passalpha_cut++;
                 }
             }
-            if(jet_passalpha_cut ==0)
+            if (jet_passalpha_cut == 0)
             {
                 continue;
             }
@@ -451,7 +450,7 @@ void ee_HT_alpha()
         T_HT2500->SetBranchAddress("I_weight", &I_ht2500_weight);
         T_HT2500->SetBranchAddress("f_Met", &f_ht2500_Met);
         T_HT2500->SetBranchAddress("I_nJets", &I_ht2500_nJet);
-        T_HT2500->SetBranchAddress("v_fakealpha", &v_ht2500_alpha);
+        T_HT2500->SetBranchAddress("v_fakealpha3", &v_ht2500_alpha);
         T_HT2500->SetBranchAddress("f_thinjetCSV", &v_ht2500_jetcsv);
         T_HT2500->SetBranchAddress("v_fakeJethadronflavor", &v_ht2500_Jethadronflavor);
         for (int evt = 0; evt < T_HT2500->GetEntries(); evt++)
@@ -460,13 +459,13 @@ void ee_HT_alpha()
             int jet_passalpha_cut = 0;
             for (int i = 0; i < v_ht2500_alpha->size(); i++)
             {
-                h_Bg_alpha->Fill((*v_ht2500_alpha)[i] , I_ht2500_weight * HT2500Weight);
+                h_Bg_alpha->Fill((*v_ht2500_alpha)[i], I_ht2500_weight * HT2500Weight);
                 if ((*v_ht2500_alpha)[i] < alphacut)
                 {
                     jet_passalpha_cut++;
                 }
             }
-            if(jet_passalpha_cut ==0)
+            if (jet_passalpha_cut == 0)
             {
                 continue;
             }
@@ -491,13 +490,7 @@ void ee_HT_alpha()
 /*
 int main(int argc, char *argv[])
 {
-    if (argc == 3)
-    {
-        ee_HT_alpha(argv[1], argv[2]);
-    }
-    else
-    {
-        cout << "ERROR" << endl;
-    }
+
+    ee_HT_alpha();
 }
 */

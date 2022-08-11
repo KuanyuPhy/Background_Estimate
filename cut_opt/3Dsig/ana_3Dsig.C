@@ -98,6 +98,25 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     TH1D *uu_Sig50_alpha4 = ((TH1D *)uu_Sigfile->Get("h_Mx2_50_alpha4"));
     TH1D *uu_Sig150_alpha4 = ((TH1D *)uu_Sigfile->Get("h_Mx2_150_alpha4"));
 
+    //-----------
+    // For 3Dsig
+    //-----------
+    TH1D *ee_HT_3Dsig = ((TH1D *)ee_DYprocess->Get("h_bg_3DSig"));
+    TH1D *ee_Top_3Dsig = ((TH1D *)ee_Topprocess->Get("h_bg_3DSig"));
+    TH1D *ee_Diboson_3Dsig = ((TH1D *)ee_Dibosonprocess->Get("h_bg_3DSig"));
+    TH1D *ee_Triboson_3Dsig = ((TH1D *)ee_Tribosonprocess->Get("h_bg_3DSig"));
+    TH1D *ee_Sig1_3Dsig = ((TH1D *)ee_Sigfile->Get("h_Mx2_1_3DSig"));
+    TH1D *ee_Sig50_3Dsig = ((TH1D *)ee_Sigfile->Get("h_Mx2_50_3DSig"));
+    TH1D *ee_Sig150_3Dsig = ((TH1D *)ee_Sigfile->Get("h_Mx2_150_3DSig"));
+
+    TH1D *uu_HT_3Dsig = ((TH1D *)uu_DYprocess->Get("h_bg_3DSig"));
+    TH1D *uu_Top_3Dsig = ((TH1D *)uu_Topprocess->Get("h_bg_3DSig"));
+    TH1D *uu_Diboson_3Dsig = ((TH1D *)uu_Dibosonprocess->Get("h_bg_3DSig"));
+    TH1D *uu_Triboson_3Dsig = ((TH1D *)uu_Tribosonprocess->Get("h_bg_3DSig"));
+    TH1D *uu_Sig1_3Dsig = ((TH1D *)uu_Sigfile->Get("h_Mx2_1_3DSig"));
+    TH1D *uu_Sig50_3Dsig = ((TH1D *)uu_Sigfile->Get("h_Mx2_50_3DSig"));
+    TH1D *uu_Sig150_3Dsig = ((TH1D *)uu_Sigfile->Get("h_Mx2_150_3DSig"));
+
     //-------------------------
     // CMS style
     //-------------------------
@@ -121,6 +140,10 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     ee_HT_alpha4->Add(ee_Diboson_alpha4);
     ee_HT_alpha4->Add(ee_Triboson_alpha4);
 
+    ee_HT_3Dsig->Add(ee_Top_3Dsig);
+    ee_HT_3Dsig->Add(ee_Diboson_3Dsig);
+    ee_HT_3Dsig->Add(ee_Triboson_3Dsig);
+
     uu_HT_alpha->Add(uu_Top_alpha);
     uu_HT_alpha->Add(uu_Diboson_alpha);
     uu_HT_alpha->Add(uu_Triboson_alpha);
@@ -136,6 +159,10 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     uu_HT_alpha4->Add(uu_Top_alpha4);
     uu_HT_alpha4->Add(uu_Diboson_alpha4);
     uu_HT_alpha4->Add(uu_Triboson_alpha4);
+
+    uu_HT_3Dsig->Add(uu_Top_3Dsig);
+    uu_HT_3Dsig->Add(uu_Diboson_3Dsig);
+    uu_HT_3Dsig->Add(uu_Triboson_3Dsig);
 
     ee_HT_alpha->SetLineColor(kOrange - 3);
     // ee_HT_alpha->SetFillColor(kOrange - 3);
@@ -165,6 +192,14 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     uu_HT_alpha4->SetFillColor(kOrange - 3);
     uu_HT_alpha4->SetFillStyle(3001);
 
+    ee_HT_3Dsig->SetLineColor(kOrange - 3);
+    ee_HT_3Dsig->SetFillColor(kOrange - 3);
+    ee_HT_3Dsig->SetFillStyle(3001);
+
+    uu_HT_3Dsig->SetLineColor(kOrange - 3);
+    uu_HT_3Dsig->SetFillColor(kOrange - 3);
+    uu_HT_3Dsig->SetFillStyle(3001);
+
     ee_Sig1_alpha->SetLineColor(kRed);
     ee_Sig50_alpha->SetLineColor(kGray + 2);
     ee_Sig150_alpha->SetLineColor(kBlue);
@@ -181,6 +216,10 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     ee_Sig50_alpha4->SetLineColor(kGray + 2);
     ee_Sig150_alpha4->SetLineColor(kBlue);
 
+    ee_Sig1_3Dsig->SetLineColor(kRed);
+    ee_Sig50_3Dsig->SetLineColor(kGray + 2);
+    ee_Sig150_3Dsig->SetLineColor(kBlue);
+
     uu_Sig1_alpha->SetLineColor(kRed);
     uu_Sig50_alpha->SetLineColor(kGray + 2);
     uu_Sig150_alpha->SetLineColor(kBlue);
@@ -196,6 +235,10 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     uu_Sig1_alpha4->SetLineColor(kRed);
     uu_Sig50_alpha4->SetLineColor(kGray + 2);
     uu_Sig150_alpha4->SetLineColor(kBlue);
+
+    uu_Sig1_3Dsig->SetLineColor(kRed);
+    uu_Sig50_3Dsig->SetLineColor(kGray + 2);
+    uu_Sig150_3Dsig->SetLineColor(kBlue);
 
     ee_HT_alpha->SetLineWidth(2);
     ee_HT_alpha->SetFillColor(kOrange - 3);
@@ -257,6 +300,17 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     uu_Sig50_alpha4->SetLineWidth(2);
     uu_Sig150_alpha4->SetLineWidth(2);
 
+    ee_HT_3Dsig->SetLineWidth(2);
+    uu_HT_3Dsig->SetLineWidth(2);
+
+    ee_Sig1_3Dsig->SetLineWidth(2);
+    ee_Sig50_3Dsig->SetLineWidth(2);
+    ee_Sig150_3Dsig->SetLineWidth(2);
+
+    uu_Sig1_3Dsig->SetLineWidth(2);
+    uu_Sig50_3Dsig->SetLineWidth(2);
+    uu_Sig150_3Dsig->SetLineWidth(2);
+
     int W = 800;
     int H = 600;
 
@@ -309,21 +363,38 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     l0->Draw();
     */
     // canv->cd(2);
+    
+        ee_HT_alpha3->GetXaxis()->SetNdivisions(6, 5, 0);
+        ee_HT_alpha3->GetXaxis()->SetTitleOffset(1.5);
+        ee_HT_alpha3->GetXaxis()->SetTitle("#alpha_{3D}");
+        ee_HT_alpha3->GetYaxis()->SetNdivisions(6, 5, 0);
+        ee_HT_alpha3->GetYaxis()->SetTitleOffset(1.5);
+        // uu_HT_alpha2->GetYaxis()->SetRangeUser(-0.1,0.5);
+        ee_HT_alpha3->GetYaxis()->SetTitle("nJets / Normalized");
 
-    uu_HT_alpha3->GetXaxis()->SetNdivisions(6, 5, 0);
-    uu_HT_alpha3->GetXaxis()->SetTitleOffset(1.5);
-    uu_HT_alpha3->GetXaxis()->SetTitle("#alpha_{3D}");
-    uu_HT_alpha3->GetYaxis()->SetNdivisions(6, 5, 0);
-    uu_HT_alpha3->GetYaxis()->SetTitleOffset(1.5);
-    uu_HT_alpha3->GetYaxis()->SetTitle("nJets / Normalized");
-    uu_HT_alpha3->SetTitle("cut1");
+        uu_Sig150_alpha3->DrawNormalized("h same");
+        uu_HT_alpha3->DrawNormalized("h same");
+        
+        //ee_Sig50_alpha3->DrawNormalized("h same");
+        //uu_Sig1_alpha3->DrawNormalized("h same");
 
-    uu_HT_alpha3->DrawNormalized("h same");
-    uu_Sig50_alpha3->DrawNormalized("h same");
+    
+    /*
+    uu_Sig1_3Dsig->GetXaxis()->SetNdivisions(6, 5, 0);
+    uu_Sig1_3Dsig->GetXaxis()->SetTitleOffset(1.5);
+    uu_Sig1_3Dsig->GetXaxis()->SetTitle("log_{10}(3D_{sig})");
+    uu_Sig1_3Dsig->GetYaxis()->SetNdivisions(6, 5, 0);
+    uu_Sig1_3Dsig->GetYaxis()->SetTitleOffset(1.5);
+    // uu_HT_alpha2->GetYaxis()->SetRangeUser(-0.1,0.5);
+    uu_Sig1_3Dsig->GetYaxis()->SetTitle("nTracks / Normalized");
 
-    uu_Sig1_alpha3->DrawNormalized("h same");
-    uu_Sig150_alpha3->DrawNormalized("h same");
+    uu_Sig1_3Dsig->DrawNormalized("h same");
+    uu_HT_3Dsig->DrawNormalized("h same");
 
+    uu_Sig50_3Dsig->DrawNormalized("h same");
+    uu_Sig150_3Dsig->DrawNormalized("h same");
+
+    */
     TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
     l1->SetBorderSize(0);
     l1->SetTextSize(0.03);
