@@ -4,6 +4,8 @@
 #include <TMath.h>
 #include <TFile.h>
 #include <TH3D.h>
+#include <TH2D.h>
+#include <TGraph.h>
 #include <TROOT.h>
 #include <TCanvas.h>
 #include <TLegend.h>
@@ -37,6 +39,7 @@ void ee_Sig_alpha()
     TH1D *h_Sig150_nJet_cut[sumstep];
     TH1D *h_Sig150_nJet[sumstep];
     TH1D *h_Bgall[sumstep];
+    TH1D *h_Bg_cut[sumstep];
 
     TH1D *h_Sig1_alpha = new TH1D("h_Sig1_alpha", "", 20, 0, 1);
     TH1D *h_Sig50_alpha = new TH1D("h_Sig50_alpha", "", 20, 0, 1);
@@ -53,8 +56,6 @@ void ee_Sig_alpha()
     {
         float alphacut = (i + 1) * 0.05;
 
-        cout << "alphacut" << alphacut << endl;
-
         h_Sig1_nJet_cut[i] = new TH1D(Form("h_Sig1_nJet_cut%i", i + 1), "", 30, 0, 30);
         h_Sig1_nJet[i] = new TH1D(Form("h_Sig1_nJet_%i", i + 1), "", 30, 0, 30);
         h_Sig50_nJet_cut[i] = new TH1D(Form("h_Sig50_nJet_cut%i", i + 1), "", 30, 0, 30);
@@ -63,6 +64,7 @@ void ee_Sig_alpha()
         h_Sig150_nJet[i] = new TH1D(Form("h_Sig150_nJet_%i", i + 1), "", 30, 0, 30);
 
         h_Bgall[i] = ((TH1D *)Bgall->Get(Form("h_Bg_nJet_%i", i + 1)));
+        h_Bg_cut[i] = ((TH1D *)Bgall->Get(Form("h_Bg_nJet_cut_%i", i + 1)));
 
         Int_t I_Mx1_weight, I_Mx50_weight, I_Mx150_weight;
 
@@ -142,11 +144,13 @@ void ee_Sig_alpha()
             {
                 continue;
             }
+            /*
             if (i == 5)
             {
                 cout << "jet_passalpha_cut = " << jet_passalpha_cut << endl;
                 cout << "Weight" << I_Mx50_weight << endl;
             }
+            */
             h_Sig50_nJet_cut[i]->Fill(jet_passalpha_cut, I_Mx50_weight);
         } // End of Mx2_50 Entries loop
         TTree *T_Mx2_150;
@@ -187,26 +191,60 @@ void ee_Sig_alpha()
     TH1D *h_punzisig1 = new TH1D("h_punzisig1", "", sumstep, 0, sumstep);
     TH1D *h_punzisig50 = new TH1D("h_punzisig50", "", sumstep, 0, sumstep);
     TH1D *h_punzisig150 = new TH1D("h_punzisig150", "", sumstep, 0, sumstep);
+
+    double arr_sig1[sumstep];
+    double arr_sig50[sumstep];
+    double arr_sig150[sumstep];
+    double arr_bgreject[sumstep];
+
     for (int i = 0; i < sumstep; i++)
     {
         double sig1eff = (h_Sig1_nJet_cut[i]->Integral() / (h_Sig1_nJet[i]->Integral()));
         double sig50eff = (h_Sig50_nJet_cut[i]->Integral() / (h_Sig50_nJet[i]->Integral()));
         double sig150eff = (h_Sig150_nJet_cut[i]->Integral() / (h_Sig150_nJet[i]->Integral()));
         double nbg = h_Bgall[i]->Integral();
-        if (sig50eff < 0)
-        {
-            cout << "i = " << i << endl;
-            cout << "sig50eff = " << sig50eff << endl;
-            cout << "h_Sig50_nJet_cut[i]->Integral() = " << h_Sig50_nJet_cut[i]->Integral() << endl;
-            cout << "h_Sig50_nJet[i]->Integral() = " << h_Sig50_nJet[i]->Integral() << endl;
-        }
-
+        double bgeff = (h_Bg_cut[i]->Integral()) / (nbg);
+        arr_sig1[i] = sig1eff;
+        arr_sig50[i] = sig50eff;
+        arr_sig150[i] = sig150eff;
+        arr_bgreject[i] = 1 - bgeff;
+        cout << "i" << i << endl;
+        cout << "sig1eff = " << sig1eff << "  arr_bgreject = " << arr_bgreject[i] << endl;
         // cout << "nbg" << nbg << endl;
         h_punzisig1->SetBinContent(i + 1, punzi(sig1eff, nbg));
         h_punzisig50->SetBinContent(i + 1, punzi(sig50eff, nbg));
         h_punzisig150->SetBinContent(i + 1, punzi(sig150eff, nbg));
+
+        //------------------
+        // ROC curve
+        //------------------
+        // h_ROCsig50->SetBinContent(i + 1, sig50eff, i + 1, 1 - bgeff);
         // cout << "punzi = " << punzi(sig50eff, nbg) << endl;
     }
+
+    /*
+    for (int i = 0; i < sumstep; i++)
+    {
+        double Total_Sig1_event = (h_Sig1_nJet[i]->Integral());
+        int nbinx = h_Sig1_nJet[i]->GetNbinsX();
+        //cout << "nbinx = " << nbinx << endl;
+        double Sig1_passcut_event = 0.;
+        for (int j = 2; j < nbinx; j++)
+        {
+            //cout << "i = " << j << endl;
+            double Sig_value = h_Sig1_nJet[i]->GetBinContent(j + 1);
+            Sig1_passcut_event = Sig1_passcut_event + Sig_value;
+        }
+        cout << "i = " << i << endl;
+        cout << "sig1eff = " << (double)((Sig1_passcut_event) / (Total_Sig1_event)) << endl;
+        arr_sig1[i]=(double)((Sig1_passcut_event) / (Total_Sig1_event));
+
+    }
+    */
+    TGraph *ROC_MX1 = new TGraph(sumstep, arr_sig1, arr_bgreject);
+    TGraph *ROC_MX50 = new TGraph(sumstep, arr_sig50, arr_bgreject);
+    TGraph *ROC_MX150 = new TGraph(sumstep, arr_sig150, arr_bgreject);
+
     h_punzisig1->SetLineWidth(2);
     h_punzisig50->SetLineWidth(2);
     h_punzisig150->SetLineWidth(2);
@@ -281,17 +319,46 @@ void ee_Sig_alpha()
 
     // h_punzisig50->Draw();
     // h_punzisig150->Draw("same");
-     h_punzisig50->Draw("same");
-     h_punzisig1->Draw("same");
-     h_punzisig150->Draw("same");
-    // h_Sig50_nJet_cut[5]->Draw("same");
-
+    // h_punzisig50->Draw("same");
+    // h_punzisig1->Draw("same");
+    // h_punzisig150->Draw("same");
     // h_Sig50_alpha->DrawNormalized("h ");
     // h_bgall_alpha->DrawNormalized("h same");
     // h_Sig1_alpha->DrawNormalized("h same");
     // h_Sig150_alpha->DrawNormalized("h same");
-    gStyle->SetOptStat(0);
+    ROC_MX1->SetLineColor(kRed);
+    ROC_MX1->SetMarkerColor(kRed);
+    ROC_MX1->SetMarkerStyle(21);
+    ROC_MX50->SetLineColor(kGray + 2);
+    ROC_MX50->SetMarkerColor(kGray + 2);
+    ROC_MX150->SetLineColor(kBlue);
+    ROC_MX50->SetMarkerColor(kBlue);
+    ROC_MX1->SetLineWidth(2);
+    ROC_MX50->SetLineWidth(2);
+    ROC_MX150->SetLineWidth(2);
 
+   
+    ROC_MX50->GetYaxis()->SetTitle("bkg rejection");
+    ROC_MX50->GetXaxis()->SetTitle("sigeff");
+
+    TAxis *axis = ROC_MX50->GetXaxis();
+    axis->SetLimits(0.,1.);       
+
+    ROC_MX50->Draw("AP same");
+    ROC_MX1->Draw("P same");
+    
+    ROC_MX150->Draw("P same");
+
+    gStyle->SetOptStat(0);
+    TLegend *l0 = new TLegend(0.4, 0.6, 0.90, 0.80);
+    l0->SetBorderSize(0);
+    l0->SetTextSize(0.03);
+    l0->AddEntry(ROC_MX1, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "P");
+    l0->AddEntry(ROC_MX50, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "P");
+    l0->AddEntry(ROC_MX150, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "P");
+    // l0->AddEntry(h_bgall_alpha, "2016 MC background", "l");
+    l0->Draw();
+    /*
     TLegend *l0 = new TLegend(0.4, 0.6, 0.90, 0.80);
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
@@ -305,5 +372,6 @@ void ee_Sig_alpha()
     int iPos = 33;
     CMS_lumi(c1, iPeriod, iPos);
     c1->Update();
+    */
     // c1->SaveAs("ee_Mx21_alpha_punzi.pdf");
 }

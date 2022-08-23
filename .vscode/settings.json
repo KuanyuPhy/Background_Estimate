@@ -56,6 +56,7 @@
         "ee_Sig_alpha.C": "cpp",
         "ee_Triboson_alpha.C": "cpp",
         "ee_Top_alpha.C": "cpp",
-        "uu_Sig_alpha.C": "cpp"
+        "uu_Sig_alpha.C": "cpp",
+        "FR_fit.C": "cpp"
     }
 }

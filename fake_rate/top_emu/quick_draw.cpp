@@ -255,8 +255,6 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_Top_htrk_region2_bybin_CR->SetLineColor(kGreen + 3);
     h_Top_htrk_region3_bybin_CR->SetLineColor(kGreen + 3);
 
-
-
     h_Top_JetPt_bybin_CR->SetLineColor(kGreen + 3);
     h_Top_bJetPt_bybin_CR->SetLineColor(kGreen + 3);
     h_Top_cJetPt_bybin_CR->SetLineColor(kGreen + 3);
@@ -290,7 +288,6 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_Top_cJetEta_diffregion_bybin_CR->SetLineColor(kGreen + 3);
     h_Top_lJetEta_diffregion_bybin_CR->SetLineColor(kGreen + 3);
     h_Top_hJetEta_diffregion_bybin_CR->SetLineColor(kGreen + 3);
-
 
     h_Top_btrk_bybin_CR->GetXaxis()->SetTitle("nTrk");
     h_Top_ctrk_bybin_CR->GetXaxis()->SetTitle("nTrk");
@@ -410,45 +407,199 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->AddEntry(h_Top_ltrk_SR, "SR", "l");
     l2->Draw();
     */
-    /*
-    c1->Divide(3, 1);
+c1->Divide(3, 2);
     c1->cd(1);
-    h_Top_ltrk_region1_SR->Draw("h ");
-    h_Top_ltrk_region1_bybin_CR->Draw("same");
-    
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_btrk_region1_bybin_CR->Draw("");
+    h_Top_btrk_region1_SR->Draw("h same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor , |#eta| < 1.");
+    l0->SetTextSize(0.03);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_btrk_region1_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l0->AddEntry(h_Top_btrk_region1_SR, "SR", "El");
+    l0->Draw();
+
+    c1->cd(4);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_btrk_rg1_CR_SR_ratio = (TH1D *)h_Top_btrk_region1_bybin_CR->Clone("h_btrk_rg1_CR_SR_ratio");
+    h_btrk_rg1_CR_SR_ratio->Divide(h_Top_btrk_region1_bybin_CR, h_Top_btrk_region1_SR, 1, 1);
+
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet ntrk");
+
+    h_btrk_rg1_CR_SR_ratio->Draw();
+
+    c1->cd(2);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_btrk_region2_SR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_btrk_region2_SR->Draw("h");
+    h_Top_btrk_region2_bybin_CR->Draw(" same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetHeader("b flavor , 1 < |#eta| < 2.");
+    l1->SetTextSize(0.03);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->AddEntry(h_Top_btrk_region2_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l1->AddEntry(h_Top_btrk_region2_SR, "SR", "El");
+    l1->Draw();
+
+    c1->cd(5);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_btrk_rg2_CR_SR_ratio = (TH1D *)h_Top_btrk_region2_bybin_CR->Clone("h_btrk_rg2_CR_SR_ratio");
+    h_btrk_rg2_CR_SR_ratio->Divide(h_Top_btrk_region2_bybin_CR, h_Top_btrk_region2_SR, 1, 1);
+
+    h_btrk_rg2_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_btrk_rg2_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
+    h_btrk_rg2_CR_SR_ratio->GetXaxis()->SetTitle("Jet ntrk");
+
+    h_btrk_rg2_CR_SR_ratio->Draw();
+
+    c1->cd(3);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_btrk_region3_bybin_CR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_btrk_region3_bybin_CR->Draw(" ");
+    h_Top_btrk_region3_SR->Draw("h same");
+
+    TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l2->SetHeader("b flavor , 2 < |#eta| < 2.5");
+    l2->SetTextSize(0.03);
+    l2->SetBorderSize(0);
+    l2->SetFillStyle(0);
+    l2->AddEntry(h_Top_btrk_region3_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l2->AddEntry(h_Top_btrk_region3_SR, "SR", "El");
+    l2->Draw();
+
+    c1->cd(6);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_btrk_rg3_CR_SR_ratio = (TH1D *)h_Top_btrk_region3_bybin_CR->Clone("h_btrk_rg3_CR_SR_ratio");
+    h_btrk_rg3_CR_SR_ratio->Divide(h_Top_btrk_region3_bybin_CR, h_Top_btrk_region3_SR, 1, 1);
+
+    h_btrk_rg3_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_btrk_rg3_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
+    h_btrk_rg3_CR_SR_ratio->GetXaxis()->SetTitle("Jet ntrk");
+
+    h_btrk_rg3_CR_SR_ratio->Draw();
+
+    /*
+    c1->Divide(3, 2);
+    c1->cd(1);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_ltrk_region1_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_ltrk_region1_bybin_CR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_ltrk_region1_bybin_CR->Draw("");
+    h_Top_ltrk_region1_SR->Draw("h same");
 
     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
     l0->SetHeader("light flavor , |#eta| < 1.");
-    l0->SetTextSize(0.04);
+    l0->SetTextSize(0.03);
     l0->SetBorderSize(0);
-    l0->AddEntry(h_Top_ltrk_region1_bybin_CR, "CR", "El");
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_ltrk_region1_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
     l0->AddEntry(h_Top_ltrk_region1_SR, "SR", "El");
     l0->Draw();
 
+    c1->cd(4);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_ltrk_rg1_CR_SR_ratio = (TH1D *)h_Top_ltrk_region1_bybin_CR->Clone("h_ltrk_rg1_CR_SR_ratio");
+    h_ltrk_rg1_CR_SR_ratio->Divide(h_Top_ltrk_region1_bybin_CR, h_Top_ltrk_region1_SR, 1, 1);
+
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet ntrk");
+
+    h_ltrk_rg1_CR_SR_ratio->Draw();
+
     c1->cd(2);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_ltrk_region2_SR->GetXaxis()->SetLabelSize(0);
+
     h_Top_ltrk_region2_SR->Draw("h");
     h_Top_ltrk_region2_bybin_CR->Draw(" same");
 
     TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
     l1->SetHeader("light flavor , 1 < |#eta| < 2.");
-    l1->SetTextSize(0.04);
+    l1->SetTextSize(0.03);
     l1->SetBorderSize(0);
-    l1->AddEntry(h_Top_ltrk_region2_bybin_CR, "CR", "El");
+    l1->SetFillStyle(0);
+    l1->AddEntry(h_Top_ltrk_region2_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
     l1->AddEntry(h_Top_ltrk_region2_SR, "SR", "El");
     l1->Draw();
 
+    c1->cd(5);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_ltrk_rg2_CR_SR_ratio = (TH1D *)h_Top_ltrk_region2_bybin_CR->Clone("h_ltrk_rg2_CR_SR_ratio");
+    h_ltrk_rg2_CR_SR_ratio->Divide(h_Top_ltrk_region2_bybin_CR, h_Top_ltrk_region2_SR, 1, 1);
+
+    h_ltrk_rg2_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_ltrk_rg2_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
+    h_ltrk_rg2_CR_SR_ratio->GetXaxis()->SetTitle("Jet ntrk");
+
+    h_ltrk_rg2_CR_SR_ratio->Draw();
+
     c1->cd(3);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_ltrk_region3_bybin_CR->GetXaxis()->SetLabelSize(0);
+
     h_Top_ltrk_region3_bybin_CR->Draw(" ");
     h_Top_ltrk_region3_SR->Draw("h same");
 
     TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
     l2->SetHeader("light flavor , 2 < |#eta| < 2.5");
-    l2->SetTextSize(0.04);
+    l2->SetTextSize(0.03);
     l2->SetBorderSize(0);
-    l2->AddEntry(h_Top_ltrk_region3_bybin_CR, "CR", "El");
+    l2->SetFillStyle(0);
+    l2->AddEntry(h_Top_ltrk_region3_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
     l2->AddEntry(h_Top_ltrk_region3_SR, "SR", "El");
     l2->Draw();
+
+    c1->cd(6);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_ltrk_rg3_CR_SR_ratio = (TH1D *)h_Top_ltrk_region3_bybin_CR->Clone("h_ltrk_rg3_CR_SR_ratio");
+    h_ltrk_rg3_CR_SR_ratio->Divide(h_Top_ltrk_region3_bybin_CR, h_Top_ltrk_region3_SR, 1, 1);
+
+    h_ltrk_rg3_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_ltrk_rg3_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
+    h_ltrk_rg3_CR_SR_ratio->GetXaxis()->SetTitle("Jet ntrk");
+
+    h_ltrk_rg3_CR_SR_ratio->Draw();
+
     */
+
     /*
      c1->Divide(3, 1);
      c1->cd(1);
@@ -481,88 +632,302 @@ void quick_draw(TString file = "./Ratio_apply.root")
      l2->AddEntry(h_Top_lJetPt_SR, "SR", "l");
      l2->Draw();
      */
-    
-    c1->Divide(3, 1);
+    /*
+    c1->Divide(3, 2);
     c1->cd(1);
-    h_Top_bJetPt_region1_bybin_CR->Draw("");
-    h_Top_bJetPt_region1_SR->Draw("h same");
-    
-    
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetTitle("nJets");
+
+    h_Top_bJetPt_region1_SR->GetXaxis()->SetLabelSize(0);
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetRangeUser(-0.2, 35);
+
+    h_Top_bJetPt_region1_SR->Draw("h ");
+    h_Top_bJetPt_region1_bybin_CR->Draw("same");
 
     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
     l0->SetHeader("b flavor, |#eta| < 1");
-    l0->SetTextSize(0.04);
+    l0->SetTextSize(0.03);
+    l0->SetFillStyle(0);
     l0->SetBorderSize(0);
-    l0->AddEntry(h_Top_bJetPt_region1_bybin_CR, "CR", "El");
+    l0->AddEntry(h_Top_bJetPt_region1_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
     l0->AddEntry(h_Top_bJetPt_region1_SR, "SR", "El");
     l0->Draw();
 
+    c1->cd(4);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_bJetPt_rg1_CR_SR_ratio = (TH1D *)h_Top_bJetPt_region1_bybin_CR->Clone("h_bJetPt_rg1_CR_SR_ratio");
+    h_bJetPt_rg1_CR_SR_ratio->Divide(h_Top_bJetPt_region1_bybin_CR, h_Top_bJetPt_region1_SR, 1, 1);
+
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    //h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+
+    h_bJetPt_rg1_CR_SR_ratio->Draw();
+
     c1->cd(2);
-    h_Top_bJetPt_region2_bybin_CR->Draw(" ");
-    h_Top_bJetPt_region2_SR->Draw("h same");
-    
-    
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetTitle("nJets");
+
+    h_Top_bJetPt_region2_SR->GetXaxis()->SetLabelSize(0);
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetRangeUser(-0.2, 35);
+
+    h_Top_bJetPt_region2_SR->Draw("h ");
+    h_Top_bJetPt_region2_bybin_CR->Draw(" same");
 
     TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
     l1->SetHeader("b flavor, 1 < |#eta| < 2");
-    l1->SetTextSize(0.04);
+    l1->SetTextSize(0.03);
     l1->SetBorderSize(0);
-    l1->AddEntry(h_Top_bJetPt_region2_bybin_CR, "CR", "El");
-    l1->AddEntry(h_Top_bJetPt_region2_SR, "SR", "El");
+    l1->SetFillStyle(0);
+    l1->AddEntry(h_Top_lJetPt_region2_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l1->AddEntry(h_Top_lJetPt_region2_SR, "SR", "El");
     l1->Draw();
 
+    c1->cd(5);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_bJetPt_rg2_CR_SR_ratio = (TH1D *)h_Top_bJetPt_region2_bybin_CR->Clone("h_bJetPt_rg2_CR_SR_ratio");
+    h_bJetPt_rg2_CR_SR_ratio->Divide(h_Top_bJetPt_region2_bybin_CR, h_Top_bJetPt_region2_SR, 1, 1);
+
+    h_bJetPt_rg2_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    //h_bJetPt_rg2_CR_SR_ratio->GetYaxis()->SetRangeUser(-20, 10);
+    h_bJetPt_rg2_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+
+    h_bJetPt_rg2_CR_SR_ratio->Draw();
+
     c1->cd(3);
-    h_Top_bJetPt_region3_bybin_CR->Draw(" ");
-    h_Top_bJetPt_region3_SR->Draw("h same");
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_bJetPt_region3_SR->GetXaxis()->SetLabelSize(0);
+    h_Top_bJetPt_region3_SR->GetYaxis()->SetRangeUser(-0.2, 10);
+
+    h_Top_bJetPt_region3_SR->Draw("h ");
+    h_Top_bJetPt_region3_bybin_CR->Draw(" same");
 
     TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
     l2->SetHeader("b flavor, 2 < |#eta| < 2.5");
-    l2->SetTextSize(0.04);
+    l2->SetTextSize(0.03);
     l2->SetBorderSize(0);
-    l2->AddEntry(h_Top_bJetPt_region3_bybin_CR, "CR", "El");
-    l2->AddEntry(h_Top_bJetPt_region3_SR, "SR", "El");
+    l2->SetFillStyle(0);
+    l2->AddEntry(h_Top_lJetPt_region3_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l2->AddEntry(h_Top_lJetPt_region3_SR, "SR", "El");
     l2->Draw();
-    
-    
+
+    c1->cd(6);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_bJetPt_rg3_CR_SR_ratio = (TH1D *)h_Top_bJetPt_region3_bybin_CR->Clone("h_bJetPt_rg3_CR_SR_ratio");
+    h_bJetPt_rg3_CR_SR_ratio->Divide(h_Top_bJetPt_region3_bybin_CR, h_Top_bJetPt_region3_SR, 1, 1);
+
+    h_bJetPt_rg3_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    //h_bJetPt_rg3_CR_SR_ratio->GetYaxis()->SetRangeUser(-20, 20);
+    h_bJetPt_rg3_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+
+    h_bJetPt_rg3_CR_SR_ratio->Draw();
+    */
+
     /*
-     c1->Divide(3, 1);
-     c1->cd(1);
-     h_Top_bJetEta_diffregion_bybin_CR->Draw("");
-     h_Top_bJetEta_diffregion_SR->Draw("h same");
+    c1->Divide(3, 2);
+    c1->cd(1);
 
+    gPad->SetBottomMargin(0.02);
 
-     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
-     l0->SetHeader("b flavor");
-     l0->SetTextSize(0.04);
-     l0->SetBorderSize(0);
-     l0->AddEntry(h_Top_bJetEta_diffregion_bybin_CR, "CR", "El");
-     l0->AddEntry(h_Top_bJetEta_diffregion_SR, "SR", "El");
-     l0->Draw();
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetTitle("nJets");
 
-     c1->cd(2);
-     h_Top_cJetEta_diffregion_SR->Draw("h");
-     h_Top_cJetEta_diffregion_bybin_CR->Draw(" same");
+    h_Top_lJetPt_region1_SR->GetXaxis()->SetLabelSize(0);
+    //h_Top_lJetPt_region1_SR->GetYaxis()->SetRangeUser(-0.2, 35);
 
-     TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
-     l1->SetHeader("c flavor");
-     l1->SetTextSize(0.04);
-     l1->SetBorderSize(0);
-     l1->AddEntry(h_Top_cJetEta_diffregion_bybin_CR, "CR", "El");
-     l1->AddEntry(h_Top_cJetEta_diffregion_SR, "SR", "El");
-     l1->Draw();
+    h_Top_lJetPt_region1_SR->Draw("h ");
+    h_Top_lJetPt_region1_bybin_CR->Draw("same");
 
-     c1->cd(3);
-     h_Top_lJetEta_diffregion_bybin_CR->Draw(" ");
-     h_Top_lJetEta_diffregion_SR->Draw("h same");
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor, |#eta| < 1");
+    l0->SetTextSize(0.03);
+    l0->SetFillStyle(0);
+    l0->SetBorderSize(0);
+    l0->AddEntry(h_Top_lJetPt_region1_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l0->AddEntry(h_Top_lJetPt_region1_SR, "SR", "El");
+    l0->Draw();
 
+    c1->cd(4);
 
-     TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
-     l2->SetHeader("light flavor");
-     l2->SetTextSize(0.04);
-     l2->SetBorderSize(0);
-     l2->AddEntry(h_Top_lJetEta_diffregion_bybin_CR, "CR", "El");
-     l2->AddEntry(h_Top_lJetEta_diffregion_SR, "SR", "El");
-     l2->Draw();
-     */
+    gPad->SetTopMargin(1);
+
+    TH1D *h_lJetPt_rg1_CR_SR_ratio = (TH1D *)h_Top_lJetPt_region1_bybin_CR->Clone("h_lJetPt_rg1_CR_SR_ratio");
+    h_lJetPt_rg1_CR_SR_ratio->Divide(h_Top_lJetPt_region1_bybin_CR, h_Top_lJetPt_region1_SR, 1, 1);
+
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
+    h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+
+    h_lJetPt_rg1_CR_SR_ratio->Draw();
+
+    c1->cd(2);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetTitle("nJets");
+
+    h_Top_lJetPt_region2_SR->GetXaxis()->SetLabelSize(0);
+    //h_Top_lJetPt_region2_SR->GetYaxis()->SetRangeUser(-0.2, 35);
+
+    h_Top_lJetPt_region2_SR->Draw("h ");
+    h_Top_lJetPt_region2_bybin_CR->Draw(" same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetHeader("light flavor, 1 < |#eta| < 2");
+    l1->SetTextSize(0.03);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->AddEntry(h_Top_lJetPt_region2_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l1->AddEntry(h_Top_lJetPt_region2_SR, "SR", "El");
+    l1->Draw();
+
+    c1->cd(5);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_lJetPt_rg2_CR_SR_ratio = (TH1D *)h_Top_lJetPt_region2_bybin_CR->Clone("h_lJetPt_rg2_CR_SR_ratio");
+    h_lJetPt_rg2_CR_SR_ratio->Divide(h_Top_lJetPt_region2_bybin_CR, h_Top_lJetPt_region2_SR, 1, 1);
+
+    h_lJetPt_rg2_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_bJetPt_rg2_CR_SR_ratio->GetYaxis()->SetRangeUser(-20, 10);
+    h_lJetPt_rg2_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+
+    h_lJetPt_rg2_CR_SR_ratio->Draw();
+
+    c1->cd(3);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_lJetPt_region3_SR->GetXaxis()->SetLabelSize(0);
+    //h_Top_lJetPt_region3_SR->GetYaxis()->SetRangeUser(-0.2, 10);
+
+    h_Top_lJetPt_region3_SR->Draw("h ");
+    h_Top_lJetPt_region3_bybin_CR->Draw(" same");
+
+    TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l2->SetHeader("light flavor, 2 < |#eta| < 2.5");
+    l2->SetTextSize(0.03);
+    l2->SetBorderSize(0);
+    l2->SetFillStyle(0);
+    l2->AddEntry(h_Top_lJetPt_region3_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l2->AddEntry(h_Top_lJetPt_region3_SR, "SR", "El");
+    l2->Draw();
+
+    c1->cd(6);
+
+    gPad->SetTopMargin(1);
+
+    TH1D *h_lJetPt_rg3_CR_SR_ratio = (TH1D *)h_Top_lJetPt_region3_bybin_CR->Clone("h_lJetPt_rg3_CR_SR_ratio");
+    h_lJetPt_rg3_CR_SR_ratio->Divide(h_Top_lJetPt_region3_bybin_CR, h_Top_lJetPt_region3_SR, 1, 1);
+
+    h_lJetPt_rg3_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_bJetPt_rg3_CR_SR_ratio->GetYaxis()->SetRangeUser(-20, 20);
+    h_lJetPt_rg3_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+
+    h_lJetPt_rg3_CR_SR_ratio->Draw();
+
+    */
+    /*
+    c1->Divide(3, 2);
+    c1->cd(1);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_bJetEta_diffregion_bybin_CR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_bJetEta_diffregion_bybin_CR->Draw("");
+
+    h_Top_bJetEta_diffregion_SR->Draw("h same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor");
+    l0->SetTextSize(0.03);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_bJetEta_diffregion_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l0->AddEntry(h_Top_bJetEta_diffregion_SR, "SR", "El");
+    l0->Draw();
+
+    TH1D *h_bJetEta_CR_SR_ratio = (TH1D *)h_Top_bJetEta_diffregion_bybin_CR->Clone("h_bJetEta_CR_SR_ratio");
+    h_bJetEta_CR_SR_ratio->Divide(h_Top_bJetEta_diffregion_bybin_CR, h_Top_bJetEta_diffregion_SR, 1, 1);
+
+    c1->cd(4);
+    gPad->SetTopMargin(1);
+    h_bJetEta_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    h_bJetEta_CR_SR_ratio->Draw();
+
+    c1->cd(2);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_cJetEta_diffregion_SR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_cJetEta_diffregion_SR->Draw("h");
+    h_Top_cJetEta_diffregion_bybin_CR->Draw(" same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetHeader("c flavor");
+    l1->SetTextSize(0.03);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->AddEntry(h_Top_cJetEta_diffregion_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l1->AddEntry(h_Top_cJetEta_diffregion_SR, "SR", "El");
+    l1->Draw();
+
+    c1->cd(5);
+    gPad->SetTopMargin(1);
+
+    TH1D *h_cJetEta_CR_SR_ratio = (TH1D *)h_Top_cJetEta_diffregion_bybin_CR->Clone("h_cJetEta_CR_SR_ratio");
+    h_cJetEta_CR_SR_ratio->Divide(h_Top_cJetEta_diffregion_bybin_CR, h_Top_cJetEta_diffregion_SR, 1, 1);
+
+    h_cJetEta_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    h_cJetEta_CR_SR_ratio->GetYaxis()->SetRangeUser(-2, 50);
+    h_cJetEta_CR_SR_ratio->GetXaxis()->SetTitle("Jet #eta");
+
+    h_cJetEta_CR_SR_ratio->Draw();
+
+    c1->cd(3);
+
+    gPad->SetBottomMargin(0.02);
+
+    h_Top_lJetEta_diffregion_bybin_CR->GetXaxis()->SetLabelSize(0);
+    //h_Top_lJetEta_diffregion_bybin_CR->GetXaxis()->SetTitleSize(0);
+
+    h_Top_lJetEta_diffregion_bybin_CR->Draw(" ");
+    h_Top_lJetEta_diffregion_SR->Draw("h same");
+
+    TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l2->SetHeader("light flavor");
+    l2->SetTextSize(0.03);
+    l2->SetBorderSize(0);
+    l2->SetFillStyle(0);
+    l2->AddEntry(h_Top_lJetEta_diffregion_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l2->AddEntry(h_Top_lJetEta_diffregion_SR, "SR", "El");
+    l2->Draw();
+
+    c1->cd(6);
+    gPad->SetTopMargin(1);
+
+    TH1D *h_lJetEta_CR_SR_ratio = (TH1D *)h_Top_lJetEta_diffregion_bybin_CR->Clone("h_lJetEta_CR_SR_ratio");
+    h_lJetEta_CR_SR_ratio->Divide(h_Top_lJetEta_diffregion_bybin_CR, h_Top_lJetEta_diffregion_SR, 1, 1);
+
+    h_lJetEta_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
+    // h_lJetEta_CR_SR_ratio->GetYaxis()->SetRangeUser(-2, 50);
+    h_lJetEta_CR_SR_ratio->GetXaxis()->SetTitle("Jet #eta");
+
+    h_lJetEta_CR_SR_ratio->Draw();
+    */
+
     gStyle->SetOptStat(0);
 }

@@ -12,13 +12,13 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTTo2L2Nu.root");
-TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTWJetsToLNu.root");
-TFile *Top_TTWJetsToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTWJetsToQQ.root");
-TFile *Top_TTZToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTZToQQ.root");
-TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_TTZToLLNuNu.root");
-TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_tW_antitop.root");
-TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/top/passmetcut/uu_top_tW_top.root");
+TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTTo2L2Nu.root");
+TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTWJetsToLNu.root");
+TFile *Top_TTWJetsToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTWJetsToQQ.root");
+TFile *Top_TTZToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTZToQQ.root");
+TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_TTZToLLNuNu.root");
+TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_tW_antitop.root");
+TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/passmetcut/top_tW_top.root");
 
 TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
@@ -59,13 +59,16 @@ void ee_Top_alpha()
 {
     int sumstep = 20;
     TH1D *h_Bg_nJet_cut[sumstep];
+    TH1D *h_Bg_nJet_[sumstep];
     TH1D *h_Bg_alpha = new TH1D("h_Bg_alpha", "", 20, 0, 1);
     for (int i = 0; i < sumstep; i++)
     {
         float alphacut = (i + 1) * 0.05;
         cout << "alphacut = " << alphacut << endl;
 
-        h_Bg_nJet_cut[i] = new TH1D(Form("h_Bg_nJet_%i", i + 1), "", 30, 0, 30);
+        h_Bg_nJet_[i] = new TH1D(Form("h_Bg_nJet_%i", i + 1), "", 30, 0, 30);
+
+        h_Bg_nJet_cut[i] = new TH1D(Form("h_Bg_nJet_cut_%i", i + 1), "", 30, 0, 30);
 
         Int_t I_TTTo2L2Nu_weight;
         Int_t I_ST_tW_top_weight;
@@ -154,6 +157,12 @@ void ee_Top_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
         }
         TTree *T_ST_tW_top_tree;
@@ -176,6 +185,12 @@ void ee_Top_alpha()
                 }
             }
             if (jet_passalpha_cut == 0)
+            {
+                continue;
+            }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ST_tW_top_weight * ST_tW_topWeight);
+
+            if (jet_passalpha_cut < 2)
             {
                 continue;
             }
@@ -204,6 +219,12 @@ void ee_Top_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ST_tW_antitop_weight * ST_tW_antitopWeight);
+
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_ST_tW_antitop_weight * ST_tW_antitopWeight);
         }
         TTree *T_TTWJetsToLNu_tree;
@@ -226,6 +247,12 @@ void ee_Top_alpha()
                 }
             }
             if (jet_passalpha_cut == 0)
+            {
+                continue;
+            }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+
+            if (jet_passalpha_cut < 2)
             {
                 continue;
             }
@@ -254,6 +281,12 @@ void ee_Top_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
         }
         TTree *T_TTZToQQ_tree;
@@ -276,6 +309,12 @@ void ee_Top_alpha()
                 }
             }
             if (jet_passalpha_cut == 0)
+            {
+                continue;
+            }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_TTZToQQ_weight * TTZToQQWeight);
+
+            if (jet_passalpha_cut < 2)
             {
                 continue;
             }
@@ -304,14 +343,23 @@ void ee_Top_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
         }
+        double bgeff = (h_Bg_nJet_cut[i]->Integral()) / (h_Bg_nJet_[i]->Integral());
+        cout << "bgeff = " << bgeff << endl;
     }
     TString outputfile1 = "./output/Top_output.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     for (int i = 0; i < sumstep; i++)
     {
         h_Bg_nJet_cut[i]->Write();
+        h_Bg_nJet_[i]->Write();
     }
     h_Bg_alpha->Write();
     outfile_HT0->Close();

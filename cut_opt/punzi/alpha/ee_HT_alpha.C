@@ -11,14 +11,14 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *DYincli = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_DYincli.root");
-TFile *DYHT100 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht100.root");
-TFile *DYHT200 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht200.root");
-TFile *DYHT400 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht400.root");
-TFile *DYHT600 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht600.root");
-TFile *DYHT800 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht800.root");
-TFile *DYHT1200 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht1200.root");
-TFile *DYHT2500 = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/passmetcut/uu_ht2500.root");
+TFile *DYincli = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_DYincli.root");
+TFile *DYHT100 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht100.root");
+TFile *DYHT200 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht200.root");
+TFile *DYHT400 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht400.root");
+TFile *DYHT600 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht600.root");
+TFile *DYHT800 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht800.root");
+TFile *DYHT1200 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht1200.root");
+TFile *DYHT2500 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht2500.root");
 
 TH1D *h_HT_eventCout = ((TH1D *)DYincli->Get("Event_Variable/h_HT_eventCout"));
 TH1D *DYHT100_sumevt = ((TH1D *)DYHT100->Get("Event_Variable/h_totevent"));
@@ -178,16 +178,16 @@ void ee_HT_alpha()
 {
     int sumstep = 20;
     TH1D *h_Bg_nJet_cut[sumstep];
+    TH1D *h_Bg_nJet_[sumstep];
     TH1D *h_Bg_alpha = new TH1D("h_Bg_alpha", "", 20, 0, 1);
 
     for (int i = 0; i < sumstep; i++)
     {
         float alphacut = (i + 1) * 0.05;
         cout << "alphacut = " << alphacut << endl;
-        h_Bg_nJet_cut[i] = new TH1D(Form("h_Bg_nJet_%i", i + 1), "", 30, 0, 30);
+        h_Bg_nJet_[i] = new TH1D(Form("h_Bg_nJet_%i", i + 1), "", 30, 0, 30);
+        h_Bg_nJet_cut[i] = new TH1D(Form("h_Bg_nJet_cut_%i", i + 1), "", 30, 0, 30);
 
-        // TH1D *h_Bg_nJet_cut = new TH1D("h_Bg_nJet_cut", "", 50, 0, 50);
-        // h_Bg_nJet_cut->Sumw2();
 
         float_t HT;
 
@@ -285,6 +285,11 @@ void ee_HT_alpha()
             {
                 continue;
             }
+            for_inclusive_sample(HT, jet_passalpha_cut, I_ht0_weight, h_Bg_nJet_[i]);
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             // for_inclusive_sample(HT, I_ht0_nJet, I_ht0_weight, h_Bg_nJet_cut);
             for_inclusive_sample(HT, jet_passalpha_cut, I_ht0_weight, h_Bg_nJet_cut[i]);
         }
@@ -310,6 +315,11 @@ void ee_HT_alpha()
                 }
             }
             if (jet_passalpha_cut == 0)
+            {
+                continue;
+            }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht100_weight * HT100Weight);
+            if (jet_passalpha_cut < 2)
             {
                 continue;
             }
@@ -339,6 +349,11 @@ void ee_HT_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht200_weight * HT200Weight);
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_ht200_weight * HT200Weight);
         }
         TTree *T_HT400;
@@ -362,6 +377,11 @@ void ee_HT_alpha()
                 }
             }
             if (jet_passalpha_cut == 0)
+            {
+                continue;
+            }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht400_weight * HT400Weight);
+            if (jet_passalpha_cut < 2)
             {
                 continue;
             }
@@ -391,6 +411,12 @@ void ee_HT_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht600_weight * HT600Weight);
+
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_ht600_weight * HT600Weight);
         }
         TTree *T_HT800;
@@ -414,6 +440,11 @@ void ee_HT_alpha()
                 }
             }
             if (jet_passalpha_cut == 0)
+            {
+                continue;
+            }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht800_weight * HT800Weight);
+            if (jet_passalpha_cut < 2)
             {
                 continue;
             }
@@ -443,6 +474,11 @@ void ee_HT_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht1200_weight * HT1200Weight);
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_ht1200_weight * HT1200Weight);
         }
         TTree *T_HT2500;
@@ -469,22 +505,28 @@ void ee_HT_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht2500_weight * HT2500Weight);
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_ht2500_weight * HT2500Weight);
         }
+                double bgeff = (h_Bg_nJet_cut[i]->Integral())/(h_Bg_nJet_[i]->Integral());
+        cout <<"bgeff = " << bgeff <<endl;
     } // End of scan loop
 
     TString outputfile = "./output/DY_output.root";
-    // h_Bg_nJet_cut[19]->Draw("text");
+
     // TString outputfile = "./output/tmp.root";
     TFile *outfile_HT0 = TFile::Open(outputfile, "RECREATE");
     for (int i = 0; i < sumstep; i++)
     {
-        cout << "i = " << i << "nbg = " << h_Bg_nJet_cut[i]->Integral() << endl;
         h_Bg_nJet_cut[i]->Write();
+        h_Bg_nJet_[i]->Write();
     }
     h_Bg_alpha->Write();
-    // h_DY_nJet->Write();
-    // h_Bg_nJet_cut->Write();
+
     outfile_HT0->Close();
 }
 /*

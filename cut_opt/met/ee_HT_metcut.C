@@ -21,7 +21,7 @@ void ee_HT_metcut(TString inputfile = "tmp", TString outputfile = "./tmp.root")
     TH1D *h_sumevt_copyed = ((TH1D *)File->Get("Event_Variable/h_totevent"));
 
     TFile *outfile = new TFile(outputfile, "RECREATE");
-    TTree *selectedTree = originalTree->CopyTree("f_Met>120.");
+    TTree *selectedTree = originalTree->CopyTree("f_Met>140.");
     TH1D *h_HT_eventCout = (TH1D*)h_HT_eventCout_copyed->Clone("h_HT_eventCout");
     TH1D *h_totevent = (TH1D*)h_sumevt_copyed->Clone("h_totevent");
     outfile->cd();

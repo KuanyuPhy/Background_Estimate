@@ -11,9 +11,9 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/triboson/passmetcut/uu_triboson_WWZ.root");
-TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/triboson/passmetcut/uu_triboson_WZZ.root");
-TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/triboson/passmetcut/uu_triboson_ZZZ.root");
+TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_WWZ.root");
+TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_WZZ.root");
+TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_ZZZ.root");
 
 TH1D *WWZ_sumevt = ((TH1D *)triboson_WWZfile->Get("Event_Variable/h_totevent"));
 TH1D *WZZ_sumevt = ((TH1D *)triboson_WZZfile->Get("Event_Variable/h_totevent"));
@@ -35,6 +35,7 @@ void ee_Triboson_alpha()
 
     int sumstep = 20;
     TH1D *h_Bg_nJet_cut[sumstep];
+    TH1D *h_Bg_nJet_[sumstep];
     TH1D *h_Bg_alpha = new TH1D("h_Bg_alpha", "", 20, 0, 1);
 
     for (int i = 0; i < sumstep; i++)
@@ -42,7 +43,8 @@ void ee_Triboson_alpha()
         float alphacut = (i + 1) * 0.05;
         cout << "alphacut = " << alphacut << endl;
 
-        h_Bg_nJet_cut[i] = new TH1D(Form("h_Bg_nJet_%i", i + 1), "", 30, 0, 30);
+        h_Bg_nJet_[i] = new TH1D(Form("h_Bg_nJet_%i", i + 1), "", 30, 0, 30);
+        h_Bg_nJet_cut[i] = new TH1D(Form("h_Bg_nJet_cut_%i", i + 1), "", 30, 0, 30);
 
         Int_t I_WWZ_weight, I_WZZ_weight, I_ZZZ_weight;
         float_t f_WWZ_met, f_WZZ_met, f_ZZZ_met;
@@ -76,6 +78,12 @@ void ee_Triboson_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_WWZ_weight * WWZWeight);
+
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_WWZ_weight * WWZWeight);
         }
         TTree *T_tree2;
@@ -96,6 +104,12 @@ void ee_Triboson_alpha()
                 }
             }
             if (jet_passalpha_cut == 0)
+            {
+                continue;
+            }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_WZZ_weight * WZZWeight);
+
+            if (jet_passalpha_cut < 2)
             {
                 continue;
             }
@@ -123,8 +137,15 @@ void ee_Triboson_alpha()
             {
                 continue;
             }
+            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ZZZ_weight * ZZZWeight);
+            if (jet_passalpha_cut < 2)
+            {
+                continue;
+            }
             h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_ZZZ_weight * ZZZWeight);
         }
+        double bgeff = (h_Bg_nJet_cut[i]->Integral()) / (h_Bg_nJet_[i]->Integral());
+        cout << "bgeff = " << bgeff << endl;
     }
     //_Bg_Met->Draw();
     TString outputfile1 = "./output/Triboson_output.root";
@@ -132,6 +153,7 @@ void ee_Triboson_alpha()
     for (int i = 0; i < sumstep; i++)
     {
         h_Bg_nJet_cut[i]->Write();
+        h_Bg_nJet_[i]->Write();
     }
     h_Bg_alpha->Write();
     outfile_HT0->Close();

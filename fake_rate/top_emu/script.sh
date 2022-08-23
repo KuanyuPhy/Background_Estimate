@@ -5,8 +5,8 @@ g++ -o ee_Top_emu_half_fakerate.o $(root-config --cflags) ee_Top_emu_half_fakera
 g++ -o Ratio_Top_apply.o $(root-config --cflags) Ratio_Top_apply.cpp  $(root-config --glibs)
 
 
-Top_emu_list_1=($(find /home/kuanyu/Documents/root_file/BgEstimation/top_emu/ -mindepth 1 -maxdepth 1 -name "top_emu_*_1.root"))
-Top_emu_list_2=($(find /home/kuanyu/Documents/root_file/BgEstimation/top_emu/ -mindepth 1 -maxdepth 1 -name "top_emu_*_2.root"))
+Top_emu_list_1=($(find /home/kuanyu/Documents/root_file/BgEstimation/top_emu/ -mindepth 1 -maxdepth 1 -name "ee_top_emu_*_1.root"))
+Top_emu_list_2=($(find /home/kuanyu/Documents/root_file/BgEstimation/top_emu/ -mindepth 1 -maxdepth 1 -name "ee_top_emu_*_2.root"))
 
 for file in ${Top_emu_list_1[*]}; do
     Topoutputfile="$(basename -s ".root" "$file")"
