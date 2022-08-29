@@ -16,7 +16,7 @@ LIBS         += $(ROOTGTTLIBS)
 
 Tasks:     clean ee_HT_half
 
-SOURCE_FILES := $(shell ls -1 ee_HT_half.C)
+SOURCE_FILES := $(shell ls -1 ./dy/ee_HT_half.C)
 
 # build object files 
 objects       = $(patsubst %.C,%.o,$(SOURCE_FILES))
@@ -35,7 +35,7 @@ clean:
 
 Tasks:     clean ee_Top_half
 
-SOURCE_FILES := $(shell ls -1 ee_Top_half.C)
+SOURCE_FILES := $(shell ls -1 ./top/ee_Top_half.C)
 
 # build object files 
 objects       = $(patsubst %.C,%.o,$(SOURCE_FILES))

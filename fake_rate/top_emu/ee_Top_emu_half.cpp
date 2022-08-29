@@ -20,13 +20,13 @@ using namespace std;
 //------------------
 // Calculate weight
 //------------------
-TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTTo2L2Nu.root");
-TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTWJetsToLNu.root");
-TFile *Top_TTWJetsToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTWJetsToQQ.root");
-TFile *Top_TTZToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTZToQQ.root");
-TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTZToLLNuNu.root");
-TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_tW_antitop.root");
-TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_tW_top.root");
+TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/eu_top_emu_TTTo2L2Nu.root");
+TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/eu_top_emu_TTWJetsToLNu.root");
+TFile *Top_TTWJetsToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/eu_top_emu_TTWJetsToQQ.root");
+TFile *Top_TTZToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/eu_top_emu_TTZToQQ.root");
+TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/eu_top_emu_TTZToLLNuNu.root");
+TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/eu_top_emu_tW_antitop.root");
+TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoemu/2016BKGMC/top/eu_top_emu_tW_top.root");
 
 TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
@@ -106,6 +106,27 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     TH1D *h_Top_nTrk_hjet_difeta[3];
     TH1D *h_Top_nTrk_hjet_cut_difeta[3];
 
+    TH1D *h_Top_nTrk_bjet_difeta_lowMET[3];
+    TH1D *h_Top_nTrk_bjet_cut_difeta_lowMET[3];
+    TH1D *h_Top_nTrk_cjet_difeta_lowMET[3];
+    TH1D *h_Top_nTrk_cjet_cut_difeta_lowMET[3];
+    TH1D *h_Top_nTrk_ljet_difeta_lowMET[3];
+    TH1D *h_Top_nTrk_ljet_cut_difeta_lowMET[3];
+
+    TH1D *h_Top_nTrk_bjet_difeta_midMET[3];
+    TH1D *h_Top_nTrk_bjet_cut_difeta_midMET[3];
+    TH1D *h_Top_nTrk_cjet_difeta_midMET[3];
+    TH1D *h_Top_nTrk_cjet_cut_difeta_midMET[3];
+    TH1D *h_Top_nTrk_ljet_difeta_midMET[3];
+    TH1D *h_Top_nTrk_ljet_cut_difeta_midMET[3];
+
+    TH1D *h_Top_nTrk_bjet_difeta_highMET[3];
+    TH1D *h_Top_nTrk_bjet_cut_difeta_highMET[3];
+    TH1D *h_Top_nTrk_cjet_difeta_highMET[3];
+    TH1D *h_Top_nTrk_cjet_cut_difeta_highMET[3];
+    TH1D *h_Top_nTrk_ljet_difeta_highMET[3];
+    TH1D *h_Top_nTrk_ljet_cut_difeta_highMET[3];
+
     for (int i = 0; i < 3; i++)
     {
 
@@ -119,6 +140,27 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_ljet_cut_difeta[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_%i", i + 1), "", 30, 1, 30);
         h_Top_nTrk_hjet_difeta[i] = new TH1D(Form("h_Top_nTrk_hjet_difeta_%i", i + 1), "", 30, 1, 30);
         h_Top_nTrk_hjet_cut_difeta[i] = new TH1D(Form("h_Top_nTrk_hjet_cut_difeta_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_bjet_difeta_lowMET[i] = new TH1D(Form("h_Top_nTrk_bjet_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_bjet_cut_difeta_lowMET[i] = new TH1D(Form("h_Top_nTrk_bjet_cut_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cjet_difeta_lowMET[i] = new TH1D(Form("h_Top_nTrk_cjet_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cjet_cut_difeta_lowMET[i] = new TH1D(Form("h_Top_nTrk_cjet_cut_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_ljet_difeta_lowMET[i] = new TH1D(Form("h_Top_nTrk_ljet_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_ljet_cut_difeta_lowMET[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+
+        h_Top_nTrk_bjet_difeta_midMET[i] = new TH1D(Form("h_Top_nTrk_bjet_difeta_midMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_bjet_cut_difeta_midMET[i] = new TH1D(Form("h_Top_nTrk_bjet_cut_difeta_midMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cjet_difeta_midMET[i] = new TH1D(Form("h_Top_nTrk_cjet_difeta_midMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cjet_cut_difeta_midMET[i] = new TH1D(Form("h_Top_nTrk_cjet_cut_difeta_midMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_ljet_difeta_midMET[i] = new TH1D(Form("h_Top_nTrk_ljet_difeta_midMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_ljet_cut_difeta_midMET[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_midMET_%i", i + 1), "", 30, 1, 30);
+
+        h_Top_nTrk_bjet_difeta_highMET[i] = new TH1D(Form("h_Top_nTrk_bjet_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_bjet_cut_difeta_highMET[i] = new TH1D(Form("h_Top_nTrk_bjet_cut_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cjet_difeta_highMET[i] = new TH1D(Form("h_Top_nTrk_cjet_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_cjet_cut_difeta_highMET[i] = new TH1D(Form("h_Top_nTrk_cjet_cut_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_ljet_difeta_highMET[i] = new TH1D(Form("h_Top_nTrk_ljet_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_Top_nTrk_ljet_cut_difeta_highMET[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+
         h_Top_nTrk_difeta[i]->Sumw2();
         h_Top_nTrk_cut_difeta[i]->Sumw2();
         h_Top_nTrk_bjet_difeta[i]->Sumw2();
@@ -129,6 +171,27 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_ljet_cut_difeta[i]->Sumw2();
         h_Top_nTrk_hjet_difeta[i]->Sumw2();
         h_Top_nTrk_hjet_cut_difeta[i]->Sumw2();
+
+        h_Top_nTrk_bjet_difeta_lowMET[i]->Sumw2();
+        h_Top_nTrk_bjet_cut_difeta_lowMET[i]->Sumw2();
+        h_Top_nTrk_cjet_difeta_lowMET[i]->Sumw2();
+        h_Top_nTrk_cjet_cut_difeta_lowMET[i]->Sumw2();
+        h_Top_nTrk_ljet_difeta_lowMET[i]->Sumw2();
+        h_Top_nTrk_ljet_cut_difeta_lowMET[i]->Sumw2();
+
+        h_Top_nTrk_bjet_difeta_midMET[i]->Sumw2();
+        h_Top_nTrk_bjet_cut_difeta_midMET[i]->Sumw2();
+        h_Top_nTrk_cjet_difeta_midMET[i]->Sumw2();
+        h_Top_nTrk_cjet_cut_difeta_midMET[i]->Sumw2();
+        h_Top_nTrk_ljet_difeta_midMET[i]->Sumw2();
+        h_Top_nTrk_ljet_cut_difeta_midMET[i]->Sumw2();
+
+        h_Top_nTrk_bjet_difeta_highMET[i]->Sumw2();
+        h_Top_nTrk_bjet_cut_difeta_highMET[i]->Sumw2();
+        h_Top_nTrk_cjet_difeta_highMET[i]->Sumw2();
+        h_Top_nTrk_cjet_cut_difeta_highMET[i]->Sumw2();
+        h_Top_nTrk_ljet_difeta_highMET[i]->Sumw2();
+        h_Top_nTrk_ljet_cut_difeta_highMET[i]->Sumw2();
     }
     //-----------------------------
     // Not consider eta
@@ -318,6 +381,201 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                 }
             }
         }
+        if (f_Top_met < 140.)
+        {
+            for (size_t i = 0; i < v_Top_nTrack->size(); i++)
+            {
+                if (abs((*v_Top_JetEta)[i]) < 1)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_lowMET[0]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_lowMET[0]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_lowMET[0]);
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_lowMET[0]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_lowMET[0]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_lowMET[0]);
+                    }
+                }
+                else if (abs((*v_Top_JetEta)[i]) > 1 && abs((*v_Top_JetEta)[i]) < 2)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_lowMET[1]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_lowMET[1]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_lowMET[1]);
+
+                    // For SR cut
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_lowMET[1]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_lowMET[1]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_lowMET[1]);
+                    }
+                }
+                else if (abs((*v_Top_JetEta)[i]) > 2 && abs((*v_Top_JetEta)[i]) < 2.5)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_lowMET[2]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_lowMET[2]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_lowMET[2]);
+
+                    // For SR cut
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_lowMET[2]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_lowMET[2]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_lowMET[2]);
+                    }
+                }
+            }
+        }
+        else if (f_Top_met > 140 && f_Top_met < 250)
+        {
+            for (size_t i = 0; i < v_Top_nTrack->size(); i++)
+            {
+                if (abs((*v_Top_JetEta)[i]) < 1)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_midMET[0]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_midMET[0]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_midMET[0]);
+
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_midMET[0]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_midMET[0]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_midMET[0]);
+                    }
+                }
+                else if (abs((*v_Top_JetEta)[i]) > 1 && abs((*v_Top_JetEta)[i]) < 2)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_midMET[1]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_midMET[1]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_midMET[1]);
+
+                    // For SR cut
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_midMET[1]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_midMET[1]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_midMET[1]);
+                    }
+                }
+                else if (abs((*v_Top_JetEta)[i]) > 2 && abs((*v_Top_JetEta)[i]) < 2.5)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_midMET[2]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_midMET[2]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_midMET[2]);
+
+                    // For SR cut
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_midMET[2]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_midMET[2]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_midMET[2]);
+                    }
+                }
+            }
+        }
+
+        else if (f_Top_met > 250)
+        {
+            for (size_t i = 0; i < v_Top_nTrack->size(); i++)
+            {
+                if (abs((*v_Top_JetEta)[i]) < 1)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_highMET[0]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_highMET[0]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_highMET[0]);
+
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_highMET[0]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_highMET[0]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_highMET[0]);
+                    }
+                }
+                else if (abs((*v_Top_JetEta)[i]) > 1 && abs((*v_Top_JetEta)[i]) < 2)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_highMET[1]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_highMET[1]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_highMET[1]);
+
+                    // For SR cut
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_highMET[1]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_highMET[1]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_highMET[1]);
+                    }
+                }
+                else if (abs((*v_Top_JetEta)[i]) > 2 && abs((*v_Top_JetEta)[i]) < 2.5)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_difeta_highMET[2]);
+                    // For c jet
+                    for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_difeta_highMET[2]);
+                    // For light flavor
+                    for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_difeta_highMET[2]);
+
+                    // For SR cut
+                    if ((*v_Top_alpha)[i] < 0.1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_bjet_cut_difeta_highMET[2]);
+                        // For c jet
+                        for_signalflavor_jet(4, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_cjet_cut_difeta_highMET[2]);
+                        // For light flavor
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], Top_weight, h_Top_nTrk_ljet_cut_difeta_highMET[2]);
+                    }
+                }
+            }
+        }
     } // End of Top loop
 
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
@@ -334,6 +592,26 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_ljet_cut_difeta[i]->Write();
         h_Top_nTrk_hjet_difeta[i]->Write();
         h_Top_nTrk_hjet_cut_difeta[i]->Write();
+        h_Top_nTrk_bjet_difeta_lowMET[i]->Write();
+        h_Top_nTrk_bjet_cut_difeta_lowMET[i]->Write();
+        h_Top_nTrk_cjet_difeta_lowMET[i]->Write();
+        h_Top_nTrk_cjet_cut_difeta_lowMET[i]->Write();
+        h_Top_nTrk_ljet_difeta_lowMET[i]->Write();
+        h_Top_nTrk_ljet_cut_difeta_lowMET[i]->Write();
+
+        h_Top_nTrk_bjet_difeta_midMET[i]->Write();
+        h_Top_nTrk_bjet_cut_difeta_midMET[i]->Write();
+        h_Top_nTrk_cjet_difeta_midMET[i]->Write();
+        h_Top_nTrk_cjet_cut_difeta_midMET[i]->Write();
+        h_Top_nTrk_ljet_difeta_midMET[i]->Write();
+        h_Top_nTrk_ljet_cut_difeta_midMET[i]->Write();
+
+        h_Top_nTrk_bjet_difeta_highMET[i]->Write();
+        h_Top_nTrk_bjet_cut_difeta_highMET[i]->Write();
+        h_Top_nTrk_cjet_difeta_highMET[i]->Write();
+        h_Top_nTrk_cjet_cut_difeta_highMET[i]->Write();
+        h_Top_nTrk_ljet_difeta_highMET[i]->Write();
+        h_Top_nTrk_ljet_cut_difeta_highMET[i]->Write();
     }
     h_Top_nTrk_bjet->Write();
     h_Top_nTrk_bjet_cut->Write();

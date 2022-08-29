@@ -13,8 +13,8 @@
 #include "RooRealVar.h"
 #include "RooDataSet.h"
 #include <ROOT/TSeq.hxx>
-#include "./../lib/Cross_section.h"
-#include "./../lib/setNCUStyle.C"
+#include "./../../lib/Cross_section.h"
+#include "./../../lib/setNCUStyle.C"
 using namespace std;
 void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee_DYincli.root", TString outputfile1 = "./DYTop_1.root", TString outputfile2 = "./DYTop_2.root")
 {
@@ -142,20 +142,20 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
         //     cout << evt << endl;
         //  fprintf(stderr, "Processing event %lli of %lli\n", T_tree + 1, data.GetEntriesFast());
         //}
+        v_Top_eventId_1.clear();
+        v_Top_alpha_1.clear();
+        v_Top_alpha2_1.clear();
+        v_Top_alpha3_1.clear();
+        v_Top_alpha4_1.clear();
+        v_Top_JetPT_1.clear();
+        v_Top_JetEta_1.clear();
+        v_Top_Jethadronflavor_1.clear();
+        v_Top_Jetpartonflavor_1.clear();
+        v_Top_JetnTracks_1.clear();
+        v_Top_2DIP_1.clear();
+        v_Top_Chi3Dlog_1.clear();
         if (evt % 2 == 1)
         {
-            v_Top_eventId_1.clear();
-            v_Top_alpha_1.clear();
-            v_Top_alpha2_1.clear();
-            v_Top_alpha3_1.clear();
-            v_Top_alpha4_1.clear();
-            v_Top_JetPT_1.clear();
-            v_Top_JetEta_1.clear();
-            v_Top_Jethadronflavor_1.clear();
-            v_Top_Jetpartonflavor_1.clear();
-            v_Top_JetnTracks_1.clear();
-            v_Top_2DIP_1.clear();
-            v_Top_Chi3Dlog_1.clear();
             f_Top_Met_1 = f_Top_Met;
             I_Top_weight_1 = I_Top_weight;
             I_Top_nJets_1 = I_Top_nJets;
@@ -168,7 +168,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
             {
                 v_Top_Jethadronflavor_1.push_back((*v_Top_Jethadronflavor)[i]);
             }
-            //cout << "evt = " << evt << endl;
+            // cout << "evt = " << evt << endl;
             for (size_t i = 0; i < v_Top_JetEta->size(); i++)
             {
                 v_Top_JetEta_1.push_back((*v_Top_JetEta)[i]);
@@ -187,7 +187,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
             h1->Fill();
         }
     }
-    //outfile_Top_1->cd();
+    // outfile_Top_1->cd();
     h1->Write();
     outfile_Top_1->Close();
     TFile *outfile_Top_2 = TFile::Open(outputfile2, "RECREATE");
@@ -227,7 +227,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
             f_Top_Met_2 = f_Top_Met;
             I_Top_weight_2 = I_Top_weight;
             I_Top_nJets_2 = I_Top_nJets;
-            //cout << "evt = " << evt << endl;
+            // cout << "evt = " << evt << endl;
             for (size_t i = 0; i < v_Top_2DIP->size(); i++)
             {
                 v_Top_2DIP_2.push_back((*v_Top_2DIP)[i]);

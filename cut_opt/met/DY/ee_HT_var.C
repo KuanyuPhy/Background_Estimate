@@ -50,6 +50,7 @@ int HT2500_Inf_event = h_HT_eventCout->GetBinContent(10);
 //---------------------
 // Define the HTWeight
 //---------------------
+
 double HT0Weight = (GlobalConstants::Lumi2016) * ((GlobalConstants::HT0CS) / (HT0_70_event)) * 1000;
 double HT70Weight = (GlobalConstants::Lumi2016) * ((GlobalConstants::HT70CS) / (HT70_100_event)) * 1000;
 double HT100Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT100CS / (DYHT100_totevt + HT100_200_event)) * 1000;
@@ -59,6 +60,18 @@ double HT600Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT600CS / (
 double HT800Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT800CS / (DYHT800_totevt + HT800_1200_event)) * 1000;
 double HT1200Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT1200CS / (DYHT1200_totevt + HT1200_2500_event)) * 1000;
 double HT2500Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT2500CS / (DYHT2500_totevt + HT2500_Inf_event)) * 1000;
+
+/*
+double HT0Weight = 1;
+double HT70Weight =  1;
+double HT100Weight =  1;
+double HT200Weight =  1;
+double HT400Weight =  1;
+double HT600Weight =  1;
+double HT800Weight =  1;
+double HT1200Weight =  1;
+double HT2500Weight =  1;
+*/
 
 void for_inclusive_sample(float HT, float i_tmp, double Weight, TH1D *h_tmp)
 {
@@ -301,7 +314,7 @@ void ee_HT_var()
     {
         T_HT100->GetEntry(evt);
         h_DY_Met->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
-        h_DY_dilepPT->Fill(f_ht100_dilepPT, I_ht100_weight * HT100Weight);
+        //h_DY_dilepPT->Fill(f_ht100_dilepPT, I_ht100_weight * HT100Weight);
         if (f_ht100_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
@@ -319,7 +332,7 @@ void ee_HT_var()
     {
         T_HT200->GetEntry(evt);
         h_DY_Met->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
-        h_DY_dilepPT->Fill(f_ht200_dilepPT, I_ht200_weight * HT200Weight);
+        //h_DY_dilepPT->Fill(f_ht200_dilepPT, I_ht200_weight * HT200Weight);
         if (f_ht200_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
@@ -337,7 +350,7 @@ void ee_HT_var()
     {
         T_HT400->GetEntry(evt);
         h_DY_Met->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
-        h_DY_dilepPT->Fill(f_ht400_dilepPT, I_ht400_weight * HT400Weight);
+        //h_DY_dilepPT->Fill(f_ht400_dilepPT, I_ht400_weight * HT400Weight);
         if (f_ht400_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
@@ -355,7 +368,7 @@ void ee_HT_var()
     {
         T_HT600->GetEntry(evt);
         h_DY_Met->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
-        h_DY_dilepPT->Fill(f_ht600_dilepPT, I_ht600_weight * HT600Weight);
+        //h_DY_dilepPT->Fill(f_ht600_dilepPT, I_ht600_weight * HT600Weight);
         if (f_ht600_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
@@ -373,7 +386,7 @@ void ee_HT_var()
     {
         T_HT800->GetEntry(evt);
         h_DY_Met->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
-        h_DY_dilepPT->Fill(f_ht800_dilepPT, I_ht800_weight * HT800Weight);
+        //h_DY_dilepPT->Fill(f_ht800_dilepPT, I_ht800_weight * HT800Weight);
         if (f_ht800_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
@@ -391,7 +404,7 @@ void ee_HT_var()
     {
         T_HT1200->GetEntry(evt);
         h_DY_Met->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
-        h_DY_dilepPT->Fill(f_ht1200_dilepPT, I_ht1200_weight * HT1200Weight);
+        //h_DY_dilepPT->Fill(f_ht1200_dilepPT, I_ht1200_weight * HT1200Weight);
         if (f_ht1200_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
@@ -409,7 +422,7 @@ void ee_HT_var()
     {
         T_HT2500->GetEntry(evt);
         h_DY_Met->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
-        h_DY_dilepPT->Fill(f_ht2500_dilepPT, I_ht2500_weight * HT2500Weight);
+        //h_DY_dilepPT->Fill(f_ht2500_dilepPT, I_ht2500_weight * HT2500Weight);
         if (f_ht2500_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
