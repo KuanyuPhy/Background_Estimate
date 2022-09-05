@@ -11,21 +11,21 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *diboson_gg_ZZ_2e2mu = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2e2mu.root");
-TFile *diboson_gg_ZZ_2e2nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2e2nu.root");
-TFile *diboson_gg_ZZ_2e2tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2e2tau.root");
-TFile *diboson_gg_ZZ_2mu2nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2mu2nu.root");
-TFile *diboson_gg_ZZ_2mu2tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_2mu2tau.root");
-TFile *diboson_gg_ZZ_4e = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_4e.root");
-TFile *diboson_gg_ZZ_4mu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_4mu.root");
-TFile *diboson_gg_ZZ_4tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_ZZ_4tau.root");
-TFile *diboson_gg_WW_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_gg_WW_2L2Nu.root");
-TFile *diboson_qq_WW_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_WW_2L2Nu.root");
-TFile *diboson_qq_WZ_2L2Q = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_WZ_2L2Q.root");
-TFile *diboson_qq_WZ_3LNu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_WZ_3LNu.root");
-TFile *diboson_qq_ZZ_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_ZZ_2L2Nu.root");
-TFile *diboson_qq_ZZ_2L2Q = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_ZZ_2L2Q.root");
-TFile *diboson_qq_ZZ_4L = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/passmetcut/diboson_qq_ZZ_4L.root");
+TFile *diboson_gg_ZZ_2e2mu = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_2e2mu.root");
+TFile *diboson_gg_ZZ_2e2nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_2e2nu.root");
+TFile *diboson_gg_ZZ_2e2tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_2e2tau.root");
+TFile *diboson_gg_ZZ_2mu2nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_2mu2nu.root");
+TFile *diboson_gg_ZZ_2mu2tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_2mu2tau.root");
+TFile *diboson_gg_ZZ_4e = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_4e.root");
+TFile *diboson_gg_ZZ_4mu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_4mu.root");
+TFile *diboson_gg_ZZ_4tau = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_4tau.root");
+TFile *diboson_gg_WW_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_WW_2L2Nu.root");
+TFile *diboson_qq_WW_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_qq_WW_2L2Nu.root");
+TFile *diboson_qq_WZ_2L2Q = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_qq_WZ_2L2Q.root");
+TFile *diboson_qq_WZ_3LNu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_qq_WZ_3LNu.root");
+TFile *diboson_qq_ZZ_2L2Nu = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_qq_ZZ_2L2Nu.root");
+TFile *diboson_qq_ZZ_2L2Q = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_qq_ZZ_2L2Q.root");
+TFile *diboson_qq_ZZ_4L = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_qq_ZZ_4L.root");
 
 TH1D *gg_ZZ_2e2mu_sumevt = ((TH1D *)diboson_gg_ZZ_2e2mu->Get("Event_Variable/h_totevent"));
 TH1D *gg_ZZ_2e2nu_sumevt = ((TH1D *)diboson_gg_ZZ_2e2nu->Get("Event_Variable/h_totevent"));
@@ -229,10 +229,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -260,10 +262,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -293,10 +297,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -324,10 +330,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -356,10 +364,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -389,10 +399,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -422,10 +434,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -455,10 +469,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -488,10 +504,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -521,10 +539,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -554,10 +574,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -587,10 +609,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -620,10 +644,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -653,10 +679,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
         
             if (jet_passalpha_cut < 2)
@@ -686,10 +714,12 @@ void ee_Diboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
         
             if (jet_passalpha_cut < 2)

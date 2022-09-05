@@ -11,9 +11,9 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_WWZ.root");
-TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_WZZ.root");
-TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/passmetcut/triboson_ZZZ.root");
+TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_WWZ.root");
+TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_WZZ.root");
+TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_ZZZ.root");
 
 TH1D *WWZ_sumevt = ((TH1D *)triboson_WWZfile->Get("Event_Variable/h_totevent"));
 TH1D *WZZ_sumevt = ((TH1D *)triboson_WZZfile->Get("Event_Variable/h_totevent"));
@@ -74,10 +74,12 @@ void ee_Triboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_WWZ_weight * WWZWeight);
 
             if (jet_passalpha_cut < 2)
@@ -103,10 +105,12 @@ void ee_Triboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_WZZ_weight * WZZWeight);
 
             if (jet_passalpha_cut < 2)
@@ -133,10 +137,12 @@ void ee_Triboson_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ZZZ_weight * ZZZWeight);
             if (jet_passalpha_cut < 2)
             {

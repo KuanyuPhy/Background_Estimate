@@ -23,6 +23,8 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
 
     TFile *Top_sample = TFile::Open(inputfile);
 
+    float_t f_HT, f_HT_1, f_HT_2;
+
     float_t f_Top_Met, f_Top_Met_1, f_Top_Met_2;
 
     Int_t I_Top_weight, I_Top_weight_1, I_Top_weight_2;
@@ -104,6 +106,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     TTree *T_tree;
     Top_sample->GetObject("T_tree", T_tree);
     T_tree->SetBranchAddress("I_weight", &I_Top_weight);
+    T_tree->SetBranchAddress("f_HT", &f_HT);
     T_tree->SetBranchAddress("f_Met", &f_Top_Met);
     T_tree->SetBranchAddress("I_nJets", &I_Top_nJets);
     T_tree->SetBranchAddress("v_fakeJethadronflavor", &v_Top_Jethadronflavor);
@@ -121,6 +124,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     TTree *h1 = new TTree("h1", "");
     h1->Branch("v_eventID", &v_Top_eventId_1);
     h1->Branch("I_weight", &I_Top_weight_1);
+    h1->Branch("f_HT", &f_HT_1);
     h1->Branch("f_Met", &f_Top_Met_1);
     h1->Branch("I_nJets", &I_Top_nJets_1);
     h1->Branch("v_fakeJethadronflavor", &v_Top_Jethadronflavor_1);
@@ -157,6 +161,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
         if (evt % 2 == 1)
         {
             f_Top_Met_1 = f_Top_Met;
+            f_HT_1 = f_HT;
             I_Top_weight_1 = I_Top_weight;
             I_Top_nJets_1 = I_Top_nJets;
             for (size_t i = 0; i < v_Top_2DIP->size(); i++)
@@ -193,6 +198,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     TFile *outfile_Top_2 = TFile::Open(outputfile2, "RECREATE");
     TTree *h2 = new TTree("h2", "h2");
     h2->Branch("v_eventID", &v_Top_eventId_2);
+    h2->Branch("f_HT", &f_HT_2);
     h2->Branch("f_Met", &f_Top_Met_2);
     h2->Branch("I_nJets", &I_Top_nJets_2);
     h2->Branch("I_weight", &I_Top_weight_2);
@@ -224,6 +230,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
         v_Top_Chi3Dlog_2.clear();
         if (evt % 2 != 1)
         {
+            f_HT_2 = f_HT;
             f_Top_Met_2 = f_Top_Met;
             I_Top_weight_2 = I_Top_weight;
             I_Top_nJets_2 = I_Top_nJets;
