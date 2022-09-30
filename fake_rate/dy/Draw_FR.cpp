@@ -147,44 +147,46 @@ void Draw_FR(TString file = "./DY_fakerate.root")
     c1->SetTicky(0);
 
     c1->Divide(3, 1);
-    /*
+    
     c1->cd(1);
-    Top_nTrk_bfakeRate_difeta_highMET_1->Draw();
-    Top_nTrk_bfakeRate_difeta_lowMET_1->Draw("same");
+
+    DY_nTrk_lfakeRate_difeta_highMET_1->Draw();
+    DY_nTrk_lfakeRate_difeta_lowMET_1->Draw("same");
 
     TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l0->SetHeader("b flavor, |#eta| < 1");
+    l0->SetHeader("light flavor, |#eta| < 1");
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
-    l0->AddEntry(Top_nTrk_bfakeRate_difeta_highMET_1, "High MET", "El");
-    l0->AddEntry(Top_nTrk_bfakeRate_difeta_lowMET_1, "Low MET", "El");
+    l0->AddEntry(DY_nTrk_lfakeRate_difeta_highMET_1, "High MET", "El");
+    l0->AddEntry(DY_nTrk_lfakeRate_difeta_lowMET_1, "Low MET", "El");
     l0->Draw();
 
     c1->cd(2);
-    Top_nTrk_bfakeRate_difeta_highMET_2->Draw();
-    Top_nTrk_bfakeRate_difeta_lowMET_2->Draw("same");
+    DY_nTrk_lfakeRate_difeta_highMET_2->Draw();
+    DY_nTrk_lfakeRate_difeta_lowMET_2->Draw("same");
 
     TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l1->SetHeader("b flavor, 1 < |#eta| < 2");
+    l1->SetHeader("light flavor, 1 < |#eta| < 2");
     l1->SetBorderSize(0);
     l1->SetTextSize(0.03);
-    l1->AddEntry(Top_nTrk_bfakeRate_difeta_highMET_2, "High MET", "El");
-    l1->AddEntry(Top_nTrk_bfakeRate_difeta_lowMET_2, "Low MET", "El");
+    l1->AddEntry(DY_nTrk_lfakeRate_difeta_highMET_2, "High MET", "El");
+    l1->AddEntry(DY_nTrk_lfakeRate_difeta_lowMET_2, "Low MET", "El");
     l1->Draw();
 
     c1->cd(3);
-    Top_nTrk_bfakeRate_difeta_highMET_3->Draw();
-    Top_nTrk_bfakeRate_difeta_lowMET_3->Draw("same");
+    DY_nTrk_lfakeRate_difeta_highMET_3->Draw();
+    DY_nTrk_lfakeRate_difeta_lowMET_3->Draw("same");
 
     TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l2->SetHeader("b flavor, 2 < |#eta| < 2.5");
+    l2->SetHeader("light flavor, 2 < |#eta| < 2.5");
     l2->SetBorderSize(0);
     l2->SetTextSize(0.03);
-    l2->AddEntry(Top_nTrk_bfakeRate_difeta_highMET_2, "High MET", "El");
-    l2->AddEntry(Top_nTrk_bfakeRate_difeta_lowMET_2, "Low MET", "El");
+    l2->AddEntry(DY_nTrk_lfakeRate_difeta_highMET_2, "High MET", "El");
+    l2->AddEntry(DY_nTrk_lfakeRate_difeta_lowMET_2, "Low MET", "El");
     l2->Draw();
-    */
+    
 
+   /* 
     c1->cd(1);
     DY_nTrk_bfakeRate_difeta_highMET_1->Draw("");
     DY_nTrk_bfakeRate_difeta_lowMET_1->Draw("same");
@@ -225,6 +227,7 @@ void Draw_FR(TString file = "./DY_fakerate.root")
     //l2->AddEntry(Top_nTrk_lfakeRate_difeta_midMET_3, "mid MET", "El");
     l2->AddEntry(DY_nTrk_bfakeRate_difeta_lowMET_3, "Low MET (MET < 140)", "El");
     l2->Draw();
+    */
 
     gStyle->SetOptStat(0);
 }

@@ -65,13 +65,13 @@ TH1D *TTZToLLNuNu_sumevt = ((TH1D *)Top_TTZToLLNuNufile->Get("Event_Variable/h_t
 TH1D *tW_antitop_sumevt = ((TH1D *)Top_tW_antitopfile->Get("Event_Variable/h_totevent"));
 TH1D *tW_top_sumevt = ((TH1D *)Top_tW_topfile->Get("Event_Variable/h_totevent"));
 
-int TTTo2L2Nu_totevt = TTTo2L2Nu_sumevt->Integral();
-int TTWJetsToLNu_totevt = TTWJetsToLNu_sumevt->Integral();
-int TTWJetsToQQ_totevt = TTWJetsToQQ_sumevt->Integral();
-int TTZToQQ_totevt = TTZToQQ_sumevt->Integral();
-int TTZToLLNuNu_totevt = TTZToLLNuNu_sumevt->Integral();
-int tW_antitop_totevt = tW_antitop_sumevt->Integral();
-int tW_top_totevt = tW_top_sumevt->Integral();
+double TTTo2L2Nu_totevt = TTTo2L2Nu_sumevt->Integral();
+double TTWJetsToLNu_totevt = TTWJetsToLNu_sumevt->Integral();
+double TTWJetsToQQ_totevt = TTWJetsToQQ_sumevt->Integral();
+double TTZToQQ_totevt = TTZToQQ_sumevt->Integral();
+double TTZToLLNuNu_totevt = TTZToLLNuNu_sumevt->Integral();
+double tW_antitop_totevt = tW_antitop_sumevt->Integral();
+double tW_top_totevt = tW_top_sumevt->Integral();
 
 //---------------------
 // Define TopWeight

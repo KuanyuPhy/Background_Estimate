@@ -354,6 +354,19 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         {
             for (size_t i = 0; i < v_thinjet.size(); i++)
             {
+                // Not Consider eta
+                // b flavor
+                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet);
+                // l flavor
+                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet);
+                if (v_thinjet[i].GetAlpha() < 0.15)
+                {
+                    //  For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut);
+                }
+
                 //--------------------
                 // Consider eta
                 //--------------------
@@ -549,7 +562,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                     }
                 }
             }
-        } // End of Met > 250
+        } // End of Met > 140
     }     // End of Top loop
 
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
@@ -587,6 +600,10 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_ljet_difeta_highMET[i]->Write();
         h_Top_nTrk_ljet_cut_difeta_highMET[i]->Write();
     }
+    h_Top_nTrk_bjet->Write();
+    h_Top_nTrk_ljet->Write();
+    h_Top_nTrk_bjet_cut->Write();
+    h_Top_nTrk_ljet_cut->Write();
     outfile->Close();
 
     // cout << getWeight(file) << endl;

@@ -66,23 +66,23 @@ TH1D *DYHT800_sumevt = ((TH1D *)DYHT800->Get("Event_Variable/h_totevent"));
 TH1D *DYHT1200_sumevt = ((TH1D *)DYHT1200->Get("Event_Variable/h_totevent"));
 TH1D *DYHT2500_sumevt = ((TH1D *)DYHT2500->Get("Event_Variable/h_totevent"));
 
-int DYHT100_totevt = DYHT100_sumevt->Integral();
-int DYHT200_totevt = DYHT200_sumevt->Integral();
-int DYHT400_totevt = DYHT400_sumevt->Integral();
-int DYHT600_totevt = DYHT600_sumevt->Integral();
-int DYHT800_totevt = DYHT800_sumevt->Integral();
-int DYHT1200_totevt = DYHT1200_sumevt->Integral();
-int DYHT2500_totevt = DYHT2500_sumevt->Integral();
+double DYHT100_totevt = DYHT100_sumevt->Integral();
+double DYHT200_totevt = DYHT200_sumevt->Integral();
+double DYHT400_totevt = DYHT400_sumevt->Integral();
+double DYHT600_totevt = DYHT600_sumevt->Integral();
+double DYHT800_totevt = DYHT800_sumevt->Integral();
+double DYHT1200_totevt = DYHT1200_sumevt->Integral();
+double DYHT2500_totevt = DYHT2500_sumevt->Integral();
 
-int HT0_70_event = h_HT_eventCout->GetBinContent(2);
-int HT70_100_event = h_HT_eventCout->GetBinContent(3);
-int HT100_200_event = h_HT_eventCout->GetBinContent(4);
-int HT200_400_event = h_HT_eventCout->GetBinContent(5);
-int HT400_600_event = h_HT_eventCout->GetBinContent(6);
-int HT600_800_event = h_HT_eventCout->GetBinContent(7);
-int HT800_1200_event = h_HT_eventCout->GetBinContent(8);
-int HT1200_2500_event = h_HT_eventCout->GetBinContent(9);
-int HT2500_Inf_event = h_HT_eventCout->GetBinContent(10);
+double HT0_70_event = h_HT_eventCout->GetBinContent(2);
+double HT70_100_event = h_HT_eventCout->GetBinContent(3);
+double HT100_200_event = h_HT_eventCout->GetBinContent(4);
+double HT200_400_event = h_HT_eventCout->GetBinContent(5);
+double HT400_600_event = h_HT_eventCout->GetBinContent(6);
+double HT600_800_event = h_HT_eventCout->GetBinContent(7);
+double HT800_1200_event = h_HT_eventCout->GetBinContent(8);
+double HT1200_2500_event = h_HT_eventCout->GetBinContent(9);
+double HT2500_Inf_event = h_HT_eventCout->GetBinContent(10);
 //---------------------
 // Define Diboson Weight
 //---------------------
@@ -255,14 +255,30 @@ void ee_DY_half(TString file = "tmp.root", TString outputfile = "output.root")
     TH1D *h_DY_nTrk = new TH1D("h_DY_nTrk", "", 30, 1, 30);
     h_DY_nTrk->Sumw2();
     TH1D *h_DY_nTrk_cut = new TH1D("h_DY_nTrk_cut", "", 30, 1, 30);
-
     h_DY_nTrk_cut->Sumw2();
+
+    //----------------------
+    // For alpha
+    //----------------------
+    TH1D *h_DY_alpha_lowMET = new TH1D("h_DY_alpha_lowMET", "", 20, 0, 1.);
+    h_DY_alpha_lowMET->Sumw2();
+
+    TH1D *h_DY_alpha_highMET = new TH1D("h_DY_alpha_highMET", "", 20, 0, 1.);
+    h_DY_alpha_highMET->Sumw2();
+
+    TH1D *h_DY_alpha_lowdipt = new TH1D("h_DY_alpha_lowdipt", "", 20, 0, 1.);
+    h_DY_alpha_lowdipt->Sumw2();
+
+    TH1D *h_DY_alpha_highdipt = new TH1D("h_DY_alpha_highdipt", "", 20, 0, 1.);
+    h_DY_alpha_highdipt->Sumw2();
 
     Int_t I_DY_nJets;
 
     Int_t I_DY_weight;
 
     float_t f_DY_met;
+
+    float_t f_DY_dileppt;
 
     vector<float> *v_DY_alpha = new vector<float>();
     vector<float> *v_DY_Chi3Dlog = new vector<float>();
@@ -288,6 +304,7 @@ void ee_DY_half(TString file = "tmp.root", TString outputfile = "output.root")
     T_DY_tree->SetBranchAddress("I_nJets", &I_DY_nJets);
     T_DY_tree->SetBranchAddress("v_N_Tracks", &v_DY_nTrack);
     T_DY_tree->SetBranchAddress("f_Met", &f_DY_met);
+    T_DY_tree->SetBranchAddress("f_dileptonPT", &f_DY_dileppt);
     T_DY_tree->SetBranchAddress("v_IP2D", &v_DY_2DIP);
     T_DY_tree->SetBranchAddress("v_Chi3Dlog", &v_DY_Chi3Dlog);
     T_DY_tree->SetBranchAddress("v_fakealpha", &v_DY_alpha);
@@ -313,6 +330,7 @@ void ee_DY_half(TString file = "tmp.root", TString outputfile = "output.root")
         {
             for (size_t i = 0; i < v_thinjet.size(); i++)
             {
+                h_DY_alpha_lowMET->Fill(v_thinjet[i].GetAlpha(), DY_weight);
                 //--------------------
                 // Consider eta
                 //--------------------
@@ -379,6 +397,7 @@ void ee_DY_half(TString file = "tmp.root", TString outputfile = "output.root")
         {
             for (size_t i = 0; i < v_thinjet.size(); i++)
             {
+                h_DY_alpha_highMET->Fill(v_thinjet[i].GetAlpha(), DY_weight);
                 //--------------------
                 // Consider eta
                 //--------------------
@@ -457,7 +476,24 @@ void ee_DY_half(TString file = "tmp.root", TString outputfile = "output.root")
                 }
             }
         } // End of high MET
-    }     // End of DY loop
+        
+        /*
+        if (f_DY_dileppt < 90)
+        {
+            for (size_t i = 0; i < v_thinjet.size(); i++)
+            {
+                h_DY_alpha_lowdipt->Fill(v_thinjet[i].GetAlpha(), DY_weight);
+            }
+        }
+        else if (f_DY_dileppt > 90)
+        {
+            for (size_t i = 0; i < v_thinjet.size(); i++)
+            {
+                h_DY_alpha_highdipt->Fill(v_thinjet[i].GetAlpha(), DY_weight);
+            }
+        }
+        */
+    } // End of DY loop
 
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
     outfile->cd();
@@ -498,6 +534,12 @@ void ee_DY_half(TString file = "tmp.root", TString outputfile = "output.root")
     h_DY_nTrk_hjet_cut->Write();
     h_DY_nTrk->Write();
     h_DY_nTrk_cut->Write();
+
+    h_DY_alpha_lowMET->Write();
+    h_DY_alpha_highMET->Write();
+
+    h_DY_alpha_lowdipt->Write();
+    h_DY_alpha_highdipt->Write();
 
     outfile->Close();
 

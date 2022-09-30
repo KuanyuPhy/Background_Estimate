@@ -31,6 +31,8 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
 
     Int_t I_Top_nJets, I_Top_nJets_1, I_Top_nJets_2;
 
+    float_t f_Top_dileppt, f_Top_dileppt_1, f_Top_dileppt_2;
+
     vector<float> *v_Top_alpha = new vector<float>();
     vector<float> *v_Top_alpha2 = new vector<float>();
     vector<float> *v_Top_alpha3 = new vector<float>();
@@ -108,6 +110,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     T_tree->SetBranchAddress("I_weight", &I_Top_weight);
     T_tree->SetBranchAddress("f_HT", &f_HT);
     T_tree->SetBranchAddress("f_Met", &f_Top_Met);
+    T_tree->SetBranchAddress("f_dileptonPT", &f_Top_dileppt);
     T_tree->SetBranchAddress("I_nJets", &I_Top_nJets);
     T_tree->SetBranchAddress("v_fakeJethadronflavor", &v_Top_Jethadronflavor);
     T_tree->SetBranchAddress("v_fakeJetpartonflavor", &v_Top_Jetpartonflavor);
@@ -126,6 +129,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     h1->Branch("I_weight", &I_Top_weight_1);
     h1->Branch("f_HT", &f_HT_1);
     h1->Branch("f_Met", &f_Top_Met_1);
+    h1->Branch("f_dileptonPT", &f_Top_dileppt_1);
     h1->Branch("I_nJets", &I_Top_nJets_1);
     h1->Branch("v_fakeJethadronflavor", &v_Top_Jethadronflavor_1);
     h1->Branch("v_fakeJetpartonflavor", &v_Top_Jetpartonflavor_1);
@@ -161,6 +165,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
         if (evt % 2 == 1)
         {
             f_Top_Met_1 = f_Top_Met;
+            f_Top_dileppt_1 = f_Top_dileppt;
             f_HT_1 = f_HT;
             I_Top_weight_1 = I_Top_weight;
             I_Top_nJets_1 = I_Top_nJets;
@@ -200,6 +205,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     h2->Branch("v_eventID", &v_Top_eventId_2);
     h2->Branch("f_HT", &f_HT_2);
     h2->Branch("f_Met", &f_Top_Met_2);
+    h2->Branch("f_dileptonPT", &f_Top_dileppt_2);
     h2->Branch("I_nJets", &I_Top_nJets_2);
     h2->Branch("I_weight", &I_Top_weight_2);
     h2->Branch("v_fakeJethadronflavor", &v_Top_Jethadronflavor_2);
@@ -232,6 +238,7 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
         {
             f_HT_2 = f_HT;
             f_Top_Met_2 = f_Top_Met;
+            f_Top_dileppt_2 = f_Top_dileppt;
             I_Top_weight_2 = I_Top_weight;
             I_Top_nJets_2 = I_Top_nJets;
             // cout << "evt = " << evt << endl;

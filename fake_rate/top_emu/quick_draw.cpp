@@ -407,7 +407,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->AddEntry(h_Top_ltrk_SR, "SR", "l");
     l2->Draw();
     */
-c1->Divide(3, 2);
+    c1->Divide(3, 2);
     c1->cd(1);
 
     gPad->SetBottomMargin(0.02);
