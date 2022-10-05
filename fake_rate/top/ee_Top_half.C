@@ -69,6 +69,20 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     vector<float> v_Top_JetEta_1;
     vector<float> v_Top_JetEta_2;
 
+    vector<float> *v_Top_JetMass = new vector<float>();
+
+    v_Top_JetMass->clear();
+
+    vector<float> v_Top_JetMass_1;
+    vector<float> v_Top_JetMass_2;
+
+    vector<float> *v_Top_JetCSV = new vector<float>();
+
+    v_Top_JetCSV->clear();
+
+    vector<float> v_Top_JetCSV_1;
+    vector<float> v_Top_JetCSV_2;
+
     vector<int> *v_Top_Jethadronflavor = new vector<int>();
 
     v_Top_Jethadronflavor->clear();
@@ -116,6 +130,8 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     T_tree->SetBranchAddress("v_fakeJetpartonflavor", &v_Top_Jetpartonflavor);
     T_tree->SetBranchAddress("v_fakeJetPt", &v_Top_JetPT);
     T_tree->SetBranchAddress("v_fakeJetEta", &v_Top_JetEta);
+    T_tree->SetBranchAddress("v_fakeJetMass", &v_Top_JetMass);
+    T_tree->SetBranchAddress("f_thinjetCSV", &v_Top_JetCSV);
     T_tree->SetBranchAddress("v_fakealpha", &v_Top_alpha);
     T_tree->SetBranchAddress("v_fakealpha2", &v_Top_alpha2);
     T_tree->SetBranchAddress("v_fakealpha3", &v_Top_alpha3);
@@ -135,6 +151,8 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     h1->Branch("v_fakeJetpartonflavor", &v_Top_Jetpartonflavor_1);
     h1->Branch("v_fakeJetPt", &v_Top_JetPT_1);
     h1->Branch("v_fakeJetEta", &v_Top_JetEta_1);
+    h1->Branch("v_fakeJetMass", &v_Top_JetMass_1);
+    h1->Branch("v_fakeJetCSV", &v_Top_JetCSV_1);
     h1->Branch("v_fakealpha", &v_Top_alpha_1);
     h1->Branch("v_fakealpha2", &v_Top_alpha2_1);
     h1->Branch("v_fakealpha3", &v_Top_alpha3_1);
@@ -157,6 +175,8 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
         v_Top_alpha4_1.clear();
         v_Top_JetPT_1.clear();
         v_Top_JetEta_1.clear();
+        v_Top_JetMass_1.clear();
+        v_Top_JetCSV_1.clear();
         v_Top_Jethadronflavor_1.clear();
         v_Top_Jetpartonflavor_1.clear();
         v_Top_JetnTracks_1.clear();
@@ -174,18 +194,11 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
                 v_Top_2DIP_1.push_back((*v_Top_2DIP)[i]);
                 v_Top_Chi3Dlog_1.push_back((*v_Top_Chi3Dlog)[i]);
             }
-            for (size_t i = 0; i < v_Top_Jethadronflavor->size(); i++)
-            {
-                v_Top_Jethadronflavor_1.push_back((*v_Top_Jethadronflavor)[i]);
-            }
             // cout << "evt = " << evt << endl;
-            for (size_t i = 0; i < v_Top_JetEta->size(); i++)
-            {
-                v_Top_JetEta_1.push_back((*v_Top_JetEta)[i]);
-            }
             for (size_t i = 0; i < v_Top_JetPT->size(); i++)
             {
                 v_Top_eventId_1.push_back(evt);
+                v_Top_Jethadronflavor_1.push_back((*v_Top_Jethadronflavor)[i]);
                 v_Top_Jetpartonflavor_1.push_back((*v_Top_Jetpartonflavor)[i]);
                 v_Top_JetPT_1.push_back((*v_Top_JetPT)[i]);
                 v_Top_alpha_1.push_back((*v_Top_alpha)[i]);
@@ -193,6 +206,9 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
                 v_Top_alpha3_1.push_back((*v_Top_alpha3)[i]);
                 v_Top_alpha4_1.push_back((*v_Top_alpha4)[i]);
                 v_Top_JetnTracks_1.push_back((*v_Top_JetnTracks)[i]);
+                v_Top_JetEta_1.push_back((*v_Top_JetEta)[i]);
+                v_Top_JetMass_1.push_back((*v_Top_JetMass)[i]);
+                v_Top_JetCSV_1.push_back((*v_Top_JetCSV)[i]);
             }
             h1->Fill();
         }
@@ -212,6 +228,8 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
     h2->Branch("v_fakeJetpartonflavor", &v_Top_Jetpartonflavor_2);
     h2->Branch("v_fakeJetPt", &v_Top_JetPT_2);
     h2->Branch("v_fakeJetEta", &v_Top_JetEta_2);
+    h2->Branch("v_fakeJetMass", &v_Top_JetMass_2);
+    h2->Branch("v_fakeJetCSV", &v_Top_JetCSV_2);
     h2->Branch("v_fakealpha", &v_Top_alpha_2);
     h2->Branch("v_fakealpha2", &v_Top_alpha2_2);
     h2->Branch("v_fakealpha3", &v_Top_alpha3_2);
@@ -229,6 +247,8 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
         v_Top_alpha4_2.clear();
         v_Top_JetPT_2.clear();
         v_Top_JetEta_2.clear();
+        v_Top_JetMass_2.clear();
+        v_Top_JetCSV_2.clear();
         v_Top_Jethadronflavor_2.clear();
         v_Top_Jetpartonflavor_2.clear();
         v_Top_JetnTracks_2.clear();
@@ -259,6 +279,8 @@ void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee
                 v_Top_alpha4_2.push_back((*v_Top_alpha4)[i]);
                 v_Top_JetnTracks_2.push_back((*v_Top_JetnTracks)[i]);
                 v_Top_JetEta_2.push_back((*v_Top_JetEta)[i]);
+                v_Top_JetMass_2.push_back((*v_Top_JetMass)[i]);
+                v_Top_JetCSV_2.push_back((*v_Top_JetCSV)[i]);
             }
             h2->Fill();
         }

@@ -8,7 +8,7 @@ Diboson_list=($(find /home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ -
 SECONDS=0
 for file in ${HT_list[*]}; do
     outputfile="$(basename -s ".root" "$file")"
-    echo $file
+    #echo $file
     #./top/ee_Top_half.o "$file" "/home/kuanyu/Documents/root_file/BgEstimation/dy/${outputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/dy/${outputfile}_2.root" &
     #echo ./$outputfile;
 done
@@ -16,7 +16,7 @@ done
 for file in ${Top_list[*]}; do
     Topoutputfile="$(basename -s ".root" "$file")"
     echo $Topoutputfile
-    #./top/ee_Top_half "$file" "/home/kuanyu/Documents/root_file/BgEstimation/top/${Topoutputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/top/${Topoutputfile}_2.root" 
+    ./top/ee_Top_half.o "$file" "/home/kuanyu/Documents/root_file/BgEstimation/top/${Topoutputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/top/${Topoutputfile}_2.root" 
     #echo ./$outputfile;
 done
 for file in ${Diboson_list[*]}; do
@@ -28,8 +28,8 @@ done
 wait
 for file in ${Top_emu_list[*]}; do
     outputfile="$(basename -s ".root" "$file")"
-    echo $outputfile
-    ./top/ee_Top_half.o "$file" "/home/kuanyu/Documents/root_file/BgEstimation/top_emu/${outputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/top_emu/${outputfile}_2.root" 
+    #echo $outputfile
+    #./top/ee_Top_half.o "$file" "/home/kuanyu/Documents/root_file/BgEstimation/top_emu/${outputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/top_emu/${outputfile}_2.root" 
     #echo ./$outputfile;
 done
 echo $SECONDS

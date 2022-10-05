@@ -159,7 +159,6 @@ void for_doubleflavor_jet(int flavor1, int flavor2, int hadronflavor, float tmp,
         h_tmp->Fill(tmp, Weight);
     }
 }
-
 void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimation/top_TTTo2L2Nu_2.root", TString outputfile = "output.root")
 {
     TFile *Topfile = TFile::Open(file);
@@ -405,7 +404,7 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
 
         for (size_t i = 0; i < v_thinjet.size(); i++)
         {
-            // For Low MET region
+            // For high MET region
             if (f_Top_met > 140)
             {
                 if (v_thinjet[i].GetAlpha() < 0.15)
@@ -783,6 +782,7 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     h_Topemu_lJetPt_HMet->Write();
     h_Topemu_bJetEta_noeta_HMet->Write();
     h_Topemu_lJetEta_noeta_HMet->Write();
+    
     outfile->Close();
     // h_Top_JetPt_bjet_SR->Draw();
 
