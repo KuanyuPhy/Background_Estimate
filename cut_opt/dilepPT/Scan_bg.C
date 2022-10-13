@@ -14,8 +14,6 @@
 #include <TError.h>
 #include "TLegend.h"
 #include <cstring>
-#include <vector>
-#include <algorithm>
 #include "./../../lib/Cross_section.h"
 using namespace std;
 
@@ -205,11 +203,10 @@ void Scan_bg(TString file = "ht100", TString outputfile = "output.root")
     // Match String to Weight
     //------------------------
     bool inclusive_flag = false;
-    vector<int>::iterator it = find(v_DY_filename.begin(), v_DY_filename.end(), inputFile);
-    if (it != v_DY_filename.end())
+    if (find(v_DY_filename.begin(), v_DY_filename.end(), inputFile) != v_DY_filename.end())
     {
         // For inclusive sameple
-        cout << "index = " << std::distance(v_DY_filename.begin(), it) << endl;
+        cout << "index = " << endl;
         /*
         if ()
         {
