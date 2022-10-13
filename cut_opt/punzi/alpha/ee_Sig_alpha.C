@@ -22,10 +22,10 @@ double punzi(double sigeff, double bg)
 
 int sumstep = 20;
 
-TFile *Mx2_1 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_1_old_remove_0alpha.root");
-TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_50_old_remove_0alpha.root");
-TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_150_old_remove_0alpha.root");
-TFile *Bgall = new TFile("./output/ee_bg_alpha3cut.root");
+TFile *Mx2_1 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_1_old_remove_0alpha.root");
+TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_50_old_remove_0alpha.root");
+TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_150_old_remove_0alpha.root");
+TFile *Bgall = new TFile("./output/ee_bg_alpha2cut.root");
 TH1D *h_bgall_alpha = ((TH1D *)Bgall->Get("h_Bg_alpha"));
 
 void ee_Sig_alpha()
@@ -85,15 +85,17 @@ void ee_Sig_alpha()
         T_Mx2_1->SetBranchAddress("I_weight", &I_Mx1_weight);
         T_Mx2_1->SetBranchAddress("f_Met", &f_Mx1_Met);
         T_Mx2_1->SetBranchAddress("I_nJets", &I_Mx1_nThinJets);
-        T_Mx2_1->SetBranchAddress("v_fakealpha3", &v_Mx1_alpha);
+        T_Mx2_1->SetBranchAddress("v_fakealpha2", &v_Mx1_alpha);
         for (int evt = 0; evt < T_Mx2_1->GetEntries(); evt++)
         {
             T_Mx2_1->GetEntry(evt);
             int jet_passalpha_cut = 0;
+            /*
             if (f_Mx1_Met < 140)
             {
                 continue;
             }
+            */
             for (int i = 0; i < v_Mx1_alpha->size(); i++)
             {
                 h_Sig1_alpha->Fill((*v_Mx1_alpha)[i], I_Mx1_weight);
@@ -102,10 +104,12 @@ void ee_Sig_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Sig1_nJet[i]->Fill(jet_passalpha_cut, I_Mx1_weight);
             if (jet_passalpha_cut < 2)
             {
@@ -118,15 +122,17 @@ void ee_Sig_alpha()
         T_Mx2_50->SetBranchAddress("I_weight", &I_Mx50_weight);
         T_Mx2_50->SetBranchAddress("f_Met", &f_Mx50_Met);
         T_Mx2_50->SetBranchAddress("I_nJets", &I_Mx50_nThinJets);
-        T_Mx2_50->SetBranchAddress("v_fakealpha3", &v_Mx50_alpha);
+        T_Mx2_50->SetBranchAddress("v_fakealpha2", &v_Mx50_alpha);
         for (int evt = 0; evt < T_Mx2_50->GetEntries(); evt++)
         {
             T_Mx2_50->GetEntry(evt);
             int jet_passalpha_cut = 0;
+            /*
             if (f_Mx50_Met < 140)
             {
                 continue;
             }
+            */
             for (int i = 0; i < v_Mx50_alpha->size(); i++)
             {
                 h_Sig50_alpha->Fill((*v_Mx50_alpha)[i], I_Mx50_weight);
@@ -135,6 +141,7 @@ void ee_Sig_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
@@ -158,15 +165,17 @@ void ee_Sig_alpha()
         T_Mx2_150->SetBranchAddress("I_weight", &I_Mx150_weight);
         T_Mx2_150->SetBranchAddress("f_Met", &f_Mx150_Met);
         T_Mx2_150->SetBranchAddress("I_nJets", &I_Mx150_nThinJets);
-        T_Mx2_150->SetBranchAddress("v_fakealpha3", &v_Mx150_alpha);
+        T_Mx2_150->SetBranchAddress("v_fakealpha2", &v_Mx150_alpha);
         for (int evt = 0; evt < T_Mx2_150->GetEntries(); evt++)
         {
             T_Mx2_150->GetEntry(evt);
             int jet_passalpha_cut = 0;
+            /*
             if (f_Mx150_Met < 140)
             {
                 continue;
             }
+            */
             for (int i = 0; i < v_Mx150_alpha->size(); i++)
             {
                 h_Sig150_alpha->Fill((*v_Mx150_alpha)[i], I_Mx150_weight);
@@ -175,10 +184,12 @@ void ee_Sig_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Sig150_nJet[i]->Fill(jet_passalpha_cut, I_Mx150_weight);
             if (jet_passalpha_cut < 2)
             {
@@ -209,8 +220,9 @@ void ee_Sig_alpha()
         arr_sig150[i] = sig150eff;
         arr_bgreject[i] = 1 - bgeff;
         cout << "i" << i << endl;
-        cout << "sig1eff = " << sig1eff << "  arr_bgreject = " << arr_bgreject[i] << endl;
-        // cout << "nbg" << nbg << endl;
+        //cout << "sig1eff = " << sig1eff << "  arr_bgreject = " << arr_bgreject[i] << endl;
+        cout << "sig1eff = " << sig1eff << endl;
+        cout << "nbg" << nbg << endl;
         h_punzisig1->SetBinContent(i + 1, punzi(sig1eff, nbg));
         h_punzisig50->SetBinContent(i + 1, punzi(sig50eff, nbg));
         h_punzisig150->SetBinContent(i + 1, punzi(sig150eff, nbg));
@@ -219,7 +231,7 @@ void ee_Sig_alpha()
         // ROC curve
         //------------------
         // h_ROCsig50->SetBinContent(i + 1, sig50eff, i + 1, 1 - bgeff);
-        // cout << "punzi = " << punzi(sig50eff, nbg) << endl;
+        //cout << "punzi = " << punzi(sig50eff, nbg) << endl;
     }
 
     /*
@@ -318,9 +330,9 @@ void ee_Sig_alpha()
     h_Sig50_alpha->GetXaxis()->SetLabelSize(0.04);
 
     // h_punzisig50->Draw();
-    // h_punzisig150->Draw("same");
-    // h_punzisig50->Draw("same");
-    // h_punzisig1->Draw("same");
+    h_punzisig50->Draw("same");
+    h_punzisig150->Draw("same");
+    h_punzisig1->Draw("same");
     // h_punzisig150->Draw("same");
     // h_Sig50_alpha->DrawNormalized("h ");
     // h_bgall_alpha->DrawNormalized("h same");
@@ -341,6 +353,7 @@ void ee_Sig_alpha()
     ROC_MX50->GetYaxis()->SetTitle("bkg rejection");
     ROC_MX50->GetXaxis()->SetTitle("sigeff");
 
+    /*
     TAxis *axis = ROC_MX50->GetXaxis();
     axis->SetLimits(0.,1.);       
 
@@ -358,7 +371,8 @@ void ee_Sig_alpha()
     l0->AddEntry(ROC_MX150, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "P");
     // l0->AddEntry(h_bgall_alpha, "2016 MC background", "l");
     l0->Draw();
-    /*
+    */
+    
     TLegend *l0 = new TLegend(0.4, 0.6, 0.90, 0.80);
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
@@ -372,6 +386,6 @@ void ee_Sig_alpha()
     int iPos = 33;
     CMS_lumi(c1, iPeriod, iPos);
     c1->Update();
-    */
+    
     // c1->SaveAs("ee_Mx21_alpha_punzi.pdf");
 }

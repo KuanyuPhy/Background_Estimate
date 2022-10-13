@@ -11,14 +11,14 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *DYincli = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_DYincli.root");
-TFile *DYHT100 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht100.root");
-TFile *DYHT200 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht200.root");
-TFile *DYHT400 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht400.root");
-TFile *DYHT600 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht600.root");
-TFile *DYHT800 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht800.root");
-TFile *DYHT1200 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht1200.root");
-TFile *DYHT2500 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/passmetcut/ee_ht2500.root");
+TFile *DYincli = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_DYincli.root");
+TFile *DYHT100 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_ht100.root");
+TFile *DYHT200 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_ht200.root");
+TFile *DYHT400 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_ht400.root");
+TFile *DYHT600 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_ht600.root");
+TFile *DYHT800 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_ht800.root");
+TFile *DYHT1200 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_ht1200.root");
+TFile *DYHT2500 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_ht2500.root");
 
 TH1D *h_HT_eventCout = ((TH1D *)DYincli->Get("Event_Variable/h_HT_eventCout"));
 TH1D *DYHT100_sumevt = ((TH1D *)DYHT100->Get("Event_Variable/h_totevent"));
@@ -281,10 +281,12 @@ void ee_HT_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             for_inclusive_sample(HT, jet_passalpha_cut, I_ht0_weight, h_Bg_nJet_[i]);
             if (jet_passalpha_cut < 2)
             {
@@ -314,10 +316,12 @@ void ee_HT_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht100_weight * HT100Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -345,10 +349,12 @@ void ee_HT_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht200_weight * HT200Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -376,10 +382,12 @@ void ee_HT_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht400_weight * HT400Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -407,10 +415,12 @@ void ee_HT_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht600_weight * HT600Weight);
 
             if (jet_passalpha_cut < 2)
@@ -439,10 +449,12 @@ void ee_HT_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht800_weight * HT800Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -470,10 +482,12 @@ void ee_HT_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht1200_weight * HT1200Weight);
             if (jet_passalpha_cut < 2)
             {
@@ -501,10 +515,12 @@ void ee_HT_alpha()
                     jet_passalpha_cut++;
                 }
             }
+            
             if (jet_passalpha_cut == 0)
             {
                 continue;
             }
+            
             h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ht2500_weight * HT2500Weight);
             if (jet_passalpha_cut < 2)
             {

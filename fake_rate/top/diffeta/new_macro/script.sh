@@ -6,7 +6,7 @@ g++ -o ee_Top_2dhalf_fakerate.o $(root-config --cflags) ee_Top_2dhalf_fakerate.c
 
 #For 1D 
 g++ -o ee_Top_half.o $(root-config --cflags) ee_Top_half.cpp  $(root-config --glibs)
-g++ -o Ratio_Top_apply.o $(root-config --cflags) Ratio_Top_apply.cpp  $(root-config --glibs)
+#g++ -o Ratio_Top_apply.o $(root-config --cflags) Ratio_Top_apply.cpp  $(root-config --glibs)
 
 
 

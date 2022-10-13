@@ -58,6 +58,9 @@
         "ee_Top_alpha.C": "cpp",
         "uu_Sig_alpha.C": "cpp",
         "FR_fit.C": "cpp",
-        "Draw_diff_top_nTrk.C": "cpp"
+        "Draw_diff_top_nTrk.C": "cpp",
+        "punzi_3Dsig.C": "cpp",
+        "ee_var.C": "cpp",
+        "ee_jetcsv.C": "cpp"
     }
 }

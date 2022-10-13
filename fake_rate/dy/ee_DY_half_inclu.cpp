@@ -17,6 +17,35 @@
 #include "./../../lib/Cross_section.h"
 using namespace std;
 
+//-------------------
+// Create New class
+//-------------------
+class ThinJet
+{
+private:
+    float jetflavor, jetpt, jeteta, jetalpha, jetntrk;
+
+public:
+    ThinJet() {}
+    ThinJet(const float &a, const float &b, const float &c, const float &d, const float &e) : jetflavor(a), jetpt(b), jeteta(c), jetalpha(d), jetntrk(e) {}
+    Float_t GetFlavor() const { return jetflavor; }
+    Float_t GetPt() const { return jetpt; }
+    Float_t GetEta() const { return jeteta; }
+    Float_t GetAlpha() const { return jetalpha; }
+    Float_t GetNtrk() const { return jetntrk; }
+
+    friend ostream &operator<<(ostream &out, const ThinJet &foo)
+    {
+        return out << foo.jetflavor << " " << foo.jetpt << " " << foo.jeteta << " " << foo.jetalpha << " " << foo.jetntrk << endl;
+    }
+
+    // greater() is used for JetPT
+    friend bool operator>(const ThinJet &a, const ThinJet &b)
+    {
+        return a.GetPt() > b.GetPt();
+    }
+};
+
 //------------------
 // Calculate weight
 //------------------
@@ -38,26 +67,27 @@ TH1D *DYHT800_sumevt = ((TH1D *)DYHT800->Get("Event_Variable/h_totevent"));
 TH1D *DYHT1200_sumevt = ((TH1D *)DYHT1200->Get("Event_Variable/h_totevent"));
 TH1D *DYHT2500_sumevt = ((TH1D *)DYHT2500->Get("Event_Variable/h_totevent"));
 
-int DYHT100_totevt = DYHT100_sumevt->Integral();
-int DYHT200_totevt = DYHT200_sumevt->Integral();
-int DYHT400_totevt = DYHT400_sumevt->Integral();
-int DYHT600_totevt = DYHT600_sumevt->Integral();
-int DYHT800_totevt = DYHT800_sumevt->Integral();
-int DYHT1200_totevt = DYHT1200_sumevt->Integral();
-int DYHT2500_totevt = DYHT2500_sumevt->Integral();
+double DYHT100_totevt = DYHT100_sumevt->Integral();
+double DYHT200_totevt = DYHT200_sumevt->Integral();
+double DYHT400_totevt = DYHT400_sumevt->Integral();
+double DYHT600_totevt = DYHT600_sumevt->Integral();
+double DYHT800_totevt = DYHT800_sumevt->Integral();
+double DYHT1200_totevt = DYHT1200_sumevt->Integral();
+double DYHT2500_totevt = DYHT2500_sumevt->Integral();
 
-int HT0_70_event = h_HT_eventCout->GetBinContent(2);
-int HT70_100_event = h_HT_eventCout->GetBinContent(3);
-int HT100_200_event = h_HT_eventCout->GetBinContent(4);
-int HT200_400_event = h_HT_eventCout->GetBinContent(5);
-int HT400_600_event = h_HT_eventCout->GetBinContent(6);
-int HT600_800_event = h_HT_eventCout->GetBinContent(7);
-int HT800_1200_event = h_HT_eventCout->GetBinContent(8);
-int HT1200_2500_event = h_HT_eventCout->GetBinContent(9);
-int HT2500_Inf_event = h_HT_eventCout->GetBinContent(10);
+double HT0_70_event = h_HT_eventCout->GetBinContent(2);
+double HT70_100_event = h_HT_eventCout->GetBinContent(3);
+double HT100_200_event = h_HT_eventCout->GetBinContent(4);
+double HT200_400_event = h_HT_eventCout->GetBinContent(5);
+double HT400_600_event = h_HT_eventCout->GetBinContent(6);
+double HT600_800_event = h_HT_eventCout->GetBinContent(7);
+double HT800_1200_event = h_HT_eventCout->GetBinContent(8);
+double HT1200_2500_event = h_HT_eventCout->GetBinContent(9);
+double HT2500_Inf_event = h_HT_eventCout->GetBinContent(10);
 //---------------------
 // Define Diboson Weight
 //---------------------
+
 double HT0Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT0CS / (HT0_70_event)) * 1000 * 2;
 double HT70Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT70CS / (HT70_100_event)) * 1000 * 2;
 double HT100Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT100CS / (DYHT100_totevt + HT100_200_event)) * 1000 * 2;
@@ -67,6 +97,18 @@ double HT600Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT600CS / (
 double HT800Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT800CS / (DYHT800_totevt + HT800_1200_event)) * 1000 * 2;
 double HT1200Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT1200CS / (DYHT1200_totevt + HT1200_2500_event)) * 1000 * 2;
 double HT2500Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT2500CS / (DYHT2500_totevt + HT2500_Inf_event)) * 1000 * 2;
+
+/*
+double HT0Weight = 1.;
+double HT70Weight = 1.;
+double HT100Weight = 1.;
+double HT200Weight = 1.;
+double HT400Weight = 1.;
+double HT600Weight = 1.;
+double HT800Weight = 1.;
+double HT1200Weight = 1.;
+double HT2500Weight = 1.;
+*/
 //---------------
 // void Function
 //---------------
@@ -281,6 +323,20 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
     TH1D *h_DY_nTrk_hjet_difeta[3];
     TH1D *h_DY_nTrk_hjet_cut_difeta[3];
 
+    TH1D *h_DY_nTrk_bjet_difeta_lowMET[3];
+    TH1D *h_DY_nTrk_bjet_cut_difeta_lowMET[3];
+    TH1D *h_DY_nTrk_cjet_difeta_lowMET[3];
+    TH1D *h_DY_nTrk_cjet_cut_difeta_lowMET[3];
+    TH1D *h_DY_nTrk_ljet_difeta_lowMET[3];
+    TH1D *h_DY_nTrk_ljet_cut_difeta_lowMET[3];
+
+    TH1D *h_DY_nTrk_bjet_difeta_highMET[3];
+    TH1D *h_DY_nTrk_bjet_cut_difeta_highMET[3];
+    TH1D *h_DY_nTrk_cjet_difeta_highMET[3];
+    TH1D *h_DY_nTrk_cjet_cut_difeta_highMET[3];
+    TH1D *h_DY_nTrk_ljet_difeta_highMET[3];
+    TH1D *h_DY_nTrk_ljet_cut_difeta_highMET[3];
+
     for (int i = 0; i < 3; i++)
     {
         h_DY_nTrk_difeta[i] = new TH1D(Form("h_DY_nTrk_difeta_%i", i + 1), "", 30, 1, 30);
@@ -293,6 +349,21 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
         h_DY_nTrk_ljet_cut_difeta[i] = new TH1D(Form("h_DY_nTrk_ljet_cut_difeta_%i", i + 1), "", 30, 1, 30);
         h_DY_nTrk_hjet_difeta[i] = new TH1D(Form("h_DY_nTrk_hjet_difeta_%i", i + 1), "", 30, 1, 30);
         h_DY_nTrk_hjet_cut_difeta[i] = new TH1D(Form("h_DY_nTrk_hjet_cut_difeta_%i", i + 1), "", 30, 1, 30);
+
+        h_DY_nTrk_bjet_difeta_lowMET[i] = new TH1D(Form("h_DY_nTrk_bjet_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_bjet_cut_difeta_lowMET[i] = new TH1D(Form("h_DY_nTrk_bjet_cut_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_cjet_difeta_lowMET[i] = new TH1D(Form("h_DY_nTrk_cjet_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_cjet_cut_difeta_lowMET[i] = new TH1D(Form("h_DY_nTrk_cjet_cut_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_ljet_difeta_lowMET[i] = new TH1D(Form("h_DY_nTrk_ljet_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_ljet_cut_difeta_lowMET[i] = new TH1D(Form("h_DY_nTrk_ljet_cut_difeta_lowMET_%i", i + 1), "", 30, 1, 30);
+
+        h_DY_nTrk_bjet_difeta_highMET[i] = new TH1D(Form("h_DY_nTrk_bjet_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_bjet_cut_difeta_highMET[i] = new TH1D(Form("h_DY_nTrk_bjet_cut_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_cjet_difeta_highMET[i] = new TH1D(Form("h_DY_nTrk_cjet_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_cjet_cut_difeta_highMET[i] = new TH1D(Form("h_DY_nTrk_cjet_cut_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_ljet_difeta_highMET[i] = new TH1D(Form("h_DY_nTrk_ljet_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+        h_DY_nTrk_ljet_cut_difeta_highMET[i] = new TH1D(Form("h_DY_nTrk_ljet_cut_difeta_highMET_%i", i + 1), "", 30, 1, 30);
+
         h_DY_nTrk_difeta[i]->Sumw2();
         h_DY_nTrk_cut_difeta[i]->Sumw2();
         h_DY_nTrk_bjet_difeta[i]->Sumw2();
@@ -303,6 +374,20 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
         h_DY_nTrk_ljet_cut_difeta[i]->Sumw2();
         h_DY_nTrk_hjet_difeta[i]->Sumw2();
         h_DY_nTrk_hjet_cut_difeta[i]->Sumw2();
+
+        h_DY_nTrk_bjet_difeta_lowMET[i]->Sumw2();
+        h_DY_nTrk_bjet_cut_difeta_lowMET[i]->Sumw2();
+        h_DY_nTrk_cjet_difeta_lowMET[i]->Sumw2();
+        h_DY_nTrk_cjet_cut_difeta_lowMET[i]->Sumw2();
+        h_DY_nTrk_ljet_difeta_lowMET[i]->Sumw2();
+        h_DY_nTrk_ljet_cut_difeta_lowMET[i]->Sumw2();
+
+        h_DY_nTrk_bjet_difeta_highMET[i]->Sumw2();
+        h_DY_nTrk_bjet_cut_difeta_highMET[i]->Sumw2();
+        h_DY_nTrk_cjet_difeta_highMET[i]->Sumw2();
+        h_DY_nTrk_cjet_cut_difeta_highMET[i]->Sumw2();
+        h_DY_nTrk_ljet_difeta_highMET[i]->Sumw2();
+        h_DY_nTrk_ljet_cut_difeta_highMET[i]->Sumw2();
     }
     //-----------------------------
     // Not consider eta
@@ -331,6 +416,21 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
     h_DY_nTrk->Sumw2();
     h_DY_nTrk_cut->Sumw2();
 
+    //----------------------
+    // For alpha
+    //----------------------
+    TH1D *h_DY_alpha_lowMET = new TH1D("h_DY_alpha_lowMET", "", 20, 0, 1.);
+    h_DY_alpha_lowMET->Sumw2();
+
+    TH1D *h_DY_alpha_highMET = new TH1D("h_DY_alpha_highMET", "", 20, 0, 1.);
+    h_DY_alpha_highMET->Sumw2();
+
+    TH1D *h_DY_alpha_lowdipt = new TH1D("h_DY_alpha_lowdipt", "", 20, 0, 1.);
+    h_DY_alpha_lowdipt->Sumw2();
+
+    TH1D *h_DY_alpha_highdipt = new TH1D("h_DY_alpha_highdipt", "", 20, 0, 1.);
+    h_DY_alpha_highdipt->Sumw2();
+
     float_t f_HT;
 
     Int_t I_DY_nJets;
@@ -338,6 +438,8 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
     Int_t I_DY_weight;
 
     float_t f_DY_met;
+
+    float_t f_DY_dileppt;
 
     vector<float> *v_DY_alpha = new vector<float>();
     vector<float> *v_DY_Chi3Dlog = new vector<float>();
@@ -364,6 +466,7 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
     T_DY_tree->SetBranchAddress("I_nJets", &I_DY_nJets);
     T_DY_tree->SetBranchAddress("v_N_Tracks", &v_DY_nTrack);
     T_DY_tree->SetBranchAddress("f_Met", &f_DY_met);
+    T_DY_tree->SetBranchAddress("f_dileptonPT", &f_DY_dileppt);
     T_DY_tree->SetBranchAddress("v_IP2D", &v_DY_2DIP);
     T_DY_tree->SetBranchAddress("v_Chi3Dlog", &v_DY_Chi3Dlog);
     T_DY_tree->SetBranchAddress("v_fakealpha", &v_DY_alpha);
@@ -374,128 +477,185 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
     for (int evt = 0; evt < T_DY_tree->GetEntries(); evt++)
     {
         T_DY_tree->GetEntry(evt);
-        if (f_DY_met < 0)
-        {
-            continue;
-        }
-        //-------------------------------------------------------------
-        // Jet var : different flavor  nTracks
-        //-------------------------------------------------------------
+        // jetflavor, jetpt, jeteta, jetalpha, jetntrk;
+        vector<ThinJet> v_thinjet;
         for (size_t i = 0; i < v_DY_nTrack->size(); i++)
         {
-            cout << "I_DY_weight = " << I_DY_weight << endl;
-            // Not Consider eta
-            for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk);
-            // For b jet
-            for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_bjet);
-            // For c jet
-            for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cjet);
-            // For l jet
-            for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_ljet);
-            // For heavy jet
-            for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_hjet);
-            if ((*v_DY_alpha)[i] < 0.1)
+            v_thinjet.push_back(ThinJet((*v_DY_Jethadronflavor)[i], (*v_DY_JetPT)[i], (*v_DY_JetEta)[i], (*v_DY_alpha)[i], (*v_DY_nTrack)[i]));
+        }
+        sort(v_thinjet.begin(), v_thinjet.end(), greater<ThinJet>());
+        if (f_DY_met < 140)
+        {
+            for (size_t i = 0; i < v_thinjet.size(); i++)
             {
-                // Not Consider eta
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cut);
-                // For b jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_bjet_cut);
-                // For c jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cjet_cut);
-                // For l jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_ljet_cut);
-                // For heavy jet
-                for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_hjet_cut);
-            }
-            //--------------------
-            // Consider eta
-            //--------------------
-            //  For Region |eta| < 1
-            if (abs((*v_DY_JetEta)[i]) < 1)
-            {
-                // Not Consider eta
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_difeta[0]);
-                // For b jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_bjet_difeta[0]);
-                // For c jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cjet_difeta[0]);
-                // For l jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_ljet_difeta[0]);
-                // For heavy jet
-                for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_hjet_difeta[0]);
-                // For SR cut
-                if ((*v_DY_alpha)[i] < 0.1)
-                {
-                    // Not Consider eta
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cut_difeta[0]);
-                    // For b jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_bjet_cut_difeta[0]);
-                    // For c jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cjet_cut_difeta[0]);
-                    // For l jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_ljet_cut_difeta[0]);
-                    // For heavy jet
-                    for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_hjet_cut_difeta[0]);
-                }
-            }
-            // For Region 1 < |eta| < 2
-            else if (abs((*v_DY_JetEta)[i]) > 1 && abs((*v_DY_JetEta)[i]) < 2)
-            {
-                // Not Consider eta
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_difeta[1]);
-                // For b jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_bjet_difeta[1]);
-                // For c jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cjet_difeta[1]);
-                // For l jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_ljet_difeta[1]);
-                // For heavy jet
-                for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_hjet_difeta[1]);
+                for_inclusive_DY_var(f_HT, v_thinjet[i].GetAlpha(), I_DY_weight, h_DY_alpha_lowMET);
 
-                // For SR cut
-                if ((*v_DY_alpha)[i] < 0.1)
+                //--------------------
+                // Consider eta
+                //--------------------
+                // For Region |eta| < 1
+                if (abs(v_thinjet[i].GetEta()) < 1)
                 {
-                    // Not Consider eta
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cut_difeta[1]);
                     // For b jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_bjet_cut_difeta[1]);
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_difeta_lowMET[0]);
                     // For c jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cjet_cut_difeta[1]);
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_difeta_lowMET[0]);
                     // For l jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_ljet_cut_difeta[1]);
-                    // For heavy jet
-                    for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_hjet_cut_difeta[1]);
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_difeta_lowMET[0]);
+
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        //  For b jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_cut_difeta_lowMET[0]);
+                        // For c jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_cut_difeta_lowMET[0]);
+                        // For light flavor
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_cut_difeta_lowMET[0]);
+                    }
                 }
-            }
-            // For Region 2 < |eta| < 2.5
-            else if (abs((*v_DY_JetEta)[i]) > 2 && abs((*v_DY_JetEta)[i]) < 2.5)
-            {
-                                // Not Consider eta
-                for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_difeta[2]);
-                // For b jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_bjet_difeta[2]);
-                // For c jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cjet_difeta[2]);
-                // For l jet
-                for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_ljet_difeta[2]);
-                // For heavy jet
-                for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_hjet_difeta[2]);
-                // For SR cut
-                if ((*v_DY_alpha)[i] < 0.1)
+                // For Region 1 < |eta| < 2
+                else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) < 2)
                 {
-                    // Not Consider eta
-                    for_inclusive_DY_var(f_HT, (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cut_difeta[2]);
                     // For b jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_bjet_cut_difeta[2]);
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_difeta_lowMET[1]);
                     // For c jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_cjet_cut_difeta[2]);
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_difeta_lowMET[1]);
                     // For l jet
-                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_ljet_cut_difeta[2]);
-                    // For heavy jet
-                    for_inclusive_DY_two_flavor_jetvar(f_HT, 5, 4, (*v_DY_Jethadronflavor)[i], (*v_DY_nTrack)[i], I_DY_weight, h_DY_nTrk_hjet_cut_difeta[2]);
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_difeta_lowMET[1]);
+
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        //  For b jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_cut_difeta_lowMET[1]);
+                        // For c jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_cut_difeta_lowMET[1]);
+                        // For light flavor
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_cut_difeta_lowMET[1]);
+                    }
+                }
+                // For Region 2 < |eta| < 2.5
+                else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) < 2.5)
+                {
+                    // For b jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_difeta_lowMET[2]);
+                    // For c jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_difeta_lowMET[2]);
+                    // For l jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_difeta_lowMET[2]);
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        //  For b jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_cut_difeta_lowMET[2]);
+                        // For c jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_cut_difeta_lowMET[2]);
+                        // For light flavor
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_cut_difeta_lowMET[2]);
+                    }
                 }
             }
         }
+        else if (f_DY_met > 140)
+        {
+            for (size_t i = 0; i < v_thinjet.size(); i++)
+            {
+
+                for_inclusive_DY_var(f_HT, v_thinjet[i].GetAlpha(), I_DY_weight, h_DY_alpha_highMET);
+                //--------------------
+                // Consider eta
+                //--------------------
+                // For Region |eta| < 1
+                if (abs(v_thinjet[i].GetEta()) < 1)
+                {
+                    // For b jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_difeta_highMET[0]);
+                    // For c jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_difeta_highMET[0]);
+                    // For l jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_difeta_highMET[0]);
+
+                    if (v_thinjet[i].GetNtrk() == 1)
+                    {
+                        if (v_thinjet[i].GetFlavor() == 5)
+                        {
+                            cout << "ntrk = " << v_thinjet[i].GetNtrk() << endl;
+                        }
+                    }
+
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        //  For b jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_cut_difeta_highMET[0]);
+                        // For c jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_cut_difeta_highMET[0]);
+                        // For light flavor
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_cut_difeta_highMET[0]);
+
+                        if (v_thinjet[i].GetNtrk() == 1)
+                        {
+                            if (v_thinjet[i].GetFlavor() == 5)
+                            {
+                                cout << "cut ntrk = " << v_thinjet[i].GetNtrk() << endl;
+                            }
+                        }
+                    }
+                }
+                // For Region 1 < |eta| < 2
+                else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) < 2)
+                {
+                    // For b jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_difeta_highMET[1]);
+                    // For c jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_difeta_highMET[1]);
+                    // For l jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_difeta_highMET[1]);
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        //  For b jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_cut_difeta_highMET[1]);
+                        // For c jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_cut_difeta_highMET[1]);
+                        // For light flavor
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_cut_difeta_highMET[1]);
+                    }
+                }
+                // For Region 2 < |eta| < 2.5
+                else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) < 2.5)
+                {
+                    // For b jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_difeta_highMET[2]);
+                    // For c jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_difeta_highMET[2]);
+                    // For l jet
+                    for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_difeta_highMET[2]);
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        //  For b jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_bjet_cut_difeta_highMET[2]);
+                        // For c jet
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 4, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_cjet_cut_difeta_highMET[2]);
+                        // For light flavor
+                        for_inclusive_DY_sigle_flavor_jetvar(f_HT, 0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), I_DY_weight, h_DY_nTrk_ljet_cut_difeta_highMET[2]);
+                    }
+                }
+            }
+        }
+
+        /*
+        if (f_DY_dileppt < 90)
+        {
+            for (size_t i = 0; i < v_thinjet.size(); i++)
+            {
+                for_inclusive_DY_var(f_HT, v_thinjet[i].GetAlpha(), I_DY_weight, h_DY_alpha_lowMET);
+            }
+        }
+        else if (f_DY_dileppt > 90)
+        {
+            for (size_t i = 0; i < v_thinjet.size(); i++)
+            {
+                for_inclusive_DY_var(f_HT, v_thinjet[i].GetAlpha(), I_DY_weight, h_DY_alpha_highdipt);
+            }
+        }
+        */
     } // End of DY loop
 
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
@@ -512,6 +672,20 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
         h_DY_nTrk_ljet_cut_difeta[i]->Write();
         h_DY_nTrk_hjet_difeta[i]->Write();
         h_DY_nTrk_hjet_cut_difeta[i]->Write();
+
+        h_DY_nTrk_bjet_difeta_lowMET[i]->Write();
+        h_DY_nTrk_bjet_cut_difeta_lowMET[i]->Write();
+        h_DY_nTrk_cjet_difeta_lowMET[i]->Write();
+        h_DY_nTrk_cjet_cut_difeta_lowMET[i]->Write();
+        h_DY_nTrk_ljet_difeta_lowMET[i]->Write();
+        h_DY_nTrk_ljet_cut_difeta_lowMET[i]->Write();
+
+        h_DY_nTrk_bjet_difeta_highMET[i]->Write();
+        h_DY_nTrk_bjet_cut_difeta_highMET[i]->Write();
+        h_DY_nTrk_cjet_difeta_highMET[i]->Write();
+        h_DY_nTrk_cjet_cut_difeta_highMET[i]->Write();
+        h_DY_nTrk_ljet_difeta_highMET[i]->Write();
+        h_DY_nTrk_ljet_cut_difeta_highMET[i]->Write();
     }
     h_DY_nTrk_bjet->Write();
     h_DY_nTrk_bjet_cut->Write();
@@ -523,6 +697,12 @@ void ee_DY_half_inclu(TString file = "tmp.root", TString outputfile = "output.ro
     h_DY_nTrk_hjet_cut->Write();
     h_DY_nTrk->Write();
     h_DY_nTrk_cut->Write();
+
+    h_DY_alpha_lowMET->Write();
+    h_DY_alpha_highMET->Write();
+
+    h_DY_alpha_lowdipt->Write();
+    h_DY_alpha_highdipt->Write();
 
     outfile->Close();
 

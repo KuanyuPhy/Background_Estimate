@@ -417,8 +417,8 @@ void Draw_diff_top_nTrk(TString file = "./top_all.root")
 
     c1->cd(2);
 
-    eu_Top_nTrk_ljet_cut_difeta_midMET_1->Draw();
-    ee_Top_nTrk_ljet_cut_difeta_midMET_1->Draw("same");
+    //eu_Top_nTrk_ljet_cut_difeta_midMET_1->Draw();
+    //ee_Top_nTrk_ljet_cut_difeta_midMET_1->Draw("same");
 
     TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
     l1->SetHeader("mid MET ,light flavor , |#eta| < 1");
@@ -440,7 +440,6 @@ void Draw_diff_top_nTrk(TString file = "./top_all.root")
     l2->AddEntry(eu_Top_nTrk_ljet_cut_difeta_highMET_1, "Top ee", "El");
     l2->AddEntry(ee_Top_nTrk_ljet_cut_difeta_highMET_1, "Top emu", "El");
     l2->Draw();
-
 
     /*
     c1->cd(1);
