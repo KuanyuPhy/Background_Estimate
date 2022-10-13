@@ -197,7 +197,7 @@ void ee_HT_var()
     TH1D *h_DY_jetcsv = new TH1D("h_DY_jetcsv", "", 20, 0, 1);
     h_DY_jetcsv->Sumw2();
 
-    TH1D *h_DY_dilepPT = new TH1D("h_DY_dilepPT", "", 50, 0, 500);
+    TH1D *h_DY_dilepPT = new TH1D("h_DY_dilepPT", "", 100, 0, 1000);
     h_DY_dilepPT->Sumw2();
 
     TH1D *h_DY_bjetcsv = new TH1D("h_DY_bjetcsv", "", 20, 0, 1);
@@ -332,12 +332,10 @@ void ee_HT_var()
     {
         T_inclusive->GetEntry(evt);
         for_inclusive_sample(HT, f_ht0_Met, I_ht0_weight, h_DY_Met);
-        for_inclusive_sample(HT, f_ht0_dilepPT, I_ht0_weight, h_DY_dilepPT);
-
         if (f_ht0_Met > metcut)
         {
             for_inclusive_sample(HT, f_ht0_Met, I_ht0_weight, h_DY_Met_cut);
-
+            for_inclusive_sample(HT, f_ht0_dilepPT, I_ht0_weight, h_DY_dilepPT);
             for (size_t i = 0; i < v_ht0_jetcsv->size(); i++)
             {
                 for_inclusive_sample(HT, (*v_ht0_jetcsv)[i], I_ht0_weight, h_DY_jetcsv);
@@ -380,11 +378,10 @@ void ee_HT_var()
     {
         T_HT100->GetEntry(evt);
         h_DY_Met->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
-        // h_DY_dilepPT->Fill(f_ht100_dilepPT, I_ht100_weight * HT100Weight);
         if (f_ht100_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
-
+            h_DY_dilepPT->Fill(f_ht100_dilepPT, I_ht100_weight * HT100Weight);
             for (size_t i = 0; i < v_ht100_jetcsv->size(); i++)
             {
                 h_DY_jetcsv->Fill((*v_ht100_jetcsv)[i], I_ht100_weight * HT100Weight);
@@ -426,11 +423,10 @@ void ee_HT_var()
     {
         T_HT200->GetEntry(evt);
         h_DY_Met->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
-        // h_DY_dilepPT->Fill(f_ht200_dilepPT, I_ht200_weight * HT200Weight);
         if (f_ht200_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
-
+            h_DY_dilepPT->Fill(f_ht200_dilepPT, I_ht200_weight * HT200Weight);
             for (size_t i = 0; i < v_ht200_jetcsv->size(); i++)
             {
                 h_DY_jetcsv->Fill((*v_ht200_jetcsv)[i], I_ht200_weight * HT200Weight);
@@ -472,11 +468,10 @@ void ee_HT_var()
     {
         T_HT400->GetEntry(evt);
         h_DY_Met->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
-        // h_DY_dilepPT->Fill(f_ht400_dilepPT, I_ht400_weight * HT400Weight);
         if (f_ht400_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
-
+            h_DY_dilepPT->Fill(f_ht400_dilepPT, I_ht400_weight * HT400Weight);
             for (size_t i = 0; i < v_ht400_jetcsv->size(); i++)
             {
                 h_DY_jetcsv->Fill((*v_ht400_jetcsv)[i], I_ht400_weight * HT400Weight);
@@ -518,11 +513,10 @@ void ee_HT_var()
     {
         T_HT600->GetEntry(evt);
         h_DY_Met->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
-        // h_DY_dilepPT->Fill(f_ht600_dilepPT, I_ht600_weight * HT600Weight);
         if (f_ht600_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
-
+            h_DY_dilepPT->Fill(f_ht600_dilepPT, I_ht600_weight * HT600Weight);
             for (size_t i = 0; i < v_ht600_jetcsv->size(); i++)
             {
                 h_DY_jetcsv->Fill((*v_ht600_jetcsv)[i], I_ht600_weight * HT600Weight);
@@ -564,10 +558,10 @@ void ee_HT_var()
     {
         T_HT800->GetEntry(evt);
         h_DY_Met->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
-        // h_DY_dilepPT->Fill(f_ht800_dilepPT, I_ht800_weight * HT800Weight);
         if (f_ht800_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
+            h_DY_dilepPT->Fill(f_ht800_dilepPT, I_ht800_weight * HT800Weight);
             for (size_t i = 0; i < v_ht800_jetcsv->size(); i++)
             {
                 h_DY_jetcsv->Fill((*v_ht800_jetcsv)[i], I_ht800_weight * HT800Weight);
@@ -609,11 +603,10 @@ void ee_HT_var()
     {
         T_HT1200->GetEntry(evt);
         h_DY_Met->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
-        // h_DY_dilepPT->Fill(f_ht1200_dilepPT, I_ht1200_weight * HT1200Weight);
         if (f_ht1200_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
-
+            h_DY_dilepPT->Fill(f_ht1200_dilepPT, I_ht1200_weight * HT1200Weight);
             for (size_t i = 0; i < v_ht1200_jetcsv->size(); i++)
             {
                 h_DY_jetcsv->Fill((*v_ht1200_jetcsv)[i], I_ht1200_weight * HT1200Weight);
@@ -655,11 +648,10 @@ void ee_HT_var()
     {
         T_HT2500->GetEntry(evt);
         h_DY_Met->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
-        // h_DY_dilepPT->Fill(f_ht2500_dilepPT, I_ht2500_weight * HT2500Weight);
         if (f_ht2500_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
-
+            h_DY_dilepPT->Fill(f_ht2500_dilepPT, I_ht2500_weight * HT2500Weight);
             for (size_t i = 0; i < v_ht2500_jetcsv->size(); i++)
             {
                 h_DY_jetcsv->Fill((*v_ht2500_jetcsv)[i], I_ht2500_weight * HT2500Weight);

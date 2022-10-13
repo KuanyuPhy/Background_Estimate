@@ -94,7 +94,7 @@ void ee_Diboson_var()
     h_Diboson_Met->GetYaxis()->SetTitle("");
     h_Diboson_Met->Sumw2();
 
-    TH1D *h_Diboson_dilepPT = new TH1D("h_Diboson_dilepPT", "", 50, 0, 500);
+    TH1D *h_Diboson_dilepPT = new TH1D("h_Diboson_dilepPT", "", 100, 0, 1000);
     h_Diboson_dilepPT->GetXaxis()->SetTitle("");
     h_Diboson_dilepPT->GetYaxis()->SetTitle("");
     h_Diboson_dilepPT->Sumw2();
@@ -298,10 +298,10 @@ void ee_Diboson_var()
     {
         T_event->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2e2mu_met, f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2mu_dilepPT, f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
         if (f_gg_ZZ_2e2mu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2e2mu_met, f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
+            h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2mu_dilepPT, f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
             for (size_t i = 0; i < v_gg_ZZ_2e2mu_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_ZZ_2e2mu_jetCSV)[i], f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
@@ -344,11 +344,10 @@ void ee_Diboson_var()
     {
         T_event1->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2e2nu_met, f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2nu_dilepPT, f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
         if (f_gg_ZZ_2e2nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2e2nu_met, f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
-
+            h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2nu_dilepPT, f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
             for (size_t i = 0; i < v_gg_ZZ_2e2nu_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_ZZ_2e2nu_jetCSV)[i], f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
@@ -391,10 +390,10 @@ void ee_Diboson_var()
     {
         T_event2->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2e2tau_met, f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2tau_dilepPT, f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
         if (f_gg_ZZ_2e2tau_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2e2tau_met, f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
+            h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2tau_dilepPT, f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
             for (size_t i = 0; i < v_gg_ZZ_2e2tau_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_ZZ_2e2tau_jetCSV)[i], f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
@@ -437,10 +436,10 @@ void ee_Diboson_var()
     {
         T_event3->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2mu2nu_met, f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_ZZ_2mu2nu_dilepPT, f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
         if (f_gg_ZZ_2mu2nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2mu2nu_met, f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
+            h_Diboson_dilepPT->Fill(f_gg_ZZ_2mu2nu_dilepPT, f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
             for (size_t i = 0; i < v_gg_ZZ_2mu2nu_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_ZZ_2mu2nu_jetCSV)[i], f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
@@ -484,10 +483,10 @@ void ee_Diboson_var()
     {
         T_event4->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2mu2tau_met, f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_ZZ_2mu2tau_dilepPT, f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
         if (f_gg_ZZ_2mu2tau_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2mu2tau_met, f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
+            h_Diboson_dilepPT->Fill(f_gg_ZZ_2mu2tau_dilepPT, f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
             for (size_t i = 0; i < v_gg_ZZ_2mu2tau_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_ZZ_2mu2tau_jetCSV)[i], f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
@@ -531,10 +530,10 @@ void ee_Diboson_var()
     {
         T_event5->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_4e_met, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_ZZ_4e_dilepPT, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
         if (f_gg_ZZ_4e_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_4e_met, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+            h_Diboson_dilepPT->Fill(f_gg_ZZ_4e_dilepPT, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
             for (size_t i = 0; i < v_gg_ZZ_4e_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_ZZ_4e_jetCSV)[i], f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
@@ -578,10 +577,10 @@ void ee_Diboson_var()
     {
         T_event6->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_4mu_met, f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_ZZ_4mu_dilepPT, f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
         if (f_gg_ZZ_4mu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_4mu_met, f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
+            h_Diboson_dilepPT->Fill(f_gg_ZZ_4mu_dilepPT, f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
             for (size_t i = 0; i < v_gg_ZZ_4mu_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_ZZ_4mu_jetCSV)[i], f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
@@ -624,10 +623,10 @@ void ee_Diboson_var()
     {
         T_event7->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_4tau_met, f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_ZZ_4tau_dilepPT, f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
         if (f_gg_ZZ_4tau_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_4tau_met, f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
+            h_Diboson_dilepPT->Fill(f_gg_ZZ_4tau_dilepPT, f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
             for (size_t i = 0; i < v_gg_ZZ_4tau_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_ZZ_4tau_jetCSV)[i], f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
@@ -670,10 +669,10 @@ void ee_Diboson_var()
     {
         T_event8->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_WW_2L2Nu_met, f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
-        h_Diboson_dilepPT->Fill(f_gg_WW_2L2Nu_dilepPT, f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
         if (f_gg_WW_2L2Nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_WW_2L2Nu_met, f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
+            h_Diboson_dilepPT->Fill(f_gg_WW_2L2Nu_dilepPT, f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
             for (size_t i = 0; i < v_gg_WW_2L2Nu_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_gg_WW_2L2Nu_jetCSV)[i], f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
@@ -716,11 +715,10 @@ void ee_Diboson_var()
     {
         T_event9->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_WW_2L2Nu_met, f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
-        h_Diboson_dilepPT->Fill(f_qq_WW_2L2Nu_dilepPT, f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
         if (f_qq_WW_2L2Nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_WW_2L2Nu_met, f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
-
+            h_Diboson_dilepPT->Fill(f_qq_WW_2L2Nu_dilepPT, f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
             for (size_t i = 0; i < v_qq_WW_2L2Nu_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_qq_WW_2L2Nu_jetCSV)[i], f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
@@ -763,10 +761,10 @@ void ee_Diboson_var()
     {
         T_event10->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_WZ_2L2Q_met, f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
-        h_Diboson_dilepPT->Fill(f_qq_WZ_2L2Q_dilepPT, f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
         if (f_qq_WZ_2L2Q_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_WZ_2L2Q_met, f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
+            h_Diboson_dilepPT->Fill(f_qq_WZ_2L2Q_dilepPT, f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
             for (size_t i = 0; i < v_qq_WZ_2L2Q_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_qq_WZ_2L2Q_jetCSV)[i], f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
@@ -809,10 +807,10 @@ void ee_Diboson_var()
     {
         T_event11->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_WZ_3LNu_met, f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
-        h_Diboson_dilepPT->Fill(f_qq_WZ_3LNu_dilepPT, f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
         if (f_qq_WZ_3LNu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_WZ_3LNu_met, f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
+            h_Diboson_dilepPT->Fill(f_qq_WZ_3LNu_dilepPT, f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
             for (size_t i = 0; i < v_qq_WZ_3LNu_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_qq_WZ_3LNu_jetCSV)[i], f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
@@ -855,11 +853,10 @@ void ee_Diboson_var()
     {
         T_event12->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_ZZ_2L2Nu_met, f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
-        h_Diboson_dilepPT->Fill(f_qq_ZZ_2L2Nu_dilepPT, f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
         if (f_qq_ZZ_2L2Nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_ZZ_2L2Nu_met, f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
-
+            h_Diboson_dilepPT->Fill(f_qq_ZZ_2L2Nu_dilepPT, f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
             for (size_t i = 0; i < v_qq_ZZ_2L2Nu_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_qq_ZZ_2L2Nu_jetCSV)[i], f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
@@ -902,11 +899,10 @@ void ee_Diboson_var()
     {
         T_event13->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_ZZ_2L2Q_met, f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
-        h_Diboson_dilepPT->Fill(f_qq_ZZ_2L2Q_dilepPT, f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
         if (f_qq_ZZ_2L2Q_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_ZZ_2L2Q_met, f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
-
+            h_Diboson_dilepPT->Fill(f_qq_ZZ_2L2Q_dilepPT, f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
             for (size_t i = 0; i < v_qq_ZZ_2L2Q_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_qq_ZZ_2L2Q_jetCSV)[i], f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
@@ -949,11 +945,10 @@ void ee_Diboson_var()
     {
         T_event14->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_ZZ_4L_met, f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
-        h_Diboson_dilepPT->Fill(f_qq_ZZ_4L_dilepPT, f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
         if (f_qq_ZZ_4L_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_ZZ_4L_met, f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
-
+            h_Diboson_dilepPT->Fill(f_qq_ZZ_4L_dilepPT, f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
             for (size_t i = 0; i < v_qq_ZZ_4L_jetCSV->size(); i++)
             {
                 h_diboson_jetcsv->Fill((*v_qq_ZZ_4L_jetCSV)[i], f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);

@@ -141,6 +141,11 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     h_2016lJetMass->Add(ee_Diboson_lJetMass);
     h_2016lJetMass->Add(ee_Triboson_lJetMass);
 
+    TH1D *h_2016dileppt = ((TH1D *)ee_HT_dilepPT->Clone("h_2016dileppt"));
+    h_2016dileppt->Add(ee_Top_dilepPT);
+    h_2016dileppt->Add(ee_Diboson_dilepPT);
+    h_2016dileppt->Add(ee_Triboson_dilepPT);
+
     //-------------------------
     // CMS style
     //-------------------------
@@ -275,6 +280,8 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     h_2016bJetMass->SetLineWidth(2);
     h_2016lJetMass->SetLineWidth(2);
 
+    h_2016dileppt->SetLineWidth(2);
+
     ee_Diboson_dilepPT->GetXaxis()->SetNdivisions(6, 5, 0);
     ee_Diboson_dilepPT->GetXaxis()->SetTitleOffset(1.5);
     ee_Diboson_dilepPT->GetXaxis()->SetTitle("dileptom PT");
@@ -316,7 +323,6 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     h_2016Jetcsv->GetYaxis()->SetNdivisions(6, 5, 0);
     h_2016Jetcsv->GetYaxis()->SetTitleOffset(1.5);
     h_2016Jetcsv->GetYaxis()->SetTitle("nJet / Normalized ");
-    
 
     h_2016lJetMass->GetXaxis()->SetNdivisions(6, 5, 0);
     h_2016lJetMass->GetXaxis()->SetTitleOffset(1.5);
@@ -324,6 +330,13 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     h_2016lJetMass->GetYaxis()->SetNdivisions(6, 5, 0);
     h_2016lJetMass->GetYaxis()->SetTitleOffset(1.5);
     h_2016lJetMass->GetYaxis()->SetTitle("nJet");
+
+    h_2016dileppt->GetXaxis()->SetNdivisions(6, 5, 0);
+    h_2016dileppt->GetXaxis()->SetTitleOffset(1.5);
+    h_2016dileppt->GetXaxis()->SetTitle("delepton PT");
+    h_2016dileppt->GetYaxis()->SetNdivisions(6, 5, 0);
+    h_2016dileppt->GetYaxis()->SetTitleOffset(1.5);
+    h_2016dileppt->GetYaxis()->SetTitle("nEvents");
 
     /*
     THStack *hs = new THStack("hs", "");
@@ -490,9 +503,10 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     // h_2016lJetMass->Draw("h e ");
     // h_2016bJetMass->Draw("e same ");
 
-    h_2016Jetcsv->DrawNormalized("h e");
+    // h_2016Jetcsv->DrawNormalized("h e");
+    // h_2016Jetcsv_cutalpha->DrawNormalized("e same ");
 
-    h_2016Jetcsv_cutalpha->DrawNormalized("e same ");
+    h_2016dileppt->Draw("h e ");
 
     // cout << "number of Events with DY without Met cut = " << h_2016lJetMass->Integral() << "\n";
     // cout << "number of Events with DY = " << h_2016bJetMass->Integral() << "\n";
@@ -506,6 +520,7 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     l1->AddEntry(h_2016lJetcsv, "light flavor", "lE");
     l1->Draw();
     */
+    /*
     TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
     l1->SetBorderSize(0);
     l1->SetFillStyle(0);
@@ -513,6 +528,7 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     l1->AddEntry(h_2016Jetcsv, "2016 MC background", "lE");
     l1->AddEntry(h_2016Jetcsv_cutalpha, "2016 MC background (SR)", "lE");
     l1->Draw();
+    */
 
     gPad->SetLogy();
 

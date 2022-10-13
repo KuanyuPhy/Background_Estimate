@@ -23,10 +23,10 @@ void ee_jetcsv(TString inputfile = "./DY/ee_DY_Met.root")
     TFile *Tribosonprocess = new TFile("./triboson/ee_Triboson_Met.root");
 
     //-----------
-    // For jetcsv
+    // For dilepPT
     //-----------
-    TH1D *HT_jetcsv = ((TH1D *)DYprocess->Get("h_DY_bjetCSV"));
-    TH1D *Top_jetcsv = ((TH1D *)Topprocess->Get("h_Top_bjetcsv"));
+    TH1D *HT_ = ((TH1D *)DYprocess->Get("h_DY_bjetCSV"));
+    TH1D *Top_ = ((TH1D *)Topprocess->Get("h_Top_bjetcsv"));
     TH1D *Diboson_jetcsv = ((TH1D *)Dibosonprocess->Get("h_diboson_bjetCSV"));
 
     HT_jetcsv->SetLineColor(kOrange - 3);

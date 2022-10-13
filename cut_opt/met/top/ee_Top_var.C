@@ -62,7 +62,7 @@ void ee_Top_var()
     h_Top_Met->GetYaxis()->SetTitle("");
     h_Top_Met->Sumw2();
 
-    TH1D *h_Top_dilepPT = new TH1D("h_Top_dilepPT", "", 50, 0, 500);
+    TH1D *h_Top_dilepPT = new TH1D("h_Top_dilepPT", "", 100, 0, 1000);
     h_Top_dilepPT->GetXaxis()->SetTitle("");
     h_Top_dilepPT->GetYaxis()->SetTitle("");
     h_Top_dilepPT->Sumw2();
@@ -211,9 +211,9 @@ void ee_Top_var()
     {
         T_TTTo2L2Nu_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTTo2L2Nu_met, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
-        h_Top_dilepPT->Fill(f_TTTo2L2Nu_dilepPT, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
         if (f_TTTo2L2Nu_met > METcut)
         {
+            h_Top_dilepPT->Fill(f_TTTo2L2Nu_dilepPT, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
             h_Top_Met_cut->Fill(f_TTTo2L2Nu_met, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
             for (size_t i = 0; i < v_TTTo2L2Nu_jetCSV->size(); i++)
             {
@@ -256,9 +256,9 @@ void ee_Top_var()
     {
         T_ST_tW_top_tree->GetEntry(evt);
         h_Top_Met->Fill(f_ST_tW_top_met, I_ST_tW_top_weight * ST_tW_topWeight);
-        h_Top_dilepPT->Fill(f_ST_tW_top_dilepPT, I_ST_tW_top_weight * ST_tW_topWeight);
         if (f_ST_tW_top_met > METcut)
         {
+            h_Top_dilepPT->Fill(f_ST_tW_top_dilepPT, I_ST_tW_top_weight * ST_tW_topWeight);
             h_Top_Met_cut->Fill(f_ST_tW_top_met, I_ST_tW_top_weight * ST_tW_topWeight);
             for (size_t i = 0; i < v_ST_tW_top_jetCSV->size(); i++)
             {
@@ -302,9 +302,9 @@ void ee_Top_var()
     {
         T_ST_tW_antitop_tree->GetEntry(evt);
         h_Top_Met->Fill(f_ST_tW_antitop_met, I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
-        h_Top_dilepPT->Fill(f_ST_tW_antitop_dilepPT, I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
         if (f_ST_tW_antitop_met > METcut)
         {
+            h_Top_dilepPT->Fill(f_ST_tW_antitop_dilepPT, I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
             h_Top_Met_cut->Fill(f_ST_tW_antitop_met, I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
             for (size_t i = 0; i < v_ST_tW_antitop_jetCSV->size(); i++)
             {
@@ -347,9 +347,9 @@ void ee_Top_var()
     {
         T_TTWJetsToLNu_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTWJetsToLNu_met, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
-        h_Top_dilepPT->Fill(f_TTWJetsToLNu_dilepPT, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
         if (f_TTWJetsToLNu_met > METcut)
         {
+            h_Top_dilepPT->Fill(f_TTWJetsToLNu_dilepPT, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
             h_Top_Met_cut->Fill(f_TTWJetsToLNu_met, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
             for (size_t i = 0; i < v_TTWJetsToLNu_jetCSV->size(); i++)
             {
@@ -393,9 +393,9 @@ void ee_Top_var()
     {
         T_TTWJetsToQQ_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTWJetsToQQ_met, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
-        h_Top_dilepPT->Fill(f_TTWJetsToQQ_dilepPT, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
         if (f_TTWJetsToQQ_met > METcut)
         {
+            h_Top_dilepPT->Fill(f_TTWJetsToQQ_dilepPT, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
             h_Top_Met_cut->Fill(f_TTWJetsToQQ_met, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
             for (size_t i = 0; i < v_TTWJetsToQQ_jetCSV->size(); i++)
             {
@@ -438,9 +438,9 @@ void ee_Top_var()
     {
         T_TTZToQQ_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTZToQQ_met, I_TTZToQQ_weight * TTZToQQWeight);
-        h_Top_dilepPT->Fill(f_TTZToQQ_dilepPT, I_TTZToQQ_weight * TTZToQQWeight);
         if (f_TTZToQQ_met > METcut)
         {
+            h_Top_dilepPT->Fill(f_TTZToQQ_dilepPT, I_TTZToQQ_weight * TTZToQQWeight);
             h_Top_Met_cut->Fill(f_TTZToQQ_met, I_TTZToQQ_weight * TTZToQQWeight);
             for (size_t i = 0; i < v_TTZToQQ_jetCSV->size(); i++)
             {
@@ -483,9 +483,9 @@ void ee_Top_var()
     {
         T_TTZToLLNuNu_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTZToLLNuNu_met, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
-        h_Top_dilepPT->Fill(f_TTZToLLNuNu_dilepPT, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
         if (f_TTZToLLNuNu_met > METcut)
         {
+            h_Top_dilepPT->Fill(f_TTZToLLNuNu_dilepPT, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
             h_Top_Met_cut->Fill(f_TTZToLLNuNu_met, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
             for (size_t i = 0; i < v_TTZToLLNuNu_jetCSV->size(); i++)
             {
