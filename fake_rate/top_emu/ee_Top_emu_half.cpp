@@ -23,20 +23,22 @@ using namespace std;
 class ThinJet
 {
 private:
-    float jetflavor, jetpt, jeteta, jetalpha, jetntrk;
+    float jetflavor, jetpt, jeteta, jetalpha, jetntrk, jetmass, jetcsv;
 
 public:
     ThinJet() {}
-    ThinJet(const float &a, const float &b, const float &c, const float &d, const float &e) : jetflavor(a), jetpt(b), jeteta(c), jetalpha(d), jetntrk(e) {}
+    ThinJet(const float &a, const float &b, const float &c, const float &d, const float &e, const float &f, const float &g) : jetflavor(a), jetpt(b), jeteta(c), jetalpha(d), jetntrk(e), jetmass(f), jetcsv(g) {}
     Float_t GetFlavor() const { return jetflavor; }
     Float_t GetPt() const { return jetpt; }
     Float_t GetEta() const { return jeteta; }
     Float_t GetAlpha() const { return jetalpha; }
     Float_t GetNtrk() const { return jetntrk; }
+    Float_t GetMass() const { return jetmass; }
+    Float_t GetCsv() const { return jetcsv; }
 
     friend ostream &operator<<(ostream &out, const ThinJet &foo)
     {
-        return out << foo.jetflavor << " " << foo.jetpt << " " << foo.jeteta << " " << foo.jetalpha << " " << foo.jetntrk << endl;
+        return out << foo.jetflavor << " " << foo.jetpt << " " << foo.jeteta << " " << foo.jetalpha << " " << foo.jetntrk << "" << foo.jetmass << "" << foo.jetcsv << endl;
     }
 
     // greater() is used for JetPT
@@ -263,6 +265,8 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     vector<float> *v_Top_Jetpartonflavor = new vector<float>();
     vector<float> *v_Top_JetPT = new vector<float>();
     vector<float> *v_Top_JetEta = new vector<float>();
+    vector<float> *v_Top_JetCsv = new vector<float>();
+    vector<float> *v_Top_JetMass = new vector<float>();
 
     v_Top_alpha->clear();
     v_Top_Chi3Dlog->clear();
@@ -272,6 +276,8 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     v_Top_Jetpartonflavor->clear();
     v_Top_JetPT->clear();
     v_Top_JetEta->clear();
+    v_Top_JetCsv->clear();
+    v_Top_JetMass->clear();
 
     TTree *T_Top_tree;
     Topfile->GetObject("h1", T_Top_tree);
@@ -286,6 +292,9 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     T_Top_tree->SetBranchAddress("v_fakeJetpartonflavor", &v_Top_Jetpartonflavor);
     T_Top_tree->SetBranchAddress("v_fakeJetPt", &v_Top_JetPT);
     T_Top_tree->SetBranchAddress("v_fakeJetEta", &v_Top_JetEta);
+    T_Top_tree->SetBranchAddress("v_fakeJetCSV", &v_Top_JetCsv);
+    T_Top_tree->SetBranchAddress("v_fakeJetMass", &v_Top_JetMass);
+
     for (int evt = 0; evt < T_Top_tree->GetEntries(); evt++)
     {
         T_Top_tree->GetEntry(evt);
@@ -306,7 +315,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         //-------------------------------------------------------------
         for (size_t i = 0; i < v_Top_nTrack->size(); i++)
         {
-            v_thinjet.push_back(ThinJet((*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], (*v_Top_JetEta)[i], (*v_Top_alpha)[i], (*v_Top_nTrack)[i]));
+            v_thinjet.push_back(ThinJet((*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], (*v_Top_JetEta)[i], (*v_Top_alpha)[i], (*v_Top_nTrack)[i], (*v_Top_JetMass)[i], (*v_Top_JetCsv)[i]));
         }
         /*
         cout << "-------- No Sort ---------------" << endl;
@@ -354,6 +363,10 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         {
             for (size_t i = 0; i < v_thinjet.size(); i++)
             {
+                if (v_thinjet[i].GetCsv() == -10)
+                {
+                    continue;
+                }
                 // Not Consider eta
                 // b flavor
                 for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet);
@@ -501,6 +514,10 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         {
             for (size_t i = 0; i < v_thinjet.size(); i++)
             {
+                if (v_thinjet[i].GetCsv() == -10)
+                {
+                    continue;
+                }
                 //--------------------
                 // Consider eta
                 //--------------------
@@ -607,7 +624,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     outfile->Close();
 
     // cout << getWeight(file) << endl;
-    // cout << "TTTo2L2NuWeight = " << TTTo2L2NuWeight << endl;
+    
 }
 int main(int argc, char **argv)
 {

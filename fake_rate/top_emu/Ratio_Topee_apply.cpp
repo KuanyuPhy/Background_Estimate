@@ -24,20 +24,22 @@ using namespace std;
 class ThinJet
 {
 private:
-    float jetflavor, jetpt, jeteta, jetalpha, jetntrk;
+    float jetflavor, jetpt, jeteta, jetalpha, jetntrk, jetmass, jetcsv;
 
 public:
     ThinJet() {}
-    ThinJet(const float &a, const float &b, const float &c, const float &d, const float &e) : jetflavor(a), jetpt(b), jeteta(c), jetalpha(d), jetntrk(e) {}
+    ThinJet(const float &a, const float &b, const float &c, const float &d, const float &e, const float &f, const float &g) : jetflavor(a), jetpt(b), jeteta(c), jetalpha(d), jetntrk(e), jetmass(f), jetcsv(g) {}
     Float_t GetFlavor() const { return jetflavor; }
     Float_t GetPt() const { return jetpt; }
     Float_t GetEta() const { return jeteta; }
     Float_t GetAlpha() const { return jetalpha; }
     Float_t GetNtrk() const { return jetntrk; }
+    Float_t GetMass() const { return jetmass; }
+    Float_t GetCsv() const { return jetcsv; }
 
     friend ostream &operator<<(ostream &out, const ThinJet &foo)
     {
-        return out << foo.jetflavor << " " << foo.jetpt << " " << foo.jeteta << " " << foo.jetalpha << " " << foo.jetntrk << endl;
+        return out << foo.jetflavor << " " << foo.jetpt << " " << foo.jeteta << " " << foo.jetalpha << " " << foo.jetntrk << "" << foo.jetmass << "" << foo.jetcsv << endl;
     }
 
     // greater() is used for JetPT
@@ -164,29 +166,29 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     TFile *Topfile = TFile::Open(file);
     cout << "Top weight = " << getWeight(file) << endl;
 
-    TH1D *h_Top_btrk_LMet = new TH1D("h_Top_btrk_LMet", "", 30, 1, 30);
-    h_Top_btrk_LMet->Sumw2();
-    TH1D *h_Top_ltrk_LMet = new TH1D("h_Top_ltrk_LMet", "", 30, 1, 30);
-    h_Top_ltrk_LMet->Sumw2();
+    TH1D *h_Top_btrk_TrueBG = new TH1D("h_Top_btrk_TrueBG", "", 30, 1, 30);
+    h_Top_btrk_TrueBG->Sumw2();
+    TH1D *h_Top_ltrk_TrueBG = new TH1D("h_Top_ltrk_TrueBG", "", 30, 1, 30);
+    h_Top_ltrk_TrueBG->Sumw2();
 
-    TH1D *h_Top_bJetPt_LMet = new TH1D("h_Top_bJetPt_LMet", "", 50, 0., 500);
-    h_Top_bJetPt_LMet->Sumw2();
-    TH1D *h_Top_lJetPt_LMet = new TH1D("h_Top_lJetPt_LMet", "", 50, 0., 500);
-    h_Top_lJetPt_LMet->Sumw2();
+    TH1D *h_Top_bJetPt_TrueBG = new TH1D("h_Top_bJetPt_TrueBG", "",10,0,1000);
+    h_Top_bJetPt_TrueBG->Sumw2();
+    TH1D *h_Top_lJetPt_TrueBG = new TH1D("h_Top_lJetPt_TrueBG", "",10,0,1000);
+    h_Top_lJetPt_TrueBG->Sumw2();
 
-    TH1D *h_Top_bJetEta_noeta_LMet = new TH1D("h_Top_bJetEta_noeta_LMet", "", 30, -3., 3.);
-    h_Top_bJetEta_noeta_LMet->Sumw2();
-    TH1D *h_Top_lJetEta_noeta_LMet = new TH1D("h_Top_lJetEta_noeta_LMet", "", 30, -3., 3.);
-    h_Top_lJetEta_noeta_LMet->Sumw2();
+    TH1D *h_Top_bJetEta_noeta_TrueBG = new TH1D("h_Top_bJetEta_noeta_TrueBG", "", 30, -3., 3.);
+    h_Top_bJetEta_noeta_TrueBG->Sumw2();
+    TH1D *h_Top_lJetEta_noeta_TrueBG = new TH1D("h_Top_lJetEta_noeta_TrueBG", "", 30, -3., 3.);
+    h_Top_lJetEta_noeta_TrueBG->Sumw2();
 
     TH1D *h_Topee_btrk_HMet = new TH1D("h_Topee_btrk_HMet", "", 30, 1, 30);
     h_Topee_btrk_HMet->Sumw2();
     TH1D *h_Topee_ltrk_HMet = new TH1D("h_Topee_ltrk_HMet", "", 30, 1, 30);
     h_Topee_ltrk_HMet->Sumw2();
 
-    TH1D *h_Topee_bJetPt_HMet = new TH1D("h_Topee_bJetPt_HMet", "", 50, 0., 500);
+    TH1D *h_Topee_bJetPt_HMet = new TH1D("h_Topee_bJetPt_HMet", "",10,0,1000);
     h_Topee_bJetPt_HMet->Sumw2();
-    TH1D *h_Topee_lJetPt_HMet = new TH1D("h_Topee_lJetPt_HMet", "", 50, 0., 500);
+    TH1D *h_Topee_lJetPt_HMet = new TH1D("h_Topee_lJetPt_HMet", "",10,0,1000);
     h_Topee_lJetPt_HMet->Sumw2();
 
     TH1D *h_Topee_bJetEta_noeta_HMet = new TH1D("h_Topee_bJetEta_noeta_HMet", "", 30, -3., 3.);
@@ -199,9 +201,9 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     TH1D *h_Topemu_ltrk_HMet = new TH1D("h_Topemu_ltrk_HMet", "", 30, 1, 30);
     h_Topemu_ltrk_HMet->Sumw2();
 
-    TH1D *h_Topemu_bJetPt_HMet = new TH1D("h_Topemu_bJetPt_HMet", "", 50, 0., 500);
+    TH1D *h_Topemu_bJetPt_HMet = new TH1D("h_Topemu_bJetPt_HMet", "",10,0,1000);
     h_Topemu_bJetPt_HMet->Sumw2();
-    TH1D *h_Topemu_lJetPt_HMet = new TH1D("h_Topemu_lJetPt_HMet", "", 50, 0., 500);
+    TH1D *h_Topemu_lJetPt_HMet = new TH1D("h_Topemu_lJetPt_HMet", "",10,0,1000);
     h_Topemu_lJetPt_HMet->Sumw2();
 
     TH1D *h_Topemu_bJetEta_noeta_HMet = new TH1D("h_Topemu_bJetEta_noeta_HMet", "", 30, -3., 3.);
@@ -209,26 +211,36 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     TH1D *h_Topemu_lJetEta_noeta_HMet = new TH1D("h_Topemu_lJetEta_noeta_HMet", "", 30, -3., 3.);
     h_Topemu_lJetEta_noeta_HMet->Sumw2();
 
+    TH1D *h_Topemu_bJetMass_HMet = new TH1D("h_Topemu_bJetMass_HMet", "",  15, 0., 150);
+    h_Topemu_bJetMass_HMet->Sumw2();
+    TH1D *h_Topemu_lJetMass_HMet = new TH1D("h_Topemu_lJetMass_HMet", "",  15, 0., 150);
+    h_Topemu_lJetMass_HMet->Sumw2();
+
+    TH1D *h_Topemu_bJetCsv_HMet = new TH1D("h_Topemu_bJetCsv_HMet", "", 20, 0., 1.);
+    h_Topemu_bJetCsv_HMet->Sumw2();
+    TH1D *h_Topemu_lJetCsv_HMet = new TH1D("h_Topemu_lJetCsv_HMet", "", 20, 0., 1.);
+    h_Topemu_lJetCsv_HMet->Sumw2();
+
     //------------------------
     //  nTrk : different eta
     //------------------------
-    TH1D *h_Top_btrk_region1_LMet = new TH1D("h_Top_btrk_region1_LMet", "", 30, 1, 30);
-    h_Top_btrk_region1_LMet->Sumw2();
+    TH1D *h_Top_btrk_region1_TrueBG = new TH1D("h_Top_btrk_region1_TrueBG", "", 30, 1, 30);
+    h_Top_btrk_region1_TrueBG->Sumw2();
 
-    TH1D *h_Top_btrk_region2_LMet = new TH1D("h_Top_btrk_region2_LMet", "", 30, 1, 30);
-    h_Top_btrk_region2_LMet->Sumw2();
+    TH1D *h_Top_btrk_region2_TrueBG = new TH1D("h_Top_btrk_region2_TrueBG", "", 30, 1, 30);
+    h_Top_btrk_region2_TrueBG->Sumw2();
 
-    TH1D *h_Top_btrk_region3_LMet = new TH1D("h_Top_btrk_region3_LMet", "", 30, 1, 30);
-    h_Top_btrk_region3_LMet->Sumw2();
+    TH1D *h_Top_btrk_region3_TrueBG = new TH1D("h_Top_btrk_region3_TrueBG", "", 30, 1, 30);
+    h_Top_btrk_region3_TrueBG->Sumw2();
 
-    TH1D *h_Top_ltrk_region1_LMet = new TH1D("h_Top_ltrk_region1_LMet", "", 30, 1, 30);
-    h_Top_ltrk_region1_LMet->Sumw2();
+    TH1D *h_Top_ltrk_region1_TrueBG = new TH1D("h_Top_ltrk_region1_TrueBG", "", 30, 1, 30);
+    h_Top_ltrk_region1_TrueBG->Sumw2();
 
-    TH1D *h_Top_ltrk_region2_LMet = new TH1D("h_Top_ltrk_region2_LMet", "", 30, 1, 30);
-    h_Top_ltrk_region2_LMet->Sumw2();
+    TH1D *h_Top_ltrk_region2_TrueBG = new TH1D("h_Top_ltrk_region2_TrueBG", "", 30, 1, 30);
+    h_Top_ltrk_region2_TrueBG->Sumw2();
 
-    TH1D *h_Top_ltrk_region3_LMet = new TH1D("h_Top_ltrk_region3_LMet", "", 30, 1, 30);
-    h_Top_ltrk_region3_LMet->Sumw2();
+    TH1D *h_Top_ltrk_region3_TrueBG = new TH1D("h_Top_ltrk_region3_TrueBG", "", 30, 1, 30);
+    h_Top_ltrk_region3_TrueBG->Sumw2();
 
     TH1D *h_Topee_btrk_region1_HMet = new TH1D("h_Topee_btrk_region1_HMet", "", 30, 1, 30);
     h_Topee_btrk_region1_HMet->Sumw2();
@@ -269,68 +281,68 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     //--------------------
     //       JetPt
     //--------------------
-    TH1D *h_Top_bJetPt_region1_LMet = new TH1D("h_Top_bJetPt_region1_LMet", "", 50, 0., 500);
-    h_Top_bJetPt_region1_LMet->Sumw2();
+    TH1D *h_Top_bJetPt_region1_TrueBG = new TH1D("h_Top_bJetPt_region1_TrueBG", "",10,0,1000);
+    h_Top_bJetPt_region1_TrueBG->Sumw2();
 
-    TH1D *h_Top_bJetPt_region2_LMet = new TH1D("h_Top_bJetPt_region2_LMet", "", 50, 0., 500);
-    h_Top_bJetPt_region2_LMet->Sumw2();
+    TH1D *h_Top_bJetPt_region2_TrueBG = new TH1D("h_Top_bJetPt_region2_TrueBG", "",10,0,1000);
+    h_Top_bJetPt_region2_TrueBG->Sumw2();
 
-    TH1D *h_Top_bJetPt_region3_LMet = new TH1D("h_Top_bJetPt_region3_LMet", "", 50, 0., 500);
-    h_Top_bJetPt_region3_LMet->Sumw2();
+    TH1D *h_Top_bJetPt_region3_TrueBG = new TH1D("h_Top_bJetPt_region3_TrueBG", "",10,0,1000);
+    h_Top_bJetPt_region3_TrueBG->Sumw2();
 
-    TH1D *h_Top_lJetPt_region1_LMet = new TH1D("h_Top_lJetPt_region1_LMet", "", 50, 0., 500);
-    h_Top_lJetPt_region1_LMet->Sumw2();
+    TH1D *h_Top_lJetPt_region1_TrueBG = new TH1D("h_Top_lJetPt_region1_TrueBG", "",10,0,1000);
+    h_Top_lJetPt_region1_TrueBG->Sumw2();
 
-    TH1D *h_Top_lJetPt_region2_LMet = new TH1D("h_Top_lJetPt_region2_LMet", "", 50, 0., 500);
-    h_Top_lJetPt_region2_LMet->Sumw2();
+    TH1D *h_Top_lJetPt_region2_TrueBG = new TH1D("h_Top_lJetPt_region2_TrueBG", "",10,0,1000);
+    h_Top_lJetPt_region2_TrueBG->Sumw2();
 
-    TH1D *h_Top_lJetPt_region3_LMet = new TH1D("h_Top_lJetPt_region3_LMet", "", 50, 0., 500);
-    h_Top_lJetPt_region3_LMet->Sumw2();
+    TH1D *h_Top_lJetPt_region3_TrueBG = new TH1D("h_Top_lJetPt_region3_TrueBG", "",10,0,1000);
+    h_Top_lJetPt_region3_TrueBG->Sumw2();
 
-    TH1D *h_Topee_bJetPt_region1_HMet = new TH1D("h_Topee_bJetPt_region1_HMet", "", 50, 0., 500);
+    TH1D *h_Topee_bJetPt_region1_HMet = new TH1D("h_Topee_bJetPt_region1_HMet", "",10,0,1000);
     h_Topee_bJetPt_region1_HMet->Sumw2();
 
-    TH1D *h_Topee_bJetPt_region2_HMet = new TH1D("h_Topee_bJetPt_region2_HMet", "", 50, 0., 500);
+    TH1D *h_Topee_bJetPt_region2_HMet = new TH1D("h_Topee_bJetPt_region2_HMet", "",10,0,1000);
     h_Topee_bJetPt_region2_HMet->Sumw2();
 
-    TH1D *h_Topee_bJetPt_region3_HMet = new TH1D("h_Topee_bJetPt_region3_HMet", "", 50, 0., 500);
+    TH1D *h_Topee_bJetPt_region3_HMet = new TH1D("h_Topee_bJetPt_region3_HMet", "",10,0,1000);
     h_Topee_bJetPt_region3_HMet->Sumw2();
 
-    TH1D *h_Topee_lJetPt_region1_HMet = new TH1D("h_Topee_lJetPt_region1_HMet", "", 50, 0., 500);
+    TH1D *h_Topee_lJetPt_region1_HMet = new TH1D("h_Topee_lJetPt_region1_HMet", "",10,0,1000);
     h_Topee_lJetPt_region1_HMet->Sumw2();
 
-    TH1D *h_Topee_lJetPt_region2_HMet = new TH1D("h_Topee_lJetPt_region2_HMet", "", 50, 0., 500);
+    TH1D *h_Topee_lJetPt_region2_HMet = new TH1D("h_Topee_lJetPt_region2_HMet", "",10,0,1000);
     h_Topee_lJetPt_region2_HMet->Sumw2();
 
-    TH1D *h_Topee_lJetPt_region3_HMet = new TH1D("h_Topee_lJetPt_region3_HMet", "", 50, 0., 500);
+    TH1D *h_Topee_lJetPt_region3_HMet = new TH1D("h_Topee_lJetPt_region3_HMet", "",10,0,1000);
     h_Topee_lJetPt_region3_HMet->Sumw2();
 
-    TH1D *h_Topemu_bJetPt_region1_HMet = new TH1D("h_Topemu_bJetPt_region1_HMet", "", 50, 0., 500);
+    TH1D *h_Topemu_bJetPt_region1_HMet = new TH1D("h_Topemu_bJetPt_region1_HMet", "",10,0,1000);
     h_Topemu_bJetPt_region1_HMet->Sumw2();
 
-    TH1D *h_Topemu_bJetPt_region2_HMet = new TH1D("h_Topemu_bJetPt_region2_HMet", "", 50, 0., 500);
+    TH1D *h_Topemu_bJetPt_region2_HMet = new TH1D("h_Topemu_bJetPt_region2_HMet", "",10,0,1000);
     h_Topemu_bJetPt_region2_HMet->Sumw2();
 
-    TH1D *h_Topemu_bJetPt_region3_HMet = new TH1D("h_Topemu_bJetPt_region3_HMet", "", 50, 0., 500);
+    TH1D *h_Topemu_bJetPt_region3_HMet = new TH1D("h_Topemu_bJetPt_region3_HMet", "",10,0,1000);
     h_Topemu_bJetPt_region3_HMet->Sumw2();
 
-    TH1D *h_Topemu_lJetPt_region1_HMet = new TH1D("h_Topemu_lJetPt_region1_HMet", "", 50, 0., 500);
+    TH1D *h_Topemu_lJetPt_region1_HMet = new TH1D("h_Topemu_lJetPt_region1_HMet", "",10,0,1000);
     h_Topemu_lJetPt_region1_HMet->Sumw2();
 
-    TH1D *h_Topemu_lJetPt_region2_HMet = new TH1D("h_Topemu_lJetPt_region2_HMet", "", 50, 0., 500);
+    TH1D *h_Topemu_lJetPt_region2_HMet = new TH1D("h_Topemu_lJetPt_region2_HMet", "",10,0,1000);
     h_Topemu_lJetPt_region2_HMet->Sumw2();
 
-    TH1D *h_Topemu_lJetPt_region3_HMet = new TH1D("h_Topemu_lJetPt_region3_HMet", "", 50, 0., 500);
+    TH1D *h_Topemu_lJetPt_region3_HMet = new TH1D("h_Topemu_lJetPt_region3_HMet", "",10,0,1000);
     h_Topemu_lJetPt_region3_HMet->Sumw2();
 
     //--------------------
     //       JetEta
     //--------------------
-    TH1D *h_Top_bJetEta_LMet = new TH1D("h_Top_bJetEta_LMet", "", 30, -3., 3.);
-    h_Top_bJetEta_LMet->Sumw2();
+    TH1D *h_Top_bJetEta_TrueBG = new TH1D("h_Top_bJetEta_TrueBG", "", 30, -3., 3.);
+    h_Top_bJetEta_TrueBG->Sumw2();
 
-    TH1D *h_Top_lJetEta_LMet = new TH1D("h_Top_lJetEta_LMet", "", 30, -3., 3.);
-    h_Top_lJetEta_LMet->Sumw2();
+    TH1D *h_Top_lJetEta_TrueBG = new TH1D("h_Top_lJetEta_TrueBG", "", 30, -3., 3.);
+    h_Top_lJetEta_TrueBG->Sumw2();
 
     TH1D *h_Topee_bJetEta_HMet = new TH1D("h_Topee_bJetEta_HMet", "", 30, -3., 3.);
     h_Topee_bJetEta_HMet->Sumw2();
@@ -343,6 +355,120 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
 
     TH1D *h_Topemu_lJetEta_HMet = new TH1D("h_Topemu_lJetEta_HMet", "", 30, -3., 3.);
     h_Topemu_lJetEta_HMet->Sumw2();
+
+    //---------------------------
+    // Jet CSV
+    //---------------------------
+    TH1D *h_Top_bJetCsv_region1_TrueBG = new TH1D("h_Top_bJetCsv_region1_TrueBG", "", 20, 0., 1.);
+    h_Top_bJetCsv_region1_TrueBG->Sumw2();
+
+    TH1D *h_Top_bJetCsv_region2_TrueBG = new TH1D("h_Top_bJetCsv_region2_TrueBG", "", 20, 0., 1.);
+    h_Top_bJetCsv_region2_TrueBG->Sumw2();
+
+    TH1D *h_Top_bJetCsv_region3_TrueBG = new TH1D("h_Top_bJetCsv_region3_TrueBG", "", 20, 0., 1.);
+    h_Top_bJetCsv_region3_TrueBG->Sumw2();
+
+    TH1D *h_Top_lJetCsv_region1_TrueBG = new TH1D("h_Top_lJetCsv_region1_TrueBG", "", 20, 0., 1.);
+    h_Top_lJetCsv_region1_TrueBG->Sumw2();
+
+    TH1D *h_Top_lJetCsv_region2_TrueBG = new TH1D("h_Top_lJetCsv_region2_TrueBG", "", 20, 0., 1.);
+    h_Top_lJetCsv_region2_TrueBG->Sumw2();
+
+    TH1D *h_Top_lJetCsv_region3_TrueBG = new TH1D("h_Top_lJetCsv_region3_TrueBG", "", 20, 0., 1.);
+    h_Top_lJetCsv_region3_TrueBG->Sumw2();
+
+    TH1D *h_Topee_bJetCsv_region1_HMet = new TH1D("h_Topee_bJetCsv_region1_HMet", "", 20, 0., 1.);
+    h_Topee_bJetCsv_region1_HMet->Sumw2();
+
+    TH1D *h_Topee_bJetCsv_region2_HMet = new TH1D("h_Topee_bJetCsv_region2_HMet", "", 20, 0., 1.);
+    h_Topee_bJetCsv_region2_HMet->Sumw2();
+
+    TH1D *h_Topee_bJetCsv_region3_HMet = new TH1D("h_Topee_bJetCsv_region3_HMet", "", 20, 0., 1.);
+    h_Topee_bJetCsv_region3_HMet->Sumw2();
+
+    TH1D *h_Topee_lJetCsv_region1_HMet = new TH1D("h_Topee_lJetCsv_region1_HMet", "", 20, 0., 1.);
+    h_Topee_lJetCsv_region1_HMet->Sumw2();
+
+    TH1D *h_Topee_lJetCsv_region2_HMet = new TH1D("h_Topee_lJetCsv_region2_HMet", "", 20, 0., 1.);
+    h_Topee_lJetCsv_region2_HMet->Sumw2();
+
+    TH1D *h_Topee_lJetCsv_region3_HMet = new TH1D("h_Topee_lJetCsv_region3_HMet", "", 20, 0., 1.);
+    h_Topee_lJetCsv_region3_HMet->Sumw2();
+
+    TH1D *h_Topemu_bJetCsv_region1_HMet = new TH1D("h_Topemu_bJetCsv_region1_HMet", "", 20, 0., 1.);
+    h_Topemu_bJetCsv_region1_HMet->Sumw2();
+
+    TH1D *h_Topemu_bJetCsv_region2_HMet = new TH1D("h_Topemu_bJetCsv_region2_HMet", "", 20, 0., 1.);
+    h_Topemu_bJetCsv_region2_HMet->Sumw2();
+
+    TH1D *h_Topemu_bJetCsv_region3_HMet = new TH1D("h_Topemu_bJetCsv_region3_HMet", "", 20, 0., 1.);
+    h_Topemu_bJetCsv_region3_HMet->Sumw2();
+
+    TH1D *h_Topemu_lJetCsv_region1_HMet = new TH1D("h_Topemu_lJetCsv_region1_HMet", "", 20, 0., 1.);
+    h_Topemu_lJetCsv_region1_HMet->Sumw2();
+
+    TH1D *h_Topemu_lJetCsv_region2_HMet = new TH1D("h_Topemu_lJetCsv_region2_HMet", "", 20, 0., 1.);
+    h_Topemu_lJetCsv_region2_HMet->Sumw2();
+
+    TH1D *h_Topemu_lJetCsv_region3_HMet = new TH1D("h_Topemu_lJetCsv_region3_HMet", "", 20, 0., 1.);
+    h_Topemu_lJetCsv_region3_HMet->Sumw2();
+
+    //----------------------------------
+    // JetMass
+    //----------------------------------
+    TH1D *h_Top_bJetMass_region1_TrueBG = new TH1D("h_Top_bJetMass_region1_TrueBG", "",  15, 0., 150.);
+    h_Top_bJetMass_region1_TrueBG->Sumw2();
+
+    TH1D *h_Top_bJetMass_region2_TrueBG = new TH1D("h_Top_bJetMass_region2_TrueBG", "",  15, 0., 150.);
+    h_Top_bJetMass_region2_TrueBG->Sumw2();
+
+    TH1D *h_Top_bJetMass_region3_TrueBG = new TH1D("h_Top_bJetMass_region3_TrueBG", "",  15, 0., 150.);
+    h_Top_bJetMass_region3_TrueBG->Sumw2();
+
+    TH1D *h_Top_lJetMass_region1_TrueBG = new TH1D("h_Top_lJetMass_region1_TrueBG", "",  15, 0., 150.);
+    h_Top_lJetMass_region1_TrueBG->Sumw2();
+
+    TH1D *h_Top_lJetMass_region2_TrueBG = new TH1D("h_Top_lJetMass_region2_TrueBG", "",  15, 0., 150.);
+    h_Top_lJetMass_region2_TrueBG->Sumw2();
+
+    TH1D *h_Top_lJetMass_region3_TrueBG = new TH1D("h_Top_lJetMass_region3_TrueBG", "",  15, 0., 150.);
+    h_Top_lJetMass_region3_TrueBG->Sumw2();
+
+    TH1D *h_Topee_bJetMass_region1_HMet = new TH1D("h_Topee_bJetMass_region1_HMet", "",  15, 0., 150.);
+    h_Topee_bJetMass_region1_HMet->Sumw2();
+
+    TH1D *h_Topee_bJetMass_region2_HMet = new TH1D("h_Topee_bJetMass_region2_HMet", "",  15, 0., 150.);
+    h_Topee_bJetMass_region2_HMet->Sumw2();
+
+    TH1D *h_Topee_bJetMass_region3_HMet = new TH1D("h_Topee_bJetMass_region3_HMet", "",  15, 0., 150.);
+    h_Topee_bJetMass_region3_HMet->Sumw2();
+
+    TH1D *h_Topee_lJetMass_region1_HMet = new TH1D("h_Topee_lJetMass_region1_HMet", "",  15, 0., 150.);
+    h_Topee_lJetMass_region1_HMet->Sumw2();
+
+    TH1D *h_Topee_lJetMass_region2_HMet = new TH1D("h_Topee_lJetMass_region2_HMet", "",  15, 0., 150.);
+    h_Topee_lJetMass_region2_HMet->Sumw2();
+
+    TH1D *h_Topee_lJetMass_region3_HMet = new TH1D("h_Topee_lJetMass_region3_HMet", "",  15, 0., 150.);
+    h_Topee_lJetMass_region3_HMet->Sumw2();
+
+    TH1D *h_Topemu_bJetMass_region1_HMet = new TH1D("h_Topemu_bJetMass_region1_HMet", "",  15, 0., 150.);
+    h_Topemu_bJetMass_region1_HMet->Sumw2();
+
+    TH1D *h_Topemu_bJetMass_region2_HMet = new TH1D("h_Topemu_bJetMass_region2_HMet", "",  15, 0., 150.);
+    h_Topemu_bJetMass_region2_HMet->Sumw2();
+
+    TH1D *h_Topemu_bJetMass_region3_HMet = new TH1D("h_Topemu_bJetMass_region3_HMet", "",  15, 0., 150.);
+    h_Topemu_bJetMass_region3_HMet->Sumw2();
+
+    TH1D *h_Topemu_lJetMass_region1_HMet = new TH1D("h_Topemu_lJetMass_region1_HMet", "",  15, 0., 150.);
+    h_Topemu_lJetMass_region1_HMet->Sumw2();
+
+    TH1D *h_Topemu_lJetMass_region2_HMet = new TH1D("h_Topemu_lJetMass_region2_HMet", "",  15, 0., 150.);
+    h_Topemu_lJetMass_region2_HMet->Sumw2();
+
+    TH1D *h_Topemu_lJetMass_region3_HMet = new TH1D("h_Topemu_lJetMass_region3_HMet", "",  15, 0., 150.);
+    h_Topemu_lJetMass_region3_HMet->Sumw2();
 
     Int_t I_Top_nJets;
 
@@ -358,6 +484,8 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     vector<float> *v_Top_Jetpartonflavor = new vector<float>();
     vector<float> *v_Top_JetPT = new vector<float>();
     vector<float> *v_Top_JetEta = new vector<float>();
+    vector<float> *v_Top_JetCsv = new vector<float>();
+    vector<float> *v_Top_JetMass = new vector<float>();
 
     v_Top_alpha->clear();
     v_Top_Chi3Dlog->clear();
@@ -367,6 +495,8 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     v_Top_Jetpartonflavor->clear();
     v_Top_JetPT->clear();
     v_Top_JetEta->clear();
+    v_Top_JetCsv->clear();
+    v_Top_JetMass->clear();
 
     TTree *T_Top_tree;
     Topfile->GetObject("h2", T_Top_tree);
@@ -381,6 +511,8 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     T_Top_tree->SetBranchAddress("v_fakeJetpartonflavor", &v_Top_Jetpartonflavor);
     T_Top_tree->SetBranchAddress("v_fakeJetPt", &v_Top_JetPT);
     T_Top_tree->SetBranchAddress("v_fakeJetEta", &v_Top_JetEta);
+    T_Top_tree->SetBranchAddress("v_fakeJetCSV", &v_Top_JetCsv);
+    T_Top_tree->SetBranchAddress("v_fakeJetMass", &v_Top_JetMass);
     for (int evt = 0; evt < T_Top_tree->GetEntries(); evt++)
     {
         T_Top_tree->GetEntry(evt);
@@ -398,12 +530,16 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
         vector<ThinJet> v_thinjet;
         for (size_t i = 0; i < v_Top_nTrack->size(); i++)
         {
-            v_thinjet.push_back(ThinJet((*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], (*v_Top_JetEta)[i], (*v_Top_alpha)[i], (*v_Top_nTrack)[i]));
+            v_thinjet.push_back(ThinJet((*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], (*v_Top_JetEta)[i], (*v_Top_alpha)[i], (*v_Top_nTrack)[i], (*v_Top_JetMass)[i], (*v_Top_JetCsv)[i]));
         }
         sort(v_thinjet.begin(), v_thinjet.end(), greater<ThinJet>());
 
         for (size_t i = 0; i < v_thinjet.size(); i++)
         {
+            if (v_thinjet[i].GetCsv() == -10)
+            {
+                continue;
+            }
             // For high MET region
             if (f_Top_met > 140)
             {
@@ -411,86 +547,124 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
                 {
                     // For trk
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_LMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_TrueBG);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_LMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_TrueBG);
                     // For JetPt
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_LMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_TrueBG);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_LMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_TrueBG);
 
                     // For JetEta
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_noeta_LMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_noeta_TrueBG);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_noeta_LMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_noeta_TrueBG);
 
                     // For Region |eta| < 1
                     if (abs(v_thinjet[i].GetEta()) < 1)
                     {
                         // For trk
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region1_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region1_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region1_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region1_TrueBG);
 
                         // For JetPt
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region1_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region1_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region1_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region1_TrueBG);
 
                         // For JetEta
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_TrueBG);
+
+                        // For JetMass
+                        //   For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), Top_weight, h_Top_bJetMass_region1_TrueBG);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), Top_weight, h_Top_lJetMass_region1_TrueBG);
+
+                        // For JetCsv
+                        //   For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), Top_weight, h_Top_bJetCsv_region1_TrueBG);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), Top_weight, h_Top_lJetCsv_region1_TrueBG);
                     }
                     // For Region 1 < |eta| < 2
                     else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) < 2)
                     {
                         // For trk
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region2_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region2_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region2_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region2_TrueBG);
 
                         // For JetPt
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region2_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region2_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region2_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region2_TrueBG);
 
                         // For JetEta
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_TrueBG);
+
+                        // For JetMass
+                        //   For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), Top_weight, h_Top_bJetMass_region2_TrueBG);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), Top_weight, h_Top_lJetMass_region2_TrueBG);
+
+                        // For JetCsv
+                        //   For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), Top_weight, h_Top_bJetCsv_region2_TrueBG);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), Top_weight, h_Top_lJetCsv_region2_TrueBG);
                     }
                     // For Region 2 < |eta| < 2.5
                     else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) < 2.5)
                     {
                         // For trk
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region3_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region3_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region3_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region3_TrueBG);
 
                         // For JetPt
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region3_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region3_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region3_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region3_TrueBG);
 
                         // For JetEta
                         //   For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_LMet);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_TrueBG);
                         // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_LMet);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_TrueBG);
+
+                        // For JetMass
+                        //   For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), Top_weight, h_Top_bJetMass_region3_TrueBG);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), Top_weight, h_Top_lJetMass_region3_TrueBG);
+
+                        // For JetCsv
+                        //   For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), Top_weight, h_Top_bJetCsv_region3_TrueBG);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), Top_weight, h_Top_lJetCsv_region3_TrueBG);
                     }
                 }
             }
+            //-----------------------------------------------------
+            // Apply Topee fake rate
             // For High MET region apply Low MET fake rate
             if (f_Top_met > 140)
             {
@@ -503,96 +677,114 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
                     cout << "cxBin_local = " << cxBin_local << endl;
                     cout << "lxBin_local = " << lxBin_local << endl;
                 }
-                double b_FR = Topemu_nTrk_bfakeRate_LM->GetBinContent(bxBin_local) * Top_weight;
-                double l_FR = Topemu_nTrk_lfakeRate_LM->GetBinContent(bxBin_local) * Top_weight;
-                // For trk
-                //   For b jet
-                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_FR, h_Topemu_btrk_HMet);
-                // For light flavor
-                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_FR, h_Topemu_ltrk_HMet);
-
-                // For JetPt
-                //   For b jet
-                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_FR, h_Topemu_bJetPt_HMet);
-                // For light flavor
-                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_FR, h_Topemu_lJetPt_HMet);
-
-                // For JetEta
-                //   For b jet
-                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_FR, h_Topemu_bJetEta_noeta_HMet);
-                // For light flavor
-                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_FR, h_Topemu_lJetEta_noeta_HMet);
 
                 // For Region |eta| < 1
                 if (abs(v_thinjet[i].GetEta()) < 1)
                 {
-                    double b_fakerate = Topee_nTrk_bfakeRate_difeta_1_LM->GetBinContent(bxBin_local) * Top_weight;
-                    double l_fakerate = Topee_nTrk_lfakeRate_difeta_1_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double b_eefr_1 = Topee_nTrk_bfakeRate_difeta_1_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double l_eefr_1 = Topee_nTrk_lfakeRate_difeta_1_LM->GetBinContent(bxBin_local) * Top_weight;
                     // For trk
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_fakerate, h_Topee_btrk_region1_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_eefr_1, h_Topee_btrk_region1_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_fakerate, h_Topee_ltrk_region1_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_eefr_1, h_Topee_ltrk_region1_HMet);
 
                     // For JetPt
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_fakerate, h_Topee_bJetPt_region1_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_eefr_1, h_Topee_bJetPt_region1_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_fakerate, h_Topee_lJetPt_region1_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_eefr_1, h_Topee_lJetPt_region1_HMet);
 
                     // For JetEta
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_fakerate, h_Topee_bJetEta_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_eefr_1, h_Topee_bJetEta_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_fakerate, h_Topee_lJetEta_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_eefr_1, h_Topee_lJetEta_HMet);
+
+                    // For JetMass
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), b_eefr_1, h_Topee_bJetMass_region1_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), l_eefr_1, h_Topee_lJetMass_region1_HMet);
+
+                    // For JetCsv
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), b_eefr_1, h_Topee_bJetCsv_region1_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), l_eefr_1, h_Topee_lJetCsv_region1_HMet);
                 }
                 // For Region 1 < |eta| < 2
                 else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) < 2)
                 {
-                    double b_fakerate = Topee_nTrk_bfakeRate_difeta_2_LM->GetBinContent(bxBin_local) * Top_weight;
-                    double l_fakerate = Topee_nTrk_lfakeRate_difeta_2_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double b_eefr_2 = Topee_nTrk_bfakeRate_difeta_2_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double l_eefr_2 = Topee_nTrk_lfakeRate_difeta_2_LM->GetBinContent(bxBin_local) * Top_weight;
                     // For trk
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_fakerate, h_Topee_btrk_region2_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_eefr_2, h_Topee_btrk_region2_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_fakerate, h_Topee_ltrk_region2_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_eefr_2, h_Topee_ltrk_region2_HMet);
 
                     // For JetPt
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_fakerate, h_Topee_bJetPt_region2_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_eefr_2, h_Topee_bJetPt_region2_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_fakerate, h_Topee_lJetPt_region2_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_eefr_2, h_Topee_lJetPt_region2_HMet);
 
                     // For JetEta
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_fakerate, h_Topee_bJetEta_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_eefr_2, h_Topee_bJetEta_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_fakerate, h_Topee_lJetEta_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_eefr_2, h_Topee_lJetEta_HMet);
+
+                    // For JetMass
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), b_eefr_2, h_Topee_bJetMass_region2_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), l_eefr_2, h_Topee_lJetMass_region2_HMet);
+
+                    // For JetCsv
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), b_eefr_2, h_Topee_bJetCsv_region2_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), l_eefr_2, h_Topee_lJetCsv_region2_HMet);
                 }
                 // For Region 2 < |eta| < 2.5
                 else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) < 2.5)
                 {
-                    double b_fakerate = Topee_nTrk_bfakeRate_difeta_3_LM->GetBinContent(bxBin_local) * Top_weight;
-                    double l_fakerate = Topee_nTrk_lfakeRate_difeta_3_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double b_eefr_3 = Topee_nTrk_bfakeRate_difeta_3_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double l_eefr_3 = Topee_nTrk_lfakeRate_difeta_3_LM->GetBinContent(bxBin_local) * Top_weight;
                     // For trk
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_fakerate, h_Topee_btrk_region3_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_eefr_3, h_Topee_btrk_region3_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_fakerate, h_Topee_ltrk_region3_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_eefr_3, h_Topee_ltrk_region3_HMet);
 
                     // For JetPt
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_fakerate, h_Topee_bJetPt_region3_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_eefr_3, h_Topee_bJetPt_region3_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_fakerate, h_Topee_lJetPt_region3_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_eefr_3, h_Topee_lJetPt_region3_HMet);
 
                     // For JetEta
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_fakerate, h_Topee_bJetEta_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_eefr_3, h_Topee_bJetEta_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_fakerate, h_Topee_lJetEta_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_eefr_3, h_Topee_lJetEta_HMet);
+
+                    // For JetMass
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), b_eefr_3, h_Topee_bJetMass_region3_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), l_eefr_3, h_Topee_lJetMass_region3_HMet);
+
+                    // For JetCsv
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), b_eefr_3, h_Topee_bJetCsv_region3_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), l_eefr_3, h_Topee_lJetCsv_region3_HMet);
                 }
             }
+            // Apply Top emu fake rate
             if (f_Top_met > 140)
             {
                 int bxBin_local = getfakerate(v_thinjet[i].GetNtrk(), 1., bxBinwidth);
@@ -604,74 +796,142 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
                     cout << "cxBin_local = " << cxBin_local << endl;
                     cout << "lxBin_local = " << lxBin_local << endl;
                 }
+                double b_emufr = Topemu_nTrk_bfakeRate_LM->GetBinContent(bxBin_local) * Top_weight;
+                double l_emufr = Topemu_nTrk_lfakeRate_LM->GetBinContent(bxBin_local) * Top_weight;
+                // For trk
+                //   For b jet
+                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_emufr, h_Topemu_btrk_HMet);
+                // For light flavor
+                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_emufr, h_Topemu_ltrk_HMet);
+
+                // For JetPt
+                //   For b jet
+                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_emufr, h_Topemu_bJetPt_HMet);
+                // For light flavor
+                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_emufr, h_Topemu_lJetPt_HMet);
+
+                // For JetEta
+                //   For b jet
+                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_emufr, h_Topemu_bJetEta_noeta_HMet);
+                // For light flavor
+                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_emufr, h_Topemu_lJetEta_noeta_HMet);
+
+                // For JetMass
+                //   For b jet
+                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), b_emufr, h_Topemu_bJetMass_HMet);
+                // For light flavor
+                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), l_emufr, h_Topemu_lJetMass_HMet);
+
+                // For JetCsv
+                //   For b jet
+                for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), b_emufr, h_Topemu_bJetCsv_HMet);
+                // For light flavor
+                for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), l_emufr, h_Topemu_lJetCsv_HMet);
+
                 // For Region |eta| < 1
                 if (abs(v_thinjet[i].GetEta()) < 1)
                 {
-                    double b_fakerate = Topemu_nTrk_bfakeRate_difeta_1_LM->GetBinContent(bxBin_local) * Top_weight;
-                    double l_fakerate = Topemu_nTrk_lfakeRate_difeta_1_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double b_emufr_1 = Topemu_nTrk_bfakeRate_difeta_1_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double l_emufr_1 = Topemu_nTrk_lfakeRate_difeta_1_LM->GetBinContent(bxBin_local) * Top_weight;
                     // For trk
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_fakerate, h_Topemu_btrk_region1_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_emufr_1, h_Topemu_btrk_region1_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_fakerate, h_Topemu_ltrk_region1_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_emufr_1, h_Topemu_ltrk_region1_HMet);
 
                     // For JetPt
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_fakerate, h_Topemu_bJetPt_region1_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_emufr_1, h_Topemu_bJetPt_region1_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_fakerate, h_Topemu_lJetPt_region1_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_emufr_1, h_Topemu_lJetPt_region1_HMet);
 
                     // For JetEta
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_fakerate, h_Topemu_bJetEta_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_emufr_1, h_Topemu_bJetEta_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_fakerate, h_Topemu_lJetEta_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_emufr_1, h_Topemu_lJetEta_HMet);
+
+                    // For JetMass
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), b_emufr_1, h_Topemu_bJetMass_region1_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), l_emufr_1, h_Topemu_lJetMass_region1_HMet);
+
+                    // For JetCsv
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), b_emufr_1, h_Topemu_bJetCsv_region1_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), l_emufr_1, h_Topemu_lJetCsv_region1_HMet);
                 }
                 // For Region 1 < |eta| < 2
                 else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) < 2)
                 {
-                    double b_fakerate = Topemu_nTrk_bfakeRate_difeta_2_LM->GetBinContent(bxBin_local) * Top_weight;
-                    double l_fakerate = Topemu_nTrk_lfakeRate_difeta_2_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double b_emufr_2 = Topemu_nTrk_bfakeRate_difeta_2_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double l_emufr_2 = Topemu_nTrk_lfakeRate_difeta_2_LM->GetBinContent(bxBin_local) * Top_weight;
                     // For trk
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_fakerate, h_Topemu_btrk_region2_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_emufr_2, h_Topemu_btrk_region2_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_fakerate, h_Topemu_ltrk_region2_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_emufr_2, h_Topemu_ltrk_region2_HMet);
 
                     // For JetPt
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_fakerate, h_Topemu_bJetPt_region2_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_emufr_2, h_Topemu_bJetPt_region2_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_fakerate, h_Topemu_lJetPt_region2_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_emufr_2, h_Topemu_lJetPt_region2_HMet);
 
                     // For JetEta
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_fakerate, h_Topemu_bJetEta_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_emufr_2, h_Topemu_bJetEta_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_fakerate, h_Topemu_lJetEta_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_emufr_2, h_Topemu_lJetEta_HMet);
+
+                    // For JetMass
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), b_emufr_2, h_Topemu_bJetMass_region2_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), l_emufr_2, h_Topemu_lJetMass_region2_HMet);
+
+                    // For JetCsv
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), b_emufr_2, h_Topemu_bJetCsv_region2_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), l_emufr_2, h_Topemu_lJetCsv_region2_HMet);
                 }
                 // For Region 2 < |eta| < 2.5
                 else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) < 2.5)
                 {
-                    double b_fakerate = Topemu_nTrk_bfakeRate_difeta_3_LM->GetBinContent(bxBin_local) * Top_weight;
-                    double l_fakerate = Topemu_nTrk_lfakeRate_difeta_3_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double b_emufr_3 = Topemu_nTrk_bfakeRate_difeta_3_LM->GetBinContent(bxBin_local) * Top_weight;
+                    double l_emufr_3 = Topemu_nTrk_lfakeRate_difeta_3_LM->GetBinContent(bxBin_local) * Top_weight;
                     // For trk
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_fakerate, h_Topemu_btrk_region3_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), b_emufr_3, h_Topemu_btrk_region3_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_fakerate, h_Topemu_ltrk_region3_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), l_emufr_3, h_Topemu_ltrk_region3_HMet);
 
                     // For JetPt
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_fakerate, h_Topemu_bJetPt_region3_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), b_emufr_3, h_Topemu_bJetPt_region3_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_fakerate, h_Topemu_lJetPt_region3_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), l_emufr_3, h_Topemu_lJetPt_region3_HMet);
 
                     // For JetEta
                     //   For b jet
-                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_fakerate, h_Topemu_bJetEta_HMet);
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), b_emufr_3, h_Topemu_bJetEta_HMet);
                     // For light flavor
-                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_fakerate, h_Topemu_lJetEta_HMet);
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), l_emufr_3, h_Topemu_lJetEta_HMet);
+
+                    // For JetMass
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), b_emufr_3, h_Topemu_bJetMass_region3_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetMass(), l_emufr_3, h_Topemu_lJetMass_region3_HMet);
+
+                    // For JetCsv
+                    //   For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), b_emufr_3, h_Topemu_bJetCsv_region3_HMet);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetCsv(), l_emufr_3, h_Topemu_lJetCsv_region3_HMet);
                 }
             }
         }
@@ -680,17 +940,17 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
     outfile->cd();
 
-    h_Top_btrk_region1_LMet->Write();
+    h_Top_btrk_region1_TrueBG->Write();
 
-    h_Top_btrk_region2_LMet->Write();
+    h_Top_btrk_region2_TrueBG->Write();
 
-    h_Top_btrk_region3_LMet->Write();
+    h_Top_btrk_region3_TrueBG->Write();
 
-    h_Top_ltrk_region1_LMet->Write();
+    h_Top_ltrk_region1_TrueBG->Write();
 
-    h_Top_ltrk_region2_LMet->Write();
+    h_Top_ltrk_region2_TrueBG->Write();
 
-    h_Top_ltrk_region3_LMet->Write();
+    h_Top_ltrk_region3_TrueBG->Write();
 
     h_Topee_btrk_region1_HMet->Write();
 
@@ -704,17 +964,17 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
 
     h_Topee_ltrk_region3_HMet->Write();
 
-    h_Top_bJetPt_region1_LMet->Write();
+    h_Top_bJetPt_region1_TrueBG->Write();
 
-    h_Top_bJetPt_region2_LMet->Write();
+    h_Top_bJetPt_region2_TrueBG->Write();
 
-    h_Top_bJetPt_region3_LMet->Write();
+    h_Top_bJetPt_region3_TrueBG->Write();
 
-    h_Top_lJetPt_region1_LMet->Write();
+    h_Top_lJetPt_region1_TrueBG->Write();
 
-    h_Top_lJetPt_region2_LMet->Write();
+    h_Top_lJetPt_region2_TrueBG->Write();
 
-    h_Top_lJetPt_region3_LMet->Write();
+    h_Top_lJetPt_region3_TrueBG->Write();
 
     h_Topee_bJetPt_region1_HMet->Write();
 
@@ -728,9 +988,9 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
 
     h_Topee_lJetPt_region3_HMet->Write();
 
-    h_Top_bJetEta_LMet->Write();
+    h_Top_bJetEta_TrueBG->Write();
 
-    h_Top_lJetEta_LMet->Write();
+    h_Top_lJetEta_TrueBG->Write();
 
     h_Topee_bJetEta_HMet->Write();
 
@@ -764,12 +1024,12 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
 
     h_Topemu_lJetEta_HMet->Write();
 
-    h_Top_btrk_LMet->Write();
-    h_Top_ltrk_LMet->Write();
-    h_Top_bJetPt_LMet->Write();
-    h_Top_lJetPt_LMet->Write();
-    h_Top_bJetEta_noeta_LMet->Write();
-    h_Top_lJetEta_noeta_LMet->Write();
+    h_Top_btrk_TrueBG->Write();
+    h_Top_ltrk_TrueBG->Write();
+    h_Top_bJetPt_TrueBG->Write();
+    h_Top_lJetPt_TrueBG->Write();
+    h_Top_bJetEta_noeta_TrueBG->Write();
+    h_Top_lJetEta_noeta_TrueBG->Write();
     h_Topee_btrk_HMet->Write();
     h_Topee_ltrk_HMet->Write();
     h_Topee_bJetPt_HMet->Write();
@@ -782,7 +1042,48 @@ void Ratio_Topee_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstima
     h_Topemu_lJetPt_HMet->Write();
     h_Topemu_bJetEta_noeta_HMet->Write();
     h_Topemu_lJetEta_noeta_HMet->Write();
-    
+    h_Top_bJetCsv_region1_TrueBG->Write();
+    h_Top_bJetCsv_region2_TrueBG->Write();
+    h_Top_bJetCsv_region3_TrueBG->Write();
+    h_Top_lJetCsv_region1_TrueBG->Write();
+    h_Top_lJetCsv_region2_TrueBG->Write();
+    h_Top_lJetCsv_region3_TrueBG->Write();
+    h_Topee_bJetCsv_region1_HMet->Write();
+    h_Topee_bJetCsv_region2_HMet->Write();
+    h_Topee_bJetCsv_region3_HMet->Write();
+    h_Topee_lJetCsv_region1_HMet->Write();
+    h_Topee_lJetCsv_region2_HMet->Write();
+    h_Topee_lJetCsv_region3_HMet->Write();
+    h_Topemu_bJetCsv_region1_HMet->Write();
+    h_Topemu_bJetCsv_region2_HMet->Write();
+    h_Topemu_bJetCsv_region3_HMet->Write();
+    h_Topemu_lJetCsv_region1_HMet->Write();
+    h_Topemu_lJetCsv_region2_HMet->Write();
+    h_Topemu_lJetCsv_region3_HMet->Write();
+    h_Top_bJetMass_region1_TrueBG->Write();
+    h_Top_bJetMass_region2_TrueBG->Write();
+    h_Top_bJetMass_region3_TrueBG->Write();
+    h_Top_lJetMass_region1_TrueBG->Write();
+    h_Top_lJetMass_region2_TrueBG->Write();
+    h_Top_lJetMass_region3_TrueBG->Write();
+    h_Topee_bJetMass_region1_HMet->Write();
+    h_Topee_bJetMass_region2_HMet->Write();
+    h_Topee_bJetMass_region3_HMet->Write();
+    h_Topee_lJetMass_region1_HMet->Write();
+    h_Topee_lJetMass_region2_HMet->Write();
+    h_Topee_lJetMass_region3_HMet->Write();
+    h_Topemu_bJetMass_region1_HMet->Write();
+    h_Topemu_bJetMass_region2_HMet->Write();
+    h_Topemu_bJetMass_region3_HMet->Write();
+    h_Topemu_lJetMass_region1_HMet->Write();
+    h_Topemu_lJetMass_region2_HMet->Write();
+    h_Topemu_lJetMass_region3_HMet->Write();
+
+    h_Topemu_bJetMass_HMet->Write();
+    h_Topemu_lJetMass_HMet->Write();
+    h_Topemu_bJetCsv_HMet->Write();
+    h_Topemu_lJetCsv_HMet->Write();
+
     outfile->Close();
     // h_Top_JetPt_bjet_SR->Draw();
 

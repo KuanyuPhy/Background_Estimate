@@ -72,25 +72,41 @@ void ee_Top_var()
     h_Top_Met_cut->GetYaxis()->SetTitle("");
     h_Top_Met_cut->Sumw2();
 
-    TH1D *h_Top_jetcsv = new TH1D("h_Top_jetcsv", "", 50, 0, 1);
+    TH1D *h_Top_jetcsv = new TH1D("h_Top_jetcsv", "", 20, 0, 1);
     h_Top_jetcsv->GetXaxis()->SetTitle("");
     h_Top_jetcsv->GetYaxis()->SetTitle("");
     h_Top_jetcsv->Sumw2();
 
-    TH1D *h_Top_bjetcsv = new TH1D("h_Top_bjetcsv", "", 50, 0, 1);
+    TH1D *h_Top_bjetcsv = new TH1D("h_Top_bjetcsv", "", 20, 0, 1);
     h_Top_bjetcsv->GetXaxis()->SetTitle("");
     h_Top_bjetcsv->GetYaxis()->SetTitle("");
     h_Top_bjetcsv->Sumw2();
 
-    TH1D *h_Top_cjetcsv = new TH1D("h_Top_cjetcsv", "", 50, 0, 1);
+    TH1D *h_Top_cjetcsv = new TH1D("h_Top_cjetcsv", "", 20, 0, 1);
     h_Top_cjetcsv->GetXaxis()->SetTitle("");
     h_Top_cjetcsv->GetYaxis()->SetTitle("");
     h_Top_cjetcsv->Sumw2();
 
-    TH1D *h_Top_ljetcsv = new TH1D("h_Top_ljetcsv", "", 50, 0, 1);
+    TH1D *h_Top_ljetcsv = new TH1D("h_Top_ljetcsv", "", 20, 0, 1);
     h_Top_ljetcsv->GetXaxis()->SetTitle("");
     h_Top_ljetcsv->GetYaxis()->SetTitle("");
     h_Top_ljetcsv->Sumw2();
+
+    TH1D *h_Top_bJetMass = new TH1D("h_Top_bJetMass", "", 50, 0., 150.);
+    h_Top_bJetMass->Sumw2();
+
+    TH1D *h_Top_lJetMass = new TH1D("h_Top_lJetMass", "", 50, 0., 150.);
+    h_Top_lJetMass->Sumw2();
+
+    // Cut alpha
+    TH1D *h_Top_jetcsv_cutalpha = new TH1D("h_Top_jetcsv_cutalpha", "", 20, 0, 1);
+    h_Top_jetcsv_cutalpha->Sumw2();
+
+    TH1D *h_Top_bjetcsv_cutalpha = new TH1D("h_Top_bjetcsv_cutalpha", "", 20, 0, 1);
+    h_Top_bjetcsv_cutalpha->Sumw2();
+
+    TH1D *h_Top_ljetcsv_cutalpha = new TH1D("h_Top_ljetcsv_cutalpha", "", 20, 0, 1);
+    h_Top_ljetcsv_cutalpha->Sumw2();
 
     Int_t I_TTTo2L2Nu_weight;
     Int_t I_ST_tW_top_weight;
@@ -148,6 +164,22 @@ void ee_Top_var()
     v_TTZToQQ_jetCSV->clear();
     v_TTZToLLNuNu_jetCSV->clear();
 
+    vector<float> *v_TTTo2L2Nu_JetMass = new vector<float>();
+    vector<float> *v_ST_tW_top_JetMass = new vector<float>();
+    vector<float> *v_ST_tW_antitop_JetMass = new vector<float>();
+    vector<float> *v_TTWJetsToLNu_JetMass = new vector<float>();
+    vector<float> *v_TTWJetsToQQ_JetMass = new vector<float>();
+    vector<float> *v_TTZToQQ_JetMass = new vector<float>();
+    vector<float> *v_TTZToLLNuNu_JetMass = new vector<float>();
+
+    v_TTTo2L2Nu_JetMass->clear();
+    v_ST_tW_top_JetMass->clear();
+    v_ST_tW_antitop_JetMass->clear();
+    v_TTWJetsToLNu_JetMass->clear();
+    v_TTWJetsToQQ_JetMass->clear();
+    v_TTZToQQ_JetMass->clear();
+    v_TTZToLLNuNu_JetMass->clear();
+
     vector<float> *v_TTTo2L2Nu_Jethadronflavor = new vector<float>();
     vector<float> *v_ST_tW_top_Jethadronflavor = new vector<float>();
     vector<float> *v_ST_tW_antitop_Jethadronflavor = new vector<float>();
@@ -172,9 +204,9 @@ void ee_Top_var()
     T_TTTo2L2Nu_tree->SetBranchAddress("f_Met", &f_TTTo2L2Nu_met);
     T_TTTo2L2Nu_tree->SetBranchAddress("f_dileptonPT", &f_TTTo2L2Nu_dilepPT);
     T_TTTo2L2Nu_tree->SetBranchAddress("v_fakealpha", &v_TTTo2L2Nu_alpha);
+    T_TTTo2L2Nu_tree->SetBranchAddress("v_fakeJetMass", &v_TTTo2L2Nu_JetMass);
     T_TTTo2L2Nu_tree->SetBranchAddress("f_thinjetCSV", &v_TTTo2L2Nu_jetCSV);
     T_TTTo2L2Nu_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTTo2L2Nu_Jethadronflavor);
-
     for (int evt = 0; evt < T_TTTo2L2Nu_tree->GetEntries(); evt++)
     {
         T_TTTo2L2Nu_tree->GetEntry(evt);
@@ -183,6 +215,32 @@ void ee_Top_var()
         if (f_TTTo2L2Nu_met > METcut)
         {
             h_Top_Met_cut->Fill(f_TTTo2L2Nu_met, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+            for (size_t i = 0; i < v_TTTo2L2Nu_jetCSV->size(); i++)
+            {
+                h_Top_jetcsv->Fill((*v_TTTo2L2Nu_jetCSV)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                if ((*v_TTTo2L2Nu_Jethadronflavor)[i] == 5)
+                {
+                    h_Top_bjetcsv->Fill((*v_TTTo2L2Nu_jetCSV)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                    h_Top_bJetMass->Fill((*v_TTTo2L2Nu_JetMass)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                    if (((*v_TTTo2L2Nu_alpha)[i] < 0.15))
+                    {
+                        h_Top_bjetcsv_cutalpha->Fill((*v_TTTo2L2Nu_jetCSV)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                    }
+                }
+                else if ((*v_TTTo2L2Nu_Jethadronflavor)[i] == 0)
+                {
+                    h_Top_ljetcsv->Fill((*v_TTTo2L2Nu_jetCSV)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                    h_Top_lJetMass->Fill((*v_TTTo2L2Nu_JetMass)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                    if (((*v_TTTo2L2Nu_alpha)[i] < 0.15))
+                    {
+                        h_Top_ljetcsv_cutalpha->Fill((*v_TTTo2L2Nu_jetCSV)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                    }
+                }
+                if (((*v_TTTo2L2Nu_alpha)[i] < 0.15))
+                {
+                    h_Top_jetcsv_cutalpha->Fill((*v_TTTo2L2Nu_jetCSV)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_ST_tW_top_tree;
@@ -191,9 +249,9 @@ void ee_Top_var()
     T_ST_tW_top_tree->SetBranchAddress("f_Met", &f_ST_tW_top_met);
     T_ST_tW_top_tree->SetBranchAddress("f_dileptonPT", &f_ST_tW_top_dilepPT);
     T_ST_tW_top_tree->SetBranchAddress("v_fakealpha", &v_ST_tW_top_alpha);
+    T_ST_tW_top_tree->SetBranchAddress("v_fakeJetMass", &v_ST_tW_top_JetMass);
     T_ST_tW_top_tree->SetBranchAddress("f_thinjetCSV", &v_ST_tW_top_jetCSV);
     T_ST_tW_top_tree->SetBranchAddress("v_fakeJethadronflavor", &v_ST_tW_top_Jethadronflavor);
-
     for (int evt = 0; evt < T_ST_tW_top_tree->GetEntries(); evt++)
     {
         T_ST_tW_top_tree->GetEntry(evt);
@@ -202,6 +260,32 @@ void ee_Top_var()
         if (f_ST_tW_top_met > METcut)
         {
             h_Top_Met_cut->Fill(f_ST_tW_top_met, I_ST_tW_top_weight * ST_tW_topWeight);
+            for (size_t i = 0; i < v_ST_tW_top_jetCSV->size(); i++)
+            {
+                h_Top_jetcsv->Fill((*v_ST_tW_top_jetCSV)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                if ((*v_ST_tW_top_Jethadronflavor)[i] == 5)
+                {
+                    h_Top_bjetcsv->Fill((*v_ST_tW_top_jetCSV)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                    h_Top_bJetMass->Fill((*v_ST_tW_top_JetMass)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                    if (((*v_ST_tW_top_alpha)[i] < 0.15))
+                    {
+                        h_Top_bjetcsv_cutalpha->Fill((*v_ST_tW_top_jetCSV)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                    }
+                }
+                else if ((*v_ST_tW_top_Jethadronflavor)[i] == 0)
+                {
+                    h_Top_ljetcsv->Fill((*v_ST_tW_top_jetCSV)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                    h_Top_lJetMass->Fill((*v_ST_tW_top_JetMass)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                    if (((*v_ST_tW_top_alpha)[i] < 0.15))
+                    {
+                        h_Top_ljetcsv_cutalpha->Fill((*v_ST_tW_top_jetCSV)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                    }
+                }
+                if (((*v_ST_tW_top_alpha)[i] < 0.15))
+                {
+                    h_Top_jetcsv_cutalpha->Fill((*v_ST_tW_top_jetCSV)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_ST_tW_antitop_tree;
@@ -210,6 +294,7 @@ void ee_Top_var()
     T_ST_tW_antitop_tree->SetBranchAddress("f_Met", &f_ST_tW_antitop_met);
     T_ST_tW_antitop_tree->SetBranchAddress("f_dileptonPT", &f_ST_tW_antitop_dilepPT);
     T_ST_tW_antitop_tree->SetBranchAddress("v_fakealpha", &v_ST_tW_antitop_alpha);
+    T_ST_tW_antitop_tree->SetBranchAddress("v_fakeJetMass", &v_ST_tW_antitop_JetMass);
     T_ST_tW_antitop_tree->SetBranchAddress("f_thinjetCSV", &v_ST_tW_antitop_jetCSV);
     T_ST_tW_antitop_tree->SetBranchAddress("v_fakeJethadronflavor", &v_ST_tW_antitop_Jethadronflavor);
 
@@ -221,6 +306,32 @@ void ee_Top_var()
         if (f_ST_tW_antitop_met > METcut)
         {
             h_Top_Met_cut->Fill(f_ST_tW_antitop_met, I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+            for (size_t i = 0; i < v_ST_tW_antitop_jetCSV->size(); i++)
+            {
+                h_Top_jetcsv->Fill((*v_ST_tW_antitop_jetCSV)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                if ((*v_ST_tW_antitop_Jethadronflavor)[i] == 5)
+                {
+                    h_Top_bjetcsv->Fill((*v_ST_tW_antitop_jetCSV)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                    h_Top_bJetMass->Fill((*v_ST_tW_antitop_JetMass)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                    if (((*v_ST_tW_antitop_alpha)[i] < 0.15))
+                    {
+                        h_Top_bjetcsv_cutalpha->Fill((*v_ST_tW_antitop_jetCSV)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                    }
+                }
+                else if ((*v_ST_tW_antitop_Jethadronflavor)[i] == 0)
+                {
+                    h_Top_ljetcsv->Fill((*v_ST_tW_antitop_jetCSV)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                    h_Top_lJetMass->Fill((*v_ST_tW_antitop_JetMass)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                    if (((*v_ST_tW_antitop_alpha)[i] < 0.15))
+                    {
+                        h_Top_ljetcsv_cutalpha->Fill((*v_ST_tW_antitop_jetCSV)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                    }
+                }
+                if (((*v_ST_tW_antitop_alpha)[i] < 0.15))
+                {
+                    h_Top_jetcsv_cutalpha->Fill((*v_ST_tW_antitop_jetCSV)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_TTWJetsToLNu_tree;
@@ -229,6 +340,7 @@ void ee_Top_var()
     T_TTWJetsToLNu_tree->SetBranchAddress("f_Met", &f_TTWJetsToLNu_met);
     T_TTWJetsToLNu_tree->SetBranchAddress("f_dileptonPT", &f_TTWJetsToLNu_dilepPT);
     T_TTWJetsToLNu_tree->SetBranchAddress("v_fakealpha", &v_TTWJetsToLNu_alpha);
+    T_TTWJetsToLNu_tree->SetBranchAddress("v_fakeJetMass", &v_TTWJetsToLNu_JetMass);
     T_TTWJetsToLNu_tree->SetBranchAddress("f_thinjetCSV", &v_TTWJetsToLNu_jetCSV);
     T_TTWJetsToLNu_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTWJetsToLNu_Jethadronflavor);
     for (int evt = 0; evt < T_TTWJetsToLNu_tree->GetEntries(); evt++)
@@ -239,6 +351,32 @@ void ee_Top_var()
         if (f_TTWJetsToLNu_met > METcut)
         {
             h_Top_Met_cut->Fill(f_TTWJetsToLNu_met, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+            for (size_t i = 0; i < v_TTWJetsToLNu_jetCSV->size(); i++)
+            {
+                h_Top_jetcsv->Fill((*v_TTWJetsToLNu_jetCSV)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                if ((*v_TTWJetsToLNu_Jethadronflavor)[i] == 5)
+                {
+                    h_Top_bjetcsv->Fill((*v_TTWJetsToLNu_jetCSV)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                    h_Top_bJetMass->Fill((*v_TTWJetsToLNu_JetMass)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                    if (((*v_TTWJetsToLNu_alpha)[i] < 0.15))
+                    {
+                        h_Top_bjetcsv_cutalpha->Fill((*v_TTWJetsToLNu_jetCSV)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                    }
+                }
+                else if ((*v_TTWJetsToLNu_Jethadronflavor)[i] == 0)
+                {
+                    h_Top_ljetcsv->Fill((*v_TTWJetsToLNu_jetCSV)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                    h_Top_lJetMass->Fill((*v_TTWJetsToLNu_JetMass)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                    if (((*v_TTWJetsToLNu_alpha)[i] < 0.15))
+                    {
+                        h_Top_ljetcsv_cutalpha->Fill((*v_TTWJetsToLNu_jetCSV)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                    }
+                }
+                if (((*v_TTWJetsToLNu_alpha)[i] < 0.15))
+                {
+                    h_Top_jetcsv_cutalpha->Fill((*v_TTWJetsToLNu_jetCSV)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_TTWJetsToQQ_tree;
@@ -247,6 +385,7 @@ void ee_Top_var()
     T_TTWJetsToQQ_tree->SetBranchAddress("f_Met", &f_TTWJetsToQQ_met);
     T_TTWJetsToQQ_tree->SetBranchAddress("f_dileptonPT", &f_TTWJetsToQQ_dilepPT);
     T_TTWJetsToQQ_tree->SetBranchAddress("v_fakealpha", &v_TTWJetsToQQ_alpha);
+    T_TTWJetsToQQ_tree->SetBranchAddress("v_fakeJetMass", &v_TTWJetsToQQ_JetMass);
     T_TTWJetsToQQ_tree->SetBranchAddress("f_thinjetCSV", &v_TTWJetsToQQ_jetCSV);
     T_TTWJetsToQQ_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTWJetsToQQ_Jethadronflavor);
 
@@ -258,6 +397,32 @@ void ee_Top_var()
         if (f_TTWJetsToQQ_met > METcut)
         {
             h_Top_Met_cut->Fill(f_TTWJetsToQQ_met, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+            for (size_t i = 0; i < v_TTWJetsToQQ_jetCSV->size(); i++)
+            {
+                h_Top_jetcsv->Fill((*v_TTWJetsToQQ_jetCSV)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                if ((*v_TTWJetsToQQ_Jethadronflavor)[i] == 5)
+                {
+                    h_Top_bjetcsv->Fill((*v_TTWJetsToQQ_jetCSV)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                    h_Top_bJetMass->Fill((*v_TTWJetsToQQ_JetMass)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                    if (((*v_TTWJetsToQQ_alpha)[i] < 0.15))
+                    {
+                        h_Top_bjetcsv_cutalpha->Fill((*v_TTWJetsToQQ_jetCSV)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                    }
+                }
+                else if ((*v_TTWJetsToQQ_Jethadronflavor)[i] == 0)
+                {
+                    h_Top_ljetcsv->Fill((*v_TTWJetsToQQ_jetCSV)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                    h_Top_lJetMass->Fill((*v_TTWJetsToQQ_JetMass)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                    if (((*v_TTWJetsToQQ_alpha)[i] < 0.15))
+                    {
+                        h_Top_ljetcsv_cutalpha->Fill((*v_TTWJetsToQQ_jetCSV)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                    }
+                }
+                if (((*v_TTWJetsToQQ_alpha)[i] < 0.15))
+                {
+                    h_Top_jetcsv_cutalpha->Fill((*v_TTWJetsToQQ_jetCSV)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_TTZToQQ_tree;
@@ -266,6 +431,7 @@ void ee_Top_var()
     T_TTZToQQ_tree->SetBranchAddress("f_Met", &f_TTZToQQ_met);
     T_TTZToQQ_tree->SetBranchAddress("f_dileptonPT", &f_TTZToQQ_dilepPT);
     T_TTZToQQ_tree->SetBranchAddress("v_fakealpha", &v_TTZToQQ_alpha);
+    T_TTZToQQ_tree->SetBranchAddress("v_fakeJetMass", &v_TTZToQQ_JetMass);
     T_TTZToQQ_tree->SetBranchAddress("f_thinjetCSV", &v_TTZToQQ_jetCSV);
     T_TTZToQQ_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTZToQQ_Jethadronflavor);
     for (int evt = 0; evt < T_TTZToQQ_tree->GetEntries(); evt++)
@@ -276,6 +442,32 @@ void ee_Top_var()
         if (f_TTZToQQ_met > METcut)
         {
             h_Top_Met_cut->Fill(f_TTZToQQ_met, I_TTZToQQ_weight * TTZToQQWeight);
+            for (size_t i = 0; i < v_TTZToQQ_jetCSV->size(); i++)
+            {
+                h_Top_jetcsv->Fill((*v_TTZToQQ_jetCSV)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                if ((*v_TTZToQQ_Jethadronflavor)[i] == 5)
+                {
+                    h_Top_bjetcsv->Fill((*v_TTZToQQ_jetCSV)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                    h_Top_bJetMass->Fill((*v_TTZToQQ_JetMass)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                    if (((*v_TTZToQQ_alpha)[i] < 0.15))
+                    {
+                        h_Top_bjetcsv_cutalpha->Fill((*v_TTZToQQ_jetCSV)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                    }
+                }
+                else if ((*v_TTZToQQ_Jethadronflavor)[i] == 0)
+                {
+                    h_Top_ljetcsv->Fill((*v_TTZToQQ_jetCSV)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                    h_Top_lJetMass->Fill((*v_TTZToQQ_JetMass)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                    if (((*v_TTZToQQ_alpha)[i] < 0.15))
+                    {
+                        h_Top_ljetcsv_cutalpha->Fill((*v_TTZToQQ_jetCSV)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                    }
+                }
+                if (((*v_TTZToQQ_alpha)[i] < 0.15))
+                {
+                    h_Top_jetcsv_cutalpha->Fill((*v_TTZToQQ_jetCSV)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_TTZToLLNuNu_tree;
@@ -284,6 +476,7 @@ void ee_Top_var()
     T_TTZToLLNuNu_tree->SetBranchAddress("f_Met", &f_TTZToLLNuNu_met);
     T_TTZToLLNuNu_tree->SetBranchAddress("f_dileptonPT", &f_TTZToLLNuNu_dilepPT);
     T_TTZToLLNuNu_tree->SetBranchAddress("v_fakealpha", &v_TTZToLLNuNu_alpha);
+    T_TTZToLLNuNu_tree->SetBranchAddress("v_fakeJetMass", &v_TTZToLLNuNu_JetMass);
     T_TTZToLLNuNu_tree->SetBranchAddress("f_thinjetCSV", &v_TTZToLLNuNu_jetCSV);
     T_TTZToLLNuNu_tree->SetBranchAddress("v_fakeJethadronflavor", &v_TTZToLLNuNu_Jethadronflavor);
     for (int evt = 0; evt < T_TTZToLLNuNu_tree->GetEntries(); evt++)
@@ -294,6 +487,32 @@ void ee_Top_var()
         if (f_TTZToLLNuNu_met > METcut)
         {
             h_Top_Met_cut->Fill(f_TTZToLLNuNu_met, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+            for (size_t i = 0; i < v_TTZToLLNuNu_jetCSV->size(); i++)
+            {
+                h_Top_jetcsv->Fill((*v_TTZToLLNuNu_jetCSV)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                if ((*v_TTZToLLNuNu_Jethadronflavor)[i] == 5)
+                {
+                    h_Top_bjetcsv->Fill((*v_TTZToLLNuNu_jetCSV)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                    h_Top_bJetMass->Fill((*v_TTZToLLNuNu_JetMass)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                    if (((*v_TTZToLLNuNu_alpha)[i] < 0.15))
+                    {
+                        h_Top_bjetcsv_cutalpha->Fill((*v_TTZToLLNuNu_jetCSV)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                    }
+                }
+                else if ((*v_TTZToLLNuNu_Jethadronflavor)[i] == 0)
+                {
+                    h_Top_ljetcsv->Fill((*v_TTZToLLNuNu_jetCSV)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                    h_Top_lJetMass->Fill((*v_TTZToLLNuNu_JetMass)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                    if (((*v_TTZToLLNuNu_alpha)[i] < 0.15))
+                    {
+                        h_Top_ljetcsv_cutalpha->Fill((*v_TTZToLLNuNu_jetCSV)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                    }
+                }
+                if (((*v_TTZToLLNuNu_alpha)[i] < 0.15))
+                {
+                    h_Top_jetcsv_cutalpha->Fill((*v_TTZToLLNuNu_jetCSV)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                }
+            } // End of csv loop
         }
     }
     h_Top_dilepPT->Draw();
@@ -302,6 +521,15 @@ void ee_Top_var()
     h_Top_dilepPT->Write();
     h_Top_Met->Write();
     h_Top_Met_cut->Write();
+    h_Top_jetcsv->Write();
+    h_Top_bjetcsv->Write();
+    h_Top_ljetcsv->Write();
+    h_Top_bJetMass->Write();
+    h_Top_lJetMass->Write();
+    h_Top_jetcsv_cutalpha->Write();
+    h_Top_bjetcsv_cutalpha->Write();
+    h_Top_ljetcsv_cutalpha->Write();
+
     outfile_HT0->Close();
 }
 int main()

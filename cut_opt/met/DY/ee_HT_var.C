@@ -194,20 +194,36 @@ void ee_HT_var()
     TH1D *h_DY_Met_cut = new TH1D("h_DY_Met_cut", "", 50, 0, 500);
     h_DY_Met_cut->Sumw2();
 
-    TH1D *h_DY_jetCSV = new TH1D("h_DY_jetCSV", "", 50, 0, 1);
-    h_DY_jetCSV->Sumw2();
+    TH1D *h_DY_jetcsv = new TH1D("h_DY_jetcsv", "", 20, 0, 1);
+    h_DY_jetcsv->Sumw2();
 
     TH1D *h_DY_dilepPT = new TH1D("h_DY_dilepPT", "", 50, 0, 500);
     h_DY_dilepPT->Sumw2();
 
-    TH1D *h_DY_bjetCSV = new TH1D("h_DY_bjetCSV", "", 50, 0, 1);
-    h_DY_bjetCSV->Sumw2();
+    TH1D *h_DY_bjetcsv = new TH1D("h_DY_bjetcsv", "", 20, 0, 1);
+    h_DY_bjetcsv->Sumw2();
 
-    TH1D *h_DY_cjetCSV = new TH1D("h_DY_cjetCSV", "", 50, 0, 1);
+    TH1D *h_DY_cjetCSV = new TH1D("h_DY_cjetCSV", "", 20, 0, 1);
     h_DY_cjetCSV->Sumw2();
 
-    TH1D *h_DY_ljetCSV = new TH1D("h_DY_ljetCSV", "", 50, 0, 1);
-    h_DY_ljetCSV->Sumw2();
+    TH1D *h_DY_ljetcsv = new TH1D("h_DY_ljetcsv", "", 20, 0, 1);
+    h_DY_ljetcsv->Sumw2();
+
+    // Cut alpha
+    TH1D *h_DY_jetcsv_cutalpha = new TH1D("h_DY_jetcsv_cutalpha", "", 20, 0, 1);
+    h_DY_jetcsv_cutalpha->Sumw2();
+
+    TH1D *h_DY_bjetcsv_cutalpha = new TH1D("h_DY_bjetcsv_cutalpha", "", 20, 0, 1);
+    h_DY_bjetcsv_cutalpha->Sumw2();
+
+    TH1D *h_DY_ljetcsv_cutalpha = new TH1D("h_DY_ljetcsv_cutalpha", "", 20, 0, 1);
+    h_DY_ljetcsv_cutalpha->Sumw2();
+
+    TH1D *h_DY_bJetMass = new TH1D("h_DY_bJetMass", "", 50, 0., 150.);
+    h_DY_bJetMass->Sumw2();
+
+    TH1D *h_DY_lJetMass = new TH1D("h_DY_lJetMass", "", 50, 0., 150.);
+    h_DY_lJetMass->Sumw2();
 
     float_t HT;
 
@@ -260,6 +276,26 @@ void ee_HT_var()
     v_ht1200_jetcsv->clear();
     v_ht2500_jetcsv->clear();
 
+    vector<float> *v_ht0_jetMass = new vector<float>();
+    vector<float> *v_ht70_jetMass = new vector<float>();
+    vector<float> *v_ht100_jetMass = new vector<float>();
+    vector<float> *v_ht200_jetMass = new vector<float>();
+    vector<float> *v_ht400_jetMass = new vector<float>();
+    vector<float> *v_ht600_jetMass = new vector<float>();
+    vector<float> *v_ht800_jetMass = new vector<float>();
+    vector<float> *v_ht1200_jetMass = new vector<float>();
+    vector<float> *v_ht2500_jetMass = new vector<float>();
+
+    v_ht0_jetMass->clear();
+    v_ht70_jetMass->clear();
+    v_ht100_jetMass->clear();
+    v_ht200_jetMass->clear();
+    v_ht400_jetMass->clear();
+    v_ht600_jetMass->clear();
+    v_ht800_jetMass->clear();
+    v_ht1200_jetMass->clear();
+    v_ht2500_jetMass->clear();
+
     vector<float> *v_ht0_Jethadronflavor = new vector<float>();
     vector<float> *v_ht70_Jethadronflavor = new vector<float>();
     vector<float> *v_ht100_Jethadronflavor = new vector<float>();
@@ -289,6 +325,7 @@ void ee_HT_var()
     T_inclusive->SetBranchAddress("f_Met", &f_ht0_Met);
     T_inclusive->SetBranchAddress("f_dileptonPT", &f_ht0_dilepPT);
     T_inclusive->SetBranchAddress("v_fakealpha", &v_ht0_alpha);
+    T_inclusive->SetBranchAddress("v_fakeJetMass", &v_ht0_jetMass);
     T_inclusive->SetBranchAddress("f_thinjetCSV", &v_ht0_jetcsv);
     T_inclusive->SetBranchAddress("v_fakeJethadronflavor", &v_ht0_Jethadronflavor);
     for (int evt = 0; evt < T_inclusive->GetEntries(); evt++)
@@ -296,10 +333,38 @@ void ee_HT_var()
         T_inclusive->GetEntry(evt);
         for_inclusive_sample(HT, f_ht0_Met, I_ht0_weight, h_DY_Met);
         for_inclusive_sample(HT, f_ht0_dilepPT, I_ht0_weight, h_DY_dilepPT);
-        
+
         if (f_ht0_Met > metcut)
         {
             for_inclusive_sample(HT, f_ht0_Met, I_ht0_weight, h_DY_Met_cut);
+
+            for (size_t i = 0; i < v_ht0_jetcsv->size(); i++)
+            {
+                for_inclusive_sample(HT, (*v_ht0_jetcsv)[i], I_ht0_weight, h_DY_jetcsv);
+                if ((*v_ht0_Jethadronflavor)[i] == 5)
+                {
+                    for_inclusive_sample(HT, (*v_ht0_jetcsv)[i], I_ht0_weight, h_DY_bjetcsv);
+                    for_inclusive_sample(HT, (*v_ht0_jetMass)[i], I_ht0_weight, h_DY_bJetMass);
+                    if ((*v_ht0_alpha)[i] < 0.15)
+                    {
+                        for_inclusive_sample(HT, (*v_ht0_jetcsv)[i], I_ht0_weight, h_DY_bjetcsv_cutalpha);
+                    }
+                }
+                else if ((*v_ht0_Jethadronflavor)[i] == 0)
+                {
+                    for_inclusive_sample(HT, (*v_ht0_jetcsv)[i], I_ht0_weight, h_DY_ljetcsv);
+                    for_inclusive_sample(HT, (*v_ht0_jetMass)[i], I_ht0_weight, h_DY_lJetMass);
+                    if ((*v_ht0_alpha)[i] < 0.15)
+                    {
+                        for_inclusive_sample(HT, (*v_ht0_jetcsv)[i], I_ht0_weight, h_DY_ljetcsv_cutalpha);
+                    }
+                }
+                // Do not consider flavor & cut alpha
+                if ((*v_ht0_alpha)[i] < 0.15)
+                {
+                    for_inclusive_sample(HT, (*v_ht0_jetcsv)[i], I_ht0_weight, h_DY_jetcsv_cutalpha);
+                }
+            }
         }
     }
     TTree *T_HT100;
@@ -308,16 +373,44 @@ void ee_HT_var()
     T_HT100->SetBranchAddress("f_Met", &f_ht100_Met);
     T_HT100->SetBranchAddress("f_dileptonPT", &f_ht100_dilepPT);
     T_HT100->SetBranchAddress("v_fakealpha", &v_ht100_alpha);
+    T_HT100->SetBranchAddress("v_fakeJetMass", &v_ht100_jetMass);
     T_HT100->SetBranchAddress("f_thinjetCSV", &v_ht100_jetcsv);
     T_HT100->SetBranchAddress("v_fakeJethadronflavor", &v_ht100_Jethadronflavor);
     for (int evt = 0; evt < T_HT100->GetEntries(); evt++)
     {
         T_HT100->GetEntry(evt);
         h_DY_Met->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
-        //h_DY_dilepPT->Fill(f_ht100_dilepPT, I_ht100_weight * HT100Weight);
+        // h_DY_dilepPT->Fill(f_ht100_dilepPT, I_ht100_weight * HT100Weight);
         if (f_ht100_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
+
+            for (size_t i = 0; i < v_ht100_jetcsv->size(); i++)
+            {
+                h_DY_jetcsv->Fill((*v_ht100_jetcsv)[i], I_ht100_weight * HT100Weight);
+                if ((*v_ht100_Jethadronflavor)[i] == 5)
+                {
+                    h_DY_bjetcsv->Fill((*v_ht100_jetcsv)[i], I_ht100_weight * HT100Weight);
+                    h_DY_bJetMass->Fill((*v_ht100_jetMass)[i], I_ht100_weight * HT100Weight);
+                    if ((*v_ht100_alpha)[i] < 0.15)
+                    {
+                        h_DY_bjetcsv_cutalpha->Fill((*v_ht100_jetcsv)[i], I_ht100_weight * HT100Weight);
+                    }
+                }
+                else if ((*v_ht100_Jethadronflavor)[i] == 0)
+                {
+                    h_DY_ljetcsv->Fill((*v_ht100_jetcsv)[i], I_ht100_weight * HT100Weight);
+                    h_DY_lJetMass->Fill((*v_ht100_jetMass)[i], I_ht100_weight * HT100Weight);
+                    if ((*v_ht100_alpha)[i] < 0.15)
+                    {
+                        h_DY_ljetcsv_cutalpha->Fill((*v_ht100_jetcsv)[i], I_ht100_weight * HT100Weight);
+                    }
+                }
+                if ((*v_ht100_alpha)[i] < 0.15)
+                {
+                    h_DY_jetcsv_cutalpha->Fill((*v_ht100_jetcsv)[i], I_ht100_weight * HT100Weight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_HT200;
@@ -326,16 +419,44 @@ void ee_HT_var()
     T_HT200->SetBranchAddress("f_Met", &f_ht200_Met);
     T_HT200->SetBranchAddress("f_dileptonPT", &f_ht200_dilepPT);
     T_HT200->SetBranchAddress("v_fakealpha", &v_ht200_alpha);
+    T_HT200->SetBranchAddress("v_fakeJetMass", &v_ht200_jetMass);
     T_HT200->SetBranchAddress("f_thinjetCSV", &v_ht200_jetcsv);
     T_HT200->SetBranchAddress("v_fakeJethadronflavor", &v_ht200_Jethadronflavor);
     for (int evt = 0; evt < T_HT200->GetEntries(); evt++)
     {
         T_HT200->GetEntry(evt);
         h_DY_Met->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
-        //h_DY_dilepPT->Fill(f_ht200_dilepPT, I_ht200_weight * HT200Weight);
+        // h_DY_dilepPT->Fill(f_ht200_dilepPT, I_ht200_weight * HT200Weight);
         if (f_ht200_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
+
+            for (size_t i = 0; i < v_ht200_jetcsv->size(); i++)
+            {
+                h_DY_jetcsv->Fill((*v_ht200_jetcsv)[i], I_ht200_weight * HT200Weight);
+                if ((*v_ht200_Jethadronflavor)[i] == 5)
+                {
+                    h_DY_bjetcsv->Fill((*v_ht200_jetcsv)[i], I_ht200_weight * HT200Weight);
+                    h_DY_bJetMass->Fill((*v_ht200_jetMass)[i], I_ht200_weight * HT200Weight);
+                    if ((*v_ht200_alpha)[i] < 0.15)
+                    {
+                        h_DY_bjetcsv_cutalpha->Fill((*v_ht200_jetcsv)[i], I_ht200_weight * HT200Weight);
+                    }
+                }
+                else if ((*v_ht200_Jethadronflavor)[i] == 0)
+                {
+                    h_DY_ljetcsv->Fill((*v_ht200_jetcsv)[i], I_ht200_weight * HT200Weight);
+                    h_DY_lJetMass->Fill((*v_ht200_jetMass)[i], I_ht200_weight * HT200Weight);
+                    if ((*v_ht200_alpha)[i] < 0.15)
+                    {
+                        h_DY_ljetcsv_cutalpha->Fill((*v_ht200_jetcsv)[i], I_ht200_weight * HT200Weight);
+                    }
+                }
+                if ((*v_ht200_alpha)[i] < 0.15)
+                {
+                    h_DY_jetcsv_cutalpha->Fill((*v_ht200_jetcsv)[i], I_ht200_weight * HT200Weight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_HT400;
@@ -344,16 +465,44 @@ void ee_HT_var()
     T_HT400->SetBranchAddress("f_Met", &f_ht400_Met);
     T_HT400->SetBranchAddress("f_dileptonPT", &f_ht400_dilepPT);
     T_HT400->SetBranchAddress("v_fakealpha", &v_ht400_alpha);
+    T_HT400->SetBranchAddress("v_fakeJetMass", &v_ht400_jetMass);
     T_HT400->SetBranchAddress("f_thinjetCSV", &v_ht400_jetcsv);
     T_HT400->SetBranchAddress("v_fakeJethadronflavor", &v_ht400_Jethadronflavor);
     for (int evt = 0; evt < T_HT400->GetEntries(); evt++)
     {
         T_HT400->GetEntry(evt);
         h_DY_Met->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
-        //h_DY_dilepPT->Fill(f_ht400_dilepPT, I_ht400_weight * HT400Weight);
+        // h_DY_dilepPT->Fill(f_ht400_dilepPT, I_ht400_weight * HT400Weight);
         if (f_ht400_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
+
+            for (size_t i = 0; i < v_ht400_jetcsv->size(); i++)
+            {
+                h_DY_jetcsv->Fill((*v_ht400_jetcsv)[i], I_ht400_weight * HT400Weight);
+                if ((*v_ht400_Jethadronflavor)[i] == 5)
+                {
+                    h_DY_bjetcsv->Fill((*v_ht400_jetcsv)[i], I_ht400_weight * HT400Weight);
+                    h_DY_bJetMass->Fill((*v_ht400_jetMass)[i], I_ht400_weight * HT400Weight);
+                    if ((*v_ht400_alpha)[i] < 0.15)
+                    {
+                        h_DY_bjetcsv_cutalpha->Fill((*v_ht400_jetcsv)[i], I_ht400_weight * HT400Weight);
+                    }
+                }
+                else if ((*v_ht400_Jethadronflavor)[i] == 0)
+                {
+                    h_DY_ljetcsv->Fill((*v_ht400_jetcsv)[i], I_ht400_weight * HT400Weight);
+                    h_DY_lJetMass->Fill((*v_ht400_jetMass)[i], I_ht400_weight * HT400Weight);
+                    if ((*v_ht400_alpha)[i] < 0.15)
+                    {
+                        h_DY_ljetcsv_cutalpha->Fill((*v_ht400_jetcsv)[i], I_ht400_weight * HT400Weight);
+                    }
+                }
+                if ((*v_ht400_alpha)[i] < 0.15)
+                {
+                    h_DY_jetcsv_cutalpha->Fill((*v_ht400_jetcsv)[i], I_ht400_weight * HT400Weight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_HT600;
@@ -362,16 +511,44 @@ void ee_HT_var()
     T_HT600->SetBranchAddress("f_Met", &f_ht600_Met);
     T_HT600->SetBranchAddress("f_dileptonPT", &f_ht600_dilepPT);
     T_HT600->SetBranchAddress("v_fakealpha", &v_ht600_alpha);
+    T_HT600->SetBranchAddress("v_fakeJetMass", &v_ht600_jetMass);
     T_HT600->SetBranchAddress("f_thinjetCSV", &v_ht600_jetcsv);
     T_HT600->SetBranchAddress("v_fakeJethadronflavor", &v_ht600_Jethadronflavor);
     for (int evt = 0; evt < T_HT600->GetEntries(); evt++)
     {
         T_HT600->GetEntry(evt);
         h_DY_Met->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
-        //h_DY_dilepPT->Fill(f_ht600_dilepPT, I_ht600_weight * HT600Weight);
+        // h_DY_dilepPT->Fill(f_ht600_dilepPT, I_ht600_weight * HT600Weight);
         if (f_ht600_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
+
+            for (size_t i = 0; i < v_ht600_jetcsv->size(); i++)
+            {
+                h_DY_jetcsv->Fill((*v_ht600_jetcsv)[i], I_ht600_weight * HT600Weight);
+                if ((*v_ht600_Jethadronflavor)[i] == 5)
+                {
+                    h_DY_bjetcsv->Fill((*v_ht600_jetcsv)[i], I_ht600_weight * HT600Weight);
+                    h_DY_bJetMass->Fill((*v_ht600_jetMass)[i], I_ht600_weight * HT600Weight);
+                    if ((*v_ht600_alpha)[i] < 0.15)
+                    {
+                        h_DY_bjetcsv_cutalpha->Fill((*v_ht600_jetcsv)[i], I_ht600_weight * HT600Weight);
+                    }
+                }
+                else if ((*v_ht600_Jethadronflavor)[i] == 0)
+                {
+                    h_DY_ljetcsv->Fill((*v_ht600_jetcsv)[i], I_ht600_weight * HT600Weight);
+                    h_DY_lJetMass->Fill((*v_ht600_jetMass)[i], I_ht600_weight * HT600Weight);
+                    if ((*v_ht600_alpha)[i] < 0.15)
+                    {
+                        h_DY_ljetcsv_cutalpha->Fill((*v_ht600_jetcsv)[i], I_ht600_weight * HT600Weight);
+                    }
+                }
+                if ((*v_ht600_alpha)[i] < 0.15)
+                {
+                    h_DY_jetcsv_cutalpha->Fill((*v_ht600_jetcsv)[i], I_ht600_weight * HT600Weight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_HT800;
@@ -380,16 +557,43 @@ void ee_HT_var()
     T_HT800->SetBranchAddress("f_Met", &f_ht800_Met);
     T_HT800->SetBranchAddress("f_dileptonPT", &f_ht800_dilepPT);
     T_HT800->SetBranchAddress("v_fakealpha", &v_ht800_alpha);
+    T_HT800->SetBranchAddress("v_fakeJetMass", &v_ht800_jetMass);
     T_HT800->SetBranchAddress("f_thinjetCSV", &v_ht800_jetcsv);
     T_HT800->SetBranchAddress("v_fakeJethadronflavor", &v_ht800_Jethadronflavor);
     for (int evt = 0; evt < T_HT800->GetEntries(); evt++)
     {
         T_HT800->GetEntry(evt);
         h_DY_Met->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
-        //h_DY_dilepPT->Fill(f_ht800_dilepPT, I_ht800_weight * HT800Weight);
+        // h_DY_dilepPT->Fill(f_ht800_dilepPT, I_ht800_weight * HT800Weight);
         if (f_ht800_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
+            for (size_t i = 0; i < v_ht800_jetcsv->size(); i++)
+            {
+                h_DY_jetcsv->Fill((*v_ht800_jetcsv)[i], I_ht800_weight * HT800Weight);
+                if ((*v_ht800_Jethadronflavor)[i] == 5)
+                {
+                    h_DY_bjetcsv->Fill((*v_ht800_jetcsv)[i], I_ht800_weight * HT800Weight);
+                    h_DY_bJetMass->Fill((*v_ht800_jetMass)[i], I_ht800_weight * HT800Weight);
+                    if ((*v_ht800_alpha)[i] < 0.15)
+                    {
+                        h_DY_bjetcsv_cutalpha->Fill((*v_ht800_jetcsv)[i], I_ht800_weight * HT800Weight);
+                    }
+                }
+                else if ((*v_ht800_Jethadronflavor)[i] == 0)
+                {
+                    h_DY_ljetcsv->Fill((*v_ht800_jetcsv)[i], I_ht800_weight * HT800Weight);
+                    h_DY_lJetMass->Fill((*v_ht800_jetMass)[i], I_ht800_weight * HT800Weight);
+                    if ((*v_ht800_alpha)[i] < 0.15)
+                    {
+                        h_DY_ljetcsv_cutalpha->Fill((*v_ht800_jetcsv)[i], I_ht800_weight * HT800Weight);
+                    }
+                }
+                if ((*v_ht800_alpha)[i] < 0.15)
+                {
+                    h_DY_jetcsv_cutalpha->Fill((*v_ht800_jetcsv)[i], I_ht800_weight * HT800Weight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_HT1200;
@@ -398,16 +602,44 @@ void ee_HT_var()
     T_HT1200->SetBranchAddress("f_Met", &f_ht1200_Met);
     T_HT1200->SetBranchAddress("f_dileptonPT", &f_ht1200_dilepPT);
     T_HT1200->SetBranchAddress("v_fakealpha", &v_ht1200_alpha);
+    T_HT1200->SetBranchAddress("v_fakeJetMass", &v_ht1200_jetMass);
     T_HT1200->SetBranchAddress("f_thinjetCSV", &v_ht1200_jetcsv);
     T_HT1200->SetBranchAddress("v_fakeJethadronflavor", &v_ht1200_Jethadronflavor);
     for (int evt = 0; evt < T_HT1200->GetEntries(); evt++)
     {
         T_HT1200->GetEntry(evt);
         h_DY_Met->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
-        //h_DY_dilepPT->Fill(f_ht1200_dilepPT, I_ht1200_weight * HT1200Weight);
+        // h_DY_dilepPT->Fill(f_ht1200_dilepPT, I_ht1200_weight * HT1200Weight);
         if (f_ht1200_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
+
+            for (size_t i = 0; i < v_ht1200_jetcsv->size(); i++)
+            {
+                h_DY_jetcsv->Fill((*v_ht1200_jetcsv)[i], I_ht1200_weight * HT1200Weight);
+                if ((*v_ht1200_Jethadronflavor)[i] == 5)
+                {
+                    h_DY_bjetcsv->Fill((*v_ht1200_jetcsv)[i], I_ht1200_weight * HT1200Weight);
+                    h_DY_bJetMass->Fill((*v_ht1200_jetMass)[i], I_ht1200_weight * HT1200Weight);
+                    if ((*v_ht1200_alpha)[i] < 0.15)
+                    {
+                        h_DY_bjetcsv_cutalpha->Fill((*v_ht1200_jetcsv)[i], I_ht1200_weight * HT1200Weight);
+                    }
+                }
+                else if ((*v_ht1200_Jethadronflavor)[i] == 0)
+                {
+                    h_DY_ljetcsv->Fill((*v_ht1200_jetcsv)[i], I_ht1200_weight * HT1200Weight);
+                    h_DY_lJetMass->Fill((*v_ht1200_jetMass)[i], I_ht1200_weight * HT1200Weight);
+                    if ((*v_ht1200_alpha)[i] < 0.15)
+                    {
+                        h_DY_ljetcsv_cutalpha->Fill((*v_ht1200_jetcsv)[i], I_ht1200_weight * HT1200Weight);
+                    }
+                }
+                if ((*v_ht1200_alpha)[i] < 0.15)
+                {
+                    h_DY_jetcsv_cutalpha->Fill((*v_ht1200_jetcsv)[i], I_ht1200_weight * HT1200Weight);
+                }
+            } // End of csv loop
         }
     }
     TTree *T_HT2500;
@@ -416,16 +648,44 @@ void ee_HT_var()
     T_HT2500->SetBranchAddress("f_Met", &f_ht2500_Met);
     T_HT2500->SetBranchAddress("f_dileptonPT", &f_ht2500_dilepPT);
     T_HT2500->SetBranchAddress("v_fakealpha", &v_ht2500_alpha);
+    T_HT2500->SetBranchAddress("v_fakeJetMass", &v_ht2500_jetMass);
     T_HT2500->SetBranchAddress("f_thinjetCSV", &v_ht2500_jetcsv);
     T_HT2500->SetBranchAddress("v_fakeJethadronflavor", &v_ht2500_Jethadronflavor);
     for (int evt = 0; evt < T_HT2500->GetEntries(); evt++)
     {
         T_HT2500->GetEntry(evt);
         h_DY_Met->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
-        //h_DY_dilepPT->Fill(f_ht2500_dilepPT, I_ht2500_weight * HT2500Weight);
+        // h_DY_dilepPT->Fill(f_ht2500_dilepPT, I_ht2500_weight * HT2500Weight);
         if (f_ht2500_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
+
+            for (size_t i = 0; i < v_ht2500_jetcsv->size(); i++)
+            {
+                h_DY_jetcsv->Fill((*v_ht2500_jetcsv)[i], I_ht2500_weight * HT2500Weight);
+                if ((*v_ht2500_Jethadronflavor)[i] == 5)
+                {
+                    h_DY_bjetcsv->Fill((*v_ht2500_jetcsv)[i], I_ht2500_weight * HT2500Weight);
+                    h_DY_bJetMass->Fill((*v_ht2500_jetMass)[i], I_ht2500_weight * HT2500Weight);
+                    if ((*v_ht2500_alpha)[i] < 0.15)
+                    {
+                        h_DY_bjetcsv_cutalpha->Fill((*v_ht2500_jetcsv)[i], I_ht2500_weight * HT2500Weight);
+                    }
+                }
+                else if ((*v_ht2500_Jethadronflavor)[i] == 0)
+                {
+                    h_DY_ljetcsv->Fill((*v_ht2500_jetcsv)[i], I_ht2500_weight * HT2500Weight);
+                    h_DY_lJetMass->Fill((*v_ht2500_jetMass)[i], I_ht2500_weight * HT2500Weight);
+                    if ((*v_ht2500_alpha)[i] < 0.15)
+                    {
+                        h_DY_ljetcsv_cutalpha->Fill((*v_ht2500_jetcsv)[i], I_ht2500_weight * HT2500Weight);
+                    }
+                }
+                if ((*v_ht2500_alpha)[i] < 0.15)
+                {
+                    h_DY_jetcsv_cutalpha->Fill((*v_ht2500_jetcsv)[i], I_ht2500_weight * HT2500Weight);
+                }
+            } // End of csv loop
         }
     }
 
@@ -436,5 +696,13 @@ void ee_HT_var()
     h_DY_Met->Write();
     h_DY_dilepPT->Write();
     h_DY_Met_cut->Write();
+    h_DY_jetcsv->Write();
+    h_DY_bjetcsv->Write();
+    h_DY_ljetcsv->Write();
+    h_DY_jetcsv_cutalpha->Write();
+    h_DY_bjetcsv_cutalpha->Write();
+    h_DY_ljetcsv_cutalpha->Write();
+    h_DY_bJetMass->Write();
+    h_DY_lJetMass->Write();
     outfile_HT0->Close();
 }
