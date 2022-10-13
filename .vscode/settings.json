@@ -61,6 +61,18 @@
         "Draw_diff_top_nTrk.C": "cpp",
         "punzi_3Dsig.C": "cpp",
         "ee_var.C": "cpp",
-        "ee_jetcsv.C": "cpp"
+        "ee_jetcsv.C": "cpp",
+        "Scan_bg.C": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp"
     }
 }
