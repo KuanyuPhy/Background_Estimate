@@ -73,6 +73,12 @@
         "*.tcc": "cpp",
         "algorithm": "cpp",
         "iterator": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "Scan_DYinclusive_bg.C": "cpp",
+        "Scan_DY_bg.C": "cpp",
+        "Scan_Top_bg.C": "cpp",
+        "Scan_Diboson_bg.C": "cpp",
+        "Scan_Triboson_bg.C": "cpp",
+        "Scan_sig.C": "cpp"
     }
 }

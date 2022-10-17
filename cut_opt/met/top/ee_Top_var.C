@@ -28,24 +28,24 @@ TH1D *TTZToLLNuNu_sumevt = ((TH1D *)Top_TTZToLLNuNufile->Get("Event_Variable/h_t
 TH1D *tW_antitop_sumevt = ((TH1D *)Top_tW_antitopfile->Get("Event_Variable/h_totevent"));
 TH1D *tW_top_sumevt = ((TH1D *)Top_tW_topfile->Get("Event_Variable/h_totevent"));
 
-int TTTo2L2Nu_totevt = TTTo2L2Nu_sumevt->Integral();
-int TTWJetsToLNu_totevt = TTWJetsToLNu_sumevt->Integral();
-int TTWJetsToQQ_totevt = TTWJetsToQQ_sumevt->Integral();
-int TTZToQQ_totevt = TTZToQQ_sumevt->Integral();
-int TTZToLLNuNu_totevt = TTZToLLNuNu_sumevt->Integral();
-int tW_antitop_totevt = tW_antitop_sumevt->Integral();
-int tW_top_totevt = tW_top_sumevt->Integral();
+double TTTo2L2Nu_totevt = TTTo2L2Nu_sumevt->Integral();
+double TTWJetsToLNu_totevt = TTWJetsToLNu_sumevt->Integral();
+double TTWJetsToQQ_totevt = TTWJetsToQQ_sumevt->Integral();
+double TTZToQQ_totevt = TTZToQQ_sumevt->Integral();
+double TTZToLLNuNu_totevt = TTZToLLNuNu_sumevt->Integral();
+double tW_antitop_totevt = tW_antitop_sumevt->Integral();
+double tW_top_totevt = tW_top_sumevt->Integral();
 
 //---------------------
-// Define TopWeight
+// Define Weight
 //---------------------
-float TTTo2L2NuWeight = (GlobalConstants::Lumi2016) * ((GlobalConstants::TTTo2L2Nu) / (TTTo2L2Nu_totevt)) * 1000;
-float ST_tW_topWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ST_tW_top_5fCS / (tW_top_totevt)) * 1000;
-float ST_tW_antitopWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ST_tW_antitop_5fCS / (tW_antitop_totevt)) * 1000;
-float TTWJetsToLNuWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTWJetsToLNu / (TTWJetsToLNu_totevt)) * 1000;
-float TTWJetsToQQWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTWJetsToQQ / (TTWJetsToQQ_totevt)) * 1000;
-float TTZToQQWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTZToQQ / (TTZToQQ_totevt)) * 1000;
-float TTZToLLNuNuWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTZToLLNuNu / (TTZToLLNuNu_totevt)) * 1000;
+double TTTo2L2NuWeight = (GlobalConstants::Lumi2016) * ((GlobalConstants::TTTo2L2Nu) / (TTTo2L2Nu_totevt)) * 1000;
+double ST_tW_topWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ST_tW_top_5fCS / (tW_top_totevt)) * 1000;
+double ST_tW_antitopWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ST_tW_antitop_5fCS / (tW_antitop_totevt)) * 1000;
+double TTWJetsToLNuWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTWJetsToLNu / (TTWJetsToLNu_totevt)) * 1000;
+double TTWJetsToQQWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTWJetsToQQ / (TTWJetsToQQ_totevt)) * 1000;
+double TTZToQQWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTZToQQ / (TTZToQQ_totevt)) * 1000;
+double TTZToLLNuNuWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTZToLLNuNu / (TTZToLLNuNu_totevt)) * 1000;
 
 void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, float Weight, TH1D *h_tmp)
 {

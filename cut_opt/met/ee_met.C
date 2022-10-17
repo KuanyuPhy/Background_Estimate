@@ -289,7 +289,7 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     l4->AddEntry(ee_Triboson_dilepPT, "Triboson process", "lE");
     l4->Draw();
     */
-    /*
+    
     hs->Draw("hist");
     hs->GetXaxis()->SetNdivisions(6, 5, 0);
     hs->GetXaxis()->SetTitle("MET");
@@ -302,10 +302,10 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     hs->GetYaxis()->SetTitleSize(0.04);
     hs->GetYaxis()->SetTitleOffset(1.5);
     hs->GetYaxis()->SetLabelSize(0.04);
-    cout << "number of Events with DY = " << ee_HT_Met->Integral() << "\n";
-    cout << "number of Events with Top = " << ee_Top_Met->Integral() << "\n";
-    cout << "number of Events with Diboson = " << ee_Diboson_Met->Integral() << "\n";
-    cout << "number of Events with Triboson = " << ee_Triboson_Met->Integral() << "\n";
+    cout << "number of Events with DY = " << ee_HT_Met_cut->Integral() << "\n";
+    cout << "number of Events with Top = " << ee_Top_Met_cut->Integral() << "\n";
+    cout << "number of Events with Diboson = " << ee_Diboson_Met_cut->Integral() << "\n";
+    cout << "number of Events with Triboson = " << ee_Triboson_Met_cut->Integral() << "\n";
     TLegend *l0 = new TLegend(0.4, 0.4, 0.90, 0.80);
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
@@ -315,7 +315,8 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     l0->AddEntry(uu_Diboson_Met, "Diboson process", "l");
     l0->AddEntry(uu_Triboson_Met, "Triboson process", "l");
     l0->Draw();
-    */
+    
+    /*
     ee_Sig150_Met_cut->GetXaxis()->SetNdivisions(6, 5, 0);
     ee_Sig150_Met_cut->GetXaxis()->SetTitleOffset(1.5);
     ee_Sig150_Met_cut->GetXaxis()->SetTitle("Met");
@@ -334,6 +335,7 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     l1->AddEntry(ee_Sig50_Met_cut, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
     l1->AddEntry(ee_Sig150_Met_cut, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
     l1->Draw();
+    */
 
     // canv->cd(2);
     /*

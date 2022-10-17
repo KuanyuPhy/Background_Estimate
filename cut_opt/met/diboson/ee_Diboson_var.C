@@ -43,21 +43,21 @@ TH1D *qq_ZZ_2L2Nu_sumevt = ((TH1D *)diboson_qq_ZZ_2L2Nu->Get("Event_Variable/h_t
 TH1D *qq_ZZ_2L2Q_sumevt = ((TH1D *)diboson_qq_ZZ_2L2Q->Get("Event_Variable/h_totevent"));
 TH1D *qq_ZZ_4L_sumevt = ((TH1D *)diboson_qq_ZZ_4L->Get("Event_Variable/h_totevent"));
 
-int gg_ZZ_2e2mu_totevt = gg_ZZ_2e2mu_sumevt->Integral();
-int gg_ZZ_2e2nu_totevt = gg_ZZ_2e2nu_sumevt->Integral();
-int gg_ZZ_2e2tau_totevt = gg_ZZ_2e2tau_sumevt->Integral();
-int gg_ZZ_2mu2nu_totevt = gg_ZZ_2mu2nu_sumevt->Integral();
-int gg_ZZ_2mu2tau_totevt = gg_ZZ_2mu2tau_sumevt->Integral();
-int gg_ZZ_4e_totevt = gg_ZZ_4e_sumevt->Integral();
-int gg_ZZ_4mu_totevt = gg_ZZ_4mu_sumevt->Integral();
-int gg_ZZ_4tau_totevt = gg_ZZ_4tau_sumevt->Integral();
-int gg_WW_2L2Nu_totevt = gg_WW_2L2Nu_sumevt->Integral();
-int qq_WW_2L2Nu_totevt = qq_WW_2L2Nu_sumevt->Integral();
-int qq_WZ_2L2Q_totevt = qq_WZ_2L2Q_sumevt->Integral();
-int qq_WZ_3LNu_totevt = qq_WZ_3LNu_sumevt->Integral();
-int qq_ZZ_2L2Nu_totevt = qq_ZZ_2L2Nu_sumevt->Integral();
-int qq_ZZ_2L2Q_totevt = qq_ZZ_2L2Q_sumevt->Integral();
-int qq_ZZ_4L_totevt = qq_ZZ_4L_sumevt->Integral();
+double gg_ZZ_2e2mu_totevt = gg_ZZ_2e2mu_sumevt->Integral();
+double gg_ZZ_2e2nu_totevt = gg_ZZ_2e2nu_sumevt->Integral();
+double gg_ZZ_2e2tau_totevt = gg_ZZ_2e2tau_sumevt->Integral();
+double gg_ZZ_2mu2nu_totevt = gg_ZZ_2mu2nu_sumevt->Integral();
+double gg_ZZ_2mu2tau_totevt = gg_ZZ_2mu2tau_sumevt->Integral();
+double gg_ZZ_4e_totevt = gg_ZZ_4e_sumevt->Integral();
+double gg_ZZ_4mu_totevt = gg_ZZ_4mu_sumevt->Integral();
+double gg_ZZ_4tau_totevt = gg_ZZ_4tau_sumevt->Integral();
+double gg_WW_2L2Nu_totevt = gg_WW_2L2Nu_sumevt->Integral();
+double qq_WW_2L2Nu_totevt = qq_WW_2L2Nu_sumevt->Integral();
+double qq_WZ_2L2Q_totevt = qq_WZ_2L2Q_sumevt->Integral();
+double qq_WZ_3LNu_totevt = qq_WZ_3LNu_sumevt->Integral();
+double qq_ZZ_2L2Nu_totevt = qq_ZZ_2L2Nu_sumevt->Integral();
+double qq_ZZ_2L2Q_totevt = qq_ZZ_2L2Q_sumevt->Integral();
+double qq_ZZ_4L_totevt = qq_ZZ_4L_sumevt->Integral();
 
 //---------------------
 // Define Diboson Weight

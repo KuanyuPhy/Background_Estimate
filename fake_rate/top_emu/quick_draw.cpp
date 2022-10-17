@@ -407,6 +407,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->AddEntry(h_Top_ltrk_SR, "SR", "l");
     l2->Draw();
     */
+    /*
     c1->Divide(3, 2);
     c1->cd(1);
 
@@ -501,6 +502,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_btrk_rg3_CR_SR_ratio->GetXaxis()->SetTitle("Jet ntrk");
 
     h_btrk_rg3_CR_SR_ratio->Draw();
+    */
 
     /*
     c1->Divide(3, 2);
@@ -927,6 +929,496 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_lJetEta_CR_SR_ratio->GetXaxis()->SetTitle("Jet #eta");
 
     h_lJetEta_CR_SR_ratio->Draw();
+    */
+    const double LABELSIZE = 20.0;
+
+    /*
+    c1->Divide(2, 2);
+    c1->cd(1);
+
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_bJetPt_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_bJetPt_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_bJetPt_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_bJetPt_bybin_CR->GetXaxis()->SetTitleSize(0);
+    h_Top_bJetPt_bybin_CR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_bJetPt_bybin_CR->Draw("h ");
+    h_Top_bJetPt_SR->Draw("same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.04);
+    l0->SetHeader("b flavor");
+    l0->AddEntry(h_Top_bJetPt_SR, "True Background", "le");
+    l0->AddEntry(h_Top_bJetPt_bybin_CR, "Predicted", "le");
+    l0->Draw();
+
+    c1->cd(3);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_bRatio;
+    h_cutalpha_applyfr_bRatio = (TH1F *)h_Top_bJetPt_SR->Clone("h_cutalpha_applyfr_bRatio");
+    h_cutalpha_applyfr_bRatio->Divide(h_Top_bJetPt_SR, h_Top_bJetPt_bybin_CR, 1, 1, "b");
+
+    h_cutalpha_applyfr_bRatio->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_bRatio->GetXaxis()->SetTitle("Jet PT");
+
+    h_cutalpha_applyfr_bRatio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_bRatio->Draw("e1");
+
+    c1->cd(2);
+
+    double temp1_pad = gPad->GetWh() * gPad->GetAbsHNDC();
+    double label1_size = LABELSIZE / temp1_pad;
+
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_lJetPt_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_lJetPt_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_lJetPt_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_lJetPt_bybin_CR->GetXaxis()->SetTitleSize(0);
+    h_Top_lJetPt_bybin_CR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_lJetPt_SR->Draw("");
+    h_Top_lJetPt_bybin_CR->Draw("h same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->SetHeader("light flavor");
+    l1->AddEntry(h_Top_lJetPt_SR, "True Background", "le");
+    l1->AddEntry(h_Top_lJetPt_bybin_CR, "Predicted", "le");
+    l1->Draw();
+
+    c1->cd(4);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_lRatio;
+    h_cutalpha_applyfr_lRatio = (TH1F *)h_Top_lJetPt_SR->Clone("h_cutalpha_applyfr_lRatio");
+    h_cutalpha_applyfr_lRatio->Divide(h_Top_lJetPt_SR, h_Top_lJetPt_bybin_CR, 1, 1, "b");
+
+    h_cutalpha_applyfr_lRatio->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_lRatio->GetXaxis()->SetTitle("Jet PT");
+
+    h_cutalpha_applyfr_lRatio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_lRatio->Draw("e1");
+    */
+
+    /*
+    c1->Divide(2, 2);
+    c1->cd(1);
+
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_btrk_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_btrk_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_btrk_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_btrk_bybin_CR->GetXaxis()->SetTitleSize(0);
+    h_Top_btrk_bybin_CR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_btrk_bybin_CR->Draw("h ");
+    h_Top_btrk_SR->Draw("same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.04);
+    l0->SetHeader("b flavor");
+    l0->AddEntry(h_Top_btrk_SR, "True Background", "le");
+    l0->AddEntry(h_Top_btrk_bybin_CR, "Predicted", "le");
+    l0->Draw();
+
+    c1->cd(3);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_bRatio;
+    h_cutalpha_applyfr_bRatio = (TH1F *)h_Top_btrk_SR->Clone("h_cutalpha_applyfr_bRatio");
+    h_cutalpha_applyfr_bRatio->Divide(h_Top_btrk_SR, h_Top_btrk_bybin_CR, 1, 1, "b");
+
+    h_cutalpha_applyfr_bRatio->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_bRatio->GetXaxis()->SetTitle("Jet PT");
+
+    h_cutalpha_applyfr_bRatio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_bRatio->Draw("e1");
+
+    c1->cd(2);
+
+    double temp1_pad = gPad->GetWh() * gPad->GetAbsHNDC();
+    double label1_size = LABELSIZE / temp1_pad;
+
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_ltrk_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_ltrk_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_ltrk_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_ltrk_bybin_CR->GetXaxis()->SetTitleSize(0);
+    h_Top_ltrk_bybin_CR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_ltrk_SR->Draw("");
+    h_Top_ltrk_bybin_CR->Draw("h same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->SetHeader("light flavor");
+    l1->AddEntry(h_Top_ltrk_SR, "True Background", "le");
+    l1->AddEntry(h_Top_ltrk_bybin_CR, "Predicted", "le");
+    l1->Draw();
+
+    c1->cd(4);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_lRatio;
+    h_cutalpha_applyfr_lRatio = (TH1F *)h_Top_ltrk_SR->Clone("h_cutalpha_applyfr_lRatio");
+    h_cutalpha_applyfr_lRatio->Divide(h_Top_ltrk_SR, h_Top_ltrk_bybin_CR, 1, 1, "b");
+
+    h_cutalpha_applyfr_lRatio->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_lRatio->GetXaxis()->SetTitle("Jet PT");
+
+    h_cutalpha_applyfr_lRatio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_lRatio->Draw("e1");
+
+    */
+    /*
+    c1->Divide(3, 2);
+    c1->cd(1);
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_JetPt_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_JetPt_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_JetPt_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_JetPt_bybin_CR->GetXaxis()->SetTitleSize(0);
+    h_Top_JetPt_bybin_CR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_JetPt_bybin_CR->Draw("h ");
+    h_Top_JetPt_SR->Draw("same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.04);
+    l0->SetHeader("b flavor");
+    l0->AddEntry(h_Top_JetPt_SR, "True Background", "le");
+    l0->AddEntry(h_Top_JetPt_bybin_CR, "Predicted", "le");
+    l0->Draw();
+
+    gPad->SetLogy();
+
+    c1->cd(4);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_Ratio;
+    h_cutalpha_applyfr_Ratio = (TH1F *)h_Top_JetPt_SR->Clone("h_cutalpha_applyfr_Ratio");
+    h_cutalpha_applyfr_Ratio->Divide(h_Top_JetPt_bybin_CR);
+
+    h_cutalpha_applyfr_Ratio->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_Ratio->GetXaxis()->SetTitle("Jet PT");
+
+    // h_cutalpha_applyfr_Ratio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_Ratio->Draw("e1");
+
+    c1->cd(2);
+
+    double temp1_pad = gPad->GetWh() * gPad->GetAbsHNDC();
+    double label1_size = LABELSIZE / temp1_pad;
+
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_trk_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_trk_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_trk_SR->GetXaxis()->SetTitle("trk");
+    h_Top_trk_SR->GetXaxis()->SetTitleSize(0);
+    h_Top_trk_SR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_trk_SR->Draw("");
+    h_Top_trk_bybin_CR->Draw("h same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->SetHeader("light flavor");
+    l1->AddEntry(h_Top_trk_SR, "True Background", "le");
+    l1->AddEntry(h_Top_trk_bybin_CR, "Predicted", "le");
+    l1->Draw();
+
+    c1->cd(5);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_Ratio_trk;
+    h_cutalpha_applyfr_Ratio_trk = (TH1F *)h_Top_trk_SR->Clone("h_cutalpha_applyfr_Ratio_trk");
+    h_cutalpha_applyfr_Ratio_trk->Divide(h_Top_trk_bybin_CR);
+
+    h_cutalpha_applyfr_Ratio_trk->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_Ratio_trk->GetXaxis()->SetTitle("trk");
+
+    h_cutalpha_applyfr_Ratio_trk->GetXaxis()->SetLabelSize(0.04);
+    h_cutalpha_applyfr_Ratio_trk->GetXaxis()->SetTitleSize(0.04);
+
+    // h_cutalpha_applyfr_Ratio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_Ratio_trk->Draw("e1");
+
+    c1->cd(3);
+
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_JetEta_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_JetEta_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_JetEta_SR->GetXaxis()->SetTitle("trk");
+    h_Top_JetEta_SR->GetXaxis()->SetTitleSize(0);
+    h_Top_JetEta_SR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_JetEta_SR->Draw("");
+    h_Top_JetEta_bybin_CR->Draw("h same");
+
+    TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l2->SetBorderSize(0);
+    l2->SetFillStyle(0);
+    l2->SetTextSize(0.04);
+    l2->SetHeader("light flavor");
+    l2->AddEntry(h_Top_JetEta_SR, "True Background", "le");
+    l2->AddEntry(h_Top_JetEta_bybin_CR, "Predicted", "le");
+    l2->Draw();
+
+    */
+   c1->Divide(3, 2);
+    c1->cd(1);
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_btrk_region1_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetTitle("nJet");
+    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetTitleSize(0);
+    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_btrk_region1_bybin_CR->Draw("h ");
+    h_Top_btrk_region1_SR->Draw("same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.04);
+    l0->SetHeader("b flavor, |#eta| < 1");
+    l0->AddEntry(h_Top_btrk_region1_SR, "True Background", "le");
+    l0->AddEntry(h_Top_btrk_region1_bybin_CR, "Predicted", "le");
+    l0->Draw();
+
+    gPad->SetLogy();
+
+    c1->cd(4);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_Ratio;
+    h_cutalpha_applyfr_Ratio = (TH1F *)h_Top_JetPt_SR->Clone("h_cutalpha_applyfr_Ratio");
+    h_cutalpha_applyfr_Ratio->Divide(h_Top_JetPt_bybin_CR);
+
+    h_cutalpha_applyfr_Ratio->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_Ratio->GetXaxis()->SetTitle("Jet PT");
+
+    // h_cutalpha_applyfr_Ratio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_Ratio->Draw("e1");
+
+    c1->cd(2);
+
+    double temp1_pad = gPad->GetWh() * gPad->GetAbsHNDC();
+    double label1_size = LABELSIZE / temp1_pad;
+
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_trk_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_trk_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_trk_SR->GetXaxis()->SetTitle("trk");
+    h_Top_trk_SR->GetXaxis()->SetTitleSize(0);
+    h_Top_trk_SR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_trk_SR->Draw("");
+    h_Top_trk_bybin_CR->Draw("h same");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->SetHeader("light flavor");
+    l1->AddEntry(h_Top_trk_SR, "True Background", "le");
+    l1->AddEntry(h_Top_trk_bybin_CR, "Predicted", "le");
+    l1->Draw();
+
+    c1->cd(5);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_Ratio_trk;
+    h_cutalpha_applyfr_Ratio_trk = (TH1F *)h_Top_trk_SR->Clone("h_cutalpha_applyfr_Ratio_trk");
+    h_cutalpha_applyfr_Ratio_trk->Divide(h_Top_trk_bybin_CR);
+
+    h_cutalpha_applyfr_Ratio_trk->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_Ratio_trk->GetXaxis()->SetTitle("trk");
+
+    h_cutalpha_applyfr_Ratio_trk->GetXaxis()->SetLabelSize(0.04);
+    h_cutalpha_applyfr_Ratio_trk->GetXaxis()->SetTitleSize(0.04);
+
+    // h_cutalpha_applyfr_Ratio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_Ratio_trk->Draw("e1");
+
+    c1->cd(3);
+
+    gPad->SetTopMargin(0 - 0.3);
+    gPad->SetBottomMargin(0.02);
+    gPad->SetRightMargin(0.04);
+
+    h_Top_JetEta_bybin_CR->SetTitle("without consider eta");
+
+    h_Top_JetEta_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_JetEta_SR->GetXaxis()->SetTitle("trk");
+    h_Top_JetEta_SR->GetXaxis()->SetTitleSize(0);
+    h_Top_JetEta_SR->GetXaxis()->SetLabelSize(0);
+
+    h_Top_JetEta_SR->Draw("");
+    h_Top_JetEta_bybin_CR->Draw("h same");
+
+    TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l2->SetBorderSize(0);
+    l2->SetFillStyle(0);
+    l2->SetTextSize(0.04);
+    l2->SetHeader("light flavor");
+    l2->AddEntry(h_Top_JetEta_SR, "True Background", "le");
+    l2->AddEntry(h_Top_JetEta_bybin_CR, "Predicted", "le");
+    l2->Draw();
+
+    /*
+    c1->cd(4);
+    gStyle->SetStatW(0.3);
+    gStyle->SetStatH(0.3);
+    gStyle->SetStatX(0.879447);
+    gStyle->SetStatY(0.939033);
+    gStyle->SetStatFontSize(0.05);
+    gStyle->SetStatBorderSize(0);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_cutalpha_applyfr_Ratio;
+    h_cutalpha_applyfr_Ratio = (TH1F *)h_Top_lJetPt_SR->Clone("h_cutalpha_applyfr_lRatio");
+    h_cutalpha_applyfr_Ratio->Divide(h_Top_lJetPt_SR, h_Top_lJetPt_bybin_CR, 1, 1, "b");
+
+    h_cutalpha_applyfr_lRatio->GetYaxis()->SetTitle("True Background / Predicted");
+    h_cutalpha_applyfr_lRatio->GetXaxis()->SetTitle("Jet PT");
+
+    h_cutalpha_applyfr_lRatio->GetYaxis()->SetRangeUser(0., 2.);
+
+    h_cutalpha_applyfr_lRatio->Draw("e1");
     */
 
     gStyle->SetOptStat(0);

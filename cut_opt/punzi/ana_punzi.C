@@ -29,7 +29,6 @@ void ana_punzi()
     TH1D *h_Mx2_1_eff = ((TH1D *)Sigfile->Get("h_Mx2_1_eff"));
     TH1D *h_Mx2_50_eff = ((TH1D *)Sigfile->Get("h_Mx2_50_eff"));
     TH1D *h_Mx2_150_eff = ((TH1D *)Sigfile->Get("h_Mx2_150_eff"));
-    TH1D *h_pass_Bg_nMetcut = ((TH1D *)Bgfile->Get("h_pass_Bg_nMetcut"));
 
     // h_Mx2_1_eff->Draw();
 
@@ -45,9 +44,6 @@ void ana_punzi()
     double Sig150_punzi[50];
     for (int i = 1; i <= 50; i++)
     {
-        Sig1_punzi[i] = punzi(h_Mx2_1_eff->GetBinContent(i + 1), h_pass_Bg_nMetcut->GetBinContent(i + 1));
-        Sig50_punzi[i] = punzi(h_Mx2_50_eff->GetBinContent(i + 1), h_pass_Bg_nMetcut->GetBinContent(i + 1));
-        Sig150_punzi[i] = punzi(h_Mx2_150_eff->GetBinContent(i + 1), h_pass_Bg_nMetcut->GetBinContent(i + 1));
         cout << "i =" << i << endl;
         cout << "Sig_eff =" << h_Mx2_1_eff->GetBinContent(i + 1) << endl;
     }

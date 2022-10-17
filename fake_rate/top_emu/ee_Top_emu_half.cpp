@@ -158,6 +158,20 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     TH1D *h_Top_nTrk_ljet_difeta_highMET[3];
     TH1D *h_Top_nTrk_ljet_cut_difeta_highMET[3];
 
+    // Separate for low dilepton PT and low PT
+    TH1D *h_Top_nTrk_bjet_difeta_lowDilepPt[3];
+    TH1D *h_Top_nTrk_bjet_cut_difeta_lowDilepPt[3];
+    TH1D *h_Top_nTrk_ljet_difeta_lowDilepPt[3];
+    TH1D *h_Top_nTrk_ljet_cut_difeta_lowDilepPt[3];
+
+    TH1D *h_Top_nTrk_bjet_difeta_highDilepPt[3];
+    TH1D *h_Top_nTrk_bjet_cut_difeta_highDilepPt[3];
+    TH1D *h_Top_nTrk_ljet_difeta_highDilepPt[3];
+    TH1D *h_Top_nTrk_ljet_cut_difeta_highDilepPt[3];
+
+    const Int_t NBINS = 10;
+    Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 40.};
+
     for (int i = 0; i < 3; i++)
     {
 
@@ -192,6 +206,16 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_ljet_difeta_highMET[i] = new TH1D(Form("h_Top_nTrk_ljet_difeta_highMET_%i", i + 1), "", 30, 1, 30);
         h_Top_nTrk_ljet_cut_difeta_highMET[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_highMET_%i", i + 1), "", 30, 1, 30);
 
+        h_Top_nTrk_bjet_difeta_lowDilepPt[i] = new TH1D(Form("h_Top_nTrk_bjet_difeta_lowDilepPt_%i", i + 1), "", NBINS, edges);
+        h_Top_nTrk_bjet_cut_difeta_lowDilepPt[i] = new TH1D(Form("h_Top_nTrk_bjet_cut_difeta_lowDilepPt_%i", i + 1), "", NBINS, edges);
+        h_Top_nTrk_ljet_difeta_lowDilepPt[i] = new TH1D(Form("h_Top_nTrk_ljet_difeta_lowDilepPt_%i", i + 1), "", NBINS, edges);
+        h_Top_nTrk_ljet_cut_difeta_lowDilepPt[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_lowDilepPt_%i", i + 1), "", NBINS, edges);
+
+        h_Top_nTrk_bjet_difeta_highDilepPt[i] = new TH1D(Form("h_Top_nTrk_bjet_difeta_highDilepPt_%i", i + 1), "", NBINS, edges);
+        h_Top_nTrk_bjet_cut_difeta_highDilepPt[i] = new TH1D(Form("h_Top_nTrk_bjet_cut_difeta_highDilepPt_%i", i + 1), "", NBINS, edges);
+        h_Top_nTrk_ljet_difeta_highDilepPt[i] = new TH1D(Form("h_Top_nTrk_ljet_difeta_highDilepPt_%i", i + 1), "", NBINS, edges);
+        h_Top_nTrk_ljet_cut_difeta_highDilepPt[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_highDilepPt_%i", i + 1), "", NBINS, edges);
+
         h_Top_nTrk_difeta[i]->Sumw2();
         h_Top_nTrk_cut_difeta[i]->Sumw2();
         h_Top_nTrk_bjet_difeta[i]->Sumw2();
@@ -223,6 +247,16 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_cjet_cut_difeta_highMET[i]->Sumw2();
         h_Top_nTrk_ljet_difeta_highMET[i]->Sumw2();
         h_Top_nTrk_ljet_cut_difeta_highMET[i]->Sumw2();
+
+        h_Top_nTrk_bjet_difeta_lowDilepPt[i]->Sumw2();
+        h_Top_nTrk_bjet_cut_difeta_lowDilepPt[i]->Sumw2();
+        h_Top_nTrk_ljet_difeta_lowDilepPt[i]->Sumw2();
+        h_Top_nTrk_ljet_cut_difeta_lowDilepPt[i]->Sumw2();
+
+        h_Top_nTrk_bjet_difeta_highDilepPt[i]->Sumw2();
+        h_Top_nTrk_bjet_cut_difeta_highDilepPt[i]->Sumw2();
+        h_Top_nTrk_ljet_difeta_highDilepPt[i]->Sumw2();
+        h_Top_nTrk_ljet_cut_difeta_highDilepPt[i]->Sumw2();
     }
     //-----------------------------
     // Not consider eta
@@ -235,6 +269,21 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     TH1D *h_Top_nTrk_ljet_cut = new TH1D("h_Top_nTrk_ljet_cut", "", 30, 1, 30);
     TH1D *h_Top_nTrk_hjet = new TH1D("h_Top_nTrk_hjet", "", 30, 1, 30);
     TH1D *h_Top_nTrk_hjet_cut = new TH1D("h_Top_nTrk_hjet_cut", "", 30, 1, 30);
+
+    TH1D *h_Top_nTrk_jet_lowDilepPt = new TH1D("h_Top_nTrk_jet_lowDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_jet_cut_lowDilepPt = new TH1D("h_Top_nTrk_jet_cut_lowDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_bjet_lowDilepPt = new TH1D("h_Top_nTrk_bjet_lowDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_bjet_cut_lowDilepPt = new TH1D("h_Top_nTrk_bjet_cut_lowDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_ljet_lowDilepPt = new TH1D("h_Top_nTrk_ljet_lowDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_ljet_cut_lowDilepPt = new TH1D("h_Top_nTrk_ljet_cut_lowDilepPt", "", NBINS, edges);
+
+    TH1D *h_Top_nTrk_jet_highDilepPt = new TH1D("h_Top_nTrk_jet_highDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_jet_cut_highDilepPt = new TH1D("h_Top_nTrk_jet_cut_highDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_bjet_highDilepPt = new TH1D("h_Top_nTrk_bjet_highDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_bjet_cut_highDilepPt = new TH1D("h_Top_nTrk_bjet_cut_highDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_ljet_highDilepPt = new TH1D("h_Top_nTrk_ljet_highDilepPt", "", NBINS, edges);
+    TH1D *h_Top_nTrk_ljet_cut_highDilepPt = new TH1D("h_Top_nTrk_ljet_cut_highDilepPt", "", NBINS, edges);
+
     h_Top_nTrk_bjet->Sumw2();
     h_Top_nTrk_bjet_cut->Sumw2();
     h_Top_nTrk_cjet->Sumw2();
@@ -243,6 +292,17 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     h_Top_nTrk_ljet_cut->Sumw2();
     h_Top_nTrk_hjet->Sumw2();
     h_Top_nTrk_hjet_cut->Sumw2();
+
+    h_Top_nTrk_bjet_lowDilepPt->Sumw2();
+    h_Top_nTrk_bjet_cut_lowDilepPt->Sumw2();
+    h_Top_nTrk_ljet_lowDilepPt->Sumw2();
+    h_Top_nTrk_ljet_cut_lowDilepPt->Sumw2();
+
+    h_Top_nTrk_bjet_highDilepPt->Sumw2();
+    h_Top_nTrk_bjet_cut_highDilepPt->Sumw2();
+    h_Top_nTrk_ljet_highDilepPt->Sumw2();
+    h_Top_nTrk_ljet_cut_highDilepPt->Sumw2();
+
     //-----------------------------
     // Not consider flavor
     //-----------------------------
@@ -255,7 +315,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
 
     Int_t I_Top_weight;
 
-    float_t f_Top_met;
+    float_t f_Top_met, f_Top_dileppt;
 
     vector<float> *v_Top_alpha = new vector<float>();
     vector<float> *v_Top_Chi3Dlog = new vector<float>();
@@ -285,6 +345,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     T_Top_tree->SetBranchAddress("I_nJets", &I_Top_nJets);
     T_Top_tree->SetBranchAddress("v_N_Tracks", &v_Top_nTrack);
     T_Top_tree->SetBranchAddress("f_Met", &f_Top_met);
+    T_Top_tree->SetBranchAddress("f_dileptonPT", &f_Top_dileppt);
     T_Top_tree->SetBranchAddress("v_IP2D", &v_Top_2DIP);
     T_Top_tree->SetBranchAddress("v_Chi3Dlog", &v_Top_Chi3Dlog);
     T_Top_tree->SetBranchAddress("v_fakealpha", &v_Top_alpha);
@@ -325,7 +386,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         }
         */
         // cout << "-------- Start Sort ---------------" << endl;
-        sort(v_thinjet.begin(), v_thinjet.end(), greater<ThinJet>());
+        // sort(v_thinjet.begin(), v_thinjet.end(), greater<ThinJet>());
         /*
         for (auto x : v_thinjet)
         {
@@ -580,7 +641,148 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                 }
             }
         } // End of Met > 140
-    }     // End of Top loop
+        //----------------------------------------
+        // Calculate fake rate base on dilepton PT
+        //----------------------------------------
+        if (f_Top_met > 140)
+        {
+            if (f_Top_dileppt < 60)
+            {
+                for (size_t i = 0; i < v_thinjet.size(); i++)
+                {
+                    h_Top_nTrk_jet_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
+                    //  For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_lowDilepPt);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_lowDilepPt);
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        h_Top_nTrk_jet_cut_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_lowDilepPt);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_lowDilepPt);
+                    }
+                    //--------------------
+                    // Consider eta
+                    //--------------------
+                    // For Region |eta| < 1
+                    if (abs(v_thinjet[i].GetEta()) < 1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_lowDilepPt[0]);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_lowDilepPt[0]);
+                        if (v_thinjet[i].GetAlpha() < 0.15)
+                        {
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_lowDilepPt[0]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_lowDilepPt[0]);
+                        }
+                    }
+                    // For Region 1 < |eta| < 2
+                    else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) < 2)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_lowDilepPt[1]);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_lowDilepPt[1]);
+                        if (v_thinjet[i].GetAlpha() < 0.15)
+                        {
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_lowDilepPt[1]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_lowDilepPt[1]);
+                        }
+                    }
+                    // For Region 2 < |eta| < 2.5
+                    else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) < 2.5)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_lowDilepPt[2]);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_lowDilepPt[2]);
+                        if (v_thinjet[i].GetAlpha() < 0.15)
+                        {
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_lowDilepPt[2]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_lowDilepPt[2]);
+                        }
+                    }
+                } // End of v_thinjet loop
+            }     // End of low dilepton PT cut
+            else
+            {
+                for (size_t i = 0; i < v_thinjet.size(); i++)
+                {
+                    h_Top_nTrk_jet_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
+                    //  For b jet
+                    for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_highDilepPt);
+                    // For light flavor
+                    for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_highDilepPt);
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        h_Top_nTrk_jet_cut_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_highDilepPt);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_highDilepPt);
+                    }
+                    //--------------------
+                    // Consider eta
+                    //--------------------
+                    // For Region |eta| < 1
+                    if (abs(v_thinjet[i].GetEta()) < 1)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[0]);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_highDilepPt[0]);
+                        if (v_thinjet[i].GetAlpha() < 0.15)
+                        {
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[0]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_highDilepPt[0]);
+                        }
+                    }
+                    // For Region 1 < |eta| < 2
+                    else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) < 2)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[1]);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_highDilepPt[1]);
+                        if (v_thinjet[i].GetAlpha() < 0.15)
+                        {
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[1]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_highDilepPt[1]);
+                        }
+                    }
+                    // For Region 2 < |eta| < 2.5
+                    else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) < 2.5)
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[2]);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_highDilepPt[2]);
+                        if (v_thinjet[i].GetAlpha() < 0.15)
+                        {
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[2]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_highDilepPt[2]);
+                        }
+                    }
+                } // End of v_thinjet loop
+            }     // End of high dilepton PT cut
+        }
+
+    } // End of Top loop
 
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
     outfile->cd();
@@ -616,15 +818,39 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_cjet_cut_difeta_highMET[i]->Write();
         h_Top_nTrk_ljet_difeta_highMET[i]->Write();
         h_Top_nTrk_ljet_cut_difeta_highMET[i]->Write();
+
+        h_Top_nTrk_bjet_difeta_lowDilepPt[i]->Write();
+        h_Top_nTrk_bjet_cut_difeta_lowDilepPt[i]->Write();
+        h_Top_nTrk_ljet_difeta_lowDilepPt[i]->Write();
+        h_Top_nTrk_ljet_cut_difeta_lowDilepPt[i]->Write();
+
+        h_Top_nTrk_bjet_difeta_highDilepPt[i]->Write();
+        h_Top_nTrk_bjet_cut_difeta_highDilepPt[i]->Write();
+        h_Top_nTrk_ljet_difeta_highDilepPt[i]->Write();
+        h_Top_nTrk_ljet_cut_difeta_highDilepPt[i]->Write();
     }
     h_Top_nTrk_bjet->Write();
     h_Top_nTrk_ljet->Write();
     h_Top_nTrk_bjet_cut->Write();
     h_Top_nTrk_ljet_cut->Write();
+
+    h_Top_nTrk_jet_lowDilepPt->Write();
+    h_Top_nTrk_bjet_lowDilepPt->Write();
+    h_Top_nTrk_ljet_lowDilepPt->Write();
+    h_Top_nTrk_jet_cut_lowDilepPt->Write();
+    h_Top_nTrk_bjet_cut_lowDilepPt->Write();
+    h_Top_nTrk_ljet_cut_lowDilepPt->Write();
+
+    h_Top_nTrk_jet_highDilepPt->Write();
+    h_Top_nTrk_bjet_highDilepPt->Write();
+    h_Top_nTrk_ljet_highDilepPt->Write();
+    h_Top_nTrk_jet_cut_highDilepPt->Write();
+    h_Top_nTrk_bjet_cut_highDilepPt->Write();
+    h_Top_nTrk_ljet_cut_highDilepPt->Write();
+
     outfile->Close();
 
     // cout << getWeight(file) << endl;
-    
 }
 int main(int argc, char **argv)
 {
