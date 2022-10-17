@@ -166,7 +166,7 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
     for (int evt = 0; evt < T_inclusive->GetEntries(); evt++)
     {
         T_inclusive->GetEntry(evt);
-        if (f_ht0_Met < Metcut)
+        if (f_ht0_Met <= Metcut)
         {
             continue;
         }
@@ -188,7 +188,7 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
     for (int evt = 0; evt < T_HT100->GetEntries(); evt++)
     {
         T_HT100->GetEntry(evt);
-        if (f_ht100_Met < Metcut)
+        if (f_ht100_Met <= Metcut)
         {
             continue;
         }
@@ -211,7 +211,7 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
     for (int evt = 0; evt < T_HT200->GetEntries(); evt++)
     {
         T_HT200->GetEntry(evt);
-        if (f_ht200_Met < Metcut)
+        if (f_ht200_Met <= Metcut)
         {
             continue;
         }
@@ -234,7 +234,7 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
     for (int evt = 0; evt < T_HT400->GetEntries(); evt++)
     {
         T_HT400->GetEntry(evt);
-        if (f_ht400_Met < Metcut)
+        if (f_ht400_Met <= Metcut)
         {
             continue;
         }
@@ -257,7 +257,7 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
     for (int evt = 0; evt < T_HT600->GetEntries(); evt++)
     {
         T_HT600->GetEntry(evt);
-        if (f_ht600_Met < Metcut)
+        if (f_ht600_Met <= Metcut)
         {
             continue;
         }
@@ -280,7 +280,7 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
     for (int evt = 0; evt < T_HT800->GetEntries(); evt++)
     {
         T_HT800->GetEntry(evt);
-        if (f_ht800_Met < Metcut)
+        if (f_ht800_Met <= Metcut)
         {
             continue;
         }
@@ -303,7 +303,7 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
     for (int evt = 0; evt < T_HT1200->GetEntries(); evt++)
     {
         T_HT1200->GetEntry(evt);
-        if (f_ht1200_Met < Metcut)
+        if (f_ht1200_Met <= Metcut)
         {
             continue;
         }
@@ -326,7 +326,7 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
     for (int evt = 0; evt < T_HT2500->GetEntries(); evt++)
     {
         T_HT2500->GetEntry(evt);
-        if (f_ht2500_Met < Metcut)
+        if (f_ht2500_Met <= Metcut)
         {
             continue;
         }

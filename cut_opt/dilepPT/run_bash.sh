@@ -36,10 +36,6 @@ else
     echo "file found, check existing old root."
     exit 
 fi
-#-----------------------
-# Check output old file
-#-----------------------
-test -e "./output/*.root" && { echo "delete old root file in output/ "; rm ./output/* ;}
 #--------------------------------
 # Calculate punzi significant
 #--------------------------------
@@ -99,8 +95,9 @@ test -e "./Scan_Diboson_bg.o" && { echo "Delete Scan_Diboson_bg.o"; rm ./Scan_Di
 test -e "./Scan_Triboson_bg.o" && { echo "Delete Scan_Triboson_bg.o"; rm ./Scan_Triboson_bg.o ;}
 
 root -b -q Scan_sig.C
-
-#rm ./output/DY_output*.root
-#rm ./output/Top_output*.root
-#rm ./output/Di_output*.root
-#rm ./output/Tri_output*.root
+#
+##rm ./output/DY_output*.root
+##rm ./output/Top_output*.root
+##rm ./output/Di_output*.root
+##rm ./output/Tri_output*.root
+#

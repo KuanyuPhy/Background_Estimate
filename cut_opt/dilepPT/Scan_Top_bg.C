@@ -68,6 +68,21 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
     TH1D *h_pass_bg = new TH1D("h_pass_bg", "", 110, 1, 110);
     h_pass_bg->Sumw2();
 
+    TH1D *h_TTTo2L2Nu_pass_bg = new TH1D("h_TTTo2L2Nu_pass_bg", "", 110, 1, 110);
+    h_TTTo2L2Nu_pass_bg->Sumw2();
+    TH1D *h_ST_tW_top_pass_bg = new TH1D("h_ST_tW_top_pass_bg", "", 110, 1, 110);
+    h_ST_tW_top_pass_bg->Sumw2();
+    TH1D *h_ST_tW_antitop_pass_bg = new TH1D("h_ST_tW_antitop_pass_bg", "", 110, 1, 110);
+    h_ST_tW_antitop_pass_bg->Sumw2();
+    TH1D *h_TTWJetsToLNu_pass_bg = new TH1D("h_TTWJetsToLNu_pass_bg", "", 110, 1, 110);
+    h_TTWJetsToLNu_pass_bg->Sumw2();
+    TH1D *h_TTWJetsToQQ_pass_bg = new TH1D("h_TTWJetsToQQ_pass_bg", "", 110, 1, 110);
+    h_TTWJetsToQQ_pass_bg->Sumw2();
+    TH1D *h_TTZToQQ_pass_bg = new TH1D("h_TTZToQQ_pass_bg", "", 110, 1, 110);
+    h_TTZToQQ_pass_bg->Sumw2();
+    TH1D *h_TTZToLLNuNu_pass_bg = new TH1D("h_TTZToLLNuNu_pass_bg", "", 110, 1, 110);
+    h_TTZToLLNuNu_pass_bg->Sumw2();
+
     TH1D *h_pass_Bg_nDilepPTcut = new TH1D("h_pass_Bg_nDilepPTcut", "", 110, 1, 110);
     h_pass_Bg_nDilepPTcut->Sumw2();
 
@@ -127,6 +142,7 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
             continue;
         }
         h_pass_bg->Fill(atoi(scanMet_step), I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+        //h_TTTo2L2Nu_pass_bg->Fill(atoi(scanMet_step), I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
         //-------------------
         // Scan dilepton PT
         //-------------------
@@ -149,6 +165,7 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
             continue;
         }
         h_pass_bg->Fill(atoi(scanMet_step), I_ST_tW_top_weight * ST_tW_topWeight);
+        //h_ST_tW_top_pass_bg->Fill(atoi(scanMet_step), I_ST_tW_top_weight * ST_tW_topWeight);
         //-------------------
         // Scan dilepton PT
         //-------------------
@@ -171,6 +188,8 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
             continue;
         }
         h_pass_bg->Fill(atoi(scanMet_step), I_ST_tW_antitop_weight * ST_tW_antitopWeight);
+        //h_ST_tW_antitop_pass_bg->Fill(atoi(scanMet_step), I_ST_tW_antitop_weight * ST_tW_antitopWeight);
+        
         //-------------------
         // Scan dilepton PT
         //-------------------
@@ -193,6 +212,8 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
             continue;
         }
         h_pass_bg->Fill(atoi(scanMet_step), I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+        //h_TTWJetsToLNu_pass_bg->Fill(atoi(scanMet_step), I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+        //cout << "weight = " << TTWJetsToLNuWeight << endl;
         //-------------------
         // Scan dilepton PT
         //-------------------
@@ -215,6 +236,7 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
             continue;
         }
         h_pass_bg->Fill(atoi(scanMet_step), I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+        //h_TTWJetsToQQ_pass_bg->Fill(atoi(scanMet_step), I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
         //-------------------
         // Scan dilepton PT
         //-------------------
@@ -237,6 +259,7 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
             continue;
         }
         h_pass_bg->Fill(atoi(scanMet_step), I_TTZToQQ_weight * TTZToQQWeight);
+        //h_TTZToQQ_pass_bg->Fill(atoi(scanMet_step), I_TTZToQQ_weight * TTZToQQWeight);
         //-------------------
         // Scan dilepton PT
         //-------------------
@@ -260,6 +283,7 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
             continue;
         }
         h_pass_bg->Fill(atoi(scanMet_step), I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+        //h_TTZToLLNuNu_pass_bg->Fill(atoi(scanMet_step), I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
         //-------------------
         // Scan dilepton PT
         //-------------------
@@ -272,6 +296,13 @@ void Scan_Top_bg(const char *scanMet_step = "tmp", TString outputfile = "output.
     TFile *outfile_HT0 = TFile::Open(outputfile, "RECREATE");
     h_pass_bg->Write();
     h_pass_Bg_nDilepPTcut->Write();
+    //h_TTTo2L2Nu_pass_bg->Write();
+    //h_ST_tW_top_pass_bg->Write();
+    //h_ST_tW_antitop_pass_bg->Write();
+    //h_TTWJetsToLNu_pass_bg->Write();
+    //h_TTWJetsToQQ_pass_bg->Write();
+    //h_TTZToQQ_pass_bg->Write();
+    //h_TTZToLLNuNu_pass_bg->Write();
     outfile_HT0->Close();
 
     // cout << typeid(inputFile).name() << endl;

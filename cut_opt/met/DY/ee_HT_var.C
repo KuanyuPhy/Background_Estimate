@@ -188,10 +188,10 @@ void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, double Weig
 
 void ee_HT_var()
 {
-    TH1D *h_DY_Met = new TH1D("h_DY_Met", "", 50, 0, 500);
+    TH1D *h_DY_Met = new TH1D("h_DY_Met", "", 150, 0, 1500);
     h_DY_Met->Sumw2();
 
-    TH1D *h_DY_Met_cut = new TH1D("h_DY_Met_cut", "", 50, 0, 500);
+    TH1D *h_DY_Met_cut = new TH1D("h_DY_Met_cut", "", 150, 0, 1500);
     h_DY_Met_cut->Sumw2();
 
     TH1D *h_DY_jetcsv = new TH1D("h_DY_jetcsv", "", 20, 0, 1);

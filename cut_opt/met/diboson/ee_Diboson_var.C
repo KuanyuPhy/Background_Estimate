@@ -89,7 +89,7 @@ void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, double Weig
 void ee_Diboson_var()
 {
 
-    TH1D *h_Diboson_Met = new TH1D("h_Diboson_Met", "", 50, 0, 500);
+    TH1D *h_Diboson_Met = new TH1D("h_Diboson_Met", "", 150, 0, 1500);
     h_Diboson_Met->GetXaxis()->SetTitle("");
     h_Diboson_Met->GetYaxis()->SetTitle("");
     h_Diboson_Met->Sumw2();
@@ -99,7 +99,7 @@ void ee_Diboson_var()
     h_Diboson_dilepPT->GetYaxis()->SetTitle("");
     h_Diboson_dilepPT->Sumw2();
 
-    TH1D *h_Diboson_Met_cut = new TH1D("h_Diboson_Met_cut", "", 50, 0, 500);
+    TH1D *h_Diboson_Met_cut = new TH1D("h_Diboson_Met_cut", "", 150, 0, 1500);
     h_Diboson_Met_cut->GetXaxis()->SetTitle("");
     h_Diboson_Met_cut->GetYaxis()->SetTitle("");
     h_Diboson_Met_cut->Sumw2();

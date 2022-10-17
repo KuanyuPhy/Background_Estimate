@@ -78,7 +78,7 @@ void Scan_Triboson_bg(const char *scanMet_step = "tmp", TString outputfile = "ou
     for (int evt = 0; evt < T_tree->GetEntries(); evt++)
     {
         T_tree->GetEntry(evt);
-        if (f_WWZ_met < Metcut)
+        if (f_WWZ_met <= Metcut)
         {
             continue;
         }
@@ -100,7 +100,7 @@ void Scan_Triboson_bg(const char *scanMet_step = "tmp", TString outputfile = "ou
     for (int evt = 0; evt < T_tree2->GetEntries(); evt++)
     {
         T_tree2->GetEntry(evt);
-        if (f_WZZ_met < Metcut)
+        if (f_WZZ_met <= Metcut)
         {
             continue;
         }
@@ -122,7 +122,7 @@ void Scan_Triboson_bg(const char *scanMet_step = "tmp", TString outputfile = "ou
     for (int evt = 0; evt < T_tree3->GetEntries(); evt++)
     {
         T_tree3->GetEntry(evt);
-        if (f_ZZZ_met < Metcut)
+        if (f_ZZZ_met <= Metcut)
         {
             continue;
         }

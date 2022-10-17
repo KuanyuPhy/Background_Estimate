@@ -157,14 +157,14 @@ void Scan_sig()
     TH1D *h_Mx2_150_eff = (TH1D *)h_pass_Mx2_150_ndilepPTcut->Clone("h_Mx2_150_eff");
     h_Mx2_150_eff->Divide(h_pass_Mx2_150_ndilepPTcut, h_pass_Mx2_150, 1, 1);
 
-    //auto c1 = new TCanvas("c", "BPRE");
-    //c1->Divide(3, 1);
-    //c1->cd(1);
-    //h_Mx2_1_eff->Draw(" text 45");
-    //c1->cd(2);
-    //h_Mx2_50_eff->Draw("");
-    //c1->cd(3);
-    //h_Mx2_150_eff->Draw("");
+    // auto c1 = new TCanvas("c", "BPRE");
+    // c1->Divide(3, 1);
+    // c1->cd(1);
+    // h_Mx2_1_eff->Draw(" text 45");
+    // c1->cd(2);
+    // h_Mx2_50_eff->Draw("");
+    // c1->cd(3);
+    // h_Mx2_150_eff->Draw("");
 
     //---------------------------------
     // Calculate Punzi significance
@@ -178,8 +178,8 @@ void Scan_sig()
         Sig50_punzi[i] = punzi(h_Mx2_50_eff->GetBinContent(i), h_pass_Bg_nDilepPTcut->GetBinContent(i));
         Sig150_punzi[i] = punzi(h_Mx2_150_eff->GetBinContent(i), h_pass_Bg_nDilepPTcut->GetBinContent(i));
 
-        cout << "i =" << i << endl;
-        cout << "Sig_eff =" << h_Mx2_1_eff->GetBinContent(i) << endl;
+        // cout << "i =" << i << endl;
+        // cout << "Sig_eff =" << h_Mx2_1_eff->GetBinContent(i) << endl;
     }
     TH1D *h_punzisig1 = new TH1D("h_punzisig1", "", 110, 1, 110);
     TH1D *h_punzisig50 = new TH1D("h_punzisig50", "", 110, 1, 110);
@@ -189,6 +189,8 @@ void Scan_sig()
         h_punzisig1->SetBinContent(i, Sig1_punzi[i]);
         h_punzisig50->SetBinContent(i, Sig50_punzi[i]);
         h_punzisig150->SetBinContent(i, Sig150_punzi[i]);
+        cout << "i =" << i << endl;
+        cout << "punzi 150 =" << Sig150_punzi[i] << endl;
     }
     h_punzisig1->SetLineWidth(2);
     h_punzisig50->SetLineWidth(2);
@@ -198,20 +200,54 @@ void Scan_sig()
     h_punzisig50->SetLineColor(kBlack);
     h_punzisig150->SetLineColor(kBlue);
 
-    h_punzisig150->GetYaxis()->SetTitle("punzi significance");
-    h_punzisig150->GetXaxis()->SetTitle("Met cut");
+    h_punzisig1->GetYaxis()->SetTitle("punzi significance");
+    h_punzisig1->GetXaxis()->SetTitle("dilepton PT cut");
 
-    //h_punzisig150->GetXaxis()->SetBinLabel(1, "Met > 10");
+    h_punzisig150->GetYaxis()->SetTitle("punzi significance");
+    h_punzisig150->GetXaxis()->SetTitle("dilepton PT cut");
+
+    h_punzisig150->GetXaxis()->SetRangeUser(10, 30);
+
+    // h_punzisig150->GetXaxis()->SetBinLabel(1, "Met > 10");
 
     Double_t w = 600;
     Double_t h = 600;
-    auto c1 = new TCanvas("c1", "c1", w, h);
+
+    int H_ref = 600;
+    int W_ref = 600;
+
+    float T = 0.08 * H_ref;
+    float B = 0.12 * H_ref;
+    float L = 0.12 * W_ref;
+    float R = 0.04 * W_ref;
+
+    auto canv = new TCanvas("c1", "c1", w, h);
+    canv->SetFillColor(0);
+    canv->SetBorderMode(0);
+    canv->SetFrameFillStyle(0);
+    canv->SetFrameBorderMode(0);
+    canv->SetLeftMargin(L / w);
+    canv->SetRightMargin(R / w);
+    canv->SetTopMargin(T / h);
+    canv->SetBottomMargin(B / h);
+    canv->SetTickx(0);
+    canv->SetTicky(0);
     // auto c1 = new TCanvas("c", "BPRE");
 
-    h_punzisig1->Draw("");
+    // h_punzisig1->Draw("");
     h_punzisig150->Draw("same");
-    h_punzisig50->Draw("same");
-    
+    // h_punzisig50->Draw("same");
+
+    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.03);
+    // l1->AddEntry(h_punzisig1, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    // l1->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(h_punzisig150, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+    l1->Draw();
+
+    gStyle->SetOptStat(0);
 
     TString outputfile1 = "./ee_Sig_punzi.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
@@ -221,5 +257,8 @@ void Scan_sig()
     h_Mx2_1_eff->Write();
     h_Mx2_50_eff->Write();
     h_Mx2_150_eff->Write();
+    h_punzisig1->Write();
+    h_punzisig50->Write();
+    h_punzisig150->Write();
     outfile_HT0->Close();
 }

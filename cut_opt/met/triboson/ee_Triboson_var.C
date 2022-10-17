@@ -32,7 +32,7 @@ double ZZZWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ZZZ_TuneCUETP
 
 void ee_Triboson_var()
 {
-    TH1D *h_Triboson_Met = new TH1D("h_Triboson_Met", "", 50, 0, 500);
+    TH1D *h_Triboson_Met = new TH1D("h_Triboson_Met", "", 150, 0, 1500);
     h_Triboson_Met->GetXaxis()->SetTitle("");
     h_Triboson_Met->GetYaxis()->SetTitle("");
     h_Triboson_Met->Sumw2();
@@ -42,7 +42,7 @@ void ee_Triboson_var()
     h_Triboson_dilepPT->GetYaxis()->SetTitle("");
     h_Triboson_dilepPT->Sumw2();
 
-    TH1D *h_Triboson_Met_cut = new TH1D("h_Triboson_Met_cut", "", 50, 0, 500);
+    TH1D *h_Triboson_Met_cut = new TH1D("h_Triboson_Met_cut", "", 150, 0, 1500);
     h_Triboson_Met_cut->GetXaxis()->SetTitle("");
     h_Triboson_Met_cut->GetYaxis()->SetTitle("");
     h_Triboson_Met_cut->Sumw2();
