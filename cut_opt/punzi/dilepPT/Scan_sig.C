@@ -66,7 +66,7 @@ void Scan_sig()
 
     for (int i = 1; i <= 100; i++)
     {
-        float Metcut = 140.;
+        float Metcut = 130.;
         float dilepton_cut = i * 10;
 
         TTree *T_Mx2_1;

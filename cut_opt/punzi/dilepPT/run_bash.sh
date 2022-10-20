@@ -1,4 +1,8 @@
 #!/bin/bash
+set -eu -o pipefail 
+#----------------------------------------------------------------
+# Compile .C file
+#----------------------------------------------------------------
 g++ -o Scan_DY_bg.o $(root-config --cflags) Scan_DY_bg.C $(root-config --glibs)
 g++ -o Scan_Top_bg.o $(root-config --cflags) Scan_Top_bg.C $(root-config --glibs)
 g++ -o Scan_Diboson_bg.o $(root-config --cflags) Scan_Diboson_bg.C $(root-config --glibs)
@@ -73,7 +77,7 @@ hadd ee_Triboson_punzi.root ./output/Tri_output_*.root
 #-------------------------------
 # Combine to 2016 MC background
 #-------------------------------
-test -e "./ee_bgall_punzi.root" && { echo "delete ee_bgall_punzi.root"; rm ./ee_bgall_punzi.root* ;}
+test -e "./ee_bgall_punzi.root" && { echo "delete ee_bgall_punzi.root"; rm ./ee_bgall_punzi.root ;}
 
 hadd ee_bgall_punzi.root ee_DY_punzi.root ee_Diboson_punzi.root ee_Top_punzi.root ee_Triboson_punzi.root
 

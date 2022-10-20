@@ -160,22 +160,6 @@ void ee_Top_emu_half_fakerate(TString file = "tmp.root", TString outputfile = "o
     Top_nTrk_bfakeRate_highDilepPt->Divide(h_Top_nTrk_bjet_cut_highDilepPt, h_Top_nTrk_bjet_highDilepPt, 1, 1, "b");
     TH1D *Top_nTrk_lfakeRate_highDilepPt = (TH1D *)h_Top_nTrk_ljet_cut_highDilepPt->Clone("Top_nTrk_lfakeRate_highDilepPt");
     Top_nTrk_lfakeRate_highDilepPt->Divide(h_Top_nTrk_ljet_cut_highDilepPt, h_Top_nTrk_ljet_highDilepPt, 1, 1, "b");
-    // Consider eta
-    TH1D *Top_nTrk_bfakeRate_lowDilepPt_1 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_lowDilepPt_1->Clone("Top_nTrk_bfakeRate_lowDilepPt_1");
-    Top_nTrk_bfakeRate_lowDilepPt_1->Divide(h_Top_nTrk_bjet_cut_difeta_lowDilepPt_1, h_Top_nTrk_bjet_difeta_lowDilepPt_1, 1, 1, "b");
-    TH1D *Top_nTrk_lfakeRate_lowDilepPt_1 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_lowDilepPt_1->Clone("Top_nTrk_lfakeRate_lowDilepPt_1");
-    Top_nTrk_lfakeRate_lowDilepPt_1->Divide(h_Top_nTrk_ljet_cut_difeta_lowDilepPt_1, h_Top_nTrk_ljet_difeta_lowDilepPt_1, 1, 1, "b");
-
-    TH1D *Top_nTrk_bfakeRate_lowDilepPt_2 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_lowDilepPt_2->Clone("Top_nTrk_bfakeRate_lowDilepPt_2");
-    Top_nTrk_bfakeRate_lowDilepPt_2->Divide(h_Top_nTrk_bjet_cut_difeta_lowDilepPt_2, h_Top_nTrk_bjet_difeta_lowDilepPt_2, 1, 1, "b");
-    TH1D *Top_nTrk_lfakeRate_lowDilepPt_2 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_lowDilepPt_2->Clone("Top_nTrk_lfakeRate_lowDilepPt_2");
-    Top_nTrk_lfakeRate_lowDilepPt_2->Divide(h_Top_nTrk_ljet_cut_difeta_lowDilepPt_2, h_Top_nTrk_ljet_difeta_lowDilepPt_2, 1, 1, "b");
-
-    TH1D *Top_nTrk_bfakeRate_lowDilepPt_3 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_lowDilepPt_3->Clone("Top_nTrk_bfakeRate_lowDilepPt_2");
-    Top_nTrk_bfakeRate_lowDilepPt_3->Divide(h_Top_nTrk_bjet_cut_difeta_lowDilepPt_3, h_Top_nTrk_bjet_difeta_lowDilepPt_2, 1, 1, "b");
-    TH1D *Top_nTrk_lfakeRate_lowDilepPt_3 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_lowDilepPt_3->Clone("Top_nTrk_lfakeRate_lowDilepPt_2");
-    Top_nTrk_lfakeRate_lowDilepPt_3->Divide(h_Top_nTrk_ljet_cut_difeta_lowDilepPt_3, h_Top_nTrk_ljet_difeta_lowDilepPt_2, 1, 1, "b");
- 
 
     // For Hight MET mid MET Low MET
     TH1D *Top_nTrk_bfakeRate_difeta_lowMET_1 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_lowMET_1->Clone("Top_nTrk_bfakeRate_difeta_lowMET_1");
@@ -241,7 +225,10 @@ void ee_Top_emu_half_fakerate(TString file = "tmp.root", TString outputfile = "o
     TH1D *Top_nTrk_lfakeRate_difeta_highMET_3 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_highMET_3->Clone("Top_nTrk_lfakeRate_difeta_highMET_3");
     Top_nTrk_lfakeRate_difeta_highMET_3->Divide(h_Top_nTrk_ljet_cut_difeta_highMET_3, h_Top_nTrk_ljet_difeta_highMET_3, 1, 1, "b");
 
-    //---------------------
+    //-------------------------------------------
+    //   Consider eta in low dilepton PT region
+    //-------------------------------------------
+
     TH1D *Top_nTrk_bfakeRate_difeta_lowDilepPt_1 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_lowDilepPt_1->Clone("Top_nTrk_bfakeRate_difeta_lowDilepPt_1");
     Top_nTrk_bfakeRate_difeta_lowDilepPt_1->Divide(h_Top_nTrk_bjet_cut_difeta_lowDilepPt_1, h_Top_nTrk_bjet_difeta_lowDilepPt_1, 1, 1, "b");
     TH1D *Top_nTrk_lfakeRate_difeta_lowDilepPt_1 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_lowDilepPt_1->Clone("Top_nTrk_lfakeRate_difeta_lowDilepPt_1");
@@ -266,7 +253,7 @@ void ee_Top_emu_half_fakerate(TString file = "tmp.root", TString outputfile = "o
     Top_nTrk_bfakeRate_difeta_highDilepPt_2->Divide(h_Top_nTrk_bjet_cut_difeta_highDilepPt_2, h_Top_nTrk_bjet_difeta_highDilepPt_2, 1, 1, "b");
     TH1D *Top_nTrk_lfakeRate_difeta_highDilepPt_2 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_highDilepPt_2->Clone("Top_nTrk_lfakeRate_difeta_highDilepPt_2");
     Top_nTrk_lfakeRate_difeta_highDilepPt_2->Divide(h_Top_nTrk_ljet_cut_difeta_highDilepPt_2, h_Top_nTrk_ljet_difeta_highDilepPt_2, 1, 1, "b");
-
+    
     TH1D *Top_nTrk_bfakeRate_difeta_highDilepPt_3 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_highDilepPt_3->Clone("Top_nTrk_bfakeRate_difeta_highDilepPt_3");
     Top_nTrk_bfakeRate_difeta_highDilepPt_3->Divide(h_Top_nTrk_bjet_cut_difeta_highDilepPt_3, h_Top_nTrk_bjet_difeta_highDilepPt_3, 1, 1, "b");
     TH1D *Top_nTrk_lfakeRate_difeta_highDilepPt_3 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_highDilepPt_3->Clone("Top_nTrk_lfakeRate_difeta_highDilepPt_3");

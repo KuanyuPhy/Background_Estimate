@@ -110,7 +110,7 @@ void ee_Triboson_var()
     v_WZZ_jetMass->clear();
     v_ZZZ_jetMass->clear();
 
-    double METcut = 140.0;
+    double METcut = 130.0;
 
     TTree *T_tree;
     triboson_WWZfile->GetObject("T_tree", T_tree);

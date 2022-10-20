@@ -12,32 +12,41 @@
 #include <TLine.h>
 
 using namespace std;
+
+// define punzi_eq
+double punzi(double sigeff, double bg)
+{
+    return sigeff / (1 + TMath::Power(abs(bg), 0.5));
+}
+
 void ana_sig()
 {
+
     TFile *Mx2_1 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_1_old_remove_0alpha.root");
     TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_50_old_remove_0alpha.root");
     TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_150_old_remove_0alpha.root");
 
-    TH1D *h_pass_Mx2_1 = new TH1D("h_pass_Mx2_1", "", 50, 0, 50);
+    TFile *Bgfile = new TFile("./ee_bgall_punzi_MET.root");
+
+    TH1D *h_bgall_nMET_cut = ((TH1D *)Bgfile->Get("h_pass_Bg_nMetcut"));
+
+    TH1D *h_pass_Mx2_1 = new TH1D("h_pass_Mx2_1", "", 160, 1, 160);
     h_pass_Mx2_1->Sumw2();
 
-    TH1D *h_pass_Mx2_1_nMetcut = new TH1D("h_pass_Mx2_1_nMetcut", "", 50, 0, 50);
+    TH1D *h_pass_Mx2_1_nMetcut = new TH1D("h_pass_Mx2_1_nMetcut", "", 160, 1, 160);
     h_pass_Mx2_1_nMetcut->Sumw2();
 
-    TH1D *h_pass_Mx2_50 = new TH1D("h_pass_Mx2_50", "", 50, 0, 50);
+    TH1D *h_pass_Mx2_50 = new TH1D("h_pass_Mx2_50", "", 160, 1, 160);
     h_pass_Mx2_50->Sumw2();
 
-    TH1D *h_pass_Mx2_50_nMetcut = new TH1D("h_pass_Mx2_50_nMetcut", "", 50, 0, 50);
+    TH1D *h_pass_Mx2_50_nMetcut = new TH1D("h_pass_Mx2_50_nMetcut", "", 160, 1, 160);
     h_pass_Mx2_50_nMetcut->Sumw2();
 
-    TH1D *h_pass_Mx2_150 = new TH1D("h_pass_Mx2_150", "", 50, 0, 50);
+    TH1D *h_pass_Mx2_150 = new TH1D("h_pass_Mx2_150", "", 160, 1, 160);
     h_pass_Mx2_150->Sumw2();
 
-    TH1D *h_pass_Mx2_150_nMetcut = new TH1D("h_pass_Mx2_150_nMetcut", "", 50, 0, 50);
+    TH1D *h_pass_Mx2_150_nMetcut = new TH1D("h_pass_Mx2_150_nMetcut", "", 160, 1, 160);
     h_pass_Mx2_150_nMetcut->Sumw2();
-
-    TH1D *h_Mx2_1_Met = new TH1D("h_Mx2_1_Met", "", 50, 0, 500);
-    h_Mx2_1_Met->Sumw2();
 
     Int_t I_Mx1_weight, I_Mx50_weight, I_Mx150_weight;
 
@@ -53,7 +62,7 @@ void ana_sig()
     v_Mx50_alpha->clear();
     v_Mx150_alpha->clear();
 
-    for (int i = 1; i <= 50; i++)
+    for (int i = 1; i <= 150; i++)
     {
         float metcut = i * 10;
 
@@ -74,10 +83,6 @@ void ana_sig()
             {
                 h_pass_Mx2_1_nMetcut->Fill(i, I_Mx1_weight);
             }
-            else
-            {
-                continue;
-            }
         } // End of Mx2_1 Entries loop
         TTree *T_Mx2_50;
         Mx2_50->GetObject("T_tree", T_Mx2_50);
@@ -91,11 +96,8 @@ void ana_sig()
             // Scan Met
             //-------------------
             h_pass_Mx2_50->Fill(i, I_Mx50_weight);
-            // cout << "Met cut"<<i*10<<endl;
             if (f_Mx50_Met > metcut)
             {
-                // cout << "metcut = " << metcut << endl;
-                // cout << "Met = " << f_Mx1_Met << endl;
                 h_pass_Mx2_50_nMetcut->Fill(i, I_Mx50_weight);
             }
         } // End of Mx2_50 Entries loop
@@ -111,36 +113,116 @@ void ana_sig()
             // Scan Met
             //-------------------
             h_pass_Mx2_150->Fill(i, I_Mx150_weight);
-            // cout << "Met cut"<<i*10<<endl;
             if (f_Mx150_Met > metcut)
             {
-                // cout << "metcut = " << metcut << endl;
-                // cout << "Met = " << f_Mx1_Met << endl;
                 h_pass_Mx2_150_nMetcut->Fill(i, I_Mx150_weight);
             }
         } // End of Mx2_150 Entries loop
     }     // End of 150 loops
 
     TH1D *h_Mx2_1_eff = (TH1D *)h_pass_Mx2_1_nMetcut->Clone("h_Mx2_1_eff");
-    h_Mx2_1_eff->Divide(h_pass_Mx2_1_nMetcut, h_pass_Mx2_1, 1, 1);
+    h_Mx2_1_eff->Divide(h_pass_Mx2_1_nMetcut, h_pass_Mx2_1, 1, 1, "b");
 
     TH1D *h_Mx2_50_eff = (TH1D *)h_pass_Mx2_50_nMetcut->Clone("h_Mx2_50_eff");
-    h_Mx2_50_eff->Divide(h_pass_Mx2_50_nMetcut, h_pass_Mx2_50, 1, 1);
+    h_Mx2_50_eff->Divide(h_pass_Mx2_50_nMetcut, h_pass_Mx2_50, 1, 1, "b");
 
     TH1D *h_Mx2_150_eff = (TH1D *)h_pass_Mx2_150_nMetcut->Clone("h_Mx2_150_eff");
-    h_Mx2_150_eff->Divide(h_pass_Mx2_150_nMetcut, h_pass_Mx2_150, 1, 1);
+    h_Mx2_150_eff->Divide(h_pass_Mx2_150_nMetcut, h_pass_Mx2_150, 1, 1, "b");
 
-    auto c1 = new TCanvas("c", "BPRE");
+    double Sig1_punzi[150];
+    double Sig50_punzi[150];
+    double Sig150_punzi[150];
+
+    for (int i = 1; i <= 150; i++)
+    {
+        Sig1_punzi[i] = punzi(h_Mx2_1_eff->GetBinContent(i), h_bgall_nMET_cut->GetBinContent(i));
+        Sig50_punzi[i] = punzi(h_Mx2_50_eff->GetBinContent(i), h_bgall_nMET_cut->GetBinContent(i));
+        Sig150_punzi[i] = punzi(h_Mx2_150_eff->GetBinContent(i), h_bgall_nMET_cut->GetBinContent(i));
+
+        cout << "i =" << i << endl;
+        cout << "eff =" << h_Mx2_1_eff->GetBinContent(i) << endl;
+        cout << "punzi =" << Sig150_punzi[i] << endl;
+    }
+
+    TH1D *h_punzisig1 = new TH1D("h_punzisig1", "", 160, 1, 160);
+    TH1D *h_punzisig50 = new TH1D("h_punzisig50", "", 160, 1, 160);
+    TH1D *h_punzisig150 = new TH1D("h_punzisig150", "", 160, 1, 160);
+    for (int i = 1; i <= 150; i++)
+    {
+        h_punzisig1->SetBinContent(i, Sig1_punzi[i]);
+        h_punzisig50->SetBinContent(i, Sig50_punzi[i]);
+        h_punzisig150->SetBinContent(i, Sig150_punzi[i]);
+    }
+
+    h_punzisig1->SetLineWidth(2);
+    h_punzisig50->SetLineWidth(2);
+    h_punzisig150->SetLineWidth(2);
+
+    h_punzisig1->SetLineColor(kRed);
+    h_punzisig50->SetLineColor(kBlack);
+    h_punzisig150->SetLineColor(kBlue);
+
+    Double_t w = 600;
+    Double_t h = 600;
+
+    int H_ref = 600;
+    int W_ref = 600;
+
+    float T = 0.08 * H_ref;
+    float B = 0.12 * H_ref;
+    float L = 0.12 * W_ref;
+    float R = 0.04 * W_ref;
+
+    auto canv = new TCanvas("c1", "c1", w, h);
+    canv->SetFillColor(0);
+    canv->SetBorderMode(0);
+    canv->SetFrameFillStyle(0);
+    canv->SetFrameBorderMode(0);
+    canv->SetLeftMargin(L / w);
+    canv->SetRightMargin(R / w);
+    canv->SetTopMargin(T / h);
+    canv->SetBottomMargin(B / h);
+    canv->SetTickx(0);
+    canv->SetTicky(0);
+
+    h_punzisig150->GetYaxis()->SetTitle("punzi significance");
+    h_punzisig150->GetXaxis()->SetTitle("MET cut");
+
+    h_punzisig150->GetXaxis()->SetRangeUser(10, 20);
+
+    h_punzisig150->Draw();
+    //h_punzisig50->Draw("same");
+    //h_punzisig1->Draw("same");
+
+    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.03);
+    //l1->AddEntry(h_punzisig1, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    //l1->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(h_punzisig150, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+    l1->Draw();
+
+    gStyle->SetOptStat(0);
+
+    //gPad->SetLogy();
+
+    // auto c1 = new TCanvas("c", "BPRE");
+    /*
     c1->Divide(3, 1);
     c1->cd(1);
-    h_Mx2_1_eff->Draw("");
+    h_Mx2_1_eff->Draw("text 45");
     c1->cd(2);
     h_Mx2_50_eff->Draw("");
     c1->cd(3);
     h_Mx2_150_eff->Draw("");
+    */
 
     TString outputfile1 = "./ee_Sig_punzi.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
+    h_pass_Mx2_1->Write();
+    h_pass_Mx2_50->Write();
+    h_pass_Mx2_150->Write();
     h_Mx2_1_eff->Write();
     h_Mx2_50_eff->Write();
     h_Mx2_150_eff->Write();

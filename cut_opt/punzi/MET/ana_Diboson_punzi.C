@@ -10,7 +10,7 @@
 #include <TLatex.h>
 #include <TAxis.h>
 #include <TLine.h>
-#include "./../../lib/Cross_section.h"
+#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/Cross_section.h"
 using namespace std;
 
 TFile *diboson_gg_ZZ_2e2mu = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/diboson/ee_diboson_gg_ZZ_2e2mu.root");
@@ -72,8 +72,8 @@ double diboson_gg_ZZ_2mu2tau_Weight = (GlobalConstants::Lumi2016) * (GlobalConst
 double diboson_gg_ZZ_4e_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::gg_ZZ_4e / (gg_ZZ_4e_totevt)) * 1000;
 double diboson_gg_ZZ_4mu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::gg_ZZ_4mu / (gg_ZZ_4mu_totevt)) * 1000;
 double diboson_gg_ZZ_4tau_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::gg_ZZ_4tau / (gg_ZZ_4tau_totevt)) * 1000;
-double diboson_gg_WW_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_WW_2L2Nu / (gg_WW_2L2Nu_totevt)) * 1000;
-double diboson_qq_WW_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_ZZ_2L2Nu / (qq_WW_2L2Nu_totevt)) * 1000;
+double diboson_gg_WW_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::gg_WW_2L2Nu / (gg_WW_2L2Nu_totevt)) * 1000;
+double diboson_qq_WW_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_WW_2L2Nu / (qq_WW_2L2Nu_totevt)) * 1000;
 double diboson_qq_WZ_2L2Q_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_WZ_2L2Q / (qq_WZ_2L2Q_totevt)) * 1000;
 double diboson_qq_WZ_3LNu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_WZ_3LNu / (qq_WZ_3LNu_totevt)) * 1000;
 double diboson_qq_ZZ_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_ZZ_2L2Nu / (qq_ZZ_2L2Nu_totevt)) * 1000;
@@ -89,7 +89,10 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
     float metcut = atoi(scanMet_step) * 10;
     cout << "metcut" << metcut << endl;
 
-    TH1D *h_pass_Bg_nMetcut = new TH1D("h_pass_Bg_nMetcut", "", 50, 0, 50);
+    TH1D *h_pass_Bg = new TH1D("h_pass_Bg", "", 160, 1, 160);
+    h_pass_Bg->Sumw2();
+
+    TH1D *h_pass_Bg_nMetcut = new TH1D("h_pass_Bg_nMetcut", "", 160, 1, 160);
     h_pass_Bg_nMetcut->Sumw2();
 
     Int_t f_gg_ZZ_2e2mu_weight, f_gg_ZZ_2e2nu_weight, f_gg_ZZ_2e2tau_weight, f_gg_ZZ_2mu2nu_weight,
@@ -145,6 +148,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
         if (f_gg_ZZ_2e2mu_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
@@ -161,6 +165,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
         if (f_gg_ZZ_2e2nu_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
@@ -177,6 +182,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
         if (f_gg_ZZ_2e2tau_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
@@ -193,6 +199,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
         if (f_gg_ZZ_2mu2nu_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
@@ -209,6 +216,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
         if (f_gg_ZZ_2mu2tau_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
@@ -225,6 +233,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
         if (f_gg_ZZ_4e_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
@@ -241,6 +250,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
         if (f_gg_ZZ_4mu_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
@@ -257,6 +267,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
         if (f_gg_ZZ_4tau_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
@@ -273,6 +284,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
         if (f_gg_WW_2L2Nu_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
@@ -289,6 +301,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
         if (f_qq_WW_2L2Nu_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
@@ -305,6 +318,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
         if (f_qq_WZ_2L2Q_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
@@ -321,6 +335,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
         if (f_qq_WZ_3LNu_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
@@ -337,6 +352,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
         if (f_qq_ZZ_2L2Nu_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
@@ -353,6 +369,7 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
         if (f_qq_ZZ_2L2Q_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
@@ -369,12 +386,14 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
         //-------------------
         // Scan Met
         //-------------------
+        h_pass_Bg->Fill(atoi(scanMet_step), f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
         if (f_qq_ZZ_4L_met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
         }
     }
     TFile *outfile_HT0 = TFile::Open(outputfile, "RECREATE");
+    h_pass_Bg->Write();
     h_pass_Bg_nMetcut->Write();
     outfile_HT0->Close();
 }

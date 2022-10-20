@@ -316,7 +316,7 @@ void ee_HT_var()
     v_ht1200_Jethadronflavor->clear();
     v_ht2500_Jethadronflavor->clear();
 
-    double metcut = 140.;
+    double metcut = 130.;
 
     TTree *T_inclusive;
     DYincli->GetObject("T_tree", T_inclusive);

@@ -213,7 +213,7 @@ void ee_Top_var()
     v_TTZToQQ_Jethadronflavor->clear();
     v_TTZToLLNuNu_Jethadronflavor->clear();
 
-    float METcut = 140.0;
+    float METcut = 130.0;
 
     TTree *T_TTTo2L2Nu_tree;
     TTTo2L2Nufile->GetObject("T_tree", T_TTTo2L2Nu_tree);

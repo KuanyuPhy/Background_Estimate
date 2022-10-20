@@ -10,7 +10,7 @@
 #include <TLatex.h>
 #include <TAxis.h>
 #include <TLine.h>
-#include "./../../lib/Cross_section.h"
+#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/Cross_section.h"
 using namespace std;
 
 TFile *DYincli = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/DY/ee_DYincli.root");
@@ -111,10 +111,10 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
     float metcut = atoi(scanMet_step) * 10;
     cout << "metcut" << metcut << endl;
 
-    TH1D *h_pass_DY = new TH1D("h_pass_DY", "", 50, 0, 50);
-    h_pass_DY->Sumw2();
+    TH1D *h_pass_Bg = new TH1D("h_pass_Bg", "", 160, 1, 160);
+    h_pass_Bg->Sumw2();
 
-    TH1D *h_pass_Bg_nMetcut = new TH1D("h_pass_Bg_nMetcut", "", 50, 0, 50);
+    TH1D *h_pass_Bg_nMetcut = new TH1D("h_pass_Bg_nMetcut", "", 160, 1, 160);
     h_pass_Bg_nMetcut->Sumw2();
 
     float_t HT;
@@ -157,7 +157,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
         //-------------------
         // Scan Met
         //-------------------
-        // for_inclusive_sample(HT, i, I_ht0_weight, h_pass_DY);
+        for_inclusive_sample(HT, atoi(scanMet_step), I_ht0_weight, h_pass_Bg);
         if (f_ht0_Met > metcut)
         {
             for_inclusive_sample(HT, atoi(scanMet_step), I_ht0_weight, h_pass_Bg_nMetcut);
@@ -174,7 +174,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
         //-------------------
         // Scan Met
         //-------------------
-        //h_pass_DY->Fill(i, I_ht100_weight * HT100Weight);
+        h_pass_Bg->Fill(atoi(scanMet_step), I_ht100_weight * HT100Weight);
         if (f_ht100_Met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), I_ht100_weight * HT100Weight);
@@ -191,7 +191,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
         //-------------------
         // Scan Met
         //-------------------
-        //h_pass_DY->Fill(i, I_ht200_weight * HT200Weight);
+        h_pass_Bg->Fill(atoi(scanMet_step), I_ht200_weight * HT200Weight);
         if (f_ht200_Met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), I_ht200_weight * HT200Weight);
@@ -208,7 +208,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
         //-------------------
         // Scan Met
         //-------------------
-        //h_pass_DY->Fill(i, I_ht400_weight * HT400Weight);
+        h_pass_Bg->Fill(atoi(scanMet_step), I_ht400_weight * HT400Weight);
         if (f_ht400_Met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), I_ht400_weight * HT400Weight);
@@ -225,7 +225,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
         //-------------------
         // Scan Met
         //-------------------
-        //h_pass_DY->Fill(i, I_ht600_weight * HT600Weight);
+        h_pass_Bg->Fill(atoi(scanMet_step), I_ht600_weight * HT600Weight);
         if (f_ht600_Met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), I_ht600_weight * HT600Weight);
@@ -242,7 +242,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
         //-------------------
         // Scan Met
         //-------------------
-        //h_pass_DY->Fill(i, I_ht800_weight * HT800Weight);
+        h_pass_Bg->Fill(atoi(scanMet_step), I_ht800_weight * HT800Weight);
         if (f_ht800_Met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), I_ht800_weight * HT800Weight);
@@ -259,7 +259,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
         //-------------------
         // Scan Met
         //-------------------
-        //h_pass_DY->Fill(i, I_ht1200_weight * HT1200Weight);
+        h_pass_Bg->Fill(atoi(scanMet_step), I_ht1200_weight * HT1200Weight);
         if (f_ht1200_Met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), I_ht1200_weight * HT1200Weight);
@@ -276,7 +276,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
         //-------------------
         // Scan Met
         //-------------------
-        //h_pass_DY->Fill(i, I_ht2500_weight * HT2500Weight);
+        h_pass_Bg->Fill(atoi(scanMet_step), I_ht2500_weight * HT2500Weight);
         if (f_ht2500_Met > metcut)
         {
             h_pass_Bg_nMetcut->Fill(atoi(scanMet_step), I_ht2500_weight * HT2500Weight);
@@ -284,6 +284,7 @@ void ana_DY_punzi(const char *scanMet_step = "tmp", TString outputfile = "./outp
     }
 
     TFile *outfile_HT0 = TFile::Open(outputfile, "RECREATE");
+    h_pass_Bg->Write();
     h_pass_Bg_nMetcut->Write();
     outfile_HT0->Close();
 }

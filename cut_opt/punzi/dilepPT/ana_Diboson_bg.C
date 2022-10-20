@@ -15,7 +15,7 @@
 #include "TLegend.h"
 #include <vector>
 #include <cstring>
-#include "./../../lib/Cross_section.h"
+#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/Cross_section.h"
 using namespace std;
 
 //------------------
@@ -88,19 +88,19 @@ double diboson_qq_ZZ_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstan
 double diboson_qq_ZZ_2L2Q_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_ZZ_2L2Q / (qq_ZZ_2L2Q_totevt)) * 1000;
 double diboson_qq_ZZ_4L_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_ZZ_4L / (qq_ZZ_4L_totevt)) * 1000;
 
-void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "output.root")
+void ana_Diboson_bg(TString outputfile = "Diboson_output.root")
 {
     //---------------------
     // dilepton cut
     //---------------------
-    float Metcut = 140.;
-    float dilepton_cut = atoi(scanMet_step) * 10;
+    float Metcut = 130.;
+    float dilepton_cut = 160;
     cout << "dilepton cut" << dilepton_cut << endl;
 
-    TH1D *h_pass_bg = new TH1D("h_pass_bg", "", 110, 1, 110);
+    TH1D *h_pass_bg = new TH1D("h_pass_bg", "", 5, 1, 5);
     h_pass_bg->Sumw2();
 
-    TH1D *h_pass_Bg_nDilepPTcut = new TH1D("h_pass_Bg_nDilepPTcut", "", 110, 1, 110);
+    TH1D *h_pass_Bg_nDilepPTcut = new TH1D("h_pass_Bg_nDilepPTcut", "", 5, 1, 5);
     h_pass_Bg_nDilepPTcut->Sumw2();
 
     float_t f_gg_ZZ_2e2mu_met, f_gg_ZZ_2e2nu_met, f_gg_ZZ_2e2tau_met, f_gg_ZZ_2mu2nu_met,
@@ -163,13 +163,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
+        h_pass_bg->Fill(1., f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_ZZ_2e2mu_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
         }
     }
     TTree *T_event1;
@@ -185,13 +189,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
+        h_pass_bg->Fill(1., f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_ZZ_2e2nu_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
         }
     }
     TTree *T_event2;
@@ -207,13 +215,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
+        h_pass_bg->Fill(1., f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_ZZ_2e2tau_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
         }
     }
     TTree *T_event3;
@@ -229,13 +241,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
+        h_pass_bg->Fill(1., f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_ZZ_2mu2nu_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
         }
     }
     TTree *T_event4;
@@ -251,13 +267,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
+        h_pass_bg->Fill(1., f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_ZZ_2mu2tau_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
         }
     }
     TTree *T_event5;
@@ -273,13 +293,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+        h_pass_bg->Fill(1., f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_ZZ_4e_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
         }
     }
     TTree *T_event6;
@@ -295,13 +319,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
+        h_pass_bg->Fill(1., f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_ZZ_4mu_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
         }
     }
     TTree *T_event7;
@@ -317,13 +345,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
+        h_pass_bg->Fill(1., f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_ZZ_4tau_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
         }
     }
     TTree *T_event8;
@@ -339,13 +371,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
+        h_pass_bg->Fill(1., f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_gg_WW_2L2Nu_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
         }
     }
     TTree *T_event9;
@@ -361,13 +397,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
+        h_pass_bg->Fill(1., f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
         //-------------------
         // Scan Met
         //-------------------
         if (f_qq_WW_2L2Nu_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
         }
     }
     TTree *T_event10;
@@ -383,13 +423,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
+        h_pass_bg->Fill(1., f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_qq_WZ_2L2Q_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
         }
     }
     TTree *T_event11;
@@ -405,13 +449,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
+        h_pass_bg->Fill(1., f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
         //-------------------
         //  Scan dilepton PT
         //-------------------
         if (f_qq_WZ_3LNu_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
         }
     }
     TTree *T_event12;
@@ -427,13 +475,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
+        h_pass_bg->Fill(1., f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_qq_ZZ_2L2Nu_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
         }
     }
     TTree *T_event13;
@@ -449,13 +501,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
+        h_pass_bg->Fill(1., f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_qq_ZZ_2L2Q_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
         }
     }
     TTree *T_event14;
@@ -471,13 +527,17 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
+        h_pass_bg->Fill(1., f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
         //-------------------
         // Scan dilepton PT
         //-------------------
         if (f_qq_ZZ_4L_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1., f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2., f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
         }
     }
 
@@ -493,11 +553,11 @@ int main(int argc, char **argv)
 {
     if (argc == 1)
     {
-        Scan_Diboson_bg();
+        ana_Diboson_bg();
     }
-    else if (argc == 3)
+    else if (argc == 2)
     {
-        Scan_Diboson_bg(argv[1], argv[2]);
+        ana_Diboson_bg(argv[1]);
     }
     else
     {

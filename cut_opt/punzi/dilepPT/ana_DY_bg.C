@@ -15,7 +15,7 @@
 #include "TLegend.h"
 #include <vector>
 #include <cstring>
-#include "./../../lib/Cross_section.h"
+#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/Cross_section.h"
 using namespace std;
 
 //------------------
@@ -111,19 +111,19 @@ void for_inclusive_sample(float HT, float i_tmp, double Weight, TH1D *h_tmp)
     }
 }
 
-void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.root")
+void ana_DY_bg(TString outputfile = "DY_output.root")
 {
     //---------------------
     // dilepton cut
     //---------------------
-    float Metcut = 140.;
-    float dilepton_cut = atoi(scanMet_step) * 10;
+    float Metcut = 130.;
+    float dilepton_cut = 160;
     cout << "dilepton cut" << dilepton_cut << endl;
 
-    TH1D *h_pass_bg = new TH1D("h_pass_bg", "", 110, 1, 110);
+    TH1D *h_pass_bg = new TH1D("h_pass_bg", "", 5, 1, 5);
     h_pass_bg->Sumw2();
 
-    TH1D *h_pass_Bg_nDilepPTcut = new TH1D("h_pass_Bg_nDilepPTcut", "", 110, 1, 110);
+    TH1D *h_pass_Bg_nDilepPTcut = new TH1D("h_pass_Bg_nDilepPTcut", "", 5, 1, 5);
     h_pass_Bg_nDilepPTcut->Sumw2();
 
     float_t HT;
@@ -170,13 +170,17 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
         {
             continue;
         }
-        for_inclusive_sample(HT, atoi(scanMet_step), I_ht0_weight, h_pass_bg);
+        for_inclusive_sample(HT, 1, I_ht0_weight, h_pass_bg);
         //-------------------
         // Scan dilepton
         //-------------------
         if (f_ht0_dilepPT > dilepton_cut)
         {
-            for_inclusive_sample(HT, atoi(scanMet_step),I_ht0_weight,  h_pass_Bg_nDilepPTcut);
+            for_inclusive_sample(HT, 1, I_ht0_weight, h_pass_Bg_nDilepPTcut);
+        }
+        else
+        {
+            for_inclusive_sample(HT, 2, I_ht0_weight, h_pass_Bg_nDilepPTcut);
         }
     }
     TTree *T_HT100;
@@ -192,14 +196,18 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), I_ht100_weight * HT100Weight);
+        h_pass_bg->Fill(1, I_ht100_weight * HT100Weight);
         //-------------------
         // Scan Met
         //-------------------
         // h_pass_DY->Fill(i, I_ht100_weight * HT100Weight);
         if (f_ht100_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), I_ht100_weight * HT100Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1, I_ht100_weight * HT100Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2, I_ht100_weight * HT100Weight);
         }
     }
     TTree *T_HT200;
@@ -215,14 +223,18 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), I_ht200_weight * HT200Weight);
+        h_pass_bg->Fill(1, I_ht200_weight * HT200Weight);
         //-------------------
         // Scan Met
         //-------------------
         // h_pass_DY->Fill(i, I_ht200_weight * HT200Weight);
         if (f_ht200_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), I_ht200_weight * HT200Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1, I_ht200_weight * HT200Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2, I_ht200_weight * HT200Weight);
         }
     }
     TTree *T_HT400;
@@ -238,14 +250,18 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), I_ht400_weight * HT400Weight);
+        h_pass_bg->Fill(1, I_ht400_weight * HT400Weight);
         //-------------------
         // Scan Met
         //-------------------
         // h_pass_DY->Fill(i, I_ht400_weight * HT400Weight);
         if (f_ht400_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), I_ht400_weight * HT400Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1, I_ht400_weight * HT400Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2, I_ht400_weight * HT400Weight);
         }
     }
     TTree *T_HT600;
@@ -261,14 +277,18 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), I_ht600_weight * HT600Weight);
+        h_pass_bg->Fill(1, I_ht600_weight * HT600Weight);
         //-------------------
         // Scan Met
         //-------------------
         // h_pass_DY->Fill(i, I_ht600_weight * HT600Weight);
         if (f_ht600_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), I_ht600_weight * HT600Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1, I_ht600_weight * HT600Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2, I_ht600_weight * HT600Weight);
         }
     }
     TTree *T_HT800;
@@ -284,14 +304,18 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), I_ht800_weight * HT800Weight);
+        h_pass_bg->Fill(1, I_ht800_weight * HT800Weight);
         //-------------------
         // Scan Met
         //-------------------
         // h_pass_DY->Fill(i, I_ht800_weight * HT800Weight);
         if (f_ht800_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), I_ht800_weight * HT800Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1, I_ht800_weight * HT800Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2, I_ht800_weight * HT800Weight);
         }
     }
     TTree *T_HT1200;
@@ -307,14 +331,18 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), I_ht1200_weight * HT1200Weight);
+        h_pass_bg->Fill(1, I_ht1200_weight * HT1200Weight);
         //-------------------
         // Scan Met
         //-------------------
         // h_pass_DY->Fill(i, I_ht1200_weight * HT1200Weight);
         if (f_ht1200_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), I_ht1200_weight * HT1200Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1, I_ht1200_weight * HT1200Weight);
+        }
+        else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2, I_ht1200_weight * HT1200Weight);
         }
     }
     TTree *T_HT2500;
@@ -330,14 +358,18 @@ void Scan_DY_bg(const char *scanMet_step = "tmp", TString outputfile = "output.r
         {
             continue;
         }
-        h_pass_bg->Fill(atoi(scanMet_step), I_ht2500_weight * HT2500Weight);
+        h_pass_bg->Fill(1, I_ht2500_weight * HT2500Weight);
         //-------------------
         // Scan Met
         //-------------------
         // h_pass_DY->Fill(i, I_ht2500_weight * HT2500Weight);
         if (f_ht2500_dilepPT > dilepton_cut)
         {
-            h_pass_Bg_nDilepPTcut->Fill(atoi(scanMet_step), I_ht2500_weight * HT2500Weight);
+            h_pass_Bg_nDilepPTcut->Fill(1, I_ht2500_weight * HT2500Weight);
+        }
+                else
+        {
+            h_pass_Bg_nDilepPTcut->Fill(2, I_ht2500_weight * HT2500Weight);
         }
     }
 
@@ -353,11 +385,11 @@ int main(int argc, char **argv)
 {
     if (argc == 1)
     {
-        Scan_DY_bg();
+        ana_DY_bg();
     }
-    else if (argc == 3)
+    else if (argc == 2)
     {
-        Scan_DY_bg(argv[1], argv[2]);
+        ana_DY_bg(argv[1]);
     }
     else
     {

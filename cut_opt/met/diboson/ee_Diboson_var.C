@@ -283,7 +283,7 @@ void ee_Diboson_var()
     v_qq_ZZ_2L2Q_Jethadronflavor->clear();
     v_qq_ZZ_4L_Jethadronflavor->clear();
 
-    double METcut = 140.0;
+    double METcut = 130.0;
 
     TTree *T_event;
     diboson_gg_ZZ_2e2mu->GetObject("T_tree", T_event);
