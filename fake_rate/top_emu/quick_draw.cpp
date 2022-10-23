@@ -374,7 +374,29 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_Top_cJetEta_diffregion_SR->GetYaxis()->SetTitle("nJets");
     h_Top_lJetEta_diffregion_bybin_CR->GetYaxis()->SetTitle("nJets");
 
-    auto c1 = new TCanvas("c1", "");
+    int W = 600;
+    int H = 600;
+
+    int H_ref = 600;
+    int W_ref = 600;
+
+    float T = 0.08 * H_ref;
+    float B = 0.12 * H_ref;
+    float L = 0.12 * W_ref;
+    float R = 0.04 * W_ref;
+
+    auto c1 = new TCanvas("c1", "c1", 50, 50, W, H);
+
+    c1->SetFillColor(0);
+    c1->SetBorderMode(0);
+    c1->SetFrameFillStyle(0);
+    c1->SetFrameBorderMode(0);
+    c1->SetLeftMargin(L / W);
+    c1->SetRightMargin(R / W);
+    c1->SetTopMargin(T / H);
+    c1->SetBottomMargin(B / H);
+    c1->SetTickx(0);
+    c1->SetTicky(0);
     /*
     c1->Divide(3, 1);
     c1->cd(1);
@@ -407,40 +429,560 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->AddEntry(h_Top_ltrk_SR, "SR", "l");
     l2->Draw();
     */
+
+    c1->Divide(1, 2);
+
     /*
-    c1->Divide(3, 2);
     c1->cd(1);
 
-    gPad->SetBottomMargin(0.02);
-
-    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetLabelSize(0);
-    h_Top_btrk_region1_bybin_CR->GetYaxis()->SetTitle("nJet");
-
-    h_Top_btrk_region1_bybin_CR->Draw("");
-    h_Top_btrk_region1_SR->Draw("h same");
-
-    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
-    l0->SetHeader("b flavor , |#eta| < 1.");
-    l0->SetTextSize(0.03);
-    l0->SetBorderSize(0);
-    l0->SetFillStyle(0);
-    l0->AddEntry(h_Top_btrk_region1_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
-    l0->AddEntry(h_Top_btrk_region1_SR, "SR", "El");
-    l0->Draw();
-
-    c1->cd(4);
-
-    gPad->SetTopMargin(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
 
     TH1D *h_btrk_rg1_CR_SR_ratio = (TH1D *)h_Top_btrk_region1_bybin_CR->Clone("h_btrk_rg1_CR_SR_ratio");
     h_btrk_rg1_CR_SR_ratio->Divide(h_Top_btrk_region1_bybin_CR, h_Top_btrk_region1_SR, 1, 1);
 
-    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
-    // h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(-50, 10);
-    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet ntrk");
+    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_btrk_region1_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_btrk_region1_SR->GetYaxis()->SetTitle("nJet");
+
+        h_Top_btrk_region1_SR->GetXaxis()->SetRangeUser(0, 25);
+    h_Top_btrk_region1_bybin_CR->GetXaxis()->SetRangeUser(0, 25);
+
+    h_Top_btrk_region1_SR->Draw("h ");
+    h_Top_btrk_region1_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor , |#eta| < 1.");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_btrk_region1_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_btrk_region1_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Track multiplicity");
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 25);
 
     h_btrk_rg1_CR_SR_ratio->Draw();
+    */
+    /*
+    c1->cd(1);
 
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_btrk_rg1_CR_SR_ratio = (TH1D *)h_Top_btrk_region3_bybin_CR->Clone("h_btrk_rg1_CR_SR_ratio");
+    h_btrk_rg1_CR_SR_ratio->Divide(h_Top_btrk_region3_bybin_CR, h_Top_btrk_region3_SR, 1, 1);
+
+    h_Top_btrk_region3_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_btrk_region3_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_btrk_region3_SR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_btrk_region3_SR->GetXaxis()->SetRangeUser(0, 25);
+    h_Top_btrk_region3_bybin_CR->GetXaxis()->SetRangeUser(0, 25);
+
+    h_Top_btrk_region3_SR->Draw("h ");
+    h_Top_btrk_region3_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor , 2 < |#eta| < 2.5.");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_btrk_region3_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_btrk_region3_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Track multiplicity");
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 25);
+
+    h_btrk_rg1_CR_SR_ratio->Draw();
+    */
+    /*
+    c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_ltrk_rg1_CR_SR_ratio = (TH1D *)h_Top_ltrk_region1_bybin_CR->Clone("h_ltrk_rg1_CR_SR_ratio");
+    h_ltrk_rg1_CR_SR_ratio->Divide(h_Top_ltrk_region1_bybin_CR, h_Top_ltrk_region1_SR, 1, 1);
+
+    h_Top_ltrk_region1_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_ltrk_region1_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_ltrk_region1_SR->GetYaxis()->SetTitle("nJet");
+
+        h_Top_ltrk_region1_SR->GetXaxis()->SetRangeUser(0, 25);
+    h_Top_ltrk_region1_bybin_CR->GetXaxis()->SetRangeUser(0, 25);
+
+    h_Top_ltrk_region1_SR->Draw("h ");
+    h_Top_ltrk_region1_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor , |#eta| < 1.");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_ltrk_region1_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_ltrk_region1_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Track multiplicity");
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 25);
+
+    h_ltrk_rg1_CR_SR_ratio->Draw();
+    */
+   /*
+       c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_ltrk_rg1_CR_SR_ratio = (TH1D *)h_Top_ltrk_region2_bybin_CR->Clone("h_ltrk_rg1_CR_SR_ratio");
+    h_ltrk_rg1_CR_SR_ratio->Divide(h_Top_ltrk_region2_bybin_CR, h_Top_ltrk_region2_SR, 1, 1);
+
+    h_Top_ltrk_region2_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_ltrk_region2_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_ltrk_region2_SR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_ltrk_region2_SR->GetXaxis()->SetRangeUser(0, 25);
+    h_Top_ltrk_region2_bybin_CR->GetXaxis()->SetRangeUser(0, 25);
+
+    h_Top_ltrk_region2_SR->Draw("h ");
+    h_Top_ltrk_region2_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor , 1 < |#eta| < 2");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_ltrk_region2_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_ltrk_region2_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Track multiplicity");
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 25);
+
+    h_ltrk_rg1_CR_SR_ratio->Draw();
+    */
+   /*
+          c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_lJetPt_rg1_CR_SR_ratio = (TH1D *)h_Top_lJetPt_region2_bybin_CR->Clone("h_lJetPt_rg1_CR_SR_ratio");
+    h_lJetPt_rg1_CR_SR_ratio->Divide(h_Top_lJetPt_region2_bybin_CR, h_Top_lJetPt_region2_SR, 1, 1);
+
+    h_Top_lJetPt_region2_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_lJetPt_region2_SR->GetYaxis()->SetTitle("nJet");
+
+    //h_Top_lJetPt_region2_SR->GetXaxis()->SetRangeUser(0, 25);
+    //h_Top_lJetPt_region2_bybin_CR->GetXaxis()->SetRangeUser(0, 25);
+
+    h_Top_lJetPt_region2_SR->Draw("h ");
+    h_Top_lJetPt_region2_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor , 1 < |#eta| < 2");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_lJetPt_region2_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_lJetPt_region2_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    //h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 25);
+
+    h_lJetPt_rg1_CR_SR_ratio->Draw();
+    */
+   /*
+    c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_lJetPt_rg1_CR_SR_ratio = (TH1D *)h_Top_lJetPt_region1_bybin_CR->Clone("h_lJetPt_rg1_CR_SR_ratio");
+    h_lJetPt_rg1_CR_SR_ratio->Divide(h_Top_lJetPt_region1_bybin_CR, h_Top_lJetPt_region1_SR, 1, 1);
+
+    h_Top_lJetPt_region1_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_lJetPt_region1_SR->GetYaxis()->SetTitle("nJet");
+
+    //h_Top_lJetPt_region1_SR->GetXaxis()->SetRangeUser(0, 25);
+    //h_Top_lJetPt_region1_bybin_CR->GetXaxis()->SetRangeUser(0, 25);
+
+    h_Top_lJetPt_region1_SR->Draw("h ");
+    h_Top_lJetPt_region1_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor , |#eta| < 1");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_lJetPt_region1_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_lJetPt_region1_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    //h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 25);
+
+    h_lJetPt_rg1_CR_SR_ratio->Draw();
+    */
+   c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_lJetPt_rg1_CR_SR_ratio = (TH1D *)h_Top_lJetPt_region3_bybin_CR->Clone("h_lJetPt_rg1_CR_SR_ratio");
+    h_lJetPt_rg1_CR_SR_ratio->Divide(h_Top_lJetPt_region3_bybin_CR, h_Top_lJetPt_region3_SR, 1, 1);
+
+    h_Top_lJetPt_region3_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_lJetPt_region3_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_lJetPt_region3_SR->GetYaxis()->SetTitle("nJet");
+
+    //h_Top_lJetPt_region3_SR->GetXaxis()->SetRangeUser(0, 25);
+    //h_Top_lJetPt_region3_bybin_CR->GetXaxis()->SetRangeUser(0, 25);
+
+    h_Top_lJetPt_region3_SR->Draw("h ");
+    h_Top_lJetPt_region3_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor , 2< |#eta| < 2.5");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_lJetPt_region3_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_lJetPt_region3_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+    h_lJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    //h_lJetPt_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 25);
+
+    h_lJetPt_rg1_CR_SR_ratio->Draw();
+    /*
+    c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_ltrk_rg1_CR_SR_ratio = (TH1D *)h_Top_ltrk_region3_bybin_CR->Clone("h_ltrk_rg1_CR_SR_ratio");
+    h_ltrk_rg1_CR_SR_ratio->Divide(h_Top_ltrk_region3_bybin_CR, h_Top_ltrk_region3_SR, 1, 1);
+
+    h_Top_ltrk_region3_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_ltrk_region3_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_ltrk_region3_SR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_ltrk_region3_SR->GetXaxis()->SetRangeUser(0, 25);
+    h_Top_ltrk_region3_bybin_CR->GetXaxis()->SetRangeUser(0, 25);
+
+    h_Top_ltrk_region3_SR->Draw("h ");
+    h_Top_ltrk_region3_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor , 2 < |#eta| < 2.5.");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_ltrk_region3_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_ltrk_region3_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Track multiplicity");
+    h_ltrk_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    h_ltrk_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 25);
+
+    h_ltrk_rg1_CR_SR_ratio->Draw();
+    */
+    /*
+    c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_bJetPt_rg1_CR_SR_ratio = (TH1D *)h_Top_bJetPt_region3_bybin_CR->Clone("h_bJetPt_rg1_CR_SR_ratio");
+    h_bJetPt_rg1_CR_SR_ratio->Divide(h_Top_bJetPt_region3_bybin_CR, h_Top_bJetPt_region3_SR, 1, 1);
+
+    h_Top_bJetPt_region3_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_bJetPt_region3_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_bJetPt_region3_SR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_bJetPt_region3_SR->GetXaxis()->SetRangeUser(0, 500);
+    h_Top_bJetPt_region3_bybin_CR->GetXaxis()->SetRangeUser(0, 500);
+
+    h_Top_bJetPt_region3_SR->Draw("h ");
+    h_Top_bJetPt_region3_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor , 2 < |#eta| < 2.5.");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_bJetPt_region3_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_bJetPt_region3_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 500);
+
+    h_bJetPt_rg1_CR_SR_ratio->Draw();
+    */
+    /*
+   c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_bJetPt_rg1_CR_SR_ratio = (TH1D *)h_Top_bJetPt_region2_bybin_CR->Clone("h_bJetPt_rg1_CR_SR_ratio");
+    h_bJetPt_rg1_CR_SR_ratio->Divide(h_Top_bJetPt_region2_bybin_CR, h_Top_bJetPt_region2_SR, 1, 1);
+
+    h_Top_bJetPt_region2_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_bJetPt_region2_SR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_bJetPt_region2_SR->GetXaxis()->SetRangeUser(0, 800);
+    h_Top_bJetPt_region2_bybin_CR->GetXaxis()->SetRangeUser(0, 800);
+
+    h_Top_bJetPt_region2_SR->Draw("h ");
+    h_Top_bJetPt_region2_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor , 1 < |#eta| < 2");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_bJetPt_region2_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_bJetPt_region2_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 800);
+
+    h_bJetPt_rg1_CR_SR_ratio->Draw();
+    */
+    /*
+    c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_bJetPt_rg1_CR_SR_ratio = (TH1D *)h_Top_bJetPt_region1_bybin_CR->Clone("h_bJetPt_rg1_CR_SR_ratio");
+    h_bJetPt_rg1_CR_SR_ratio->Divide(h_Top_bJetPt_region1_bybin_CR, h_Top_bJetPt_region1_SR, 1, 1);
+
+    h_Top_bJetPt_region1_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_bJetPt_region1_SR->GetYaxis()->SetTitle("nJet");
+
+    //h_Top_bJetPt_region1_SR->GetXaxis()->SetRangeUser(0, 800);
+    //h_Top_bJetPt_region1_bybin_CR->GetXaxis()->SetRangeUser(0, 800);
+
+    h_Top_bJetPt_region1_SR->Draw("h ");
+    h_Top_bJetPt_region1_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor ,  |#eta| < 1");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_bJetPt_region1_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_bJetPt_region1_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Jet PT");
+    h_bJetPt_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    //h_bJetPt_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 800);
+
+    h_bJetPt_rg1_CR_SR_ratio->Draw();
+    */
+    /*
+    c1->cd(1);
+
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1D *h_btrk_rg1_CR_SR_ratio = (TH1D *)h_Top_btrk_region2_bybin_CR->Clone("h_btrk_rg1_CR_SR_ratio");
+    h_btrk_rg1_CR_SR_ratio->Divide(h_Top_btrk_region2_bybin_CR, h_Top_btrk_region2_SR, 1, 1);
+
+    h_Top_btrk_region2_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_btrk_region2_SR->GetYaxis()->SetTitleSize(0.06);
+    h_Top_btrk_region2_SR->GetYaxis()->SetTitle("nJet");
+
+    h_Top_btrk_region2_SR->GetXaxis()->SetRangeUser(0, 15);
+    h_Top_btrk_region2_bybin_CR->GetXaxis()->SetRangeUser(0, 15);
+
+    h_Top_btrk_region2_SR->Draw("h ");
+    h_Top_btrk_region2_bybin_CR->Draw("same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor , 1 < |#eta| < 2");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_btrk_region2_bybin_CR, "predict (Top to emu apply emu low fake rate)", "El");
+    l0->AddEntry(h_Top_btrk_region2_SR, "True Background", "El");
+    l0->Draw();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetTitle("predict / True Background");
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetRangeUser(0, 2.);
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetTitle("Track multiplicity");
+    h_btrk_rg1_CR_SR_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    h_btrk_rg1_CR_SR_ratio->GetXaxis()->SetRangeUser(0, 15);
+
+    h_btrk_rg1_CR_SR_ratio->Draw();
+    */
+    /*
     c1->cd(2);
 
     gPad->SetBottomMargin(0.02);
@@ -1267,6 +1809,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->Draw();
 
     */
+    /*
    c1->Divide(3, 2);
     c1->cd(1);
     gPad->SetTopMargin(0 - 0.3);
@@ -1395,7 +1938,7 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->AddEntry(h_Top_JetEta_SR, "True Background", "le");
     l2->AddEntry(h_Top_JetEta_bybin_CR, "Predicted", "le");
     l2->Draw();
-
+    */
     /*
     c1->cd(4);
     gStyle->SetStatW(0.3);

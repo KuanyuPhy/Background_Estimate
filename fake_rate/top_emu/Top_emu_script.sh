@@ -49,15 +49,24 @@ test -e "$FileMainLocation/top_emu_fakerate.root" && { echo "Delete old top_emu_
 ./ee_Top_emu_half_fakerate.o "./top_all.root" "./top_emu_fakerate.root"
 
 
-#for file in ${Top_emu_list_2[*]}; do
-#    Topoutputfile="$(basename -s ".root" "$file")"
-#    echo $Topoutputfile
-#    ./Ratio_Top_apply.o "$file" "./output/${Topoutputfile}_output.root" 
-#    #echo ./$outputfile;
-#done
-#rm Ratio_apply.root
-#hadd Ratio_apply.root ./output/*.root
-#rm ./output/*.root
+for file in ${Top_emu_list_2[*]}; do
+    Topoutputfile="$(basename -s ".root" "$file")"
+    echo $Topoutputfile
+    ./Ratio_Top_apply.o "$file" "./output/${Topoutputfile}_output.root" 
+    #echo ./$outputfile;
+done
+test -e "$FileMainLocation/Ratio_apply.root" && { echo "Delete old Ratio_apply.root"; rm $FileMainLocation/Ratio_apply.root ;}
+
+hadd Ratio_apply.root $FileMainLocation/output/*.root
+
+
+if [ "ls -A $FileMainLocation/output/*" = "" ]; then
+    echo "$FileMainLocation/output/* is indeed empty"
+else
+    echo "$FileMainLocation/output/* is not empty"
+    echo "Clear output directory" && rm $FileMainLocation/output/*
+fi
+
 #root -l quick_TopeeFR_draw.cpp
 #./ee_Top_half_fakerate.o "./top_all.root" "./top_fakerate.root"
 
