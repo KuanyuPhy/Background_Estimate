@@ -144,9 +144,6 @@ int getbinfakerate(float tmp_ntrk)
     }
     return bin_pos_info;
 }
-
-//
-
 //---------------
 // void Function
 //---------------
@@ -177,359 +174,179 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
     TFile *Topfile = TFile::Open(file);
     cout << "Top weight = " << getWeight(file) << endl;
 
-    const Int_t NBINS = 16;
-    Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15., 25., 40.};
+    //----------------------------------
+    // Define histogram bin information
+    //----------------------------------
+    const Int_t Ntrk_Nbins = 16;
+    Double_t Ntrk_edges[Ntrk_Nbins + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15., 25., 40.};
 
-    TH1D *h_Top_trk_bybin_CR = new TH1D("h_Top_trk_bybin_CR", "", NBINS, edges);
-    h_Top_trk_bybin_CR->Sumw2();
+    const Int_t JetPt_Nbins = 20.;
+    Double_t JetPt_low_bound = 0.;
+    Double_t JetPt_upper_bound = 1000.;
 
-    TH1D *h_Top_btrk_bybin_CR = new TH1D("h_Top_btrk_bybin_CR", "", NBINS, edges);
-    h_Top_btrk_bybin_CR->Sumw2();
+    const Int_t JetEta_Nbins = 30.;
+    Double_t JetEta_low_bound = -3.;
+    Double_t JetEta_upper_bound = 3.;
 
-    TH1D *h_Top_ctrk_bybin_CR = new TH1D("h_Top_ctrk_bybin_CR", "", NBINS, edges);
-    h_Top_ctrk_bybin_CR->Sumw2();
-
-    TH1D *h_Top_ltrk_bybin_CR = new TH1D("h_Top_ltrk_bybin_CR", "", NBINS, edges);
-    h_Top_ltrk_bybin_CR->Sumw2();
-
-    TH1D *h_Top_htrk_bybin_CR = new TH1D("h_Top_htrk_bybin_CR", "", NBINS, edges);
-    h_Top_htrk_bybin_CR->Sumw2();
-
-    TH1D *h_Top_trk_SR = new TH1D("h_Top_trk_SR", "", NBINS, edges);
+    //-------------------
+    // For Signal Region
+    //-------------------
+    // ntrk
+    // Not consider eta
+    TH1D *h_Top_trk_SR = new TH1D("h_Top_trk_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_trk_SR->Sumw2();
 
-    TH1D *h_Top_btrk_SR = new TH1D("h_Top_btrk_SR", "", NBINS, edges);
+    TH1D *h_Top_btrk_SR = new TH1D("h_Top_btrk_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_btrk_SR->Sumw2();
 
-    TH1D *h_Top_ctrk_SR = new TH1D("h_Top_ctrk_SR", "", NBINS, edges);
-    h_Top_ctrk_SR->Sumw2();
-
-    TH1D *h_Top_ltrk_SR = new TH1D("h_Top_ltrk_SR", "", NBINS, edges);
+    TH1D *h_Top_ltrk_SR = new TH1D("h_Top_ltrk_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_ltrk_SR->Sumw2();
 
-    TH1D *h_Top_htrk_SR = new TH1D("h_Top_htrk_SR", "", NBINS, edges);
-    h_Top_htrk_SR->Sumw2();
-
-    // Jet PT
-
-    TH1D *h_Top_JetPt_bybin_CR = new TH1D("h_Top_JetPt_bybin_CR", "", 20., 0., 1000.);
-    h_Top_JetPt_bybin_CR->Sumw2();
-
-    TH1D *h_Top_bJetPt_bybin_CR = new TH1D("h_Top_bJetPt_bybin_CR", "", 20., 0., 1000.);
-    h_Top_bJetPt_bybin_CR->Sumw2();
-
-    TH1D *h_Top_lJetPt_bybin_CR = new TH1D("h_Top_lJetPt_bybin_CR", "", 20., 0., 1000.);
-    h_Top_lJetPt_bybin_CR->Sumw2();
-
-    TH1D *h_Top_bJetPt_SR = new TH1D("h_Top_bJetPt_SR", "", 20., 0., 1000.);
-    h_Top_bJetPt_SR->Sumw2();
-
-    TH1D *h_Top_lJetPt_SR = new TH1D("h_Top_lJetPt_SR", "", 20., 0., 1000.);
-    h_Top_lJetPt_SR->Sumw2();
-
-    // Jet Eta
-    TH1D *h_Top_JetEta_bybin_CR = new TH1D("h_Top_JetEta_bybin_CR", "", 10., -3., 3.);
-    h_Top_JetEta_bybin_CR->Sumw2();
-
-    TH1D *h_Top_bJetEta_bybin_CR = new TH1D("h_Top_bJetEta_bybin_CR", "", 10., -3., 3.);
-    h_Top_bJetEta_bybin_CR->Sumw2();
-
-    TH1D *h_Top_lJetEta_bybin_CR = new TH1D("h_Top_lJetEta_bybin_CR", "", 10., -3., 3.);
-    h_Top_lJetEta_bybin_CR->Sumw2();
-
-    TH1D *h_Top_bJetEta_SR = new TH1D("h_Top_bJetEta_SR", "", 10., -3., 3.);
-    h_Top_bJetEta_SR->Sumw2();
-
-    TH1D *h_Top_lJetEta_SR = new TH1D("h_Top_lJetEta_SR", "", 10., -3., 3.);
-    h_Top_lJetEta_SR->Sumw2();
-
-    //----------------------
-    //  nTrk : different eta
-    //----------------------
-    TH1D *h_Top_trk_region1_bybin_CR = new TH1D("h_Top_trk_region1_bybin_CR", "", NBINS, edges);
-    h_Top_trk_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_trk_region2_bybin_CR = new TH1D("h_Top_trk_region2_bybin_CR", "", NBINS, edges);
-    h_Top_trk_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_trk_region3_bybin_CR = new TH1D("h_Top_trk_region3_bybin_CR", "", NBINS, edges);
-    h_Top_trk_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_btrk_region1_bybin_CR = new TH1D("h_Top_btrk_region1_bybin_CR", "", NBINS, edges);
-    h_Top_btrk_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_btrk_region2_bybin_CR = new TH1D("h_Top_btrk_region2_bybin_CR", "", NBINS, edges);
-    h_Top_btrk_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_btrk_region3_bybin_CR = new TH1D("h_Top_btrk_region3_bybin_CR", "", NBINS, edges);
-    h_Top_btrk_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_ctrk_region1_bybin_CR = new TH1D("h_Top_ctrk_region1_bybin_CR", "", NBINS, edges);
-    h_Top_ctrk_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_ctrk_region2_bybin_CR = new TH1D("h_Top_ctrk_region2_bybin_CR", "", NBINS, edges);
-    h_Top_ctrk_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_ctrk_region3_bybin_CR = new TH1D("h_Top_ctrk_region3_bybin_CR", "", NBINS, edges);
-    h_Top_ctrk_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_ltrk_region1_bybin_CR = new TH1D("h_Top_ltrk_region1_bybin_CR", "", NBINS, edges);
-    h_Top_ltrk_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_ltrk_region2_bybin_CR = new TH1D("h_Top_ltrk_region2_bybin_CR", "", NBINS, edges);
-    h_Top_ltrk_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_ltrk_region3_bybin_CR = new TH1D("h_Top_ltrk_region3_bybin_CR", "", NBINS, edges);
-    h_Top_ltrk_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_htrk_region1_bybin_CR = new TH1D("h_Top_htrk_region1_bybin_CR", "", NBINS, edges);
-    h_Top_htrk_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_htrk_region2_bybin_CR = new TH1D("h_Top_htrk_region2_bybin_CR", "", NBINS, edges);
-    h_Top_htrk_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_htrk_region3_bybin_CR = new TH1D("h_Top_htrk_region3_bybin_CR", "", NBINS, edges);
-    h_Top_htrk_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_trk_region1_SR = new TH1D("h_Top_trk_region1_SR", "", NBINS, edges);
+    // consider eta fake rate
+    TH1D *h_Top_trk_region1_SR = new TH1D("h_Top_trk_region1_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_trk_region1_SR->Sumw2();
-    TH1D *h_Top_trk_region2_SR = new TH1D("h_Top_trk_region2_SR", "", NBINS, edges);
+    TH1D *h_Top_trk_region2_SR = new TH1D("h_Top_trk_region2_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_trk_region2_SR->Sumw2();
-    TH1D *h_Top_trk_region3_SR = new TH1D("h_Top_trk_region3_SR", "", NBINS, edges);
+    TH1D *h_Top_trk_region3_SR = new TH1D("h_Top_trk_region3_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_trk_region3_SR->Sumw2();
 
-    TH1D *h_Top_btrk_region1_SR = new TH1D("h_Top_btrk_region1_SR", "", NBINS, edges);
+    TH1D *h_Top_btrk_region1_SR = new TH1D("h_Top_btrk_region1_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_btrk_region1_SR->Sumw2();
-    TH1D *h_Top_btrk_region2_SR = new TH1D("h_Top_btrk_region2_SR", "", NBINS, edges);
+    TH1D *h_Top_btrk_region2_SR = new TH1D("h_Top_btrk_region2_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_btrk_region2_SR->Sumw2();
-    TH1D *h_Top_btrk_region3_SR = new TH1D("h_Top_btrk_region3_SR", "", NBINS, edges);
+    TH1D *h_Top_btrk_region3_SR = new TH1D("h_Top_btrk_region3_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_btrk_region3_SR->Sumw2();
 
-    TH1D *h_Top_ctrk_region1_SR = new TH1D("h_Top_ctrk_region1_SR", "", NBINS, edges);
-    h_Top_ctrk_region1_SR->Sumw2();
-    TH1D *h_Top_ctrk_region2_SR = new TH1D("h_Top_ctrk_region2_SR", "", NBINS, edges);
-    h_Top_ctrk_region2_SR->Sumw2();
-    TH1D *h_Top_ctrk_region3_SR = new TH1D("h_Top_ctrk_region3_SR", "", NBINS, edges);
-    h_Top_ctrk_region3_SR->Sumw2();
-
-    TH1D *h_Top_ltrk_region1_SR = new TH1D("h_Top_ltrk_region1_SR", "", NBINS, edges);
+    TH1D *h_Top_ltrk_region1_SR = new TH1D("h_Top_ltrk_region1_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_ltrk_region1_SR->Sumw2();
-    TH1D *h_Top_ltrk_region2_SR = new TH1D("h_Top_ltrk_region2_SR", "", NBINS, edges);
+    TH1D *h_Top_ltrk_region2_SR = new TH1D("h_Top_ltrk_region2_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_ltrk_region2_SR->Sumw2();
-    TH1D *h_Top_ltrk_region3_SR = new TH1D("h_Top_ltrk_region3_SR", "", NBINS, edges);
+    TH1D *h_Top_ltrk_region3_SR = new TH1D("h_Top_ltrk_region3_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_ltrk_region3_SR->Sumw2();
 
-    TH1D *h_Top_htrk_region1_SR = new TH1D("h_Top_htrk_region1_SR", "", NBINS, edges);
-    h_Top_htrk_region1_SR->Sumw2();
-    TH1D *h_Top_htrk_region2_SR = new TH1D("h_Top_htrk_region2_SR", "", NBINS, edges);
-    h_Top_htrk_region2_SR->Sumw2();
-    TH1D *h_Top_htrk_region3_SR = new TH1D("h_Top_htrk_region3_SR", "", NBINS, edges);
-    h_Top_htrk_region3_SR->Sumw2();
-
-    //--------------------
-    //       JetPt
-    //--------------------
-
-    TH1D *h_Top_cJetPt_bybin_CR = new TH1D("h_Top_cJetPt_bybin_CR", "", 20., 0., 1000.);
-    h_Top_cJetPt_bybin_CR->Sumw2();
-
-    TH1D *h_Top_hJetPt_bybin_CR = new TH1D("h_Top_hJetPt_bybin_CR", "", 20., 0., 1000.);
-    h_Top_hJetPt_bybin_CR->Sumw2();
-
-    TH1D *h_Top_JetPt_SR = new TH1D("h_Top_JetPt_SR", "", 20., 0., 1000.);
+    // JetPt
+    // Not consider eta
+    TH1D *h_Top_JetPt_SR = new TH1D("h_Top_JetPt_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_JetPt_SR->Sumw2();
-
-    TH1D *h_Top_cJetPt_SR = new TH1D("h_Top_cJetPt_SR", "", 20., 0., 1000.);
-    h_Top_cJetPt_SR->Sumw2();
-
-    TH1D *h_Top_hJetPt_SR = new TH1D("h_Top_hJetPt_SR", "", 20., 0., 1000.);
-    h_Top_hJetPt_SR->Sumw2();
-
-    //----------------------
-    //  JetPt : different eta
-    //----------------------
-    TH1D *h_Top_JetPt_region1_bybin_CR = new TH1D("h_Top_JetPt_region1_bybin_CR", "", 20., 0., 1000.);
-    h_Top_JetPt_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_JetPt_region2_bybin_CR = new TH1D("h_Top_JetPt_region2_bybin_CR", "", 20., 0., 1000.);
-    h_Top_JetPt_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_JetPt_region3_bybin_CR = new TH1D("h_Top_JetPt_region3_bybin_CR", "", 20., 0., 1000.);
-    h_Top_JetPt_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_bJetPt_region1_bybin_CR = new TH1D("h_Top_bJetPt_region1_bybin_CR", "", 20., 0., 1000.);
-    h_Top_bJetPt_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_bJetPt_region2_bybin_CR = new TH1D("h_Top_bJetPt_region2_bybin_CR", "", 20., 0., 1000.);
-    h_Top_bJetPt_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_bJetPt_region3_bybin_CR = new TH1D("h_Top_bJetPt_region3_bybin_CR", "", 20., 0., 1000.);
-    h_Top_bJetPt_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_cJetPt_region1_bybin_CR = new TH1D("h_Top_cJetPt_region1_bybin_CR", "", 20., 0., 1000.);
-    h_Top_cJetPt_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_cJetPt_region2_bybin_CR = new TH1D("h_Top_cJetPt_region2_bybin_CR", "", 20., 0., 1000.);
-    h_Top_cJetPt_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_cJetPt_region3_bybin_CR = new TH1D("h_Top_cJetPt_region3_bybin_CR", "", 20., 0., 1000.);
-    h_Top_cJetPt_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_lJetPt_region1_bybin_CR = new TH1D("h_Top_lJetPt_region1_bybin_CR", "", 20., 0., 1000.);
-    h_Top_lJetPt_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_lJetPt_region2_bybin_CR = new TH1D("h_Top_lJetPt_region2_bybin_CR", "", 20., 0., 1000.);
-    h_Top_lJetPt_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_lJetPt_region3_bybin_CR = new TH1D("h_Top_lJetPt_region3_bybin_CR", "", 20., 0., 1000.);
-    h_Top_lJetPt_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_hJetPt_region1_bybin_CR = new TH1D("h_Top_hJetPt_region1_bybin_CR", "", 20., 0., 1000.);
-    h_Top_hJetPt_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_hJetPt_region2_bybin_CR = new TH1D("h_Top_hJetPt_region2_bybin_CR", "", 20., 0., 1000.);
-    h_Top_hJetPt_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_hJetPt_region3_bybin_CR = new TH1D("h_Top_hJetPt_region3_bybin_CR", "", 20., 0., 1000.);
-    h_Top_hJetPt_region3_bybin_CR->Sumw2();
-
-    TH1D *h_Top_JetPt_region1_SR = new TH1D("h_Top_JetPt_region1_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_bJetPt_SR = new TH1D("h_Top_bJetPt_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_bJetPt_SR->Sumw2();
+    TH1D *h_Top_lJetPt_SR = new TH1D("h_Top_lJetPt_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_lJetPt_SR->Sumw2();
+    // consider eta fake rate
+    TH1D *h_Top_JetPt_region1_SR = new TH1D("h_Top_JetPt_region1_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_JetPt_region1_SR->Sumw2();
-    TH1D *h_Top_JetPt_region2_SR = new TH1D("h_Top_JetPt_region2_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_JetPt_region2_SR = new TH1D("h_Top_JetPt_region2_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_JetPt_region2_SR->Sumw2();
-    TH1D *h_Top_JetPt_region3_SR = new TH1D("h_Top_JetPt_region3_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_JetPt_region3_SR = new TH1D("h_Top_JetPt_region3_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_JetPt_region3_SR->Sumw2();
 
-    TH1D *h_Top_bJetPt_region1_SR = new TH1D("h_Top_bJetPt_region1_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_bJetPt_region1_SR = new TH1D("h_Top_bJetPt_region1_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_bJetPt_region1_SR->Sumw2();
-    TH1D *h_Top_bJetPt_region2_SR = new TH1D("h_Top_bJetPt_region2_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_bJetPt_region2_SR = new TH1D("h_Top_bJetPt_region2_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_bJetPt_region2_SR->Sumw2();
-    TH1D *h_Top_bJetPt_region3_SR = new TH1D("h_Top_bJetPt_region3_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_bJetPt_region3_SR = new TH1D("h_Top_bJetPt_region3_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_bJetPt_region3_SR->Sumw2();
 
-    TH1D *h_Top_cJetPt_region1_SR = new TH1D("h_Top_cJetPt_region1_SR", "", 20., 0., 1000.);
-    h_Top_cJetPt_region1_SR->Sumw2();
-    TH1D *h_Top_cJetPt_region2_SR = new TH1D("h_Top_cJetPt_region2_SR", "", 20., 0., 1000.);
-    h_Top_cJetPt_region2_SR->Sumw2();
-    TH1D *h_Top_cJetPt_region3_SR = new TH1D("h_Top_cJetPt_region3_SR", "", 20., 0., 1000.);
-    h_Top_cJetPt_region3_SR->Sumw2();
-
-    TH1D *h_Top_lJetPt_region1_SR = new TH1D("h_Top_lJetPt_region1_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_lJetPt_region1_SR = new TH1D("h_Top_lJetPt_region1_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_lJetPt_region1_SR->Sumw2();
-    TH1D *h_Top_lJetPt_region2_SR = new TH1D("h_Top_lJetPt_region2_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_lJetPt_region2_SR = new TH1D("h_Top_lJetPt_region2_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_lJetPt_region2_SR->Sumw2();
-    TH1D *h_Top_lJetPt_region3_SR = new TH1D("h_Top_lJetPt_region3_SR", "", 20., 0., 1000.);
+    TH1D *h_Top_lJetPt_region3_SR = new TH1D("h_Top_lJetPt_region3_SR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
     h_Top_lJetPt_region3_SR->Sumw2();
 
-    TH1D *h_Top_hJetPt_region1_SR = new TH1D("h_Top_hJetPt_region1_SR", "", 20., 0., 1000.);
-    h_Top_hJetPt_region1_SR->Sumw2();
-    TH1D *h_Top_hJetPt_region2_SR = new TH1D("h_Top_hJetPt_region2_SR", "", 20., 0., 1000.);
-    h_Top_hJetPt_region2_SR->Sumw2();
-    TH1D *h_Top_hJetPt_region3_SR = new TH1D("h_Top_hJetPt_region3_SR", "", 20., 0., 1000.);
-    h_Top_hJetPt_region3_SR->Sumw2();
-
-    //--------------------
-    //       JetEta
-    //--------------------
-
-    TH1D *h_Top_cJetEta_bybin_CR = new TH1D("h_Top_cJetEta_bybin_CR", "", 30, -3., 3.);
-    h_Top_cJetEta_bybin_CR->Sumw2();
-
-    TH1D *h_Top_hJetEta_bybin_CR = new TH1D("h_Top_hJetEta_bybin_CR", "", 30, -3., 3.);
-    h_Top_hJetEta_bybin_CR->Sumw2();
-
-    TH1D *h_Top_JetEta_SR = new TH1D("h_Top_JetEta_SR", "", 10, -3., 3.);
+    // JetEta
+    TH1D *h_Top_JetEta_SR = new TH1D("h_Top_JetEta_SR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
     h_Top_JetEta_SR->Sumw2();
+    TH1D *h_Top_bJetEta_SR = new TH1D("h_Top_bJetEta_SR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_bJetEta_SR->Sumw2();
+    TH1D *h_Top_lJetEta_SR = new TH1D("h_Top_lJetEta_SR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_lJetEta_SR->Sumw2();
 
-    TH1D *h_Top_cJetEta_SR = new TH1D("h_Top_cJetEta_SR", "", 30, -3., 3.);
-    h_Top_cJetEta_SR->Sumw2();
+    //---------------------------------
+    // For Control Region (predicted)
+    //---------------------------------
+    // ntrk
+    // Not consider eta
+    TH1D *h_Top_trk_bybin_CR = new TH1D("h_Top_trk_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_trk_bybin_CR->Sumw2();
 
-    TH1D *h_Top_hJetEta_SR = new TH1D("h_Top_hJetEta_SR", "", 30, -3., 3.);
-    h_Top_hJetEta_SR->Sumw2();
+    TH1D *h_Top_btrk_bybin_CR = new TH1D("h_Top_btrk_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_btrk_bybin_CR->Sumw2();
 
-    //----------------------
-    //  JetEta : different eta
-    //---------------------
-    /*
-    TH1D *h_Top_JetEta_region1_bybin_CR = new TH1D("h_Top_JetEta_region1_bybin_CR", "", 30, -3., 3.);
-    h_Top_JetEta_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_JetEta_region2_bybin_CR = new TH1D("h_Top_JetEta_region2_bybin_CR", "", 30, -3., 3.);
-    h_Top_JetEta_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_JetEta_region3_bybin_CR = new TH1D("h_Top_JetEta_region3_bybin_CR", "", 30, -3., 3.);
-    h_Top_JetEta_region3_bybin_CR->Sumw2();
+    TH1D *h_Top_ltrk_bybin_CR = new TH1D("h_Top_ltrk_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_ltrk_bybin_CR->Sumw2();
 
-    TH1D *h_Top_bJetEta_region1_bybin_CR = new TH1D("h_Top_bJetEta_region1_bybin_CR", "", 30, -3., 3.);
-    h_Top_bJetEta_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_bJetEta_region2_bybin_CR = new TH1D("h_Top_bJetEta_region2_bybin_CR", "", 30, -3., 3.);
-    h_Top_bJetEta_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_bJetEta_region3_bybin_CR = new TH1D("h_Top_bJetEta_region3_bybin_CR", "", 30, -3., 3.);
-    h_Top_bJetEta_region3_bybin_CR->Sumw2();
+    // consider eta fake rate
+    TH1D *h_Top_trk_region1_bybin_CR = new TH1D("h_Top_trk_region1_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_trk_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_trk_region2_bybin_CR = new TH1D("h_Top_trk_region2_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_trk_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_trk_region3_bybin_CR = new TH1D("h_Top_trk_region3_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_trk_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_cJetEta_region1_bybin_CR = new TH1D("h_Top_cJetEta_region1_bybin_CR", "", 30, -3., 3.);
-    h_Top_cJetEta_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_cJetEta_region2_bybin_CR = new TH1D("h_Top_cJetEta_region2_bybin_CR", "", 30, -3., 3.);
-    h_Top_cJetEta_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_cJetEta_region3_bybin_CR = new TH1D("h_Top_cJetEta_region3_bybin_CR", "", 30, -3., 3.);
-    h_Top_cJetEta_region3_bybin_CR->Sumw2();
+    TH1D *h_Top_btrk_region1_bybin_CR = new TH1D("h_Top_btrk_region1_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_btrk_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_btrk_region2_bybin_CR = new TH1D("h_Top_btrk_region2_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_btrk_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_btrk_region3_bybin_CR = new TH1D("h_Top_btrk_region3_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_btrk_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_lJetEta_region1_bybin_CR = new TH1D("h_Top_lJetEta_region1_bybin_CR", "", 30, -3., 3.);
-    h_Top_lJetEta_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_lJetEta_region2_bybin_CR = new TH1D("h_Top_lJetEta_region2_bybin_CR", "", 30, -3., 3.);
-    h_Top_lJetEta_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_lJetEta_region3_bybin_CR = new TH1D("h_Top_lJetEta_region3_bybin_CR", "", 30, -3., 3.);
-    h_Top_lJetEta_region3_bybin_CR->Sumw2();
+    TH1D *h_Top_ltrk_region1_bybin_CR = new TH1D("h_Top_ltrk_region1_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_ltrk_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_ltrk_region2_bybin_CR = new TH1D("h_Top_ltrk_region2_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_ltrk_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_ltrk_region3_bybin_CR = new TH1D("h_Top_ltrk_region3_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_ltrk_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_hJetEta_region1_bybin_CR = new TH1D("h_Top_hJetEta_region1_bybin_CR", "", 30, -3., 3.);
-    h_Top_hJetEta_region1_bybin_CR->Sumw2();
-    TH1D *h_Top_hJetEta_region2_bybin_CR = new TH1D("h_Top_hJetEta_region2_bybin_CR", "", 30, -3., 3.);
-    h_Top_hJetEta_region2_bybin_CR->Sumw2();
-    TH1D *h_Top_hJetEta_region3_bybin_CR = new TH1D("h_Top_hJetEta_region3_bybin_CR", "", 30, -3., 3.);
-    h_Top_hJetEta_region3_bybin_CR->Sumw2();
+    // JetPT
+    // Not consider eta
+    TH1D *h_Top_JetPt_bybin_CR = new TH1D("h_Top_JetPt_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_JetPt_bybin_CR->Sumw2();
 
-    TH1D *h_Top_JetEta_region1_SR = new TH1D("h_Top_JetEta_region1_SR", "", 30, -3., 3.);
-    h_Top_JetEta_region1_SR->Sumw2();
-    TH1D *h_Top_JetEta_region2_SR = new TH1D("h_Top_JetEta_region2_SR", "", 30, -3., 3.);
-    h_Top_JetEta_region2_SR->Sumw2();
-    TH1D *h_Top_JetEta_region3_SR = new TH1D("h_Top_JetEta_region3_SR", "", 30, -3., 3.);
-    h_Top_JetEta_region3_SR->Sumw2();
+    TH1D *h_Top_bJetPt_bybin_CR = new TH1D("h_Top_bJetPt_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_bJetPt_bybin_CR->Sumw2();
 
-    TH1D *h_Top_bJetEta_region1_SR = new TH1D("h_Top_bJetEta_region1_SR", "", 30, -3., 3.);
-    h_Top_bJetEta_region1_SR->Sumw2();
-    TH1D *h_Top_bJetEta_region2_SR = new TH1D("h_Top_bJetEta_region2_SR", "", 30, -3., 3.);
-    h_Top_bJetEta_region2_SR->Sumw2();
-    TH1D *h_Top_bJetEta_region3_SR = new TH1D("h_Top_bJetEta_region3_SR", "", 30, -3., 3.);
-    h_Top_bJetEta_region3_SR->Sumw2();
+    TH1D *h_Top_lJetPt_bybin_CR = new TH1D("h_Top_lJetPt_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_lJetPt_bybin_CR->Sumw2();
 
-    TH1D *h_Top_cJetEta_region1_SR = new TH1D("h_Top_cJetEta_region1_SR", "", 30, -3., 3.);
-    h_Top_cJetEta_region1_SR->Sumw2();
-    TH1D *h_Top_cJetEta_region2_SR = new TH1D("h_Top_cJetEta_region2_SR", "", 30, -3., 3.);
-    h_Top_cJetEta_region2_SR->Sumw2();
-    TH1D *h_Top_cJetEta_region3_SR = new TH1D("h_Top_cJetEta_region3_SR", "", 30, -3., 3.);
-    h_Top_cJetEta_region3_SR->Sumw2();
+    // consider eta fake rate
+    TH1D *h_Top_JetPt_region1_bybin_CR = new TH1D("h_Top_JetPt_region1_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_JetPt_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_JetPt_region2_bybin_CR = new TH1D("h_Top_JetPt_region2_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_JetPt_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_JetPt_region3_bybin_CR = new TH1D("h_Top_JetPt_region3_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_JetPt_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_lJetEta_region1_SR = new TH1D("h_Top_lJetEta_region1_SR", "", 30, -3., 3.);
-    h_Top_lJetEta_region1_SR->Sumw2();
-    TH1D *h_Top_lJetEta_region2_SR = new TH1D("h_Top_lJetEta_region2_SR", "", 30, -3., 3.);
-    h_Top_lJetEta_region2_SR->Sumw2();
-    TH1D *h_Top_lJetEta_region3_SR = new TH1D("h_Top_lJetEta_region3_SR", "", 30, -3., 3.);
-    h_Top_lJetEta_region3_SR->Sumw2();
+    TH1D *h_Top_bJetPt_region1_bybin_CR = new TH1D("h_Top_bJetPt_region1_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_bJetPt_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_bJetPt_region2_bybin_CR = new TH1D("h_Top_bJetPt_region2_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_bJetPt_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_bJetPt_region3_bybin_CR = new TH1D("h_Top_bJetPt_region3_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_bJetPt_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_hJetEta_region1_SR = new TH1D("h_Top_hJetEta_region1_SR", "", 30, -3., 3.);
-    h_Top_hJetEta_region1_SR->Sumw2();
-    TH1D *h_Top_hJetEta_region2_SR = new TH1D("h_Top_hJetEta_region2_SR", "", 30, -3., 3.);
-    h_Top_hJetEta_region2_SR->Sumw2();
-    TH1D *h_Top_hJetEta_region3_SR = new TH1D("h_Top_hJetEta_region3_SR", "", 30, -3., 3.);
-    h_Top_hJetEta_region3_SR->Sumw2();
-    */
-    TH1D *h_Top_JetEta_diffregion_bybin_CR = new TH1D("h_Top_JetEta_diffregion_bybin_CR", "", 30, -3., 3.);
-    h_Top_JetEta_diffregion_bybin_CR->Sumw2();
+    TH1D *h_Top_lJetPt_region1_bybin_CR = new TH1D("h_Top_lJetPt_region1_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_lJetPt_region1_bybin_CR->Sumw2();
+    TH1D *h_Top_lJetPt_region2_bybin_CR = new TH1D("h_Top_lJetPt_region2_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_lJetPt_region2_bybin_CR->Sumw2();
+    TH1D *h_Top_lJetPt_region3_bybin_CR = new TH1D("h_Top_lJetPt_region3_bybin_CR", "", JetPt_Nbins, JetPt_low_bound, JetPt_upper_bound);
+    h_Top_lJetPt_region3_bybin_CR->Sumw2();
 
-    TH1D *h_Top_bJetEta_diffregion_bybin_CR = new TH1D("h_Top_bJetEta_diffregion_bybin_CR", "", 30, -3., 3.);
-    h_Top_bJetEta_diffregion_bybin_CR->Sumw2();
+    // JetEta
+    // consider eta fake rate
+    TH1D *h_Top_JetEta_bybin_CR = new TH1D("h_Top_JetEta_bybin_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_JetEta_bybin_CR->Sumw2();
 
-    TH1D *h_Top_cJetEta_diffregion_bybin_CR = new TH1D("h_Top_cJetEta_diffregion_bybin_CR", "", 30, -3., 3.);
-    h_Top_cJetEta_diffregion_bybin_CR->Sumw2();
+    TH1D *h_Top_bJetEta_bybin_CR = new TH1D("h_Top_bJetEta_bybin_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_bJetEta_bybin_CR->Sumw2();
 
-    TH1D *h_Top_lJetEta_diffregion_bybin_CR = new TH1D("h_Top_lJetEta_diffregion_bybin_CR", "", 30, -3., 3.);
-    h_Top_lJetEta_diffregion_bybin_CR->Sumw2();
+    TH1D *h_Top_lJetEta_bybin_CR = new TH1D("h_Top_lJetEta_bybin_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_lJetEta_bybin_CR->Sumw2();
 
-    TH1D *h_Top_hJetEta_diffregion_bybin_CR = new TH1D("h_Top_hJetEta_diffregion_bybin_CR", "", 30, -3., 3.);
-    h_Top_hJetEta_diffregion_bybin_CR->Sumw2();
+    TH1D *h_Top_bJetEta_diffFR_CR = new TH1D("h_Top_bJetEta_diffFR_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_bJetEta_diffFR_CR->Sumw2();
 
-    TH1D *h_Top_JetEta_diffregion_SR = new TH1D("h_Top_JetEta_diffregion_SR", "", 30, -3., 3.);
-    h_Top_JetEta_diffregion_SR->Sumw2();
-
-    TH1D *h_Top_bJetEta_diffregion_SR = new TH1D("h_Top_bJetEta_diffregion_SR", "", 30, -3., 3.);
-    h_Top_bJetEta_diffregion_SR->Sumw2();
-
-    TH1D *h_Top_cJetEta_diffregion_SR = new TH1D("h_Top_cJetEta_diffregion_SR", "", 30, -3., 3.);
-    h_Top_cJetEta_diffregion_SR->Sumw2();
-
-    TH1D *h_Top_lJetEta_diffregion_SR = new TH1D("h_Top_lJetEta_diffregion_SR", "", 30, -3., 3.);
-    h_Top_lJetEta_diffregion_SR->Sumw2();
-
-    TH1D *h_Top_hJetEta_diffregion_SR = new TH1D("h_Top_hJetEta_diffregion_SR", "", 30, -3., 3.);
-    h_Top_hJetEta_diffregion_SR->Sumw2();
+    TH1D *h_Top_lJetEta_diffFR_CR = new TH1D("h_Top_lJetEta_diffFR_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_lJetEta_diffFR_CR->Sumw2();
 
     Int_t I_Top_nJets;
 
@@ -557,7 +374,7 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
 
     float METcut = 130.;
 
-    float DilepPTcut = 160.;
+    float DilepPTcut = 60.;
 
     TTree *T_Top_tree;
     Topfile->GetObject("h2", T_Top_tree);
@@ -793,10 +610,11 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
         //------------------------------------------------------
         if (f_Top_met > METcut)
         {
-            for (int i = 0; i < v_Top_nTrack->size(); i++)
+            if (f_Top_dileppt > DilepPTcut)
             {
-                if (f_Top_dileppt > DilepPTcut)
+                for (int i = 0; i < v_Top_nTrack->size(); i++)
                 {
+
                     //--------------------
                     // 1. Plot True BG
                     //--------------------
@@ -823,9 +641,6 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
                             // For Jet PT
                             for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_bJetPt_region1_SR);
                             for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_lJetPt_region1_SR);
-                            // Fot Jet Eta
-                            // for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_bJetEta_SR);
-                            // for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_lJetEta_SR);
                         }
                         else if (abs((*v_Top_JetEta)[i]) > 1 && abs((*v_Top_JetEta)[i]) < 2)
                         {
@@ -835,9 +650,6 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
                             // For Jet PT
                             for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_bJetPt_region2_SR);
                             for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_lJetPt_region2_SR);
-                            // Fot Jet Eta
-                            // for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_bJetEta_SR);
-                            // for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_lJetEta_SR);
                         }
                         else if (abs((*v_Top_JetEta)[i]) > 2 && abs((*v_Top_JetEta)[i]) < 2.5)
                         {
@@ -847,17 +659,14 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
                             // For Jet PT
                             for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_bJetPt_region3_SR);
                             for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], Top_weight, h_Top_lJetPt_region3_SR);
-                            // Fot Jet Eta
-                            // for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_bJetEta_SR);
-                            // for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_lJetEta_SR);
                         }
                     }
-                    
+
                     //------------------------------------
                     // 2. Apply low dilepton PT fake rate
                     //------------------------------------
                     int fk_bin_pos = getbinfakerate((*v_Top_nTrack)[i]);
-                    cout << "fk_bin_pos = " << fk_bin_pos << endl;
+                    // cout << "fk_bin_pos = " << fk_bin_pos << endl;
                     double no_flavor_fk = Top_nTrk_fakeRate_lowDilepPt->GetBinContent(fk_bin_pos) * Top_weight;
                     double b_flavor_fk = Top_nTrk_bfakeRate_lowDilepPt->GetBinContent(fk_bin_pos) * Top_weight;
                     double l_flavor_fk = Top_nTrk_lfakeRate_lowDilepPt->GetBinContent(fk_bin_pos) * Top_weight;
@@ -878,12 +687,8 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
                     if (abs((*v_Top_JetEta)[i]) < 1)
                     {
                         int fk_bin_pos = getbinfakerate((*v_Top_nTrack)[i]);
-                        cout << "fk_bin_pos = " << fk_bin_pos << endl;
-                        // double no_flavor_fk = Top_nTrk_fakeRate_lowDilepPt_1->GetBinContent(fk_bin_pos) * Top_weight;
                         double b_flavor_fk = Top_nTrk_bfakeRate_lowDilepPt_1->GetBinContent(fk_bin_pos) * Top_weight;
                         double l_flavor_fk = Top_nTrk_lfakeRate_lowDilepPt_1->GetBinContent(fk_bin_pos) * Top_weight;
-                        cout << "b_flavor_fk = " << b_flavor_fk << endl;
-                        cout << "l_flavor_fk = " << l_flavor_fk << endl;
                         // For ntrk
                         for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], b_flavor_fk, h_Top_btrk_region1_bybin_CR);
                         for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_nTrack)[i], l_flavor_fk, h_Top_ltrk_region1_bybin_CR);
@@ -891,15 +696,13 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
                         for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], b_flavor_fk, h_Top_bJetPt_region1_bybin_CR);
                         for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], l_flavor_fk, h_Top_lJetPt_region1_bybin_CR);
                         // Fot Jet Eta
-                        // for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_bJetEta_SR);
-                        // for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_lJetEta_SR);
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], b_flavor_fk, h_Top_bJetEta_diffFR_CR);
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], l_flavor_fk, h_Top_lJetEta_diffFR_CR);
                     }
-                    
+
                     else if (abs((*v_Top_JetEta)[i]) > 1 && abs((*v_Top_JetEta)[i]) < 2)
                     {
                         int fk_bin_pos = getbinfakerate((*v_Top_nTrack)[i]);
-                        cout << "fk_bin_pos = " << fk_bin_pos << endl;
-                        // double no_flavor_fk = Top_nTrk_fakeRate_lowDilepPt_2->GetBinContent(fk_bin_pos) * Top_weight;
                         double b_flavor_fk = Top_nTrk_bfakeRate_lowDilepPt_2->GetBinContent(fk_bin_pos) * Top_weight;
                         double l_flavor_fk = Top_nTrk_lfakeRate_lowDilepPt_2->GetBinContent(fk_bin_pos) * Top_weight;
                         // For ntrk
@@ -909,14 +712,12 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
                         for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], b_flavor_fk, h_Top_bJetPt_region2_bybin_CR);
                         for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], l_flavor_fk, h_Top_lJetPt_region2_bybin_CR);
                         // Fot Jet Eta
-                        // for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_bJetEta_SR);
-                        // for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_lJetEta_SR);
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], b_flavor_fk, h_Top_bJetEta_diffFR_CR);
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], l_flavor_fk, h_Top_lJetEta_diffFR_CR);
                     }
                     else if (abs((*v_Top_JetEta)[i]) > 2 && abs((*v_Top_JetEta)[i]) < 2.5)
                     {
                         int fk_bin_pos = getbinfakerate((*v_Top_nTrack)[i]);
-                        cout << "fk_bin_pos = " << fk_bin_pos << endl;
-                        // double no_flavor_fk = Top_nTrk_fakeRate_lowDilepPt->GetBinContent(fk_bin_pos) * Top_weight;
                         double b_flavor_fk = Top_nTrk_bfakeRate_lowDilepPt_3->GetBinContent(fk_bin_pos) * Top_weight;
                         double l_flavor_fk = Top_nTrk_lfakeRate_lowDilepPt_3->GetBinContent(fk_bin_pos) * Top_weight;
                         // For ntrk
@@ -926,128 +727,75 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
                         for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], b_flavor_fk, h_Top_bJetPt_region3_bybin_CR);
                         for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], l_flavor_fk, h_Top_lJetPt_region3_bybin_CR);
                         // Fot Jet Eta
-                        // for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_bJetEta_SR);
-                        // for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], Top_weight, h_Top_lJetEta_SR);
+                        for_signalflavor_jet(5, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], b_flavor_fk, h_Top_bJetEta_diffFR_CR);
+                        for_signalflavor_jet(0, (*v_Top_Jethadronflavor)[i], (*v_Top_JetEta)[i], l_flavor_fk, h_Top_lJetEta_diffFR_CR);
                     }
-                    
-                } // End of High dilepton PT required
-            }
-        } // End of MET cut
+
+                } // End of v_Jetloop
+            }     // End of dilepton PT required
+        }         // End of MET cut
 
     } // End of Top loop
 
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
     outfile->cd();
-    h_Top_trk_bybin_CR->Write();
-    h_Top_btrk_bybin_CR->Write();
-    h_Top_ctrk_bybin_CR->Write();
-    h_Top_ltrk_bybin_CR->Write();
-    h_Top_htrk_bybin_CR->Write();
     h_Top_trk_SR->Write();
     h_Top_btrk_SR->Write();
-    h_Top_ctrk_SR->Write();
     h_Top_ltrk_SR->Write();
-    h_Top_htrk_SR->Write();
-    h_Top_JetPt_bybin_CR->Write();
-    h_Top_bJetPt_bybin_CR->Write();
-    h_Top_lJetPt_bybin_CR->Write();
-    h_Top_bJetPt_SR->Write();
-    h_Top_lJetPt_SR->Write();
-    h_Top_JetEta_bybin_CR->Write();
-    h_Top_bJetEta_bybin_CR->Write();
-    h_Top_lJetEta_bybin_CR->Write();
-    h_Top_bJetEta_SR->Write();
-    h_Top_lJetEta_SR->Write();
-    h_Top_trk_region1_bybin_CR->Write();
-    h_Top_trk_region2_bybin_CR->Write();
-    h_Top_trk_region3_bybin_CR->Write();
-    h_Top_btrk_region1_bybin_CR->Write();
-    h_Top_btrk_region2_bybin_CR->Write();
-    h_Top_btrk_region3_bybin_CR->Write();
-    h_Top_ctrk_region1_bybin_CR->Write();
-    h_Top_ctrk_region2_bybin_CR->Write();
-    h_Top_ctrk_region3_bybin_CR->Write();
-    h_Top_ltrk_region1_bybin_CR->Write();
-    h_Top_ltrk_region2_bybin_CR->Write();
-    h_Top_ltrk_region3_bybin_CR->Write();
-    h_Top_htrk_region1_bybin_CR->Write();
-    h_Top_htrk_region2_bybin_CR->Write();
-    h_Top_htrk_region3_bybin_CR->Write();
     h_Top_trk_region1_SR->Write();
     h_Top_trk_region2_SR->Write();
     h_Top_trk_region3_SR->Write();
     h_Top_btrk_region1_SR->Write();
     h_Top_btrk_region2_SR->Write();
     h_Top_btrk_region3_SR->Write();
-    h_Top_ctrk_region1_SR->Write();
-    h_Top_ctrk_region2_SR->Write();
-    h_Top_ctrk_region3_SR->Write();
     h_Top_ltrk_region1_SR->Write();
     h_Top_ltrk_region2_SR->Write();
     h_Top_ltrk_region3_SR->Write();
-    h_Top_htrk_region1_SR->Write();
-    h_Top_htrk_region2_SR->Write();
-    h_Top_htrk_region3_SR->Write();
-
-    h_Top_bJetPt_bybin_CR->Write();
-    h_Top_cJetPt_bybin_CR->Write();
-    h_Top_lJetPt_bybin_CR->Write();
-    h_Top_hJetPt_bybin_CR->Write();
     h_Top_JetPt_SR->Write();
     h_Top_bJetPt_SR->Write();
-    h_Top_cJetPt_SR->Write();
     h_Top_lJetPt_SR->Write();
-    h_Top_hJetPt_SR->Write();
-    h_Top_JetPt_region1_bybin_CR->Write();
-    h_Top_JetPt_region2_bybin_CR->Write();
-    h_Top_JetPt_region3_bybin_CR->Write();
-    h_Top_bJetPt_region1_bybin_CR->Write();
-    h_Top_bJetPt_region2_bybin_CR->Write();
-    h_Top_bJetPt_region3_bybin_CR->Write();
-    h_Top_cJetPt_region1_bybin_CR->Write();
-    h_Top_cJetPt_region2_bybin_CR->Write();
-    h_Top_cJetPt_region3_bybin_CR->Write();
-    h_Top_lJetPt_region1_bybin_CR->Write();
-    h_Top_lJetPt_region2_bybin_CR->Write();
-    h_Top_lJetPt_region3_bybin_CR->Write();
-    h_Top_hJetPt_region1_bybin_CR->Write();
-    h_Top_hJetPt_region2_bybin_CR->Write();
-    h_Top_hJetPt_region3_bybin_CR->Write();
     h_Top_JetPt_region1_SR->Write();
     h_Top_JetPt_region2_SR->Write();
     h_Top_JetPt_region3_SR->Write();
     h_Top_bJetPt_region1_SR->Write();
     h_Top_bJetPt_region2_SR->Write();
     h_Top_bJetPt_region3_SR->Write();
-    h_Top_cJetPt_region1_SR->Write();
-    h_Top_cJetPt_region2_SR->Write();
-    h_Top_cJetPt_region3_SR->Write();
     h_Top_lJetPt_region1_SR->Write();
     h_Top_lJetPt_region2_SR->Write();
     h_Top_lJetPt_region3_SR->Write();
-    h_Top_hJetPt_region1_SR->Write();
-    h_Top_hJetPt_region2_SR->Write();
-    h_Top_hJetPt_region3_SR->Write();
-    h_Top_JetEta_bybin_CR->Write();
-    h_Top_bJetEta_bybin_CR->Write();
-    h_Top_cJetEta_bybin_CR->Write();
-    h_Top_lJetEta_bybin_CR->Write();
-    h_Top_hJetEta_bybin_CR->Write();
     h_Top_JetEta_SR->Write();
     h_Top_bJetEta_SR->Write();
-    h_Top_cJetEta_SR->Write();
     h_Top_lJetEta_SR->Write();
-    h_Top_hJetEta_SR->Write();
-    h_Top_JetEta_diffregion_bybin_CR->Write();
-    h_Top_bJetEta_diffregion_bybin_CR->Write();
-    h_Top_cJetEta_diffregion_bybin_CR->Write();
-    h_Top_lJetEta_diffregion_bybin_CR->Write();
-    h_Top_hJetEta_diffregion_bybin_CR->Write();
-    h_Top_JetEta_diffregion_SR->Write();
-    h_Top_bJetEta_diffregion_SR->Write();
-    h_Top_cJetEta_diffregion_SR->Write();
-    h_Top_lJetEta_diffregion_SR->Write();
-    h_Top_hJetEta_diffregion_SR->Write();
+    h_Top_trk_bybin_CR->Write();
+    h_Top_btrk_bybin_CR->Write();
+    h_Top_ltrk_bybin_CR->Write();
+    h_Top_trk_region1_bybin_CR->Write();
+    h_Top_trk_region2_bybin_CR->Write();
+    h_Top_trk_region3_bybin_CR->Write();
+    h_Top_btrk_region1_bybin_CR->Write();
+    h_Top_btrk_region2_bybin_CR->Write();
+    h_Top_btrk_region3_bybin_CR->Write();
+    h_Top_ltrk_region1_bybin_CR->Write();
+    h_Top_ltrk_region2_bybin_CR->Write();
+    h_Top_ltrk_region3_bybin_CR->Write();
+    h_Top_JetPt_bybin_CR->Write();
+    h_Top_bJetPt_bybin_CR->Write();
+    h_Top_lJetPt_bybin_CR->Write();
+    h_Top_JetPt_region1_bybin_CR->Write();
+    h_Top_JetPt_region2_bybin_CR->Write();
+    h_Top_JetPt_region3_bybin_CR->Write();
+    h_Top_bJetPt_region1_bybin_CR->Write();
+    h_Top_bJetPt_region2_bybin_CR->Write();
+    h_Top_bJetPt_region3_bybin_CR->Write();
+    h_Top_lJetPt_region1_bybin_CR->Write();
+    h_Top_lJetPt_region2_bybin_CR->Write();
+    h_Top_lJetPt_region3_bybin_CR->Write();
+    h_Top_JetEta_bybin_CR->Write();
+    h_Top_bJetEta_bybin_CR->Write();
+    h_Top_lJetEta_bybin_CR->Write();
+    h_Top_bJetEta_diffFR_CR->Write();
+    h_Top_lJetEta_diffFR_CR->Write();
+
     outfile->Close();
     // h_Top_JetPt_bjet_SR->Draw();
 

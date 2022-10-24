@@ -28,71 +28,45 @@ void quick_draw(TString file = "./Ratio_apply.root")
 
     TH1D *h_Top_trk_bybin_CR = ((TH1D *)Topfile->Get("h_Top_trk_bybin_CR"));
     TH1D *h_Top_btrk_bybin_CR = ((TH1D *)Topfile->Get("h_Top_btrk_bybin_CR"));
-    TH1D *h_Top_ctrk_bybin_CR = ((TH1D *)Topfile->Get("h_Top_ctrk_bybin_CR"));
     TH1D *h_Top_ltrk_bybin_CR = ((TH1D *)Topfile->Get("h_Top_ltrk_bybin_CR"));
-    TH1D *h_Top_htrk_bybin_CR = ((TH1D *)Topfile->Get("h_Top_htrk_bybin_CR"));
     TH1D *h_Top_trk_SR = ((TH1D *)Topfile->Get("h_Top_trk_SR"));
     TH1D *h_Top_btrk_SR = ((TH1D *)Topfile->Get("h_Top_btrk_SR"));
-    TH1D *h_Top_ctrk_SR = ((TH1D *)Topfile->Get("h_Top_ctrk_SR"));
     TH1D *h_Top_ltrk_SR = ((TH1D *)Topfile->Get("h_Top_ltrk_SR"));
-    TH1D *h_Top_htrk_SR = ((TH1D *)Topfile->Get("h_Top_htrk_SR"));
     TH1D *h_Top_trk_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_trk_region1_bybin_CR"));
     TH1D *h_Top_trk_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_trk_region2_bybin_CR"));
     TH1D *h_Top_trk_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_trk_region3_bybin_CR"));
     TH1D *h_Top_btrk_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_btrk_region1_bybin_CR"));
     TH1D *h_Top_btrk_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_btrk_region2_bybin_CR"));
     TH1D *h_Top_btrk_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_btrk_region3_bybin_CR"));
-    TH1D *h_Top_ctrk_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_ctrk_region1_bybin_CR"));
-    TH1D *h_Top_ctrk_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_ctrk_region2_bybin_CR"));
-    TH1D *h_Top_ctrk_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_ctrk_region3_bybin_CR"));
     TH1D *h_Top_ltrk_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_ltrk_region1_bybin_CR"));
     TH1D *h_Top_ltrk_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_ltrk_region2_bybin_CR"));
     TH1D *h_Top_ltrk_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_ltrk_region3_bybin_CR"));
-    TH1D *h_Top_htrk_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_htrk_region1_bybin_CR"));
-    TH1D *h_Top_htrk_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_htrk_region2_bybin_CR"));
-    TH1D *h_Top_htrk_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_htrk_region3_bybin_CR"));
-
+    
     TH1D *h_Top_trk_region1_SR = ((TH1D *)Topfile->Get("h_Top_trk_region1_SR"));
     TH1D *h_Top_trk_region2_SR = ((TH1D *)Topfile->Get("h_Top_trk_region2_SR"));
     TH1D *h_Top_trk_region3_SR = ((TH1D *)Topfile->Get("h_Top_trk_region3_SR"));
     TH1D *h_Top_btrk_region1_SR = ((TH1D *)Topfile->Get("h_Top_btrk_region1_SR"));
     TH1D *h_Top_btrk_region2_SR = ((TH1D *)Topfile->Get("h_Top_btrk_region2_SR"));
     TH1D *h_Top_btrk_region3_SR = ((TH1D *)Topfile->Get("h_Top_btrk_region3_SR"));
-    TH1D *h_Top_ctrk_region1_SR = ((TH1D *)Topfile->Get("h_Top_ctrk_region1_SR"));
-    TH1D *h_Top_ctrk_region2_SR = ((TH1D *)Topfile->Get("h_Top_ctrk_region2_SR"));
-    TH1D *h_Top_ctrk_region3_SR = ((TH1D *)Topfile->Get("h_Top_ctrk_region3_SR"));
     TH1D *h_Top_ltrk_region1_SR = ((TH1D *)Topfile->Get("h_Top_ltrk_region1_SR"));
     TH1D *h_Top_ltrk_region2_SR = ((TH1D *)Topfile->Get("h_Top_ltrk_region2_SR"));
     TH1D *h_Top_ltrk_region3_SR = ((TH1D *)Topfile->Get("h_Top_ltrk_region3_SR"));
-    TH1D *h_Top_htrk_region1_SR = ((TH1D *)Topfile->Get("h_Top_htrk_region1_SR"));
-    TH1D *h_Top_htrk_region2_SR = ((TH1D *)Topfile->Get("h_Top_htrk_region2_SR"));
-    TH1D *h_Top_htrk_region3_SR = ((TH1D *)Topfile->Get("h_Top_htrk_region3_SR"));
-
+   
     TH1D *h_Top_JetPt_bybin_CR = ((TH1D *)Topfile->Get("h_Top_JetPt_bybin_CR"));
     TH1D *h_Top_bJetPt_bybin_CR = ((TH1D *)Topfile->Get("h_Top_bJetPt_bybin_CR"));
-    TH1D *h_Top_cJetPt_bybin_CR = ((TH1D *)Topfile->Get("h_Top_cJetPt_bybin_CR"));
     TH1D *h_Top_lJetPt_bybin_CR = ((TH1D *)Topfile->Get("h_Top_lJetPt_bybin_CR"));
-    TH1D *h_Top_hJetPt_bybin_CR = ((TH1D *)Topfile->Get("h_Top_hJetPt_bybin_CR"));
     TH1D *h_Top_JetPt_SR = ((TH1D *)Topfile->Get("h_Top_JetPt_SR"));
     TH1D *h_Top_bJetPt_SR = ((TH1D *)Topfile->Get("h_Top_bJetPt_SR"));
-    TH1D *h_Top_cJetPt_SR = ((TH1D *)Topfile->Get("h_Top_cJetPt_SR"));
     TH1D *h_Top_lJetPt_SR = ((TH1D *)Topfile->Get("h_Top_lJetPt_SR"));
-    TH1D *h_Top_hJetPt_SR = ((TH1D *)Topfile->Get("h_Top_hJetPt_SR"));
     TH1D *h_Top_JetPt_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_JetPt_region1_bybin_CR"));
     TH1D *h_Top_JetPt_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_JetPt_region2_bybin_CR"));
     TH1D *h_Top_JetPt_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_JetPt_region3_bybin_CR"));
     TH1D *h_Top_bJetPt_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_bJetPt_region1_bybin_CR"));
     TH1D *h_Top_bJetPt_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_bJetPt_region2_bybin_CR"));
     TH1D *h_Top_bJetPt_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_bJetPt_region3_bybin_CR"));
-    TH1D *h_Top_cJetPt_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_cJetPt_region1_bybin_CR"));
-    TH1D *h_Top_cJetPt_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_cJetPt_region2_bybin_CR"));
-    TH1D *h_Top_cJetPt_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_cJetPt_region3_bybin_CR"));
     TH1D *h_Top_lJetPt_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_lJetPt_region1_bybin_CR"));
     TH1D *h_Top_lJetPt_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_lJetPt_region2_bybin_CR"));
     TH1D *h_Top_lJetPt_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_lJetPt_region3_bybin_CR"));
-    TH1D *h_Top_hJetPt_region1_bybin_CR = ((TH1D *)Topfile->Get("h_Top_hJetPt_region1_bybin_CR"));
-    TH1D *h_Top_hJetPt_region2_bybin_CR = ((TH1D *)Topfile->Get("h_Top_hJetPt_region2_bybin_CR"));
-    TH1D *h_Top_hJetPt_region3_bybin_CR = ((TH1D *)Topfile->Get("h_Top_hJetPt_region3_bybin_CR"));
 
     TH1D *h_Top_JetPt_region1_SR = ((TH1D *)Topfile->Get("h_Top_JetPt_region1_SR"));
     TH1D *h_Top_JetPt_region2_SR = ((TH1D *)Topfile->Get("h_Top_JetPt_region2_SR"));
@@ -100,38 +74,17 @@ void quick_draw(TString file = "./Ratio_apply.root")
     TH1D *h_Top_bJetPt_region1_SR = ((TH1D *)Topfile->Get("h_Top_bJetPt_region1_SR"));
     TH1D *h_Top_bJetPt_region2_SR = ((TH1D *)Topfile->Get("h_Top_bJetPt_region2_SR"));
     TH1D *h_Top_bJetPt_region3_SR = ((TH1D *)Topfile->Get("h_Top_bJetPt_region3_SR"));
-    TH1D *h_Top_cJetPt_region1_SR = ((TH1D *)Topfile->Get("h_Top_cJetPt_region1_SR"));
-    TH1D *h_Top_cJetPt_region2_SR = ((TH1D *)Topfile->Get("h_Top_cJetPt_region2_SR"));
-    TH1D *h_Top_cJetPt_region3_SR = ((TH1D *)Topfile->Get("h_Top_cJetPt_region3_SR"));
     TH1D *h_Top_lJetPt_region1_SR = ((TH1D *)Topfile->Get("h_Top_lJetPt_region1_SR"));
     TH1D *h_Top_lJetPt_region2_SR = ((TH1D *)Topfile->Get("h_Top_lJetPt_region2_SR"));
     TH1D *h_Top_lJetPt_region3_SR = ((TH1D *)Topfile->Get("h_Top_lJetPt_region3_SR"));
-    TH1D *h_Top_hJetPt_region1_SR = ((TH1D *)Topfile->Get("h_Top_hJetPt_region1_SR"));
-    TH1D *h_Top_hJetPt_region2_SR = ((TH1D *)Topfile->Get("h_Top_hJetPt_region2_SR"));
-    TH1D *h_Top_hJetPt_region3_SR = ((TH1D *)Topfile->Get("h_Top_hJetPt_region3_SR"));
 
     //--------------------
-    TH1D *h_Top_JetEta_bybin_CR = ((TH1D *)Topfile->Get("h_Top_JetEta_bybin_CR"));
-    TH1D *h_Top_bJetEta_bybin_CR = ((TH1D *)Topfile->Get("h_Top_bJetEta_bybin_CR"));
-    TH1D *h_Top_cJetEta_bybin_CR = ((TH1D *)Topfile->Get("h_Top_cJetEta_bybin_CR"));
-    TH1D *h_Top_lJetEta_bybin_CR = ((TH1D *)Topfile->Get("h_Top_lJetEta_bybin_CR"));
-    TH1D *h_Top_hJetEta_bybin_CR = ((TH1D *)Topfile->Get("h_Top_hJetEta_bybin_CR"));
     TH1D *h_Top_JetEta_SR = ((TH1D *)Topfile->Get("h_Top_JetEta_SR"));
     TH1D *h_Top_bJetEta_SR = ((TH1D *)Topfile->Get("h_Top_bJetEta_SR"));
-    TH1D *h_Top_cJetEta_SR = ((TH1D *)Topfile->Get("h_Top_cJetEta_SR"));
     TH1D *h_Top_lJetEta_SR = ((TH1D *)Topfile->Get("h_Top_lJetEta_SR"));
-    TH1D *h_Top_hJetEta_SR = ((TH1D *)Topfile->Get("h_Top_hJetEta_SR"));
-    TH1D *h_Top_JetEta_diffregion_bybin_CR = ((TH1D *)Topfile->Get("h_Top_JetEta_diffregion_bybin_CR"));
-    TH1D *h_Top_bJetEta_diffregion_bybin_CR = ((TH1D *)Topfile->Get("h_Top_bJetEta_diffregion_bybin_CR"));
-    TH1D *h_Top_cJetEta_diffregion_bybin_CR = ((TH1D *)Topfile->Get("h_Top_cJetEta_diffregion_bybin_CR"));
-    TH1D *h_Top_lJetEta_diffregion_bybin_CR = ((TH1D *)Topfile->Get("h_Top_lJetEta_diffregion_bybin_CR"));
-    TH1D *h_Top_hJetEta_diffregion_bybin_CR = ((TH1D *)Topfile->Get("h_Top_hJetEta_diffregion_bybin_CR"));
 
-    TH1D *h_Top_JetEta_diffregion_SR = ((TH1D *)Topfile->Get("h_Top_JetEta_diffregion_SR"));
-    TH1D *h_Top_bJetEta_diffregion_SR = ((TH1D *)Topfile->Get("h_Top_bJetEta_diffregion_SR"));
-    TH1D *h_Top_cJetEta_diffregion_SR = ((TH1D *)Topfile->Get("h_Top_cJetEta_diffregion_SR"));
-    TH1D *h_Top_lJetEta_diffregion_SR = ((TH1D *)Topfile->Get("h_Top_lJetEta_diffregion_SR"));
-    TH1D *h_Top_hJetEta_diffregion_SR = ((TH1D *)Topfile->Get("h_Top_hJetEta_diffregion_SR"));
+    TH1D *h_Top_bJetEta_diffFR_CR = ((TH1D *)Topfile->Get("h_Top_bJetEta_diffFR_CR"));
+    TH1D *h_Top_lJetEta_diffFR_CR = ((TH1D *)Topfile->Get("h_Top_lJetEta_diffFR_CR"));
 
     //--------------------------
     // For Signal Region
@@ -220,14 +173,10 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_Style_Setting(h_Top_lJetPt_region3_bybin_CR, kAzure + 4);
 
     // 3. Jet Eta
-    h_Style_Setting(h_Top_JetEta_diffregion_bybin_CR, kAzure + 4);
-    h_Style_Setting(h_Top_bJetEta_diffregion_bybin_CR, kAzure + 4);
-    h_Style_Setting(h_Top_cJetEta_diffregion_bybin_CR, kAzure + 4);
-    h_Style_Setting(h_Top_lJetEta_diffregion_bybin_CR, kAzure + 4);
-    h_Style_Setting(h_Top_hJetEta_diffregion_bybin_CR, kAzure + 4);
+    h_Style_Setting(h_Top_bJetEta_diffFR_CR, kAzure + 4);
+    h_Style_Setting(h_Top_lJetEta_diffFR_CR, kAzure + 4);
 
     h_Top_btrk_bybin_CR->GetXaxis()->SetTitle("nTrk");
-    h_Top_ctrk_bybin_CR->GetXaxis()->SetTitle("nTrk");
     h_Top_ltrk_bybin_CR->GetXaxis()->SetTitle("nTrk");
 
     h_Top_ltrk_region1_SR->GetXaxis()->SetTitle("nTrk");
@@ -251,7 +200,6 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_Top_bJetPt_bybin_CR->GetXaxis()->SetTitle("JetPt");
 
     h_Top_bJetPt_SR->GetXaxis()->SetTitle("JetPt");
-    h_Top_cJetPt_SR->GetXaxis()->SetTitle("JetPt");
     h_Top_lJetPt_SR->GetXaxis()->SetTitle("JetPt");
 
     h_Top_bJetPt_region1_bybin_CR->GetXaxis()->SetTitle("JetPt");
@@ -259,16 +207,9 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_Top_bJetPt_region3_SR->GetXaxis()->SetTitle("JetPt");
     h_Top_bJetPt_region3_bybin_CR->GetXaxis()->SetTitle("JetPt");
 
-    h_Top_cJetPt_region1_bybin_CR->GetXaxis()->SetTitle("JetPt");
-    h_Top_cJetPt_region1_SR->GetXaxis()->SetTitle("JetPt");
-    h_Top_cJetPt_region2_SR->GetXaxis()->SetTitle("JetPt");
-
-    h_Top_cJetPt_region2_bybin_CR->GetXaxis()->SetTitle("JetPt");
     h_Top_lJetPt_region1_SR->GetXaxis()->SetTitle("JetPt");
     h_Top_lJetPt_region2_SR->GetXaxis()->SetTitle("JetPt");
 
-    h_Top_cJetPt_region3_SR->GetXaxis()->SetTitle("JetPt");
-    h_Top_cJetPt_region3_bybin_CR->GetXaxis()->SetTitle("JetPt");
 
     h_Top_lJetPt_region1_bybin_CR->GetXaxis()->SetTitle("JetPt");
     h_Top_lJetPt_region2_bybin_CR->GetXaxis()->SetTitle("JetPt");
@@ -280,13 +221,6 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_Top_bJetPt_region3_SR->GetYaxis()->SetTitle("nJets");
     h_Top_bJetPt_region3_bybin_CR->GetYaxis()->SetTitle("nJets");
 
-    h_Top_cJetPt_region1_bybin_CR->GetYaxis()->SetTitle("nJets");
-    h_Top_cJetPt_region1_SR->GetYaxis()->SetTitle("nJets");
-    h_Top_cJetPt_region2_bybin_CR->GetYaxis()->SetTitle("nJets");
-    h_Top_cJetPt_region2_SR->GetYaxis()->SetTitle("nJets");
-    h_Top_cJetPt_region3_SR->GetYaxis()->SetTitle("nJets");
-    h_Top_cJetPt_region3_bybin_CR->GetYaxis()->SetTitle("nJets");
-
     h_Top_lJetPt_region1_bybin_CR->GetYaxis()->SetTitle("nJets");
     h_Top_lJetPt_region1_SR->GetYaxis()->SetTitle("nJets");
     h_Top_lJetPt_region2_bybin_CR->GetYaxis()->SetTitle("nJets");
@@ -297,19 +231,15 @@ void quick_draw(TString file = "./Ratio_apply.root")
     h_Top_bJetPt_bybin_CR->GetYaxis()->SetTitle("nJets");
 
     h_Top_btrk_bybin_CR->GetYaxis()->SetTitle("nJets");
-    h_Top_ctrk_bybin_CR->GetYaxis()->SetTitle("nJets");
     h_Top_ltrk_bybin_CR->GetYaxis()->SetTitle("nJets");
 
     h_Top_bJetPt_SR->GetYaxis()->SetTitle("nJets");
-    h_Top_cJetPt_SR->GetYaxis()->SetTitle("nJets");
     h_Top_lJetPt_SR->GetYaxis()->SetTitle("nJets");
 
-    h_Top_bJetEta_diffregion_bybin_CR->GetXaxis()->SetTitle("Jet #eta");
-    h_Top_cJetEta_diffregion_SR->GetXaxis()->SetTitle("Jet #eta");
-    h_Top_lJetEta_diffregion_bybin_CR->GetXaxis()->SetTitle("Jet #eta");
-    h_Top_bJetEta_diffregion_bybin_CR->GetYaxis()->SetTitle("nJets");
-    h_Top_cJetEta_diffregion_SR->GetYaxis()->SetTitle("nJets");
-    h_Top_lJetEta_diffregion_bybin_CR->GetYaxis()->SetTitle("nJets");
+    h_Top_bJetEta_diffFR_CR->GetXaxis()->SetTitle("Jet #eta");
+    h_Top_lJetEta_diffFR_CR->GetXaxis()->SetTitle("Jet #eta");
+    h_Top_bJetEta_diffFR_CR->GetYaxis()->SetTitle("nJets");
+    h_Top_lJetEta_diffFR_CR->GetYaxis()->SetTitle("nJets");
 
     int W = 600;
     int H = 600;
@@ -1325,9 +1255,9 @@ void quick_draw(TString file = "./Ratio_apply.root")
 
     gPad->SetBottomMargin(0.02);
 
-    h_Top_bJetEta_diffregion_bybin_CR->GetXaxis()->SetLabelSize(0);
+    h_Top_bJetEta_diffFR_CR->GetXaxis()->SetLabelSize(0);
 
-    h_Top_bJetEta_diffregion_bybin_CR->Draw("");
+    h_Top_bJetEta_diffFR_CR->Draw("");
 
     h_Top_bJetEta_diffregion_SR->Draw("h same");
 
@@ -1336,12 +1266,12 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l0->SetTextSize(0.03);
     l0->SetBorderSize(0);
     l0->SetFillStyle(0);
-    l0->AddEntry(h_Top_bJetEta_diffregion_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l0->AddEntry(h_Top_bJetEta_diffFR_CR, "CR (Top to emu apply ee fake rate)", "El");
     l0->AddEntry(h_Top_bJetEta_diffregion_SR, "SR", "El");
     l0->Draw();
 
-    TH1D *h_bJetEta_CR_SR_ratio = (TH1D *)h_Top_bJetEta_diffregion_bybin_CR->Clone("h_bJetEta_CR_SR_ratio");
-    h_bJetEta_CR_SR_ratio->Divide(h_Top_bJetEta_diffregion_bybin_CR, h_Top_bJetEta_diffregion_SR, 1, 1);
+    TH1D *h_bJetEta_CR_SR_ratio = (TH1D *)h_Top_bJetEta_diffFR_CR->Clone("h_bJetEta_CR_SR_ratio");
+    h_bJetEta_CR_SR_ratio->Divide(h_Top_bJetEta_diffFR_CR, h_Top_bJetEta_diffregion_SR, 1, 1);
 
     c1->cd(4);
     gPad->SetTopMargin(1);
@@ -1382,10 +1312,10 @@ void quick_draw(TString file = "./Ratio_apply.root")
 
     gPad->SetBottomMargin(0.02);
 
-    h_Top_lJetEta_diffregion_bybin_CR->GetXaxis()->SetLabelSize(0);
-    //h_Top_lJetEta_diffregion_bybin_CR->GetXaxis()->SetTitleSize(0);
+    h_Top_lJetEta_diffFR_CR->GetXaxis()->SetLabelSize(0);
+    //h_Top_lJetEta_diffFR_CR->GetXaxis()->SetTitleSize(0);
 
-    h_Top_lJetEta_diffregion_bybin_CR->Draw(" ");
+    h_Top_lJetEta_diffFR_CR->Draw(" ");
     h_Top_lJetEta_diffregion_SR->Draw("h same");
 
     TLegend *l2 = new TLegend(0.45, 0.4, 0.80, 0.80);
@@ -1393,15 +1323,15 @@ void quick_draw(TString file = "./Ratio_apply.root")
     l2->SetTextSize(0.03);
     l2->SetBorderSize(0);
     l2->SetFillStyle(0);
-    l2->AddEntry(h_Top_lJetEta_diffregion_bybin_CR, "CR (Top to emu apply ee fake rate)", "El");
+    l2->AddEntry(h_Top_lJetEta_diffFR_CR, "CR (Top to emu apply ee fake rate)", "El");
     l2->AddEntry(h_Top_lJetEta_diffregion_SR, "SR", "El");
     l2->Draw();
 
     c1->cd(6);
     gPad->SetTopMargin(1);
 
-    TH1D *h_lJetEta_CR_SR_ratio = (TH1D *)h_Top_lJetEta_diffregion_bybin_CR->Clone("h_lJetEta_CR_SR_ratio");
-    h_lJetEta_CR_SR_ratio->Divide(h_Top_lJetEta_diffregion_bybin_CR, h_Top_lJetEta_diffregion_SR, 1, 1);
+    TH1D *h_lJetEta_CR_SR_ratio = (TH1D *)h_Top_lJetEta_diffFR_CR->Clone("h_lJetEta_CR_SR_ratio");
+    h_lJetEta_CR_SR_ratio->Divide(h_Top_lJetEta_diffFR_CR, h_Top_lJetEta_diffregion_SR, 1, 1);
 
     h_lJetEta_CR_SR_ratio->GetYaxis()->SetTitle("CR / SR");
     // h_lJetEta_CR_SR_ratio->GetYaxis()->SetRangeUser(-2, 50);
