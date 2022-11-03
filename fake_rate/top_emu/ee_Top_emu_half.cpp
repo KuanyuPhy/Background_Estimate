@@ -383,6 +383,8 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         {
             v_thinjet.push_back(ThinJet((*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], (*v_Top_JetEta)[i], (*v_Top_alpha)[i], (*v_Top_nTrack)[i], (*v_Top_JetMass)[i], (*v_Top_JetCsv)[i]));
         }
+        sort(v_thinjet.begin(), v_thinjet.end(), greater<ThinJet>());
+        
         /*
         cout << "-------- No Sort ---------------" << endl;
         for (auto x : v_thinjet)

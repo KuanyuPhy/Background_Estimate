@@ -646,7 +646,6 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
                     for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), bfr_3, h_Top_bJetEta_diffFR_LO_CR);
                     for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), lfr_3, h_Top_lJetEta_diffFR_LO_CR);
                 }
-
             } // End of dilepton PT required
         }     // End of MET cut
 

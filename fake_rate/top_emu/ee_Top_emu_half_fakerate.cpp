@@ -213,7 +213,6 @@ void ee_Top_emu_half_fakerate(TString file = "tmp.root", TString outputfile = "o
     //-------------------------------------------
     //   Consider eta in low dilepton PT region
     //-------------------------------------------
-
     TH1D *Top_nTrk_bfakeRate_difeta_lowDilepPt_1 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_lowDilepPt_1->Clone("Top_nTrk_bfakeRate_difeta_lowDilepPt_1");
     DivideHistogram(Top_nTrk_bfakeRate_difeta_lowDilepPt_1, h_Top_nTrk_bjet_cut_difeta_lowDilepPt_1, h_Top_nTrk_bjet_difeta_lowDilepPt_1);
 
