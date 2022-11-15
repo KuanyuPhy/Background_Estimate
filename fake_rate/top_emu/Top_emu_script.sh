@@ -11,7 +11,7 @@ g++ -o $FileMainLocation/ee_Top_emu_half.o $(root-config --cflags) $FileMainLoca
 g++ -o $FileMainLocation/ee_Top_emu_half_fakerate.o $(root-config --cflags) $FileMainLocation/ee_Top_emu_half_fakerate.cpp  $(root-config --glibs)
 g++ -o $FileMainLocation/Ratio_Topee_apply.o $(root-config --cflags) $FileMainLocation/Ratio_Topee_apply.cpp  $(root-config --glibs)
 g++ -o $FileMainLocation/Ratio_Top_apply.o $(root-config --cflags) $FileMainLocation/Ratio_Top_apply.cpp  $(root-config --glibs)
-g++ -o $FileMainLocation/Ratio_Top_apply_forLd.o $(root-config --cflags) $FileMainLocation/Ratio_Top_apply_forLd.cpp  $(root-config --glibs)
+g++ -o $FileMainLocation/Ratio_Top_apply_LO.o $(root-config --cflags) $FileMainLocation/Ratio_Top_apply_LO.cpp  $(root-config --glibs)
 
 
 Top_emu_list_1=($(find /home/kuanyu/Documents/root_file/BgEstimation/top_emu/ -mindepth 1 -maxdepth 1 -name "eu_top_emu_*_1.root"))
@@ -54,7 +54,7 @@ test -e "$FileMainLocation/top_emu_fakerate.root" && { echo "Delete old top_emu_
 for file in ${Top_emu_list_2[*]}; do
     Topoutputfile="$(basename -s ".root" "$file")"
     echo $Topoutputfile
-    ./Ratio_Top_apply_forLd.o "$file" "./output/${Topoutputfile}_output.root" 
+    ./Ratio_Top_apply_LO.o "$file" "./output/${Topoutputfile}_output.root" 
     #echo ./$outputfile;
 done
 test -e "$FileMainLocation/Ratio_apply.root" && { echo "Delete old Ratio_apply.root"; rm $FileMainLocation/Ratio_apply.root ;}

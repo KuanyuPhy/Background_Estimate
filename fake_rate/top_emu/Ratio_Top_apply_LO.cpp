@@ -36,7 +36,7 @@ public:
     Float_t GetNtrk() const { return jetntrk; }
     Float_t GetMass() const { return jetmass; }
     Float_t GetCsv() const { return jetcsv; }
-
+    
     friend ostream &operator<<(ostream &out, const ThinJet &foo)
     {
         return out << foo.jetflavor << " " << foo.jetpt << " " << foo.jeteta << " " << foo.jetalpha << " " << foo.jetntrk << "" << foo.jetmass << "" << foo.jetcsv << endl;
@@ -48,6 +48,7 @@ public:
         return a.GetPt() > b.GetPt();
     }
 };
+
 //------------------
 // Calculate weight
 //------------------
@@ -94,9 +95,9 @@ TH1D *Top_nTrk_fakeRate = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate"
 // Get Top to e mu fake rate
 //---------------------------
 // 1. For dilepton PT fake rate
-TH1D *Top_nTrk_fakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt"));
-TH1D *Top_nTrk_bfakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_bfakeRate_highDilepPt"));
-TH1D *Top_nTrk_lfakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_lfakeRate_highDilepPt"));
+TH1D *Top_nTrk_fakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_fakeRate_lowDilepPt"));
+TH1D *Top_nTrk_bfakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_bfakeRate_lowDilepPt"));
+TH1D *Top_nTrk_lfakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_lfakeRate_lowDilepPt"));
 // Consider eta
 TH1D *Top_nTrk_bfakeRate_lowDilepPt_1 = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_bfakeRate_difeta_lowDilepPt_1"));
 TH1D *Top_nTrk_bfakeRate_lowDilepPt_2 = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_bfakeRate_difeta_lowDilepPt_2"));
@@ -246,6 +247,9 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     TH1D *h_Top_ltrk_SR = new TH1D("h_Top_ltrk_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_ltrk_SR->Sumw2();
 
+    TH1D *h_Top_trk_LO_SR = new TH1D("h_Top_trk_LO_SR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_trk_LO_SR->Sumw2();
+
     // consider eta fake rate
     TH1D *h_Top_trk_region1_SR = new TH1D("h_Top_trk_region1_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_trk_region1_SR->Sumw2();
@@ -276,6 +280,8 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     h_Top_bJetPt_SR->Sumw2();
     TH1D *h_Top_lJetPt_SR = new TH1D("h_Top_lJetPt_SR", "", NJet_Nbins, NJet_edges);
     h_Top_lJetPt_SR->Sumw2();
+    TH1D *h_Top_JetPt_LO_SR = new TH1D("h_Top_JetPt_LO_SR", "", NJet_Nbins, NJet_edges);
+    h_Top_JetPt_LO_SR->Sumw2();
     // consider eta fake rate
     TH1D *h_Top_JetPt_region1_SR = new TH1D("h_Top_JetPt_region1_SR", "", NJet_Nbins, NJet_edges);
     h_Top_JetPt_region1_SR->Sumw2();
@@ -301,6 +307,8 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     // JetEta
     TH1D *h_Top_JetEta_SR = new TH1D("h_Top_JetEta_SR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
     h_Top_JetEta_SR->Sumw2();
+    TH1D *h_Top_JetEta_LO_SR = new TH1D("h_Top_JetEta_LO_SR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_JetEta_LO_SR->Sumw2();
     TH1D *h_Top_bJetEta_LO_SR = new TH1D("h_Top_bJetEta_LO_SR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
     h_Top_bJetEta_LO_SR->Sumw2();
     TH1D *h_Top_lJetEta_LO_SR = new TH1D("h_Top_lJetEta_LO_SR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
@@ -363,6 +371,9 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     TH1D *h_Top_ltrk_bybin_CR = new TH1D("h_Top_ltrk_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_ltrk_bybin_CR->Sumw2();
 
+    TH1D *h_Top_trk_LO_bybin_CR = new TH1D("h_Top_trk_LO_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_trk_LO_bybin_CR->Sumw2();
+
     // consider eta fake rate
     TH1D *h_Top_trk_region1_bybin_CR = new TH1D("h_Top_trk_region1_bybin_CR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_trk_region1_bybin_CR->Sumw2();
@@ -396,6 +407,9 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     TH1D *h_Top_lJetPt_bybin_CR = new TH1D("h_Top_lJetPt_bybin_CR", "", NJet_Nbins, NJet_edges);
     h_Top_lJetPt_bybin_CR->Sumw2();
 
+    TH1D *h_Top_JetPt_LO_bybin_CR = new TH1D("h_Top_JetPt_LO_bybin_CR", "", NJet_Nbins, NJet_edges);
+    h_Top_JetPt_LO_bybin_CR->Sumw2();
+
     // consider eta fake rate
     TH1D *h_Top_JetPt_region1_bybin_CR = new TH1D("h_Top_JetPt_region1_bybin_CR", "", NJet_Nbins, NJet_edges);
     h_Top_JetPt_region1_bybin_CR->Sumw2();
@@ -428,6 +442,9 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
 
     TH1D *h_Top_lJetEta_bybin_CR = new TH1D("h_Top_lJetEta_bybin_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
     h_Top_lJetEta_bybin_CR->Sumw2();
+
+    TH1D *h_Top_JetEta_LO_bybin_CR = new TH1D("h_Top_JetEta_LO_bybin_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_JetEta_LO_bybin_CR->Sumw2();
 
     TH1D *h_Top_bJetEta_diffFR_LO_CR = new TH1D("h_Top_bJetEta_diffFR_LO_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
     h_Top_bJetEta_diffFR_LO_CR->Sumw2();
@@ -540,22 +557,24 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
         //--------------
         sort(v_thinjet.begin(), v_thinjet.end(), greater<ThinJet>());
         // check sort result
-        //cout << "i = " << evt << endl;
-        for (size_t i = 0; i < v_thinjet.size() - 1; i++)
+        // cout << "i = " << evt << endl;
+        for (size_t i = 0; i < v_Top_JetPT->size() - 1; i++)
         {
-            float a_pt = v_thinjet[i].GetPt();
-            float b_pt = v_thinjet[i + 1].GetPt();
+            float a_pt = (*v_Top_JetPT)[i];
+            float b_pt = (*v_Top_JetPT)[i + 1];
             if (b_pt > a_pt)
             {
                 cout << "a_pt = " << a_pt << endl;
                 cout << "b_pt = " << b_pt << endl;
             }
-        } /*
-         for (auto x : v_thinjet)
-         {
-             cout << "JetPT= " << x.GetPt() << endl;
-         }*/
-
+        }
+        for (auto x : v_thinjet)
+        {
+            if (x.GetPt() < 30)
+            {
+                cout << "JetPT= " << x << endl;
+            }
+        }
         //------------------------------------------------------
         // New version of fake rate apply(non eq bin fake rate)
         //------------------------------------------------------
@@ -563,88 +582,109 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
         {
             if (f_Top_dileppt > DilepPTcut)
             {
-                if (v_thinjet[0].GetAlpha() < 0.15)
+                for (size_t i = 0; i < v_thinjet.size(); i++)
                 {
-                    // Fot Jet Eta
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), Top_weight, h_Top_bJetEta_LO_SR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), Top_weight, h_Top_lJetEta_LO_SR);
+                    if (v_thinjet[i].GetPt() < 30)
+                    {
+                        cout << "Jet PT = " << v_thinjet[i].GetPt() << endl;
+                    }
+                }
 
-                    // Consider diff eta
-                    if (abs(v_thinjet[0].GetEta()) <= 1)
-                    {
-                        // For ntrk
-                        for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), Top_weight, h_Top_btrk_region1_LO_SR);
-                        for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), Top_weight, h_Top_ltrk_region1_LO_SR);
-                        // For Jet PT
-                        for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), Top_weight, h_Top_bJetPt_region1_LO_SR);
-                        for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), Top_weight, h_Top_lJetPt_region1_LO_SR);
-                    }
-                    else if (abs(v_thinjet[0].GetEta()) > 1 && abs(v_thinjet[0].GetEta()) <= 2)
-                    {
-                        // For ntrk
-                        for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), Top_weight, h_Top_btrk_region2_LO_SR);
-                        for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), Top_weight, h_Top_ltrk_region2_LO_SR);
-                        // For Jet PT
-                        for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), Top_weight, h_Top_bJetPt_region2_LO_SR);
-                        for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), Top_weight, h_Top_lJetPt_region2_LO_SR);
-                    }
-                    else if (abs(v_thinjet[0].GetEta()) > 2 && abs(v_thinjet[0].GetEta()) <= 2.5)
-                    {
-                        // For ntrk
-                        for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), Top_weight, h_Top_btrk_region3_LO_SR);
-                        for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), Top_weight, h_Top_ltrk_region3_LO_SR);
-                        // For Jet PT
-                        for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), Top_weight, h_Top_bJetPt_region3_LO_SR);
-                        for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), Top_weight, h_Top_lJetPt_region3_LO_SR);
-                    }
-                } // End of alpha cut
-                //------------------------------------
-                // 2. Apply low dilepton PT fake rate
-                //------------------------------------
-                if (abs(v_thinjet[0].GetEta()) <= 1)
+                for (int i = 0; i < v_thinjet.size(); i++)
                 {
-                    int fr_bin_pos_1 = getbinfakerate(v_thinjet[0].GetNtrk());
-                    double bfr_1 = Top_nTrk_bfakeRate_lowDilepPt_1->GetBinContent(fr_bin_pos_1) * Top_weight;
-                    double lfr_1 = Top_nTrk_lfakeRate_lowDilepPt_1->GetBinContent(fr_bin_pos_1) * Top_weight;
-                    // For ntrk
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), bfr_1, h_Top_btrk_region1_LO_bybin_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), lfr_1, h_Top_ltrk_region1_LO_bybin_CR);
-                    // For Jet PT
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), bfr_1, h_Top_bJetPt_region1_LO_bybin_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), lfr_1, h_Top_lJetPt_region1_LO_bybin_CR);
-                    // Fot Jet Eta
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), bfr_1, h_Top_bJetEta_diffFR_LO_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), lfr_1, h_Top_lJetEta_diffFR_LO_CR);
-                }
-                else if (abs(v_thinjet[0].GetEta()) > 1 && abs(v_thinjet[0].GetEta()) <= 2)
-                {
-                    int fr_bin_pos_2 = getbinfakerate(v_thinjet[0].GetNtrk());
-                    double bfr_2 = Top_nTrk_bfakeRate_lowDilepPt_2->GetBinContent(fr_bin_pos_2) * Top_weight;
-                    double lfr_2 = Top_nTrk_lfakeRate_lowDilepPt_2->GetBinContent(fr_bin_pos_2) * Top_weight;
-                    // For ntrk
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), bfr_2, h_Top_btrk_region2_LO_bybin_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), lfr_2, h_Top_ltrk_region2_LO_bybin_CR);
-                    // For Jet PT
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), bfr_2, h_Top_bJetPt_region2_LO_bybin_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), lfr_2, h_Top_lJetPt_region2_LO_bybin_CR);
-                    // Fot Jet Eta
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), bfr_2, h_Top_bJetEta_diffFR_LO_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), lfr_2, h_Top_lJetEta_diffFR_LO_CR);
-                }
-                else if (abs(v_thinjet[0].GetEta()) > 2 && abs(v_thinjet[0].GetEta()) <= 2.5)
-                {
-                    int fr_bin_pos_3 = getbinfakerate(v_thinjet[0].GetNtrk());
-                    double bfr_3 = Top_nTrk_bfakeRate_lowDilepPt_3->GetBinContent(fr_bin_pos_3) * Top_weight;
-                    double lfr_3 = Top_nTrk_lfakeRate_lowDilepPt_3->GetBinContent(fr_bin_pos_3) * Top_weight;
-                    // For ntrk
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), bfr_3, h_Top_btrk_region3_LO_bybin_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetNtrk(), lfr_3, h_Top_ltrk_region3_LO_bybin_CR);
-                    // For Jet PT
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), bfr_3, h_Top_bJetPt_region3_LO_bybin_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetPt(), lfr_3, h_Top_lJetPt_region3_LO_bybin_CR);
-                    // Fot Jet Eta
-                    for_signalflavor_jet(5, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), bfr_3, h_Top_bJetEta_diffFR_LO_CR);
-                    for_signalflavor_jet(0, v_thinjet[0].GetFlavor(), v_thinjet[0].GetEta(), lfr_3, h_Top_lJetEta_diffFR_LO_CR);
+                    if (v_thinjet[i].GetAlpha()< 0.15)
+                    {
+                        // For Jet trk
+                        h_Top_trk_LO_SR->Fill(v_thinjet[i].GetNtrk(), Top_weight);
+                        // For Jet PT
+                        h_Top_JetPt_LO_SR->Fill(v_thinjet[i].GetPt(), Top_weight);
+                        // Fot Jet Eta
+                        h_Top_JetEta_LO_SR->Fill(v_thinjet[i].GetEta(), Top_weight);
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_bJetEta_LO_SR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), Top_weight, h_Top_lJetEta_LO_SR);
+
+                        // Consider diff eta
+                        if (abs(v_thinjet[i].GetEta()) <= 1)
+                        {
+                            // For ntrk
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region1_LO_SR);
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region1_LO_SR);
+                            // For Jet PT
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region1_LO_SR);
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region1_LO_SR);
+                        }
+                        else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) <= 2)
+                        {
+                            // For ntrk
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region2_LO_SR);
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region2_LO_SR);
+                            // For Jet PT
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region2_LO_SR);
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region2_LO_SR);
+                        }
+                        else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) <= 2.5)
+                        {
+                            // For ntrk
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_btrk_region3_LO_SR);
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_ltrk_region3_LO_SR);
+                            // For Jet PT
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_bJetPt_region3_LO_SR);
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region3_LO_SR);
+                        }
+                    } // End of alpha cut
+                    //------------------------------------
+                    // 2. Apply low dilepton PT fake rate
+                    //------------------------------------
+                    int fr_bin_pos = getbinfakerate(v_thinjet[i].GetNtrk());
+                    double fr = Top_nTrk_fakeRate_lowDilepPt->GetBinContent(fr_bin_pos) * Top_weight;
+                    h_Top_trk_LO_bybin_CR->Fill(v_thinjet[i].GetNtrk(), fr);
+                    h_Top_JetPt_LO_bybin_CR->Fill(v_thinjet[i].GetPt(), fr);
+                    h_Top_JetEta_LO_bybin_CR->Fill(v_thinjet[i].GetEta(), fr);
+                    if (abs(v_thinjet[i].GetEta()) <= 1)
+                    {
+                        int fr_bin_pos_1 = getbinfakerate(v_thinjet[i].GetNtrk());
+                        double bfr_1 = Top_nTrk_bfakeRate_lowDilepPt_1->GetBinContent(fr_bin_pos_1) * Top_weight;
+                        double lfr_1 = Top_nTrk_lfakeRate_lowDilepPt_1->GetBinContent(fr_bin_pos_1) * Top_weight;
+                        // For ntrk
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), bfr_1, h_Top_btrk_region1_LO_bybin_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), lfr_1, h_Top_ltrk_region1_LO_bybin_CR);
+                        // For Jet PT
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), bfr_1, h_Top_bJetPt_region1_LO_bybin_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), lfr_1, h_Top_lJetPt_region1_LO_bybin_CR);
+                        // Fot Jet Eta
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), bfr_1, h_Top_bJetEta_diffFR_LO_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), lfr_1, h_Top_lJetEta_diffFR_LO_CR);
+                    }
+                    else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) <= 2)
+                    {
+                        int fr_bin_pos_2 = getbinfakerate(v_thinjet[i].GetNtrk());
+                        double bfr_2 = Top_nTrk_bfakeRate_lowDilepPt_2->GetBinContent(fr_bin_pos_2) * Top_weight;
+                        double lfr_2 = Top_nTrk_lfakeRate_lowDilepPt_2->GetBinContent(fr_bin_pos_2) * Top_weight;
+                        // For ntrk
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), bfr_2, h_Top_btrk_region2_LO_bybin_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), lfr_2, h_Top_ltrk_region2_LO_bybin_CR);
+                        // For Jet PT
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), bfr_2, h_Top_bJetPt_region2_LO_bybin_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), lfr_2, h_Top_lJetPt_region2_LO_bybin_CR);
+                        // Fot Jet Eta
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), bfr_2, h_Top_bJetEta_diffFR_LO_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), lfr_2, h_Top_lJetEta_diffFR_LO_CR);
+                    }
+                    else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) <= 2.5)
+                    {
+                        int fr_bin_pos_3 = getbinfakerate(v_thinjet[i].GetNtrk());
+                        double bfr_3 = Top_nTrk_bfakeRate_lowDilepPt_3->GetBinContent(fr_bin_pos_3) * Top_weight;
+                        double lfr_3 = Top_nTrk_lfakeRate_lowDilepPt_3->GetBinContent(fr_bin_pos_3) * Top_weight;
+                        // For ntrk
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), bfr_3, h_Top_btrk_region3_LO_bybin_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), lfr_3, h_Top_ltrk_region3_LO_bybin_CR);
+                        // For Jet PT
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), bfr_3, h_Top_bJetPt_region3_LO_bybin_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), lfr_3, h_Top_lJetPt_region3_LO_bybin_CR);
+                        // Fot Jet Eta
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), bfr_3, h_Top_bJetEta_diffFR_LO_CR);
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetEta(), lfr_3, h_Top_lJetEta_diffFR_LO_CR);
+                    }
                 }
             } // End of dilepton PT required
         }     // End of MET cut
@@ -710,6 +750,10 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     h_Top_bJetEta_diffFR_LO_CR->Write();
     h_Top_lJetEta_diffFR_LO_CR->Write();
 
+    h_Top_trk_LO_bybin_CR->Write();
+    h_Top_JetPt_LO_bybin_CR->Write();
+    h_Top_JetEta_LO_bybin_CR->Write();
+
     h_Top_btrk_MET_region1_SR->Write();
     h_Top_btrk_MET_region2_SR->Write();
     h_Top_btrk_MET_region3_SR->Write();
@@ -724,6 +768,10 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     h_Top_lJetPt_MET_region3_SR->Write();
     h_Top_bJetEta_MET_SR->Write();
     h_Top_lJetEta_MET_SR->Write();
+
+    h_Top_trk_LO_SR->Write();
+    h_Top_JetPt_LO_SR->Write();
+    h_Top_JetEta_LO_SR->Write();
 
     h_Top_btrk_MET_region1_bybin_CR->Write();
     h_Top_btrk_MET_region2_bybin_CR->Write();

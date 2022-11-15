@@ -14,6 +14,7 @@
 #include <TAxis.h>
 #include <TLine.h>
 #include <TError.h>
+#include <TObjString.h>
 #include "TLegend.h"
 #include <cstring>
 
@@ -33,6 +34,9 @@ void draw_fakerate()
     TFile *Top_emufile = TFile::Open("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top_emu/top_emu_fakerate.root");
 
     // For Top emu file
+    TH1D *Top_eu_nTrk_fakeRate_difeta_lowDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_fakeRate_lowDilepPt"));
+    TH1D *Top_eu_nTrk_fakeRate_difeta_highDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_fakeRate_highDilepPt"));
+
     TH1D *Top_eu_nTrk_bfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_lowMET_1"));
     TH1D *Top_eu_nTrk_cfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_cfakeRate_difeta_lowMET_1"));
     TH1D *Top_eu_nTrk_lfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_lowMET_1"));
@@ -78,6 +82,8 @@ void draw_fakerate()
     //-------------------------------------
     // Set low dilepton PT fake rate style
     //-------------------------------------
+
+    h_Style_Setting(Top_eu_nTrk_fakeRate_difeta_lowDilepPt, kAzure + 4);
     h_Style_Setting(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1, kAzure + 4);
     h_Style_Setting(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2, kAzure + 4);
     h_Style_Setting(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3, kAzure + 4);
@@ -89,6 +95,7 @@ void draw_fakerate()
     //-------------------------------------
     // Set high dilepton PT fake rate style
     //-------------------------------------
+    h_Style_Setting(Top_eu_nTrk_fakeRate_difeta_highDilepPt, kRed);
     h_Style_Setting(Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1, kRed);
     h_Style_Setting(Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2, kRed);
     h_Style_Setting(Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3, kRed);
@@ -122,10 +129,81 @@ void draw_fakerate()
     c1->SetTicky(0);
 
     c1->Divide(1, 2);
-
-    
+    // Compare without flavor and eta region
     c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
 
+    TH1D *h_trk_H_L_ratio = (TH1D *)Top_eu_nTrk_fakeRate_difeta_highDilepPt->Clone("h_trk_H_L_ratio");
+    h_trk_H_L_ratio->Divide(Top_eu_nTrk_fakeRate_difeta_highDilepPt, Top_eu_nTrk_fakeRate_difeta_lowDilepPt, 1, 1);
+
+    Top_eu_nTrk_fakeRate_difeta_lowDilepPt->GetXaxis()->SetLabelSize(0);
+    Top_eu_nTrk_fakeRate_difeta_lowDilepPt->GetYaxis()->SetTitleSize(0.06);
+    Top_eu_nTrk_fakeRate_difeta_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+
+    // Top_eu_nTrk_fakeRate_difeta_lowDilepPt->GetXaxis()->SetRangeUser(1, 25);
+    // Top_eu_nTrk_fakeRate_difeta_highDilepPt->GetXaxis()->SetRangeUser(1, 25);
+
+    Top_eu_nTrk_fakeRate_difeta_lowDilepPt->Draw();
+    Top_eu_nTrk_fakeRate_difeta_highDilepPt->Draw("same");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetTextSize(0.06);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(Top_eu_nTrk_fakeRate_difeta_lowDilepPt, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_fakeRate_difeta_highDilepPt, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_trk_H_L_ratio->SetLineColor(kBlack);
+    h_trk_H_L_ratio->GetYaxis()->SetTitle("High Region / Low Region");
+    h_trk_H_L_ratio->GetXaxis()->SetTitle("Track multiplicity");
+    h_trk_H_L_ratio->GetYaxis()->SetTitleSize(0.06);
+    h_trk_H_L_ratio->GetXaxis()->SetTitleSize(0.06);
+
+    //------------------------
+    // Fit Ratio
+    //------------------------
+    Double_t trk_xmin = Top_eu_nTrk_fakeRate_difeta_lowDilepPt->GetXaxis()->GetXmin();
+    Double_t trk_xmax = Top_eu_nTrk_fakeRate_difeta_lowDilepPt->GetXaxis()->GetXmax();
+
+    TF1 *f1 = new TF1("f1", Ratio, trk_xmin, trk_xmax, 2);
+
+    f1->SetLineWidth(2);
+
+    f1->SetLineColor(kTeal - 7);
+
+    // Use TFitResult to store fit result
+    TFitResultPtr Fit_r = h_trk_H_L_ratio->Fit("f1", "MFRS");
+
+    TObjString *par0Name = new TObjString("Value for Par0: ");
+    TObjString *par1Name = new TObjString("Value for Par1: ");
+
+    TObjString *par0Error = new TObjString("Error for Par0: ");
+    TObjString *par1Error = new TObjString("Error for Par1: ");
+
+    // h_trk_H_L_ratio->GetXaxis()->SetRangeUser(1, 25);
+    h_trk_H_L_ratio->Draw();
+
+    TLegend *leg_ratio = new TLegend(0.55, 0.6, 0.6, 0.9);
+    leg_ratio->SetHeader("Fitting function: par0 + par1*x");
+    leg_ratio->SetTextSize(0.06);
+    leg_ratio->SetBorderSize(0);
+    leg_ratio->SetFillStyle(0);
+    leg_ratio->AddEntry(par0Name, Form("par0 : %g +- %g", f1->GetParameter(0), f1->GetParError(0)), " ");
+    leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
+    leg_ratio->Draw();
+
+    /*
+    c1->cd(1);
     gPad->SetTopMargin(0.01);
     gPad->SetBottomMargin(0);
     gPad->SetRightMargin(0.04);
@@ -190,7 +268,7 @@ void draw_fakerate()
     l1->SetFillStyle(0);
     l1->AddEntry(f1, "c0+c1*x", "l");
     l1->Draw();
-    
+    */
     /*
     c1->cd(1);
 
@@ -330,7 +408,7 @@ void draw_fakerate()
     l1->Draw();
     */
     // c1->SaveAs("Top(emu)_HL_dileppT_bRatio_2.svg");
-    
+
     /*
     c1->cd(1);
 
@@ -467,7 +545,7 @@ void draw_fakerate()
     l1->AddEntry(f1, "c0+c1*x", "l");
     l1->Draw();
     */
-    
+
     /*
     c1->cd(1);
 
