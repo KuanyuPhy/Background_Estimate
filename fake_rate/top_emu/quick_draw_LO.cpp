@@ -158,7 +158,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
 
     c1->Divide(1, 2);
     // Without consider eta and flavor
-    
+    /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);
     gPad->SetBottomMargin(0);
@@ -167,7 +167,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     TH1D *h_trk_LO_T_P_ratio = (TH1D *)h_Top_trk_LO_SR->Clone("h_trk_LO_T_P_ratio");
     h_trk_LO_T_P_ratio->Divide(h_Top_trk_LO_SR, h_Top_trk_LO_bybin_CR, 1, 1);
 
-    h_Top_trk_LO_SR->GetYaxis()->SetTitle("nEvent");
+    h_Top_trk_LO_SR->GetYaxis()->SetTitle("nJet");
     h_Top_trk_LO_SR->GetXaxis()->SetLabelSize(0);
     h_Top_trk_LO_SR->GetYaxis()->SetTitleSize(0.06);
 
@@ -228,7 +228,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->AddEntry(par0Name, Form("par0 : %g +- %g", f1->GetParameter(0), f1->GetParError(0)), " ");
     leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
-    
+    */
     // For Jet PT
     /*
     c1->cd(1);
@@ -239,7 +239,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     TH1D *h_JetPt_LO_T_P_ratio = (TH1D *)h_Top_JetPt_LO_SR->Clone("h_JetPt_LO_T_P_ratio");
     h_JetPt_LO_T_P_ratio->Divide(h_Top_JetPt_LO_SR, h_Top_JetPt_LO_bybin_CR, 1, 1);
 
-    h_Top_JetPt_LO_SR->GetYaxis()->SetTitle("nEvent");
+    h_Top_JetPt_LO_SR->GetYaxis()->SetTitle("nJet");
     h_Top_JetPt_LO_SR->GetXaxis()->SetLabelSize(0);
     h_Top_JetPt_LO_SR->GetYaxis()->SetTitleSize(0.06);
 
@@ -300,7 +300,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
     */
-    /*
+    
     // For Jet Eta
     c1->cd(1);
     gPad->SetTopMargin(0.01);
@@ -310,7 +310,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     TH1D *h_JetEta_LO_T_P_ratio = (TH1D *)h_Top_JetEta_LO_SR->Clone("h_JetEta_LO_T_P_ratio");
     h_JetEta_LO_T_P_ratio->Divide(h_Top_JetEta_LO_SR, h_Top_JetEta_LO_bybin_CR, 1, 1);
 
-    h_Top_JetEta_LO_SR->GetYaxis()->SetTitle("nEvent");
+    h_Top_JetEta_LO_SR->GetYaxis()->SetTitle("nJet");
     h_Top_JetEta_LO_SR->GetXaxis()->SetLabelSize(0);
     h_Top_JetEta_LO_SR->GetYaxis()->SetTitleSize(0.06);
 
@@ -370,7 +370,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->AddEntry(par0Name, Form("par0 : %g +- %g", f1->GetParameter(0), f1->GetParError(0)), " ");
     leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
-    */
+    
     // For ntrk
     /*
     c1->cd(1);
