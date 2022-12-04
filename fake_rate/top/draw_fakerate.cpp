@@ -18,7 +18,7 @@
 using namespace std;
 void draw_fakerate()
 {
-    TFile *Topfile = TFile::Open("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top_emu/top_emu_fakerate.root");
+    TFile *Topfile = TFile::Open("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top/top_ee_fakerate.root");
 
     TH1D *Top_nTrk_fakeRate_lowDilepPt = ((TH1D *)Topfile->Get("Top_nTrk_fakeRate_lowDilepPt"));
     TH1D *Top_JetPt_fakeRate_lowDilepPt = ((TH1D *)Topfile->Get("Top_JetPt_fakeRate_lowDilepPt"));
@@ -62,10 +62,10 @@ void draw_fakerate()
 
     //c1->Divide(3, 1);
     //c1->cd(1);
-    //Top_nTrk_fakeRate_lowDilepPt->SetLineColor(kRed);
-    //Top_nTrk_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
-    //Top_nTrk_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Track multiplicity");
-    //Top_nTrk_fakeRate_lowDilepPt->Draw();
+    Top_nTrk_fakeRate_lowDilepPt->SetLineColor(kRed);
+    Top_nTrk_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+    Top_nTrk_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Track multiplicity");
+    Top_nTrk_fakeRate_lowDilepPt->Draw();
 
 
     //Top_JetPt_fakeRate_lowDilepPt->SetLineColor(kGreen + 3);
@@ -73,9 +73,9 @@ void draw_fakerate()
     //Top_JetPt_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Jet PT");
     //Top_JetPt_fakeRate_lowDilepPt->Draw();
 
-    Top_JetEta_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
-    Top_JetEta_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Jet #eta");
-    Top_JetEta_fakeRate_lowDilepPt->Draw();
+    //Top_JetEta_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+    //Top_JetEta_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Jet #eta");
+    //Top_JetEta_fakeRate_lowDilepPt->Draw();
 
 
     gPad->SetLogy();

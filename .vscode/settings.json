@@ -84,6 +84,7 @@
         "ana_Diboson_bg.C": "cpp",
         "ana_Top_bg.C": "cpp",
         "ana_Triboson_bg.C": "cpp",
-        "quick_draw_csv.C": "cpp"
+        "quick_draw_csv.C": "cpp",
+        "ee_Top_ee_half.C": "cpp"
     }
 }

@@ -371,7 +371,7 @@ void ee_Top_var()
             h_Top_dilepPT->Fill(f_TTWJetsToLNu_dilepPT, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
             h_Top_Met_cut->Fill(f_TTWJetsToLNu_met, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
             h_TTWJetsToLNu_Met_cut->Fill(f_TTWJetsToLNu_met, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
-            cout << "weight = " << TTWJetsToLNuWeight << endl;
+            //cout << "weight = " << TTWJetsToLNuWeight << endl;
             for (size_t i = 0; i < v_TTWJetsToLNu_jetCSV->size(); i++)
             {
                 h_Top_jetcsv->Fill((*v_TTWJetsToLNu_jetCSV)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
