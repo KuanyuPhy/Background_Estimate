@@ -229,6 +229,8 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     hs->Add(ee_HT_dilepPT);
     */
 
+
+
     THStack *hs = new THStack("hs", "");
     hs->Add(ee_HT_Met_cut);
     hs->Add(ee_Diboson_Met_cut);
@@ -289,8 +291,12 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     l4->AddEntry(ee_Triboson_dilepPT, "Triboson process", "lE");
     l4->Draw();
     */
-    
+
     hs->Draw("hist");
+    hs->GetXaxis()->SetLimits(130.,1500.);
+
+    gPad->SetLogy();
+
     hs->GetXaxis()->SetNdivisions(6, 5, 0);
     hs->GetXaxis()->SetTitle("MET");
     // hs->GetXaxis()->SetTitleOffset(1.5);
@@ -315,7 +321,7 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     l0->AddEntry(uu_Diboson_Met, "Diboson process", "l");
     l0->AddEntry(uu_Triboson_Met, "Triboson process", "l");
     l0->Draw();
-    
+
     /*
     ee_Sig150_Met_cut->GetXaxis()->SetNdivisions(6, 5, 0);
     ee_Sig150_Met_cut->GetXaxis()->SetTitleOffset(1.5);
