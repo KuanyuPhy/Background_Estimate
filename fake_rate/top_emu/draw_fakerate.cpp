@@ -60,29 +60,43 @@ void draw_fakerate()
     c1->SetTickx(0);
     c1->SetTicky(0);
 
-    //c1->Divide(3, 1);
-    //c1->cd(1);
-    //Top_nTrk_fakeRate_lowDilepPt->SetLineColor(kRed);
-    //Top_nTrk_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
-    //Top_nTrk_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Track multiplicity");
-    //Top_nTrk_fakeRate_lowDilepPt->Draw();
+    // c1->Divide(3, 1);
+    // c1->cd(1);
+    Top_nTrk_fakeRate_lowDilepPt->SetLineColor(kRed);
+    Top_nTrk_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+    Top_nTrk_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Track multiplicity");
+    // Top_nTrk_fakeRate_lowDilepPt->Draw();
 
+    Top_JetPt_fakeRate_lowDilepPt->SetLineColor(kGreen + 3);
+    Top_JetPt_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+    Top_JetPt_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Jet PT");
+    // Top_JetPt_fakeRate_lowDilepPt->Draw();
 
-    //Top_JetPt_fakeRate_lowDilepPt->SetLineColor(kGreen + 3);
-    //Top_JetPt_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
-    //Top_JetPt_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Jet PT");
-    //Top_JetPt_fakeRate_lowDilepPt->Draw();
+    // Top_JetEta_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+    // Top_JetEta_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Jet #eta");
+    // Top_JetEta_fakeRate_lowDilepPt->Draw();
 
-    Top_JetEta_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
-    Top_JetEta_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Jet #eta");
-    Top_JetEta_fakeRate_lowDilepPt->Draw();
+    Top_JetPt_fakeRate_highDilepPt->SetLineColor(kRed);
+    Top_JetPt_fakeRate_highDilepPt->GetYaxis()->SetTitle("fake rate");
+    Top_JetPt_fakeRate_highDilepPt->GetXaxis()->SetTitle("Track multiplicity");
 
+    Top_JetPt_fakeRate_lowDilepPt->Draw("h");
+    Top_JetPt_fakeRate_highDilepPt->Draw("h same");
+
+    TLegend *l0 = new TLegend(0.45, 0.6, 0.80, 0.80);
+    l0->SetHeader("Top to emu");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(Top_JetPt_fakeRate_lowDilepPt, "low dilepton PT region", "El");
+    l0->AddEntry(Top_JetPt_fakeRate_highDilepPt, "high dilepton PT region", "El");
+    l0->Draw();
 
     gPad->SetLogy();
-    //c1->cd(2);
-    //Top_JetPt_fakeRate_lowDilepPt->Draw();
-    //c1->cd(3);
-    //Top_JetEta_fakeRate_lowDilepPt->Draw();
+    // c1->cd(2);
+    // Top_JetPt_fakeRate_lowDilepPt->Draw();
+    // c1->cd(3);
+    // Top_JetEta_fakeRate_lowDilepPt->Draw();
 
     gStyle->SetOptStat(0);
 }

@@ -73,6 +73,13 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     TH1D *h_Top_JetEta_LO_bybin_CR = ((TH1D *)Topfile->Get("h_Top_JetEta_LO_bybin_CR"));
     TH1D *h_Top_bJetEta_diffFR_LO_CR = ((TH1D *)Topfile->Get("h_Top_bJetEta_diffFR_LO_CR"));
     TH1D *h_Top_lJetEta_diffFR_LO_CR = ((TH1D *)Topfile->Get("h_Top_lJetEta_diffFR_LO_CR"));
+    //----------------------------
+    // for apply fk(jetpt) result
+    //----------------------------
+    TH1D *h_Top_trk_LO_byjetPTbin_CR = ((TH1D *)Topfile->Get("h_Top_trk_LO_byjetPTbin_CR"));
+    TH1D *h_Top_JetPt_LO_byjetPTbin_CR = ((TH1D *)Topfile->Get("h_Top_JetPt_LO_byjetPTbin_CR"));
+    TH1D *h_Top_JetEta_LO_byjetPTbin_CR = ((TH1D *)Topfile->Get("h_Top_JetEta_LO_byjetPTbin_CR"));
+
     //--------------------------
     // For Signal Region
     //--------------------------
@@ -131,6 +138,13 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     h_Style_Setting(h_Top_JetEta_LO_bybin_CR, kAzure + 4);
     h_Style_Setting(h_Top_bJetEta_diffFR_LO_CR, kAzure + 4);
     h_Style_Setting(h_Top_lJetEta_diffFR_LO_CR, kAzure + 4);
+
+    //-----------------------
+    // for fk(jetpt) result
+    //-----------------------
+    h_Style_Setting(h_Top_trk_LO_byjetPTbin_CR, kAzure + 4);
+    h_Style_Setting(h_Top_JetPt_LO_byjetPTbin_CR, kAzure + 4);
+    h_Style_Setting(h_Top_JetEta_LO_byjetPTbin_CR, kAzure + 4);
 
     int W = 600;
     int H = 600;
@@ -300,8 +314,9 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
     */
-    
+
     // For Jet Eta
+    /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);
     gPad->SetBottomMargin(0);
@@ -370,7 +385,8 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->AddEntry(par0Name, Form("par0 : %g +- %g", f1->GetParameter(0), f1->GetParError(0)), " ");
     leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
-    
+    */
+
     // For ntrk
     /*
     c1->cd(1);
@@ -1362,6 +1378,52 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     l1->AddEntry(f1, Form("%f + %f*x", par0, par1), "l");
     l1->Draw();
     */
+    /*
+    h_Top_JetPt_LO_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_JetPt_LO_SR->GetXaxis()->SetTitle("Jet PT");
+    h_Top_JetPt_LO_SR->Draw();
+    h_Top_JetPt_LO_byjetPTbin_CR->Draw("same");
+
+    TLegend *l0 = new TLegend(0.45, 0.6, 0.80, 0.80);
+    l0->SetHeader("Top to emu");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_JetPt_LO_SR, "True Background", "El");
+    l0->AddEntry(h_Top_JetPt_LO_byjetPTbin_CR, "Predict", "El");
+    l0->Draw();
+    */
+    /*
+     h_Top_JetEta_LO_SR->GetYaxis()->SetTitle("nJet");
+     h_Top_JetEta_LO_SR->GetXaxis()->SetTitle("Jet #eta");
+     h_Top_JetEta_LO_SR->Draw();
+     h_Top_JetEta_LO_byjetPTbin_CR->Draw("h same");
+
+     TLegend *l0 = new TLegend(0.45, 0.6, 0.80, 0.80);
+     l0->SetHeader("Top to emu");
+     l0->SetTextSize(0.04);
+     l0->SetBorderSize(0);
+     l0->SetFillStyle(0);
+     l0->AddEntry(h_Top_JetEta_LO_SR, "True Background", "El");
+     l0->AddEntry(h_Top_JetEta_LO_byjetPTbin_CR, "Predict", "El");
+     l0->Draw();
+     */
+    h_Top_trk_LO_SR->GetYaxis()->SetTitle("nJet");
+    h_Top_trk_LO_SR->GetXaxis()->SetTitle("Track multiplicity");
+    h_Top_trk_LO_SR->Draw();
+    h_Top_trk_LO_byjetPTbin_CR->Draw("h same");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.80, 0.80);
+    l0->SetHeader("Top to emu");
+    l0->SetTextSize(0.04);
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->AddEntry(h_Top_trk_LO_SR, "True Background", "El");
+    l0->AddEntry(h_Top_trk_LO_byjetPTbin_CR, "Predict", "El");
+    l0->Draw();
+    
+
+    gPad->SetLogy();
 
     gStyle->SetOptStat(0);
 }
