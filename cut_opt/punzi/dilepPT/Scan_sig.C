@@ -66,7 +66,7 @@ void Scan_sig()
 
     for (int i = 1; i <= 100; i++)
     {
-        float Metcut = 130.;
+        float Metcut = 0.;
         float dilepton_cut = i * 10;
 
         TTree *T_Mx2_1;
@@ -206,7 +206,7 @@ void Scan_sig()
     h_punzisig150->GetYaxis()->SetTitle("punzi significance");
     h_punzisig150->GetXaxis()->SetTitle("dilepton PT cut");
 
-    h_punzisig150->GetXaxis()->SetRangeUser(10, 30);
+    //h_punzisig150->GetXaxis()->SetRangeUser(10, 30);
 
     // h_punzisig150->GetXaxis()->SetBinLabel(1, "Met > 10");
 
@@ -234,16 +234,16 @@ void Scan_sig()
     canv->SetTicky(0);
     // auto c1 = new TCanvas("c", "BPRE");
 
-    // h_punzisig1->Draw("");
+    h_punzisig1->Draw("");
     h_punzisig150->Draw("same");
-    // h_punzisig50->Draw("same");
+    h_punzisig50->Draw("same");
 
     TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
     l1->SetBorderSize(0);
     l1->SetFillStyle(0);
     l1->SetTextSize(0.03);
-    // l1->AddEntry(h_punzisig1, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
-    // l1->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(h_punzisig1, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
     l1->AddEntry(h_punzisig150, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
     l1->Draw();
 

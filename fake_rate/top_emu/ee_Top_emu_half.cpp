@@ -623,12 +623,11 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         {
             if (f_Top_dileppt < DilepPTcut)
             {
-                for (size_t i = 0; i < 2; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     h_Top_nTrk_jet_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                     h_Top_JetPt_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
                     h_Top_JetEta_lowDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
-
                     //  For b jet
                     for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_lowDilepPt);
                     // For light flavor
@@ -696,7 +695,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
             }     // End of low dilepton PT cut
             else
             {
-                for (size_t i = 0; i < 2; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     h_Top_nTrk_jet_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                     h_Top_JetPt_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
@@ -711,7 +710,6 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                         h_Top_nTrk_jet_cut_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                         h_Top_JetPt_cut_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
                         h_Top_JetEta_cut_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
-
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_highDilepPt);
                         // For light flavor

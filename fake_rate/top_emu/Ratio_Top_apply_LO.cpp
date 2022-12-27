@@ -100,6 +100,8 @@ TH1D *Top_nTrk_bfakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("To
 TH1D *Top_nTrk_lfakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_lfakeRate_lowDilepPt"));
 // 2. For low dilepton PT region, fake rate(JetPt) without consider eta
 TH1D *Top_JetPt_fakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_JetPt_fakeRate_lowDilepPt"));
+// 3. For low dilepton PT region, fake rate(JetEta) without consider eta
+TH1D *Top_JetEta_fakeRate_lowDilepPt = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_JetEta_fakeRate_lowDilepPt"));
 
 // Consider eta
 TH1D *Top_nTrk_bfakeRate_lowDilepPt_1 = ((TH1D *)Top_emu_fakerate_topfile->Get("Top_nTrk_bfakeRate_difeta_lowDilepPt_1"));
@@ -166,7 +168,8 @@ double getWeight(const char *file_name_tmp)
 //    const Int_t NBINS = 5;
 //    Double_t edges[NBINS + 1] = {1., 5., 10., 15., 20., 40.};
 //-------------------------------------------------------------
-int getfakerate(float tmp1, float start, float Binwidth)
+
+int get_eta_binfakerate(float tmp1, float start, float Binwidth)
 {
     int quotient;
     quotient = floor((tmp1 - start) / (Binwidth));
@@ -232,6 +235,10 @@ int get_jetpt_binfakerate(float tmp_jetPt)
     else if (tmp_jetPt >= 450 && tmp_jetPt < 1500)
     {
         jetPtbin_pos_info = 10;
+    }
+    else if (tmp_jetPt >= 1500)
+    {
+        jetPtbin_pos_info = 11;
     }
     return jetPtbin_pos_info;
 }
@@ -299,6 +306,9 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
 
     TH1D *h_Top_trk_LO_SR = new TH1D("h_Top_trk_LO_SR", "", Ntrk_Nbins, Ntrk_edges);
     h_Top_trk_LO_SR->Sumw2();
+
+    // TH1D *h_Top_trk_LO_SR = new TH1D("h_Top_trk_LO_SR", "", 30., 0, 30.);
+    // h_Top_trk_LO_SR->Sumw2();
 
     // consider eta fake rate
     TH1D *h_Top_trk_region1_SR = new TH1D("h_Top_trk_region1_SR", "", Ntrk_Nbins, Ntrk_edges);
@@ -515,6 +525,21 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     h_Top_JetEta_LO_byjetPTbin_CR->Sumw2();
 
     //--------------------------
+    // Apply fakerate(jetEta)
+    //--------------------------
+    TH1D *h_Top_trk_LO_byjetEtabin_CR = new TH1D("h_Top_trk_LO_byjetEtabin_CR", "", Ntrk_Nbins, Ntrk_edges);
+    h_Top_trk_LO_byjetEtabin_CR->Sumw2();
+
+    // TH1D *h_Top_trk_LO_byjetEtabin_CR = new TH1D("h_Top_trk_LO_byjetEtabin_CR", "", 30., 0, 30.);
+    // h_Top_trk_LO_byjetEtabin_CR->Sumw2();
+
+    TH1D *h_Top_JetPt_LO_byjetEtabin_CR = new TH1D("h_Top_JetPt_LO_byjetEtabin_CR", "", NJet_Nbins, NJet_edges);
+    h_Top_JetPt_LO_byjetEtabin_CR->Sumw2();
+
+    TH1D *h_Top_JetEta_LO_byjetEtabin_CR = new TH1D("h_Top_JetEta_LO_byjetEtabin_CR", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_JetEta_LO_byjetEtabin_CR->Sumw2();
+
+    //--------------------------
     // For old fake rate (MET)
     //--------------------------
     // 1. Jet trk
@@ -607,6 +632,8 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     for (int evt = 0; evt < T_Top_tree->GetEntries(); evt++)
     {
         T_Top_tree->GetEntry(evt);
+
+
         double Top_weight = getWeight(file) * I_Top_weight;
 
         vector<ThinJet> v_thinjet;
@@ -647,7 +674,7 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
         //------------------------------------------------------
         if (f_Top_met > METcut)
         {
-            if (f_Top_dileppt > DilepPTcut)
+            if (f_Top_dileppt >= DilepPTcut)
             {
                 for (size_t i = 0; i < v_thinjet.size(); i++)
                 {
@@ -699,13 +726,16 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
                             for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetPt(), Top_weight, h_Top_lJetPt_region3_LO_SR);
                         }
                     } // End of alpha cut
+         
                     //------------------------------------
                     // 2. Apply low dilepton PT fake rate
                     //------------------------------------
                     int fr_trk_bin_pos = get_trk_binfakerate(v_thinjet[i].GetNtrk());
                     int fr_jetPt_bin_pos = get_jetpt_binfakerate(v_thinjet[i].GetPt());
+                    int fr_eta_bin_pos = get_eta_binfakerate(v_thinjet[i].GetEta(), -3., 0.2);
                     double fr_trk = Top_nTrk_fakeRate_lowDilepPt->GetBinContent(fr_trk_bin_pos) * Top_weight;
                     double fr_jetPt = Top_JetPt_fakeRate_lowDilepPt->GetBinContent(fr_jetPt_bin_pos) * Top_weight;
+                    double fr_jetEta = Top_JetEta_fakeRate_lowDilepPt->GetBinContent(fr_eta_bin_pos) * Top_weight;
                     // For fakerate(ntrk) result
                     h_Top_trk_LO_bybin_CR->Fill(v_thinjet[i].GetNtrk(), fr_trk);
                     h_Top_JetPt_LO_bybin_CR->Fill(v_thinjet[i].GetPt(), fr_trk);
@@ -715,6 +745,11 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
                     h_Top_trk_LO_byjetPTbin_CR->Fill(v_thinjet[i].GetNtrk(), fr_jetPt);
                     h_Top_JetPt_LO_byjetPTbin_CR->Fill(v_thinjet[i].GetPt(), fr_jetPt);
                     h_Top_JetEta_LO_byjetPTbin_CR->Fill(v_thinjet[i].GetEta(), fr_jetPt);
+
+                    // For fakerate(jetETa) result
+                    h_Top_trk_LO_byjetEtabin_CR->Fill(v_thinjet[i].GetNtrk(), fr_jetEta);
+                    h_Top_JetPt_LO_byjetEtabin_CR->Fill(v_thinjet[i].GetPt(), fr_jetEta);
+                    h_Top_JetEta_LO_byjetEtabin_CR->Fill(v_thinjet[i].GetEta(), fr_jetEta);
 
                     if (abs(v_thinjet[i].GetEta()) <= 1)
                     {
@@ -867,6 +902,10 @@ void Ratio_Top_apply_LO(TString file = "/home/kuanyu/Documents/root_file/BgEstim
     h_Top_trk_LO_byjetPTbin_CR->Write();
     h_Top_JetPt_LO_byjetPTbin_CR->Write();
     h_Top_JetEta_LO_byjetPTbin_CR->Write();
+
+    h_Top_trk_LO_byjetEtabin_CR->Write();
+    h_Top_JetPt_LO_byjetEtabin_CR->Write();
+    h_Top_JetEta_LO_byjetEtabin_CR->Write();
 
     outfile->Close();
     // h_Top_JetPt_bjet_SR->Draw();

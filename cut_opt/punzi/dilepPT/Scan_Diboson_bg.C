@@ -93,7 +93,7 @@ void Scan_Diboson_bg(const char *scanMet_step = "tmp", TString outputfile = "out
     //---------------------
     // dilepton cut
     //---------------------
-    float Metcut = 130.;
+    float Metcut = 0.;
     float dilepton_cut = atoi(scanMet_step) * 10;
     cout << "dilepton cut" << dilepton_cut << endl;
 
