@@ -12,13 +12,13 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTTo2L2Nu.root");
-TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTWJetsToLNu.root");
-TFile *Top_TTWJetsToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTWJetsToQQ.root");
-TFile *Top_TTZToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTZToQQ.root");
-TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_TTZToLLNuNu.root");
-TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_tW_antitop.root");
-TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/top_tW_top.root");
+TFile *TTTo2L2Nufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_TTTo2L2Nu.root");
+TFile *Top_TTWJetsToLNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_TTWJetsToLNu.root");
+TFile *Top_TTWJetsToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_TTWJetsToQQ.root");
+TFile *Top_TTZToQQfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_TTZToQQ.root");
+TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_TTZToLLNuNu.root");
+TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_tW_antitop.root");
+TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_tW_top.root");
 
 TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
@@ -57,7 +57,7 @@ void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, float Weigh
 
 void ee_Top_var()
 {
-    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 20, -5, 5);
+    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 50, -5, 5);
     h_bg_3DSig->Sumw2();
 
     TH1D *h_bg_alpha1 = new TH1D("h_bg_alpha1", "", 20, 0, 1);
@@ -200,7 +200,7 @@ void ee_Top_var()
     v_TTZToQQ_log3Dsig->clear();
     v_TTZToLLNuNu_log3Dsig->clear();
 
-    double METcut = 140.0;
+    double METcut = 0.;
 
     TTree *T_TTTo2L2Nu_tree;
     TTTo2L2Nufile->GetObject("T_tree", T_TTTo2L2Nu_tree);
@@ -217,7 +217,7 @@ void ee_Top_var()
     for (int evt = 0; evt < T_TTTo2L2Nu_tree->GetEntries(); evt++)
     {
         T_TTTo2L2Nu_tree->GetEntry(evt);
-        if (f_TTTo2L2Nu_met < 140)
+        if (f_TTTo2L2Nu_met < METcut)
         {
             continue;
         }
@@ -248,7 +248,7 @@ void ee_Top_var()
     for (int evt = 0; evt < T_ST_tW_top_tree->GetEntries(); evt++)
     {
         T_ST_tW_top_tree->GetEntry(evt);
-        if (f_ST_tW_top_met < 140)
+        if (f_ST_tW_top_met < METcut)
         {
             continue;
         }
@@ -278,7 +278,7 @@ void ee_Top_var()
     for (int evt = 0; evt < T_ST_tW_antitop_tree->GetEntries(); evt++)
     {
         T_ST_tW_antitop_tree->GetEntry(evt);
-        if (f_ST_tW_antitop_met < 140)
+        if (f_ST_tW_antitop_met < METcut)
         {
             continue;
         }
@@ -308,11 +308,11 @@ void ee_Top_var()
     for (int evt = 0; evt < T_TTWJetsToLNu_tree->GetEntries(); evt++)
     {
         T_TTWJetsToLNu_tree->GetEntry(evt);
-        if (f_TTWJetsToLNu_met < 140)
+        if (f_TTWJetsToLNu_met < METcut)
         {
             continue;
         }
-for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
+        for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTWJetsToLNu_log3Dsig)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
         }
@@ -339,7 +339,7 @@ for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
     for (int evt = 0; evt < T_TTWJetsToQQ_tree->GetEntries(); evt++)
     {
         T_TTWJetsToQQ_tree->GetEntry(evt);
-        if (f_TTWJetsToQQ_met < 140)
+        if (f_TTWJetsToQQ_met < METcut)
         {
             continue;
         }
@@ -369,7 +369,7 @@ for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
     for (int evt = 0; evt < T_TTZToQQ_tree->GetEntries(); evt++)
     {
         T_TTZToQQ_tree->GetEntry(evt);
-        if (f_TTZToQQ_met < 140)
+        if (f_TTZToQQ_met < METcut)
         {
             continue;
         }
@@ -399,7 +399,7 @@ for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
     for (int evt = 0; evt < T_TTZToLLNuNu_tree->GetEntries(); evt++)
     {
         T_TTZToLLNuNu_tree->GetEntry(evt);
-        if (f_TTZToLLNuNu_met < 140)
+        if (f_TTZToLLNuNu_met < METcut)
         {
             continue;
         }

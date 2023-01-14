@@ -31,7 +31,7 @@ void setTDRStyle() {
   tdrStyle->SetPadColor(kWhite);
   tdrStyle->SetPadGridX(false);
   tdrStyle->SetPadGridY(false);
-  tdrStyle->SetGridColor(0);
+  tdrStyle->SetGridColor(1);
   tdrStyle->SetGridStyle(3);
   tdrStyle->SetGridWidth(1);
 

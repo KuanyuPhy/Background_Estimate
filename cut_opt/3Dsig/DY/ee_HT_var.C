@@ -181,7 +181,7 @@ void ee_HT_var()
     TH1D *h_DY_Met_cut = new TH1D("h_DY_Met_cut", "", 50, 0, 500);
     h_DY_Met_cut->Sumw2();
 
-    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 20, -5, 5);
+    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 50, -5, 5);
     h_bg_3DSig->Sumw2();
 
     TH1D *h_bg_alpha1 = new TH1D("h_bg_alpha1", "", 20, 0, 1);
@@ -353,7 +353,7 @@ void ee_HT_var()
     for (int evt = 0; evt < T_inclusive->GetEntries(); evt++)
     {
         T_inclusive->GetEntry(evt);
-        if (f_ht0_Met < 140)
+        if (f_ht0_Met < metcut)
         {
             continue;
         }
@@ -383,7 +383,7 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT100->GetEntries(); evt++)
     {
         T_HT100->GetEntry(evt);
-        if (f_ht100_Met < 140)
+        if (f_ht100_Met < metcut)
         {
             continue;
         }
@@ -413,7 +413,7 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT200->GetEntries(); evt++)
     {
         T_HT200->GetEntry(evt);
-        if (f_ht200_Met < 140)
+        if (f_ht200_Met < metcut)
         {
             continue;
         }
@@ -443,7 +443,7 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT400->GetEntries(); evt++)
     {
         T_HT400->GetEntry(evt);
-        if (f_ht400_Met < 140)
+        if (f_ht400_Met < metcut)
         {
             continue;
         }
@@ -473,7 +473,7 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT600->GetEntries(); evt++)
     {
         T_HT600->GetEntry(evt);
-        if (f_ht600_Met < 140)
+        if (f_ht600_Met < metcut)
         {
             continue;
         }
@@ -503,7 +503,7 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT800->GetEntries(); evt++)
     {
         T_HT800->GetEntry(evt);
-        if (f_ht800_Met < 140)
+        if (f_ht800_Met < metcut)
         {
             continue;
         }
@@ -533,7 +533,7 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT1200->GetEntries(); evt++)
     {
         T_HT1200->GetEntry(evt);
-        if (f_ht1200_Met < 140)
+        if (f_ht1200_Met < metcut)
         {
             continue;
         }
@@ -563,7 +563,7 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT2500->GetEntries(); evt++)
     {
         T_HT2500->GetEntry(evt);
-        if (f_ht2500_Met < 140)
+        if (f_ht2500_Met < metcut)
         {
             continue;
         }
@@ -580,6 +580,7 @@ void ee_HT_var()
         }
     }
     h_bg_3DSig->Draw();
+    gStyle->SetGridStyle();
     TString outputfile1 = "./ee_DY_alpha.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_bg_3DSig->Write();

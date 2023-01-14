@@ -254,8 +254,8 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->SetTextSize(0.06);
     leg_ratio->SetBorderSize(0);
     leg_ratio->SetFillStyle(0);
-    leg_ratio->AddEntry(par0Name, Form("par0 : %g +- %g", f1->GetParameter(0), f1->GetParError(0)), " ");
-    leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
+    leg_ratio->AddEntry(par0Name, Form("par0 : %.2g +- %.1g", f1->GetParameter(0), f1->GetParError(0)), " ");
+    leg_ratio->AddEntry(par1Name, Form("par1 : %.3g +- %.2g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
     */
     // For Jet PT
@@ -328,13 +328,13 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->SetTextSize(0.06);
     leg_ratio->SetBorderSize(0);
     leg_ratio->SetFillStyle(0);
-    leg_ratio->AddEntry(par0Name, Form("par0 : %g +- %g", f1->GetParameter(0), f1->GetParError(0)), " ");
-    leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
+    leg_ratio->AddEntry(par0Name, Form("par0 : %.2g +- %.2g", f1->GetParameter(0), f1->GetParError(0)), " ");
+    leg_ratio->AddEntry(par1Name, Form("par1 : %.2g +- %.2g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
     */
 
     // For Jet Eta
-    /*
+    
     c1->cd(1);
     gPad->SetTopMargin(0.01);
     gPad->SetBottomMargin(0);
@@ -402,10 +402,10 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->SetTextSize(0.06);
     leg_ratio->SetBorderSize(0);
     leg_ratio->SetFillStyle(0);
-    leg_ratio->AddEntry(par0Name, Form("par0 : %g +- %g", f1->GetParameter(0), f1->GetParError(0)), " ");
-    leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
+    leg_ratio->AddEntry(par0Name, Form("par0 : %.2g +- %.2g", f1->GetParameter(0), f1->GetParError(0)), " ");
+    leg_ratio->AddEntry(par1Name, Form("par1 : %.2g +- %.2g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
-    */
+    
 
     // For ntrk
     /*
@@ -1545,7 +1545,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
     */
-    
+    /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);
     gPad->SetBottomMargin(0);
@@ -1618,7 +1618,7 @@ void quick_draw_LO(TString file = "./Ratio_apply.root")
     leg_ratio->AddEntry(par0Name, Form("par0 : %g +- %g", f1->GetParameter(0), f1->GetParError(0)), " ");
     leg_ratio->AddEntry(par1Name, Form("par1 : %g +- %g", f1->GetParameter(1), f1->GetParError(1)), " ");
     leg_ratio->Draw();
-    
+    */
     /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);

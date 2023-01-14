@@ -14,9 +14,9 @@
 using namespace std;
 void ee_sig_var()
 {
-    TFile *Mx2_1 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_1_old_remove_0alpha.root");
-    TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_50_old_remove_0alpha.root");
-    TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_150_old_remove_0alpha.root");
+    TFile *Mx2_1 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_1_old_remove_0alpha.root");
+    TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_50_old_remove_0alpha.root");
+    TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_150_old_remove_0alpha.root");
 
     TH1D *h_Mx2_1_alpha = new TH1D("h_Mx2_1_alpha", "", 20, 0., 1.);
     h_Mx2_1_alpha->Sumw2();
@@ -54,13 +54,13 @@ void ee_sig_var()
     TH1D *h_Mx2_150_alpha4 = new TH1D("h_Mx2_150_alpha4", "", 20, 0., 1.);
     h_Mx2_150_alpha4->Sumw2();
 
-    TH1D *h_Mx2_1_3DSig = new TH1D("h_Mx2_1_3DSig", "", 20, -5., 5.);
+    TH1D *h_Mx2_1_3DSig = new TH1D("h_Mx2_1_3DSig", "", 50, -5., 5.);
     h_Mx2_1_3DSig->Sumw2();
 
-    TH1D *h_Mx2_50_3DSig = new TH1D("h_Mx2_50_3DSig", "",20, -5., 5.);
+    TH1D *h_Mx2_50_3DSig = new TH1D("h_Mx2_50_3DSig", "",50, -5., 5.);
     h_Mx2_50_3DSig->Sumw2();
 
-    TH1D *h_Mx2_150_3DSig = new TH1D("h_Mx2_150_3DSig", "",20, -5., 5.);
+    TH1D *h_Mx2_150_3DSig = new TH1D("h_Mx2_150_3DSig", "",50, -5., 5.);
     h_Mx2_150_3DSig->Sumw2();
 
     Int_t I_Mx1_weight, I_Mx50_weight, I_Mx150_weight;
@@ -110,6 +110,7 @@ void ee_sig_var()
     v_Mx50_3Dsig->clear();
     v_Mx150_3Dsig->clear();
 
+    double METcut = 0.;
     TTree *T_Mx2_1;
     Mx2_1->GetObject("T_tree", T_Mx2_1);
     T_Mx2_1->SetBranchAddress("I_weight", &I_Mx1_weight);
@@ -122,7 +123,7 @@ void ee_sig_var()
     for (int evt = 0; evt < T_Mx2_1->GetEntries(); evt++)
     {
         T_Mx2_1->GetEntry(evt);
-        if(f_Mx1_Met < 140)
+        if(f_Mx1_Met < METcut)
         {
             continue;
         }
@@ -150,7 +151,7 @@ void ee_sig_var()
     for (int evt = 0; evt < T_Mx2_50->GetEntries(); evt++)
     {
         T_Mx2_50->GetEntry(evt);
-        if(f_Mx50_Met < 140)
+        if(f_Mx50_Met < METcut)
         {
             continue;
         }
@@ -178,7 +179,7 @@ void ee_sig_var()
     for (int evt = 0; evt < T_Mx2_150->GetEntries(); evt++)
     {
         T_Mx2_150->GetEntry(evt);
-        if(f_Mx150_Met < 140)
+        if(f_Mx150_Met < METcut)
         {
             continue;
         }
@@ -194,6 +195,8 @@ void ee_sig_var()
             h_Mx2_150_alpha4->Fill((*v_Mx150_alpha4)[i], I_Mx150_weight);
         }
     } // End of Mx2_150 Entries loop
+
+    h_Mx2_150_3DSig->Draw();
 
     TString outputfile1 = "./ee_Sig_alpha.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");

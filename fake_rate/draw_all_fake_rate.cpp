@@ -74,7 +74,7 @@ void draw_all_fake_rate()
 
     // For Top emu file
     TH1D *Top_eu_nTrk_bfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_lowMET_1"));
-    TH1D *Top_eu_nTrk_cfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_cfakeRate_difeta_lowMET_1"));
+    // TH1D *Top_eu_nTrk_cfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_cfakeRate_difeta_lowMET_1"));
     TH1D *Top_eu_nTrk_lfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_lowMET_1"));
 
     TH1D *Top_eu_nTrk_bfakeRate_difeta_lowMET_2 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_lowMET_2"));
@@ -115,6 +115,7 @@ void draw_all_fake_rate()
     TH1D *Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_highDilepPt_3"));
     TH1D *Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_highDilepPt_3"));
 
+    TH1D *Top_eu_nTrk_fakeRate_lowDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_fakeRate_lowDilepPt"));
     TH1D *Top_eu_nTrk_bfakeRate_lowDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_lowDilepPt"));
     TH1D *Top_eu_nTrk_lfakeRate_lowDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_lowDilepPt"));
 
@@ -172,27 +173,27 @@ void draw_all_fake_rate()
 
     // For Top emu file
     Top_eu_nTrk_bfakeRate_difeta_lowMET_1->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_lowMET_1->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_lowMET_1->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_lowMET_1->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_lowMET_2->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_lowMET_2->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_lowMET_2->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_lowMET_2->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_lowMET_3->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_lowMET_3->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_lowMET_3->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_lowMET_3->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_highMET_1->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_highMET_1->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_highMET_1->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_highMET_1->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_highMET_2->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_highMET_2->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_highMET_2->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_highMET_2->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_highMET_3->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_highMET_3->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_highMET_3->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_highMET_3->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->SetLineWidth(2);
@@ -213,6 +214,7 @@ void draw_all_fake_rate()
     Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
 
+    Top_eu_nTrk_fakeRate_lowDilepPt->SetLineWidth(2);
     Top_eu_nTrk_bfakeRate_lowDilepPt->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_lowDilepPt->SetLineWidth(2);
 
@@ -290,6 +292,14 @@ void draw_all_fake_rate()
     c1->SetBottomMargin(B / H);
     c1->SetTickx(0);
     c1->SetTicky(0);
+
+    Top_eu_nTrk_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_fakeRate_lowDilepPt->GetXaxis()->SetRangeUser(0,25);
+    Top_eu_nTrk_fakeRate_lowDilepPt->Draw();
+
+    gPad->SetLogy();
 
     // c1->Divide(3, 2);
 
@@ -1575,7 +1585,7 @@ void draw_all_fake_rate()
     l2->AddEntry(DY_nTrk_lfakeRate_difeta_highMET_3, "Drell-Yan", "El");
     l2->Draw();
     */
-    c1->Divide(1, 2);
+    // c1->Divide(1, 2);
     /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);
@@ -1856,7 +1866,7 @@ void draw_all_fake_rate()
     // h_High_Low_bRatio_2->GetYaxis()->SetLabelSize(1);
     h_High_Low_lRatio_highDilepPt_2->Draw("e");
     */
-    
+    /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);
     gPad->SetBottomMargin(0);
@@ -1911,7 +1921,7 @@ void draw_all_fake_rate()
     h_High_Low_lRatio_highDilepPt_1->SetLineColor(kBlack);
     // h_High_Low_bRatio_1->GetYaxis()->SetLabelSize(1);
     h_High_Low_lRatio_highDilepPt_1->Draw("e");
-    
+    */
     /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);
@@ -2041,7 +2051,7 @@ void draw_all_fake_rate()
 
     // Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetXaxis()->SetTitleSize(0);
     // Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetXaxis()->SetLabelSize(0);
-    
+
     Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetXaxis()->SetTitle("Track multiplicity");
     Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetYaxis()->SetTitle("fake rate");
     Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetYaxis()->SetTitleSize(0.06);
@@ -2140,7 +2150,7 @@ void draw_all_fake_rate()
     // h_High_Low_bRatio_3->GetYaxis()->SetLabelSize(1);
     h_High_Low_lRatio_highMET_3->Draw("e");
     */
-    
+
     /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);

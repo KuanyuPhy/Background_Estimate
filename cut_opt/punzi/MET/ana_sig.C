@@ -140,7 +140,7 @@ void ana_sig()
         Sig150_punzi[i] = punzi(h_Mx2_150_eff->GetBinContent(i), h_bgall_nMET_cut->GetBinContent(i));
 
         cout << "i =" << i << endl;
-        cout << "eff =" << h_Mx2_1_eff->GetBinContent(i) << endl;
+        cout << "eff =" << h_Mx2_150_eff->GetBinContent(i) << endl;
         cout << "punzi =" << Sig150_punzi[i] << endl;
     }
 
@@ -188,7 +188,7 @@ void ana_sig()
     h_punzisig150->GetYaxis()->SetTitle("punzi significance");
     h_punzisig150->GetXaxis()->SetTitle("MET cut");
 
-    h_punzisig150->GetXaxis()->SetRangeUser(10, 20);
+    //h_punzisig150->GetXaxis()->SetRangeUser(10, 20);
 
     h_punzisig150->Draw();
     //h_punzisig50->Draw("same");

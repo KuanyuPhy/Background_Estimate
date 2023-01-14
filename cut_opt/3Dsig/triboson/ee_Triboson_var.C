@@ -11,9 +11,9 @@
 #include "./../../../lib/Cross_section.h"
 using namespace std;
 
-TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/triboson_WWZ.root");
-TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/triboson_WZZ.root");
-TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/triboson_ZZZ.root");
+TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_WWZ.root");
+TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_WZZ.root");
+TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_ZZZ.root");
 
 TH1D *WWZ_sumevt = ((TH1D *)triboson_WWZfile->Get("Event_Variable/h_totevent"));
 TH1D *WZZ_sumevt = ((TH1D *)triboson_WZZfile->Get("Event_Variable/h_totevent"));
@@ -33,7 +33,7 @@ double ZZZWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ZZZ_TuneCUETP
 void ee_Triboson_var()
 {
 
-    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 20, -5, 5);
+    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 50, -5, 5);
     h_bg_3DSig->Sumw2();
 
     TH1D *h_bg_alpha1 = new TH1D("h_bg_alpha1", "", 20, 0, 1);
@@ -92,7 +92,7 @@ void ee_Triboson_var()
     v_WZZ_log3Dsig->clear();
     v_ZZZ_log3Dsig->clear();
 
-    double METcut = 140.0;
+    double METcut = 0.;
 
     TTree *T_tree;
     triboson_WWZfile->GetObject("T_tree", T_tree);
@@ -106,7 +106,7 @@ void ee_Triboson_var()
     for (int evt = 0; evt < T_tree->GetEntries(); evt++)
     {
         T_tree->GetEntry(evt);
-        if (f_WWZ_met < 140)
+        if (f_WWZ_met < METcut)
         {
             continue;
         }
@@ -134,7 +134,7 @@ void ee_Triboson_var()
     for (int evt = 0; evt < T_tree2->GetEntries(); evt++)
     {
         T_tree2->GetEntry(evt);
-        if (f_WZZ_met < 140)
+        if (f_WZZ_met < METcut)
         {
             continue;
         }
@@ -163,7 +163,7 @@ void ee_Triboson_var()
     for (int evt = 0; evt < T_tree3->GetEntries(); evt++)
     {
         T_tree3->GetEntry(evt);
-        if (f_ZZZ_met < 140)
+        if (f_ZZZ_met < METcut)
         {
             continue;
         }

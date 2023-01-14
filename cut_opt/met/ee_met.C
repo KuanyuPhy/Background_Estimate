@@ -213,13 +213,13 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     ee_Triboson_dilepPT->GetYaxis()->SetTitleOffset(1.5);
     ee_Triboson_dilepPT->GetYaxis()->SetTitle("nEvents");
 
-    /*
+    
     THStack *hs = new THStack("hs", "");
-    hs->Add(uu_HT_Met);
-    hs->Add(uu_Diboson_Met);
-    hs->Add(uu_Top_Met);
-    hs->Add(uu_Triboson_Met);
-    */
+    hs->Add(ee_HT_Met_cut);
+    hs->Add(ee_Diboson_Met_cut);
+    hs->Add(ee_Top_Met_cut);
+    hs->Add(ee_Triboson_Met_cut);
+    
 
     /*
     THStack *hs = new THStack("hs", "");
@@ -230,13 +230,13 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     */
 
 
-
+    /*
     THStack *hs = new THStack("hs", "");
     hs->Add(ee_HT_Met_cut);
     hs->Add(ee_Diboson_Met_cut);
     hs->Add(ee_Top_Met_cut);
     hs->Add(ee_Triboson_Met_cut);
-
+    */
     int W = 800;
     int H = 600;
 
@@ -293,12 +293,12 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     */
 
     hs->Draw("hist");
-    hs->GetXaxis()->SetLimits(130.,1500.);
+    hs->GetXaxis()->SetLimits(130.,800.);
 
     gPad->SetLogy();
 
     hs->GetXaxis()->SetNdivisions(6, 5, 0);
-    hs->GetXaxis()->SetTitle("MET");
+    hs->GetXaxis()->SetTitle("MET(GeV)");
     // hs->GetXaxis()->SetTitleOffset(1.5);
     hs->GetXaxis()->SetTitleSize(0.04);
     hs->GetXaxis()->SetLabelSize(0.04);
@@ -313,6 +313,7 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     cout << "number of Events with Diboson = " << ee_Diboson_Met_cut->Integral() << "\n";
     cout << "number of Events with Triboson = " << ee_Triboson_Met_cut->Integral() << "\n";
     TLegend *l0 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    l0->SetFillStyle(0);
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
     l0->SetHeader("2016MC Background");
