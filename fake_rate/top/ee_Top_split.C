@@ -16,7 +16,7 @@
 #include "./../../lib/Cross_section.h"
 #include "./../../lib/setNCUStyle.C"
 using namespace std;
-void ee_Top_half(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee_DYincli.root", TString outputfile1 = "./DYTop_1.root", TString outputfile2 = "./DYTop_2.root")
+void ee_Top_split(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/ee_DYincli.root", TString outputfile1 = "./DYTop_1.root", TString outputfile2 = "./DYTop_2.root")
 {
     // int nthreads = 8;
     // ROOT::EnableImplicitMT(nthreads);
@@ -295,11 +295,11 @@ int main(int argc, char *argv[])
 {
     if (argc == 1)
     {
-        ee_Top_half();
+        ee_Top_split();
     }
     else if (argc == 4)
     {
-        ee_Top_half(argv[1], argv[2], argv[3]);
+        ee_Top_split(argv[1], argv[2], argv[3]);
     }
     else
     {
