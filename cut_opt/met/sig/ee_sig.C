@@ -45,13 +45,13 @@ void ee_sig()
     TH1D *h_Mx2_150_Met = new TH1D("h_Mx2_150_Met", "", 50, 0, 500);
     h_Mx2_150_Met->Sumw2();
 
-    TH1D *h_Mx2_1_dilepPT = new TH1D("h_Mx2_1_dilepPT", "", 50, 0, 500);
+    TH1D *h_Mx2_1_dilepPT = new TH1D("h_Mx2_1_dilepPT", "", 100, 0., 1000.);
     h_Mx2_1_dilepPT->Sumw2();
 
-    TH1D *h_Mx2_50_dilepPT = new TH1D("h_Mx2_50_dilepPT", "", 50, 0, 500);
+    TH1D *h_Mx2_50_dilepPT = new TH1D("h_Mx2_50_dilepPT", "", 100, 0., 1000.);
     h_Mx2_50_dilepPT->Sumw2();
 
-    TH1D *h_Mx2_150_dilepPT = new TH1D("h_Mx2_150_dilepPT", "", 50, 0, 500);
+    TH1D *h_Mx2_150_dilepPT = new TH1D("h_Mx2_150_dilepPT", "", 100, 0., 1000.);
     h_Mx2_150_dilepPT->Sumw2();
 
     TH1D *h_Mx2_1_Met_cut = new TH1D("h_Mx2_1_Met_cut", "", 50, 0, 500);
@@ -91,10 +91,10 @@ void ee_sig()
     {
         T_Mx2_1->GetEntry(evt);
         h_Mx2_1_Met->Fill(f_Mx1_Met, I_Mx1_weight);
-        h_Mx2_1_dilepPT->Fill(f_Mx1_dilepPT, I_Mx1_weight);
         if (f_Mx1_Met > metcut)
         {
             h_Mx2_1_Met_cut->Fill(f_Mx1_Met, I_Mx1_weight);
+            h_Mx2_1_dilepPT->Fill(f_Mx1_dilepPT, I_Mx1_weight);
         }
     } // End of Mx2_1 Entries loop
     TTree *T_Mx2_50;
@@ -107,10 +107,10 @@ void ee_sig()
     {
         T_Mx2_50->GetEntry(evt);
         h_Mx2_50_Met->Fill(f_Mx50_Met, I_Mx50_weight);
-        h_Mx2_50_dilepPT->Fill(f_Mx50_dilepPT, I_Mx50_weight);
         if (f_Mx50_Met > metcut)
         {
             h_Mx2_50_Met_cut->Fill(f_Mx50_Met, I_Mx50_weight);
+            h_Mx2_50_dilepPT->Fill(f_Mx50_dilepPT, I_Mx50_weight);
         }
     } // End of Mx2_50 Entries loop
     TTree *T_Mx2_150;
@@ -123,10 +123,10 @@ void ee_sig()
     {
         T_Mx2_150->GetEntry(evt);
         h_Mx2_150_Met->Fill(f_Mx150_Met, I_Mx150_weight);
-        h_Mx2_150_dilepPT->Fill(f_Mx150_dilepPT, I_Mx150_weight);
         if (f_Mx150_Met > metcut)
         {
             h_Mx2_150_Met_cut->Fill(f_Mx150_Met, I_Mx150_weight);
+            h_Mx2_150_dilepPT->Fill(f_Mx150_dilepPT, I_Mx150_weight);
         }
     } // End of Mx2_150 Entries loop
 

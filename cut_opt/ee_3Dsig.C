@@ -11,7 +11,7 @@
 using namespace std;
 void ee_3Dsig()
 {
-    TFile *Mx2_1 = new TFile("./../../../../../root_file/Ztoee/Mx2_1.root");
+    TFile *Mx2_1 = new TFile("./../../../../../root_file/Ztoee/ee_+Mx2_1.root");
     TFile *Mx2_50 = new TFile("./../../../../../root_file/Ztoee/Mx2_50.root");
     TFile *Mx2_150 = new TFile("./../../../../../root_file/Ztoee/Mx2_150.root");
 

@@ -212,9 +212,14 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     h_2016bJetMass->SetLineColor(kRed);
     h_2016lJetMass->SetLineColor(kGreen + 3);
 
+    h_2016dileppt->SetLineColor(kGreen + 3);
+
     h_2016lJetMass->SetFillColor(kGreen + 3);
 
     h_2016lJetMass->SetFillStyle(3001);
+
+    h_2016dileppt->SetFillColor(kGreen + 3);
+    h_2016dileppt->SetFillStyle(3001);
 
     ee_Sig1_Met->SetLineColor(kRed);
     ee_Sig50_Met->SetLineColor(kGray + 2);
@@ -322,7 +327,7 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     h_2016Jetcsv->GetXaxis()->SetTitle("Jetcsv");
     h_2016Jetcsv->GetYaxis()->SetNdivisions(6, 5, 0);
     h_2016Jetcsv->GetYaxis()->SetTitleOffset(1.5);
-    h_2016Jetcsv->GetYaxis()->SetTitle("nJet / Normalized ");
+    h_2016Jetcsv->GetYaxis()->SetTitle("nJet");
 
     h_2016lJetMass->GetXaxis()->SetNdivisions(6, 5, 0);
     h_2016lJetMass->GetXaxis()->SetTitleOffset(1.5);
@@ -336,7 +341,7 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     h_2016dileppt->GetXaxis()->SetTitle("delepton PT");
     h_2016dileppt->GetYaxis()->SetNdivisions(6, 5, 0);
     h_2016dileppt->GetYaxis()->SetTitleOffset(1.5);
-    h_2016dileppt->GetYaxis()->SetTitle("nEvents");
+    h_2016dileppt->GetYaxis()->SetTitle("nEvents / Normalized");
 
     /*
     THStack *hs = new THStack("hs", "");
@@ -503,13 +508,15 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     // h_2016lJetMass->Draw("h e ");
     // h_2016bJetMass->Draw("e same ");
 
-    // h_2016Jetcsv->DrawNormalized("h e");
-    // h_2016Jetcsv_cutalpha->DrawNormalized("e same ");
+    h_2016Jetcsv->Draw("h e");
+    h_2016Jetcsv_cutalpha->Draw("e same ");
 
-    h_2016dileppt->Draw("h e ");
-
-    // cout << "number of Events with DY without Met cut = " << h_2016lJetMass->Integral() << "\n";
-    // cout << "number of Events with DY = " << h_2016bJetMass->Integral() << "\n";
+    // h_2016dileppt->DrawNormalized("h e ");
+    // ee_Sig1_dilepPT->DrawNormalized("h e same ");
+    // ee_Sig50_dilepPT->DrawNormalized("h e same ");
+    // ee_Sig150_dilepPT->DrawNormalized("h e same ");
+    //  cout << "number of Events with DY without Met cut = " << h_2016lJetMass->Integral() << "\n";
+    //  cout << "number of Events with DY = " << h_2016bJetMass->Integral() << "\n";
 
     /*
     TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
@@ -520,13 +527,24 @@ void ee_var(TString inputfile = "./DY/ee_DY_Met.root")
     l1->AddEntry(h_2016lJetcsv, "light flavor", "lE");
     l1->Draw();
     */
-    /*
+    
     TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
     l1->SetBorderSize(0);
     l1->SetFillStyle(0);
     l1->SetTextSize(0.03);
     l1->AddEntry(h_2016Jetcsv, "2016 MC background", "lE");
     l1->AddEntry(h_2016Jetcsv_cutalpha, "2016 MC background (SR)", "lE");
+    l1->Draw();
+    
+    /*
+    TLegend *l1 = new TLegend(0.6, 0.4, 0.90, 0.80);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.03);
+    l1->AddEntry(h_2016dileppt, "2016 MC background", "lE");
+    l1->AddEntry(ee_Sig1_dilepPT, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(ee_Sig50_dilepPT, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(ee_Sig150_dilepPT, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
     l1->Draw();
     */
 

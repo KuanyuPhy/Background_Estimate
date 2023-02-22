@@ -74,7 +74,7 @@ void draw_all_fake_rate()
 
     // For Top emu file
     TH1D *Top_eu_nTrk_bfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_lowMET_1"));
-    TH1D *Top_eu_nTrk_cfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_cfakeRate_difeta_lowMET_1"));
+    // TH1D *Top_eu_nTrk_cfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_cfakeRate_difeta_lowMET_1"));
     TH1D *Top_eu_nTrk_lfakeRate_difeta_lowMET_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_lowMET_1"));
 
     TH1D *Top_eu_nTrk_bfakeRate_difeta_lowMET_2 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_lowMET_2"));
@@ -96,6 +96,31 @@ void draw_all_fake_rate()
     TH1D *Top_eu_nTrk_bfakeRate_difeta_highMET_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_highMET_3"));
     TH1D *Top_eu_nTrk_cfakeRate_difeta_highMET_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_cfakeRate_difeta_highMET_3"));
     TH1D *Top_eu_nTrk_lfakeRate_difeta_highMET_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_highMET_3"));
+
+    TH1D *Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_lowDilepPt_1"));
+    TH1D *Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_lowDilepPt_1"));
+
+    TH1D *Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_lowDilepPt_2"));
+    TH1D *Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_lowDilepPt_2"));
+
+    TH1D *Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_lowDilepPt_3"));
+    TH1D *Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_lowDilepPt_3"));
+
+    TH1D *Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_highDilepPt_1"));
+    TH1D *Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_highDilepPt_1"));
+
+    TH1D *Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_highDilepPt_2"));
+    TH1D *Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_highDilepPt_2"));
+
+    TH1D *Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_difeta_highDilepPt_3"));
+    TH1D *Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3 = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_difeta_highDilepPt_3"));
+
+    TH1D *Top_eu_nTrk_fakeRate_lowDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_fakeRate_lowDilepPt"));
+    TH1D *Top_eu_nTrk_bfakeRate_lowDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_lowDilepPt"));
+    TH1D *Top_eu_nTrk_lfakeRate_lowDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_lowDilepPt"));
+
+    TH1D *Top_eu_nTrk_bfakeRate_highDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_bfakeRate_highDilepPt"));
+    TH1D *Top_eu_nTrk_lfakeRate_highDilepPt = ((TH1D *)Top_emufile->Get("Top_nTrk_lfakeRate_highDilepPt"));
 
     DY_nTrk_bfakeRate_difeta_lowMET_1->SetLineWidth(2);
     DY_nTrk_cfakeRate_difeta_lowMET_1->SetLineWidth(2);
@@ -148,28 +173,53 @@ void draw_all_fake_rate()
 
     // For Top emu file
     Top_eu_nTrk_bfakeRate_difeta_lowMET_1->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_lowMET_1->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_lowMET_1->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_lowMET_1->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_lowMET_2->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_lowMET_2->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_lowMET_2->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_lowMET_2->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_lowMET_3->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_lowMET_3->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_lowMET_3->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_lowMET_3->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_highMET_1->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_highMET_1->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_highMET_1->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_highMET_1->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_highMET_2->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_highMET_2->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_highMET_2->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_highMET_2->SetLineWidth(2);
 
     Top_eu_nTrk_bfakeRate_difeta_highMET_3->SetLineWidth(2);
-    Top_eu_nTrk_cfakeRate_difeta_highMET_3->SetLineWidth(2);
+    // Top_eu_nTrk_cfakeRate_difeta_highMET_3->SetLineWidth(2);
     Top_eu_nTrk_lfakeRate_difeta_highMET_3->SetLineWidth(2);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->SetLineWidth(2);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->SetLineWidth(2);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->SetLineWidth(2);
+
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->SetLineWidth(2);
+
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->SetLineWidth(2);
+
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
+
+    Top_eu_nTrk_fakeRate_lowDilepPt->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_lowDilepPt->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_lowDilepPt->SetLineWidth(2);
+
+    Top_eu_nTrk_bfakeRate_highDilepPt->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_highDilepPt->SetLineWidth(2);
 
     DY_nTrk_bfakeRate_difeta_lowMET_1->SetLineColor(kOrange - 3);
     DY_nTrk_cfakeRate_difeta_lowMET_1->SetLineColor(kOrange - 3);
@@ -219,11 +269,11 @@ void draw_all_fake_rate()
     Top_ee_nTrk_cfakeRate_difeta_highMET_3->SetLineColor(kGreen + 3);
     Top_ee_nTrk_lfakeRate_difeta_highMET_3->SetLineColor(kGreen + 3);
 
-    int W = 1000;
-    int H = 800;
+    int W = 600;
+    int H = 600;
 
     int H_ref = 600;
-    int W_ref = 800;
+    int W_ref = 600;
 
     float T = 0.08 * H_ref;
     float B = 0.12 * H_ref;
@@ -236,14 +286,22 @@ void draw_all_fake_rate()
     c1->SetBorderMode(0);
     c1->SetFrameFillStyle(0);
     c1->SetFrameBorderMode(0);
-    // c1->SetLeftMargin(L / W);
-    // c1->SetRightMargin(R / W);
-    // c1->SetTopMargin(T / H);
-    // c1->SetBottomMargin(B / H);
+    c1->SetLeftMargin(L / W);
+    c1->SetRightMargin(R / W);
+    c1->SetTopMargin(T / H);
+    c1->SetBottomMargin(B / H);
     c1->SetTickx(0);
     c1->SetTicky(0);
 
-    c1->Divide(3, 2, 0.01, 0.01);
+    Top_eu_nTrk_fakeRate_lowDilepPt->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_fakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_fakeRate_lowDilepPt->GetXaxis()->SetRangeUser(0,25);
+    Top_eu_nTrk_fakeRate_lowDilepPt->Draw();
+
+    gPad->SetLogy();
+
+    // c1->Divide(3, 2);
 
     /*
     c1->cd(1);
@@ -1152,6 +1210,8 @@ void draw_all_fake_rate()
     // h_High_Low_lRatio_1->GetYaxis()->SetLabelSize(1);
     h_High_Low_lRatio_3->Draw("e");
     */
+
+    /*
     c1->cd(1);
     gPad->SetTopMargin(0.01);
     gPad->SetBottomMargin(0);
@@ -1274,6 +1334,8 @@ void draw_all_fake_rate()
     h_High_Low_lRatio_3->SetLineColor(kBlack);
     // h_High_Low_lRatio_1->GetYaxis()->SetLabelSize(1);
     h_High_Low_lRatio_3->Draw("e");
+
+    */
 
     /*
     DY_nTrk_lfakeRate_difeta_lowMET_1->GetXaxis()->SetTitle("Track multiplicity");
@@ -1522,6 +1584,1111 @@ void draw_all_fake_rate()
     l2->AddEntry(Top_ee_nTrk_lfakeRate_difeta_highMET_3, "Top to e e", "El");
     l2->AddEntry(DY_nTrk_lfakeRate_difeta_highMET_3, "Drell-Yan", "El");
     l2->Draw();
+    */
+    // c1->Divide(1, 2);
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1F *h_High_Low_bRatio_highDilepPt_1 = (TH1F *)Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1->Clone("h_High_Low_bRatio_highDilepPt_1");
+    h_High_Low_bRatio_highDilepPt_1->Divide(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1);
+
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1->SetLineColor(kRed);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetTitleSize(0);
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1->Draw("h");
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1->Draw("h same");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("b flavor, |#eta| < 1");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_bRatio_highDilepPt_1->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_bRatio_highDilepPt_1->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_bRatio_highDilepPt_1->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_bRatio_highDilepPt_1->GetXaxis()->SetTitle("Track multiplicity");
+
+    h_High_Low_bRatio_highDilepPt_1->GetXaxis()->SetTitleSize(0.06);
+    h_High_Low_bRatio_highDilepPt_1->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_highDilepPt_1->SetLineColor(kBlack);
+    // h_High_Low_bRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_highDilepPt_1->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1F *h_High_Low_bRatio_highDilepPt_2 = (TH1F *)Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->Clone("h_High_Low_bRatio_highDilepPt_2");
+    h_High_Low_bRatio_highDilepPt_2->Divide(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2);
+
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->SetLineColor(kRed);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetTitleSize(0);
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->Draw("h ");
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("b flavor, 1 < |#eta| < 2");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_bRatio_highDilepPt_2->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_bRatio_highDilepPt_2->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_bRatio_highDilepPt_2->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_bRatio_highDilepPt_2->GetXaxis()->SetTitle("Track multiplicity");
+
+    h_High_Low_bRatio_highDilepPt_2->GetXaxis()->SetTitleSize(0.06);
+    h_High_Low_bRatio_highDilepPt_2->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_highDilepPt_2->SetLineColor(kBlack);
+    // h_High_Low_bRatio_2->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_highDilepPt_2->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1F *h_High_Low_bRatio_highDilepPt_3 = (TH1F *)Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->Clone("h_High_Low_bRatio_highDilepPt_3");
+    h_High_Low_bRatio_highDilepPt_3->Divide(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3);
+
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->SetLineColor(kRed);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetTitleSize(0);
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->Draw("h ");
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("b flavor, 2 < |#eta| < 2.5");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_bRatio_highDilepPt_3->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_bRatio_highDilepPt_3->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_bRatio_highDilepPt_3->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_bRatio_highDilepPt_3->GetXaxis()->SetTitle("Track multiplicity");
+
+    h_High_Low_bRatio_highDilepPt_3->GetXaxis()->SetTitleSize(0.06);
+    h_High_Low_bRatio_highDilepPt_3->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_highDilepPt_3->SetLineColor(kBlack);
+    // h_High_Low_bRatio_3->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_highDilepPt_3->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1F *h_High_Low_lRatio_highDilepPt_3 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->Clone("h_High_Low_lRatio_highDilepPt_3");
+    h_High_Low_lRatio_highDilepPt_3->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetTitleSize(0);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->GetXaxis()->SetRangeUser(0, 15);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetRangeUser(0, 15);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->Draw("h ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("light flavor, 2 < |#eta| < 2.5");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_lRatio_highDilepPt_3->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_lRatio_highDilepPt_3->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_lRatio_highDilepPt_3->GetXaxis()->SetRangeUser(0, 15);
+
+    h_High_Low_lRatio_highDilepPt_3->GetXaxis()->SetTitle("Track multiplicity");
+
+    h_High_Low_lRatio_highDilepPt_3->GetXaxis()->SetTitleSize(0.06);
+    h_High_Low_lRatio_highDilepPt_3->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_highDilepPt_3->SetLineColor(kBlack);
+    // h_High_Low_bRatio_3->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_highDilepPt_3->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1F *h_High_Low_lRatio_highDilepPt_2 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->Clone("h_High_Low_lRatio_highDilepPt_2");
+    h_High_Low_lRatio_highDilepPt_2->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetTitleSize(0);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->Draw("h ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("light flavor, 1 < |#eta| < 2");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_lRatio_highDilepPt_2->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_lRatio_highDilepPt_2->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_lRatio_highDilepPt_2->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_lRatio_highDilepPt_2->GetXaxis()->SetTitle("Track multiplicity");
+
+    h_High_Low_lRatio_highDilepPt_2->GetXaxis()->SetTitleSize(0.06);
+    h_High_Low_lRatio_highDilepPt_2->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_highDilepPt_2->SetLineColor(kBlack);
+    // h_High_Low_bRatio_2->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_highDilepPt_2->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    TH1F *h_High_Low_lRatio_highDilepPt_1 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->Clone("h_High_Low_lRatio_highDilepPt_1");
+    h_High_Low_lRatio_highDilepPt_1->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetTitleSize(0);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->Draw("h ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("light flavor,  |#eta| < 1");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_lRatio_highDilepPt_1->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_lRatio_highDilepPt_1->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_lRatio_highDilepPt_1->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_lRatio_highDilepPt_1->GetXaxis()->SetTitle("Track multiplicity");
+
+    h_High_Low_lRatio_highDilepPt_1->GetXaxis()->SetTitleSize(0.06);
+    h_High_Low_lRatio_highDilepPt_1->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_highDilepPt_1->SetLineColor(kBlack);
+    // h_High_Low_bRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_highDilepPt_1->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    // Top_nTrk_lfakeRate_difeta_lowMET_1
+    TH1D *h_High_Low_bRatio_highMET_1 = (TH1D *)Top_eu_nTrk_bfakeRate_difeta_highMET_1->Clone("h_High_Low_bRatio_highMET_1");
+    h_High_Low_bRatio_highMET_1->Divide(Top_eu_nTrk_bfakeRate_difeta_lowMET_1);
+
+    Top_eu_nTrk_bfakeRate_difeta_highMET_1->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_difeta_highMET_1->SetLineColor(kRed);
+
+    // Top_eu_nTrk_bfakeRate_difeta_lowMET_1->GetXaxis()->SetTitleSize(0);
+    // Top_eu_nTrk_bfakeRate_difeta_lowMET_1->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_1->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_1->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_1->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_bfakeRate_difeta_highMET_1->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_1->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_1->Draw("h ");
+    Top_eu_nTrk_bfakeRate_difeta_highMET_1->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("b flavor,  |#eta| < 1");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_lowMET_1, "Low MET", "El");
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_highMET_1, "High MET", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_bRatio_highMET_1->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_bRatio_highMET_1->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_bRatio_highMET_1->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_bRatio_highMET_1->GetXaxis()->SetTitle("Track multiplicity");
+
+    // h_High_Low_bRatio_highMET_1->GetXaxis()->SetTitleSize(0.06);
+    // h_High_Low_bRatio_highMET_1->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_highMET_1->SetLineColor(kBlack);
+    // h_High_Low_bRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_highMET_1->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    // Top_nTrk_lfakeRate_difeta_lowMET_2
+    TH1D *h_High_Low_bRatio_highMET_2 = (TH1D *)Top_eu_nTrk_bfakeRate_difeta_highMET_2->Clone("h_High_Low_bRatio_highMET_2");
+    h_High_Low_bRatio_highMET_2->Divide(Top_eu_nTrk_bfakeRate_difeta_lowMET_2);
+
+    Top_eu_nTrk_bfakeRate_difeta_highMET_2->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_difeta_highMET_2->SetLineColor(kRed);
+
+    // Top_eu_nTrk_bfakeRate_difeta_lowMET_2->GetXaxis()->SetTitleSize(0);
+    // Top_eu_nTrk_bfakeRate_difeta_lowMET_2->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_2->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_2->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_2->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_bfakeRate_difeta_highMET_2->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_2->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_2->Draw("h ");
+    Top_eu_nTrk_bfakeRate_difeta_highMET_2->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("b flavor, 1 < |#eta| < 2");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_lowMET_2, "Low MET", "El");
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_highMET_2, "High MET", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_bRatio_highMET_2->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_bRatio_highMET_2->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_bRatio_highMET_2->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_bRatio_highMET_2->GetXaxis()->SetTitle("Track multiplicity");
+
+    // h_High_Low_bRatio_highMET_2->GetXaxis()->SetTitleSize(0.06);
+    // h_High_Low_bRatio_highMET_2->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_highMET_2->SetLineColor(kBlack);
+    // h_High_Low_bRatio_2->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_highMET_2->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    // Top_nTrk_lfakeRate_difeta_lowMET_3
+    TH1D *h_High_Low_bRatio_highMET_3 = (TH1D *)Top_eu_nTrk_bfakeRate_difeta_highMET_3->Clone("h_High_Low_bRatio_highMET_3");
+    h_High_Low_bRatio_highMET_3->Divide(Top_eu_nTrk_bfakeRate_difeta_lowMET_3);
+
+    Top_eu_nTrk_bfakeRate_difeta_highMET_3->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_difeta_highMET_3->SetLineColor(kRed);
+
+    // Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetXaxis()->SetTitleSize(0);
+    // Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_bfakeRate_difeta_highMET_3->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_3->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowMET_3->Draw("h ");
+    Top_eu_nTrk_bfakeRate_difeta_highMET_3->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("b flavor, 2 < |#eta| < 2.5");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_lowMET_3, "Low MET", "El");
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_difeta_highMET_3, "High MET", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_bRatio_highMET_3->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_bRatio_highMET_3->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_bRatio_highMET_3->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_bRatio_highMET_3->GetXaxis()->SetTitle("Track multiplicity");
+
+    // h_High_Low_bRatio_highMET_3->GetXaxis()->SetTitleSize(0.06);
+    // h_High_Low_bRatio_highMET_3->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_highMET_3->SetLineColor(kBlack);
+    // h_High_Low_bRatio_3->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_highMET_3->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    // Top_nTrk_lfakeRate_difeta_lowMET_3
+    TH1D *h_High_Low_lRatio_highMET_3 = (TH1D *)Top_eu_nTrk_lfakeRate_difeta_highMET_3->Clone("h_High_Low_lRatio_highMET_3");
+    h_High_Low_lRatio_highMET_3->Divide(Top_eu_nTrk_lfakeRate_difeta_lowMET_3);
+
+    Top_eu_nTrk_lfakeRate_difeta_highMET_3->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highMET_3->SetLineColor(kRed);
+
+    // Top_eu_nTrk_lfakeRate_difeta_lowMET_3->GetXaxis()->SetTitleSize(0);
+    // Top_eu_nTrk_lfakeRate_difeta_lowMET_3->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_3->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_3->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_3->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_lfakeRate_difeta_highMET_3->GetXaxis()->SetRangeUser(0, 15);
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_3->GetXaxis()->SetRangeUser(0, 15);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_3->Draw("h ");
+    Top_eu_nTrk_lfakeRate_difeta_highMET_3->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("light flavor, 2 < |#eta| < 2.5");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowMET_3, "Low MET", "El");
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highMET_3, "High MET", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_lRatio_highMET_3->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_lRatio_highMET_3->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_lRatio_highMET_3->GetXaxis()->SetRangeUser(0, 15);
+
+    h_High_Low_lRatio_highMET_3->GetXaxis()->SetTitle("Track multiplicity");
+
+    // h_High_Low_bRatio_highMET_3->GetXaxis()->SetTitleSize(0.06);
+    // h_High_Low_bRatio_highMET_3->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_highMET_3->SetLineColor(kBlack);
+    // h_High_Low_bRatio_3->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_highMET_3->Draw("e");
+    */
+
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    // Top_nTrk_lfakeRate_difeta_lowMET_2
+    TH1D *h_High_Low_lRatio_highMET_2 = (TH1D *)Top_eu_nTrk_lfakeRate_difeta_highMET_2->Clone("h_High_Low_lRatio_highMET_2");
+    h_High_Low_lRatio_highMET_2->Divide(Top_eu_nTrk_lfakeRate_difeta_lowMET_2);
+
+    Top_eu_nTrk_lfakeRate_difeta_highMET_2->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highMET_2->SetLineColor(kRed);
+
+    // Top_eu_nTrk_lfakeRate_difeta_lowMET_2->GetXaxis()->SetTitleSize(0);
+    // Top_eu_nTrk_lfakeRate_difeta_lowMET_2->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_2->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_2->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_2->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_lfakeRate_difeta_highMET_2->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_2->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_2->Draw("h ");
+    Top_eu_nTrk_lfakeRate_difeta_highMET_2->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("light flavor, 1 < |#eta| < 2");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowMET_2, "Low MET", "El");
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highMET_2, "High MET", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_lRatio_highMET_2->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_lRatio_highMET_2->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_lRatio_highMET_2->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_lRatio_highMET_2->GetXaxis()->SetTitle("Track multiplicity");
+
+    // h_High_Low_bRatio_highMET_2->GetXaxis()->SetTitleSize(0.06);
+    h_High_Low_lRatio_highMET_2->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_highMET_2->SetLineColor(kBlack);
+    // h_High_Low_bRatio_2->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_highMET_2->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    // Top_nTrk_lfakeRate_difeta_lowMET_1
+    TH1D *h_High_Low_lRatio_highMET_1 = (TH1D *)Top_eu_nTrk_lfakeRate_difeta_highMET_1->Clone("h_High_Low_lRatio_highMET_1");
+    h_High_Low_lRatio_highMET_1->Divide(Top_eu_nTrk_lfakeRate_difeta_lowMET_1);
+
+    Top_eu_nTrk_lfakeRate_difeta_highMET_1->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highMET_1->SetLineColor(kRed);
+
+    // Top_eu_nTrk_lfakeRate_difeta_lowMET_1->GetXaxis()->SetTitleSize(0);
+    // Top_eu_nTrk_lfakeRate_difeta_lowMET_1->GetXaxis()->SetLabelSize(0);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_1->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_1->GetYaxis()->SetTitle("fake rate");
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_1->GetYaxis()->SetTitleSize(0.06);
+
+    // Region 0 ~ 25
+    Top_eu_nTrk_lfakeRate_difeta_highMET_1->GetXaxis()->SetRangeUser(0, 25);
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_1->GetXaxis()->SetRangeUser(0, 25);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowMET_1->Draw("h ");
+    Top_eu_nTrk_lfakeRate_difeta_highMET_1->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l0->SetHeader("light flavor, |#eta| < 1");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.06);
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowMET_1, "Low MET", "El");
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highMET_1, "High MET", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    h_High_Low_lRatio_highMET_1->GetYaxis()->SetTitle("High / Low");
+    h_High_Low_lRatio_highMET_1->GetYaxis()->SetTitleSize(0.06);
+
+    h_High_Low_lRatio_highMET_1->GetXaxis()->SetRangeUser(0, 25);
+
+    h_High_Low_lRatio_highMET_1->GetXaxis()->SetTitle("Track multiplicity");
+
+    // h_High_Low_bRatio_highMET_1->GetXaxis()->SetTitleSize(0.06);
+    h_High_Low_lRatio_highMET_1->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_highMET_1->SetLineColor(kBlack);
+    // h_High_Low_bRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_highMET_1->Draw("e");
+    */
+    /*
+    c1->cd(2);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->SetLineColor(kRed);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2->Draw("h  ");
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->Draw("h same ");
+
+    TLegend *l1 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l1->SetHeader("b flavor, 1 < |#eta| < 2");
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->AddEntry(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2, "Low dilepton PT", "El");
+    l1->AddEntry(Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2, "High dilepton PT", "El");
+    l1->Draw();
+    gPad->SetLogy();
+
+    c1->cd(3);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->SetLineColor(kRed);
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3->Draw("h  ");
+    Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->Draw("h same");
+
+    TLegend *l2 = new TLegend(0.45, 0.7, 0.90, 0.95);
+    l2->SetHeader("b flavor, 2 < |#eta| < 2.5");
+    l2->SetBorderSize(0);
+    l2->SetFillStyle(0);
+    l2->SetTextSize(0.04);
+    l2->AddEntry(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3, "Low dilepton PT", "El");
+    l2->AddEntry(Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3, "High dilepton PT", "El");
+    l2->Draw();
+    //gPad->SetLogy();
+
+    c1->cd(4);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_bRatio_1 = (TH1F *)Top_eu_nTrk_bfakeRate_difeta_highDilepPt_1->Clone("h_High_Low_bRatio_1");
+    h_High_Low_bRatio_1->Divide(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_1);
+    h_High_Low_bRatio_1->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_bRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_bRatio_1->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_bRatio_1->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_bRatio_1->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_bRatio_1->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_1->SetLineColor(kBlack);
+    // h_High_Low_bRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_1->Draw("e");
+
+    c1->cd(5);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_bRatio_2 = (TH1F *)Top_eu_nTrk_bfakeRate_difeta_highDilepPt_2->Clone("h_High_Low_bRatio_2");
+    h_High_Low_bRatio_2->Divide(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_2);
+    h_High_Low_bRatio_2->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_bRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_bRatio_2->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_bRatio_2->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_bRatio_2->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_bRatio_2->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_2->SetLineColor(kBlack);
+    // h_High_Low_bRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_2->Draw("e");
+
+    c1->cd(6);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_bRatio_3 = (TH1F *)Top_eu_nTrk_bfakeRate_difeta_highDilepPt_3->Clone("h_High_Low_bRatio_3");
+    h_High_Low_bRatio_3->Divide(Top_eu_nTrk_bfakeRate_difeta_lowDilepPt_3);
+    h_High_Low_bRatio_3->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_bRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_bRatio_3->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_bRatio_3->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_bRatio_3->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_bRatio_3->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_bRatio_3->SetLineColor(kBlack);
+    // h_High_Low_bRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_bRatio_3->Draw("e");
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->Draw("h ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor, |#eta| < 1");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.04);
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->Draw("h  ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->Draw("h same ");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetHeader("light flavor, 1 < |#eta| < 2");
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2, "Low dilepton PT", "El");
+    l1->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2, "High dilepton PT", "El");
+    l1->Draw();
+    gPad->SetLogy();
+
+    c1->cd(3);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->Draw("h  ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->Draw("h same");
+
+    TLegend *l2 = new TLegend(0.5, 0.4, 0.80, 0.80);
+    l2->SetHeader("light flavor, 2 < |#eta| < 2.5");
+    l2->SetBorderSize(0);
+    l2->SetFillStyle(0);
+    l2->SetTextSize(0.04);
+    l2->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3, "Low dilepton PT", "El");
+    l2->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3, "High dilepton PT", "El");
+    l2->Draw();
+    gPad->SetLogy();
+
+    c1->cd(4);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_lRatio_1 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->Clone("h_High_Low_lRatio_1");
+    h_High_Low_lRatio_1->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1);
+    h_High_Low_lRatio_1->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_lRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_lRatio_1->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_lRatio_1->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_lRatio_1->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_lRatio_1->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_1->SetLineColor(kBlack);
+    // h_High_Low_lRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_1->Draw("e");
+
+    c1->cd(5);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_lRatio_2 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->Clone("h_High_Low_lRatio_2");
+    h_High_Low_lRatio_2->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2);
+    h_High_Low_lRatio_2->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_lRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_lRatio_2->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_lRatio_2->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_lRatio_2->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_lRatio_2->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_2->SetLineColor(kBlack);
+    // h_High_Low_lRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_2->Draw("e");
+
+    c1->cd(6);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_lRatio_3 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->Clone("h_High_Low_lRatio_3");
+    h_High_Low_lRatio_3->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3);
+    h_High_Low_lRatio_3->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_lRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_lRatio_3->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_lRatio_3->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_lRatio_3->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_lRatio_3->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_3->SetLineColor(kBlack);
+    // h_High_Low_lRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_3->Draw("e");
+
+
+
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_bfakeRate_highDilepPt->SetLineWidth(2);
+    Top_eu_nTrk_bfakeRate_highDilepPt->SetLineColor(kRed);
+
+    Top_eu_nTrk_bfakeRate_lowDilepPt->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_bfakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_bfakeRate_lowDilepPt->Draw("h text");
+    Top_eu_nTrk_bfakeRate_highDilepPt->Draw("h same text");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("b flavor");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.04);
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_lowDilepPt, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_bfakeRate_highDilepPt, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_lfakeRate_highDilepPt->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_highDilepPt->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_lowDilepPt->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_lowDilepPt->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_lfakeRate_lowDilepPt->Draw("h text");
+    Top_eu_nTrk_lfakeRate_highDilepPt->Draw("h same text");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetHeader("light flavor");
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->AddEntry(Top_eu_nTrk_lfakeRate_lowDilepPt, "Low dilepton PT", "El");
+    l1->AddEntry(Top_eu_nTrk_lfakeRate_highDilepPt, "High dilepton PT", "El");
+    l1->Draw();
+    gPad->SetLogy();
+    */
+    /*
+    c1->cd(1);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1->Draw("h ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->Draw("h same ");
+
+    TLegend *l0 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l0->SetHeader("light flavor, |#eta| < 1");
+    l0->SetBorderSize(0);
+    l0->SetFillStyle(0);
+    l0->SetTextSize(0.04);
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1, "Low dilepton PT", "El");
+    l0->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1, "High dilepton PT", "El");
+    l0->Draw();
+    gPad->SetLogy();
+
+    c1->cd(2);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2->Draw("h  ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->Draw("h same ");
+
+    TLegend *l1 = new TLegend(0.45, 0.4, 0.80, 0.80);
+    l1->SetHeader("light flavor, 1 < |#eta| < 2");
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2, "Low dilepton PT", "El");
+    l1->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2, "High dilepton PT", "El");
+    l1->Draw();
+    gPad->SetLogy();
+
+    c1->cd(3);
+    gPad->SetTopMargin(0.01);
+    gPad->SetBottomMargin(0);
+    gPad->SetRightMargin(0.04);
+
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->SetLineWidth(2);
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->SetLineColor(kRed);
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetXaxis()->SetTitle("Track multiplicity");
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->GetYaxis()->SetTitle("fake rate");
+
+    Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3->Draw("h  ");
+    Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->Draw("h same");
+
+    TLegend *l2 = new TLegend(0.5, 0.4, 0.80, 0.80);
+    l2->SetHeader("light flavor, 2 < |#eta| < 2.5");
+    l2->SetBorderSize(0);
+    l2->SetFillStyle(0);
+    l2->SetTextSize(0.04);
+    l2->AddEntry(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3, "Low dilepton PT", "El");
+    l2->AddEntry(Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3, "High dilepton PT", "El");
+    l2->Draw();
+    gPad->SetLogy();
+
+    c1->cd(4);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_lRatio_1 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_1->Clone("h_High_Low_lRatio_1");
+    h_High_Low_lRatio_1->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_1);
+    h_High_Low_lRatio_1->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_lRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_lRatio_1->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_lRatio_1->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_lRatio_1->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_lRatio_1->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_1->SetLineColor(kBlack);
+    // h_High_Low_lRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_1->Draw("e");
+
+    c1->cd(5);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_lRatio_2 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_2->Clone("h_High_Low_lRatio_2");
+    h_High_Low_lRatio_2->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_2);
+    h_High_Low_lRatio_2->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_lRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_lRatio_2->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_lRatio_2->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_lRatio_2->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_lRatio_2->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_2->SetLineColor(kBlack);
+    // h_High_Low_lRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_2->Draw("e");
+
+    c1->cd(6);
+    gPad->SetRightMargin(0.04);
+    gPad->SetTopMargin(0);
+    gPad->SetBottomMargin(0.2);
+    gPad->SetTickx();
+
+    TH1F *h_High_Low_lRatio_3 = (TH1F *)Top_eu_nTrk_lfakeRate_difeta_highDilepPt_3->Clone("h_High_Low_lRatio_3");
+    h_High_Low_lRatio_3->Divide(Top_eu_nTrk_lfakeRate_difeta_lowDilepPt_3);
+    h_High_Low_lRatio_3->GetYaxis()->SetTitle("High / Low");
+    // h_High_Low_lRatio_1->GetXaxis()->SetTitle("Ratio");
+
+    h_High_Low_lRatio_3->GetXaxis()->SetTitleSize(0.04);
+    h_High_Low_lRatio_3->GetXaxis()->SetLabelSize(0.04);
+
+    h_High_Low_lRatio_3->GetXaxis()->SetTitle("Track multiplicity");
+    h_High_Low_lRatio_3->GetYaxis()->SetRangeUser(0., 2.);
+    h_High_Low_lRatio_3->SetLineColor(kBlack);
+    // h_High_Low_lRatio_1->GetYaxis()->SetLabelSize(1);
+    h_High_Low_lRatio_3->Draw("e");
     */
 
     gStyle->SetOptStat(0);

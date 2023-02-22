@@ -32,17 +32,17 @@ double ZZZWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ZZZ_TuneCUETP
 
 void ee_Triboson_var()
 {
-    TH1D *h_Triboson_Met = new TH1D("h_Triboson_Met", "", 50, 0, 500);
+    TH1D *h_Triboson_Met = new TH1D("h_Triboson_Met", "", 150, 0, 1500);
     h_Triboson_Met->GetXaxis()->SetTitle("");
     h_Triboson_Met->GetYaxis()->SetTitle("");
     h_Triboson_Met->Sumw2();
 
-    TH1D *h_Triboson_dilepPT = new TH1D("h_Triboson_dilepPT", "", 100, 0, 1000);
+    TH1D *h_Triboson_dilepPT = new TH1D("h_Triboson_dilepPT", "", 150, 0, 1500);
     h_Triboson_dilepPT->GetXaxis()->SetTitle("");
     h_Triboson_dilepPT->GetYaxis()->SetTitle("");
     h_Triboson_dilepPT->Sumw2();
 
-    TH1D *h_Triboson_Met_cut = new TH1D("h_Triboson_Met_cut", "", 50, 0, 500);
+    TH1D *h_Triboson_Met_cut = new TH1D("h_Triboson_Met_cut", "", 150, 0, 1500);
     h_Triboson_Met_cut->GetXaxis()->SetTitle("");
     h_Triboson_Met_cut->GetYaxis()->SetTitle("");
     h_Triboson_Met_cut->Sumw2();
@@ -110,7 +110,7 @@ void ee_Triboson_var()
     v_WZZ_jetMass->clear();
     v_ZZZ_jetMass->clear();
 
-    double METcut = 140.0;
+    double METcut = 130.0;
 
     TTree *T_tree;
     triboson_WWZfile->GetObject("T_tree", T_tree);
@@ -125,10 +125,11 @@ void ee_Triboson_var()
     {
         T_tree->GetEntry(evt);
         h_Triboson_Met->Fill(f_WWZ_met, I_WWZ_weight * WWZWeight);
+        h_Triboson_dilepPT->Fill(f_WWZ_dilepPT, I_WWZ_weight * WWZWeight);
+
         if (f_WWZ_met > METcut)
         {
             h_Triboson_Met_cut->Fill(f_WWZ_met, I_WWZ_weight * WWZWeight);
-            h_Triboson_dilepPT->Fill(f_WWZ_dilepPT, I_WWZ_weight * WWZWeight);
             for (size_t i = 0; i < v_WWZ_jetcsv->size(); i++)
             {
                 h_Triboson_jetcsv->Fill((*v_WWZ_jetcsv)[i], I_WWZ_weight * WWZWeight);
@@ -170,10 +171,11 @@ void ee_Triboson_var()
     {
         T_tree2->GetEntry(evt);
         h_Triboson_Met->Fill(f_WZZ_met, I_WZZ_weight * WZZWeight);
+        h_Triboson_dilepPT->Fill(f_WZZ_dilepPT, I_WZZ_weight * WZZWeight);
+
         if (f_WZZ_met > METcut)
         {
             h_Triboson_Met_cut->Fill(f_WZZ_met, I_WZZ_weight * WZZWeight);
-            h_Triboson_dilepPT->Fill(f_WZZ_dilepPT, I_WZZ_weight * WZZWeight);
             for (size_t i = 0; i < v_WZZ_jetcsv->size(); i++)
             {
                 h_Triboson_jetcsv->Fill((*v_WZZ_jetcsv)[i], I_WZZ_weight * WZZWeight);
@@ -216,10 +218,11 @@ void ee_Triboson_var()
     {
         T_tree3->GetEntry(evt);
         h_Triboson_Met->Fill(f_ZZZ_met, I_ZZZ_weight * ZZZWeight);
+        h_Triboson_dilepPT->Fill(f_ZZZ_dilepPT, I_ZZZ_weight * ZZZWeight);
+
         if (f_ZZZ_met > METcut)
         {
             h_Triboson_Met_cut->Fill(f_ZZZ_met, I_ZZZ_weight * ZZZWeight);
-            h_Triboson_dilepPT->Fill(f_ZZZ_dilepPT, I_ZZZ_weight * ZZZWeight);
             for (size_t i = 0; i < v_ZZZ_jetcsv->size(); i++)
             {
                 h_Triboson_jetcsv->Fill((*v_ZZZ_jetcsv)[i], I_ZZZ_weight * ZZZWeight);
@@ -249,7 +252,7 @@ void ee_Triboson_var()
         }
     }
     h_Triboson_dilepPT->Draw();
-    //h_Triboson_ljetcsv->Draw("same");
+    // h_Triboson_ljetcsv->Draw("same");
     TString outputfile1 = "./ee_Triboson_Met.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_Triboson_Met->Write();

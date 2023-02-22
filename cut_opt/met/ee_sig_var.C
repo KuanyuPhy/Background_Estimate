@@ -18,13 +18,13 @@ void ee_sig_var()
     TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_50_old_remove_0alpha.root");
     TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/Mx2_150_old_remove_0alpha.root");
 
-    TH1D *h_Mx2_1_Met = new TH1D("h_Mx2_1_Met", "", 50, 0, 500);
+    TH1D *h_Mx2_1_Met = new TH1D("h_Mx2_1_Met", "", 150, 0, 1500);
     h_Mx2_1_Met->Sumw2();
 
-    TH1D *h_Mx2_50_Met = new TH1D("h_Mx2_50_Met", "", 50, 0, 500);
+    TH1D *h_Mx2_50_Met = new TH1D("h_Mx2_50_Met", "", 150, 0, 1500);
     h_Mx2_50_Met->Sumw2();
 
-    TH1D *h_Mx2_150_Met = new TH1D("h_Mx2_150_Met", "", 50, 0, 500);
+    TH1D *h_Mx2_150_Met = new TH1D("h_Mx2_150_Met", "", 150, 0, 1500);
     h_Mx2_150_Met->Sumw2();
 
     Int_t I_Mx1_weight, I_Mx50_weight, I_Mx150_weight;

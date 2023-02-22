@@ -57,7 +57,7 @@ void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, float Weigh
 
 void uu_Top_var()
 {
-    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 20, -5, 5);
+    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 50, -5, 5);
     h_bg_3DSig->Sumw2();
 
     TH1D *h_bg_alpha1 = new TH1D("h_bg_alpha1", "", 20, 0, 1);
@@ -217,10 +217,10 @@ void uu_Top_var()
     for (int evt = 0; evt < T_TTTo2L2Nu_tree->GetEntries(); evt++)
     {
         T_TTTo2L2Nu_tree->GetEntry(evt);
-        if (f_TTTo2L2Nu_met < 140)
+        /*if (f_TTTo2L2Nu_met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_TTTo2L2Nu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTTo2L2Nu_log3Dsig)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
@@ -248,10 +248,10 @@ void uu_Top_var()
     for (int evt = 0; evt < T_ST_tW_top_tree->GetEntries(); evt++)
     {
         T_ST_tW_top_tree->GetEntry(evt);
-        if (f_ST_tW_top_met < 140)
+        /*if (f_ST_tW_top_met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ST_tW_top_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ST_tW_top_log3Dsig)[i], I_ST_tW_top_weight * ST_tW_topWeight);
@@ -278,10 +278,10 @@ void uu_Top_var()
     for (int evt = 0; evt < T_ST_tW_antitop_tree->GetEntries(); evt++)
     {
         T_ST_tW_antitop_tree->GetEntry(evt);
-        if (f_ST_tW_antitop_met < 140)
+        /*if (f_ST_tW_antitop_met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ST_tW_antitop_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ST_tW_antitop_log3Dsig)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
@@ -308,11 +308,11 @@ void uu_Top_var()
     for (int evt = 0; evt < T_TTWJetsToLNu_tree->GetEntries(); evt++)
     {
         T_TTWJetsToLNu_tree->GetEntry(evt);
-        if (f_TTWJetsToLNu_met < 140)
+        /*if (f_TTWJetsToLNu_met < 140)
         {
             continue;
-        }
-for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
+        }*/
+        for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTWJetsToLNu_log3Dsig)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
         }
@@ -339,10 +339,10 @@ for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
     for (int evt = 0; evt < T_TTWJetsToQQ_tree->GetEntries(); evt++)
     {
         T_TTWJetsToQQ_tree->GetEntry(evt);
-        if (f_TTWJetsToQQ_met < 140)
+        /*if (f_TTWJetsToQQ_met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_TTWJetsToQQ_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTWJetsToQQ_log3Dsig)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
@@ -369,10 +369,10 @@ for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
     for (int evt = 0; evt < T_TTZToQQ_tree->GetEntries(); evt++)
     {
         T_TTZToQQ_tree->GetEntry(evt);
-        if (f_TTZToQQ_met < 140)
+        /*if (f_TTZToQQ_met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_TTZToQQ_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTZToQQ_log3Dsig)[i], I_TTZToQQ_weight * TTZToQQWeight);
@@ -399,10 +399,10 @@ for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
     for (int evt = 0; evt < T_TTZToLLNuNu_tree->GetEntries(); evt++)
     {
         T_TTZToLLNuNu_tree->GetEntry(evt);
-        if (f_TTZToLLNuNu_met < 140)
+        /*if (f_TTZToLLNuNu_met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_TTZToLLNuNu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTZToLLNuNu_log3Dsig)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
@@ -415,6 +415,7 @@ for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
             h_bg_alpha4->Fill((*v_TTZToLLNuNu_alpha4)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
         }
     }
+    h_bg_3DSig->Draw();
     TString outputfile1 = "./uu_Top_alpha.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_bg_3DSig->Write();

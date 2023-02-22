@@ -54,13 +54,13 @@ void uu_sig_var()
     TH1D *h_Mx2_150_alpha4 = new TH1D("h_Mx2_150_alpha4", "", 20, 0., 1.);
     h_Mx2_150_alpha4->Sumw2();
 
-    TH1D *h_Mx2_1_3DSig = new TH1D("h_Mx2_1_3DSig", "", 20, -5., 5.);
+    TH1D *h_Mx2_1_3DSig = new TH1D("h_Mx2_1_3DSig", "", 50, -5., 5.);
     h_Mx2_1_3DSig->Sumw2();
 
-    TH1D *h_Mx2_50_3DSig = new TH1D("h_Mx2_50_3DSig", "", 20, -5., 5.);
+    TH1D *h_Mx2_50_3DSig = new TH1D("h_Mx2_50_3DSig", "", 50, -5., 5.);
     h_Mx2_50_3DSig->Sumw2();
 
-    TH1D *h_Mx2_150_3DSig = new TH1D("h_Mx2_150_3DSig", "", 20, -5., 5.);
+    TH1D *h_Mx2_150_3DSig = new TH1D("h_Mx2_150_3DSig", "", 50, -5., 5.);
     h_Mx2_150_3DSig->Sumw2();
 
     Int_t I_Mx1_weight, I_Mx50_weight, I_Mx150_weight;
@@ -101,7 +101,6 @@ void uu_sig_var()
     v_Mx50_alpha4->clear();
     v_Mx150_alpha4->clear();
 
-    
     vector<float> *v_Mx1_3Dsig = new vector<float>();
     vector<float> *v_Mx50_3Dsig = new vector<float>();
     vector<float> *v_Mx150_3Dsig = new vector<float>();
@@ -122,10 +121,10 @@ void uu_sig_var()
     for (int evt = 0; evt < T_Mx2_1->GetEntries(); evt++)
     {
         T_Mx2_1->GetEntry(evt);
-        if(f_Mx1_Met < 140)
-        {
-            continue;
-        }
+        /*         if(f_Mx1_Met < 140)
+                {
+                    continue;
+                } */
         for (size_t i = 0; i < v_Mx1_3Dsig->size(); i++)
         {
             h_Mx2_1_3DSig->Fill((*v_Mx1_3Dsig)[i], I_Mx1_weight);
@@ -150,10 +149,10 @@ void uu_sig_var()
     for (int evt = 0; evt < T_Mx2_50->GetEntries(); evt++)
     {
         T_Mx2_50->GetEntry(evt);
-        if(f_Mx50_Met < 140)
-        {
-            continue;
-        }
+        /*        if(f_Mx50_Met < 140)
+               {
+                   continue;
+               } */
         for (size_t i = 0; i < v_Mx50_3Dsig->size(); i++)
         {
             h_Mx2_50_3DSig->Fill((*v_Mx50_3Dsig)[i], I_Mx50_weight);
@@ -178,10 +177,10 @@ void uu_sig_var()
     for (int evt = 0; evt < T_Mx2_150->GetEntries(); evt++)
     {
         T_Mx2_150->GetEntry(evt);
-        if(f_Mx150_Met < 140)
-        {
-            continue;
-        }
+        /*         if(f_Mx150_Met < 140)
+                {
+                    continue;
+                } */
         for (size_t i = 0; i < v_Mx150_3Dsig->size(); i++)
         {
             h_Mx2_150_3DSig->Fill((*v_Mx150_3Dsig)[i], I_Mx150_weight);
@@ -194,7 +193,7 @@ void uu_sig_var()
             h_Mx2_150_alpha4->Fill((*v_Mx150_alpha4)[i], I_Mx150_weight);
         }
     } // End of Mx2_150 Entries loop
-
+    h_Mx2_150_3DSig->Draw();
     TString outputfile1 = "./uu_Sig_alpha.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_Mx2_1_alpha->Write();

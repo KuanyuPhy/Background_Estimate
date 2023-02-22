@@ -8,7 +8,7 @@
 #include <string>
 #include <TAttLine.h>
 #include <TStyle.h>
-#include "./../../lib/Cross_section.h"
+#include "./../../../lib/Cross_section.h"
 using namespace std;
 
 TFile *DYincli = new TFile("/home/kuanyu/Documents/root_file/Ztouu/2016BKGMC/DY/uu_DYincli.root");
@@ -175,8 +175,11 @@ void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, double Weig
 
 void uu_HT_var()
 {
-    TH1D *h_DY_Met = new TH1D("h_DY_Met", "", 50, 0, 500);
+    TH1D *h_DY_Met = new TH1D("h_DY_Met", "", 150, 0, 1500);
     h_DY_Met->Sumw2();
+
+    TH1D *h_DY_dilepPT = new TH1D("h_DY_dilepPT", "", 150, 0, 1500);
+    h_DY_dilepPT->Sumw2();
 
     TH1D *h_DY_Met_cut = new TH1D("h_DY_Met_cut", "", 50, 0, 500);
     h_DY_Met_cut->Sumw2();
@@ -197,6 +200,9 @@ void uu_HT_var()
 
     float_t f_ht0_Met, f_ht70_Met, f_ht100_Met, f_ht200_Met, f_ht400_Met, f_ht600_Met, f_ht800_Met,
         f_ht1200_Met, f_ht2500_Met;
+
+    float_t f_ht0_dilepPT, f_ht100_dilepPT, f_ht200_dilepPT, f_ht400_dilepPT, f_ht600_dilepPT, f_ht800_dilepPT,
+        f_ht1200_dilepPT, f_ht2500_dilepPT;
 
     Int_t I_ht0_weight, I_ht70_weight, I_ht100_weight, I_ht200_weight, I_ht400_weight, I_ht600_weight,
         I_ht800_weight, I_ht1200_weight, I_ht2500_weight;
@@ -268,6 +274,7 @@ void uu_HT_var()
     T_inclusive->SetBranchAddress("I_weight", &I_ht0_weight);
     T_inclusive->SetBranchAddress("f_HT", &HT);
     T_inclusive->SetBranchAddress("f_Met", &f_ht0_Met);
+    T_inclusive->SetBranchAddress("f_dileptonPT", &f_ht0_dilepPT);
     T_inclusive->SetBranchAddress("v_fakealpha", &v_ht0_alpha);
     T_inclusive->SetBranchAddress("f_thinjetCSV", &v_ht0_jetcsv);
     T_inclusive->SetBranchAddress("v_fakeJethadronflavor", &v_ht0_Jethadronflavor);
@@ -275,6 +282,9 @@ void uu_HT_var()
     {
         T_inclusive->GetEntry(evt);
         for_inclusive_sample(HT, f_ht0_Met, I_ht0_weight, h_DY_Met);
+        for_inclusive_sample(HT, f_ht0_Met, I_ht0_weight, h_DY_dilepPT);
+
+         
         if (f_ht0_Met > metcut)
         {
             for_inclusive_sample(HT, f_ht0_Met, I_ht0_weight, h_DY_Met_cut);
@@ -284,6 +294,7 @@ void uu_HT_var()
     DYHT100->GetObject("T_tree", T_HT100);
     T_HT100->SetBranchAddress("I_weight", &I_ht100_weight);
     T_HT100->SetBranchAddress("f_Met", &f_ht100_Met);
+    T_HT100->SetBranchAddress("f_dileptonPT", &f_ht100_dilepPT);
     T_HT100->SetBranchAddress("v_fakealpha", &v_ht100_alpha);
     T_HT100->SetBranchAddress("f_thinjetCSV", &v_ht100_jetcsv);
     T_HT100->SetBranchAddress("v_fakeJethadronflavor", &v_ht100_Jethadronflavor);
@@ -291,6 +302,7 @@ void uu_HT_var()
     {
         T_HT100->GetEntry(evt);
         h_DY_Met->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
+        h_DY_dilepPT->Fill(f_ht100_dilepPT, I_ht100_weight * HT100Weight);
         if (f_ht100_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
@@ -300,6 +312,7 @@ void uu_HT_var()
     DYHT200->GetObject("T_tree", T_HT200);
     T_HT200->SetBranchAddress("I_weight", &I_ht200_weight);
     T_HT200->SetBranchAddress("f_Met", &f_ht200_Met);
+    T_HT200->SetBranchAddress("f_dileptonPT", &f_ht200_dilepPT);
     T_HT200->SetBranchAddress("v_fakealpha", &v_ht200_alpha);
     T_HT200->SetBranchAddress("f_thinjetCSV", &v_ht200_jetcsv);
     T_HT200->SetBranchAddress("v_fakeJethadronflavor", &v_ht200_Jethadronflavor);
@@ -307,6 +320,7 @@ void uu_HT_var()
     {
         T_HT200->GetEntry(evt);
         h_DY_Met->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
+        h_DY_dilepPT->Fill(f_ht200_dilepPT, I_ht200_weight * HT200Weight);
         if (f_ht200_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
@@ -316,6 +330,7 @@ void uu_HT_var()
     DYHT400->GetObject("T_tree", T_HT400);
     T_HT400->SetBranchAddress("I_weight", &I_ht400_weight);
     T_HT400->SetBranchAddress("f_Met", &f_ht400_Met);
+    T_HT400->SetBranchAddress("f_dileptonPT", &f_ht400_dilepPT);
     T_HT400->SetBranchAddress("v_fakealpha", &v_ht400_alpha);
     T_HT400->SetBranchAddress("f_thinjetCSV", &v_ht400_jetcsv);
     T_HT400->SetBranchAddress("v_fakeJethadronflavor", &v_ht400_Jethadronflavor);
@@ -323,6 +338,7 @@ void uu_HT_var()
     {
         T_HT400->GetEntry(evt);
         h_DY_Met->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
+        h_DY_dilepPT->Fill(f_ht400_dilepPT, I_ht400_weight * HT400Weight);
         if (f_ht400_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
@@ -332,6 +348,7 @@ void uu_HT_var()
     DYHT600->GetObject("T_tree", T_HT600);
     T_HT600->SetBranchAddress("I_weight", &I_ht600_weight);
     T_HT600->SetBranchAddress("f_Met", &f_ht600_Met);
+    T_HT600->SetBranchAddress("f_dileptonPT", &f_ht600_dilepPT);
     T_HT600->SetBranchAddress("v_fakealpha", &v_ht600_alpha);
     T_HT600->SetBranchAddress("f_thinjetCSV", &v_ht600_jetcsv);
     T_HT600->SetBranchAddress("v_fakeJethadronflavor", &v_ht600_Jethadronflavor);
@@ -339,6 +356,7 @@ void uu_HT_var()
     {
         T_HT600->GetEntry(evt);
         h_DY_Met->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
+        h_DY_dilepPT->Fill(f_ht600_dilepPT, I_ht600_weight * HT600Weight);
         if (f_ht600_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
@@ -348,6 +366,7 @@ void uu_HT_var()
     DYHT800->GetObject("T_tree", T_HT800);
     T_HT800->SetBranchAddress("I_weight", &I_ht800_weight);
     T_HT800->SetBranchAddress("f_Met", &f_ht800_Met);
+    T_HT800->SetBranchAddress("f_dileptonPT", &f_ht800_dilepPT);
     T_HT800->SetBranchAddress("v_fakealpha", &v_ht800_alpha);
     T_HT800->SetBranchAddress("f_thinjetCSV", &v_ht800_jetcsv);
     T_HT800->SetBranchAddress("v_fakeJethadronflavor", &v_ht800_Jethadronflavor);
@@ -355,6 +374,7 @@ void uu_HT_var()
     {
         T_HT800->GetEntry(evt);
         h_DY_Met->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
+        h_DY_dilepPT->Fill(f_ht800_dilepPT, I_ht800_weight * HT800Weight);
         if (f_ht800_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
@@ -364,6 +384,7 @@ void uu_HT_var()
     DYHT1200->GetObject("T_tree", T_HT1200);
     T_HT1200->SetBranchAddress("I_weight", &I_ht1200_weight);
     T_HT1200->SetBranchAddress("f_Met", &f_ht1200_Met);
+    T_HT1200->SetBranchAddress("f_dileptonPT", &f_ht1200_dilepPT);
     T_HT1200->SetBranchAddress("v_fakealpha", &v_ht1200_alpha);
     T_HT1200->SetBranchAddress("f_thinjetCSV", &v_ht1200_jetcsv);
     T_HT1200->SetBranchAddress("v_fakeJethadronflavor", &v_ht1200_Jethadronflavor);
@@ -371,6 +392,7 @@ void uu_HT_var()
     {
         T_HT1200->GetEntry(evt);
         h_DY_Met->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
+        h_DY_dilepPT->Fill(f_ht1200_dilepPT, I_ht1200_weight * HT1200Weight);
         if (f_ht1200_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
@@ -380,6 +402,7 @@ void uu_HT_var()
     DYHT2500->GetObject("T_tree", T_HT2500);
     T_HT2500->SetBranchAddress("I_weight", &I_ht2500_weight);
     T_HT2500->SetBranchAddress("f_Met", &f_ht2500_Met);
+    T_HT2500->SetBranchAddress("f_dileptonPT", &f_ht2500_dilepPT);
     T_HT2500->SetBranchAddress("v_fakealpha", &v_ht2500_alpha);
     T_HT2500->SetBranchAddress("f_thinjetCSV", &v_ht2500_jetcsv);
     T_HT2500->SetBranchAddress("v_fakeJethadronflavor", &v_ht2500_Jethadronflavor);
@@ -387,14 +410,17 @@ void uu_HT_var()
     {
         T_HT2500->GetEntry(evt);
         h_DY_Met->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
+        h_DY_dilepPT->Fill(f_ht2500_dilepPT, I_ht2500_weight * HT2500Weight);
         if (f_ht2500_Met > metcut)
         {
             h_DY_Met_cut->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
         }
     }
+    h_DY_dilepPT->Draw();
     TString outputfile1 = "./uu_DY_Met.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_DY_Met->Write();
+    h_DY_dilepPT->Write();
     h_DY_Met_cut->Write();
     outfile_HT0->Close();
 }

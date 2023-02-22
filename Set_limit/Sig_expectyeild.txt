@@ -1,0 +1,11 @@
+
+Processing Signal_yield.C...
+Calculate Expect Signal yeild
+Before weight
+Number of event for Mx2 = 1 Gev: 70
+Number of event for Mx2 = 50 Gev: 371
+Number of event for Mx2 = 150 Gev: 641
+After weight
+Number of event for Mx2 = 1 Gev: 126.964
+Number of event for Mx2 = 50 Gev: 667.079
+Number of event for Mx2 = 150 Gev: 1061.04
