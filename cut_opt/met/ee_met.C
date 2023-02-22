@@ -213,13 +213,17 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     ee_Triboson_dilepPT->GetYaxis()->SetTitleOffset(1.5);
     ee_Triboson_dilepPT->GetYaxis()->SetTitle("nEvents");
 
-    
-    THStack *hs = new THStack("hs", "");
-    hs->Add(ee_HT_Met_cut);
-    hs->Add(ee_Diboson_Met_cut);
-    hs->Add(ee_Top_Met_cut);
-    hs->Add(ee_Triboson_Met_cut);
-    
+    THStack *hs_ee_MET2016MCbg = new THStack("hs_ee_MET2016MCbg", "");
+    hs_ee_MET2016MCbg->Add(ee_HT_Met);
+    hs_ee_MET2016MCbg->Add(ee_Diboson_Met);
+    hs_ee_MET2016MCbg->Add(ee_Top_Met);
+    hs_ee_MET2016MCbg->Add(ee_Triboson_Met);
+
+    THStack *hs_uu_MET2016MCbg = new THStack("hs_uu_MET2016MCbg", "");
+    hs_uu_MET2016MCbg->Add(uu_HT_Met);
+    hs_uu_MET2016MCbg->Add(uu_Diboson_Met);
+    hs_uu_MET2016MCbg->Add(uu_Top_Met);
+    hs_uu_MET2016MCbg->Add(uu_Triboson_Met);
 
     /*
     THStack *hs = new THStack("hs", "");
@@ -228,7 +232,6 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     hs->Add(ee_Triboson_dilepPT);
     hs->Add(ee_HT_dilepPT);
     */
-
 
     /*
     THStack *hs = new THStack("hs", "");
@@ -260,6 +263,36 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     canv->SetTickx(0);
     canv->SetTicky(0);
 
+    // canv->Divide(2, 2);
+    // canv->cd(1);
+    // ee_Diboson_dilepPT->Add(ee_Top_dilepPT);
+    // ee_Diboson_dilepPT->Add(ee_Triboson_dilepPT);
+    // ee_Diboson_dilepPT->Add(ee_HT_dilepPT);
+    // ee_Diboson_dilepPT->Draw();
+    /*
+    int W = 800;
+    int H = 600;
+
+    int H_ref = 600;
+    int W_ref = 800;
+
+    float T = 0.08 * H_ref;
+    float B = 0.12 * H_ref;
+    float L = 0.12 * W_ref;
+    float R = 0.04 * W_ref;
+
+    TCanvas *canv = new TCanvas("canv", "", 50, 50, W, H);
+    canv->SetFillColor(0);
+    canv->SetBorderMode(0);
+    canv->SetFrameFillStyle(0);
+    canv->SetFrameBorderMode(0);
+    canv->SetLeftMargin(L / W);
+    canv->SetRightMargin(R / W);
+    canv->SetTopMargin(T / H);
+    canv->SetBottomMargin(B / H);
+    canv->SetTickx(0);
+    canv->SetTicky(0);
+    */
     /*
     canv->Divide(2, 2);
     canv->cd(1);
@@ -291,60 +324,110 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     l4->AddEntry(ee_Triboson_dilepPT, "Triboson process", "lE");
     l4->Draw();
     */
-
-    hs->Draw("hist");
-    hs->GetXaxis()->SetLimits(130.,800.);
+    /*
+    hs_ee_MET2016MCbg->Draw("hist");
+    hs_ee_MET2016MCbg->GetXaxis()->SetLimits(0., 800.);
 
     gPad->SetLogy();
 
-    hs->GetXaxis()->SetNdivisions(6, 5, 0);
-    hs->GetXaxis()->SetTitle("MET(GeV)");
+    hs_ee_MET2016MCbg->GetXaxis()->SetNdivisions(6, 5, 0);
+    hs_ee_MET2016MCbg->GetXaxis()->SetTitle("MET(GeV)");
     // hs->GetXaxis()->SetTitleOffset(1.5);
-    hs->GetXaxis()->SetTitleSize(0.04);
-    hs->GetXaxis()->SetLabelSize(0.04);
-    hs->GetYaxis()->SetNdivisions(6, 5, 0);
-    hs->GetYaxis()->SetTitleOffset(1);
-    hs->GetYaxis()->SetTitle("nEvents");
-    hs->GetYaxis()->SetTitleSize(0.04);
-    hs->GetYaxis()->SetTitleOffset(1.5);
-    hs->GetYaxis()->SetLabelSize(0.04);
-    cout << "number of Events with DY = " << ee_HT_Met_cut->Integral() << "\n";
-    cout << "number of Events with Top = " << ee_Top_Met_cut->Integral() << "\n";
-    cout << "number of Events with Diboson = " << ee_Diboson_Met_cut->Integral() << "\n";
-    cout << "number of Events with Triboson = " << ee_Triboson_Met_cut->Integral() << "\n";
+    hs_ee_MET2016MCbg->GetXaxis()->SetTitleSize(0.04);
+    hs_ee_MET2016MCbg->GetXaxis()->SetLabelSize(0.04);
+    hs_ee_MET2016MCbg->GetYaxis()->SetNdivisions(6, 5, 0);
+    hs_ee_MET2016MCbg->GetYaxis()->SetTitleOffset(1);
+    hs_ee_MET2016MCbg->GetYaxis()->SetTitle("nEvents");
+    hs_ee_MET2016MCbg->GetYaxis()->SetTitleSize(0.04);
+    hs_ee_MET2016MCbg->GetYaxis()->SetTitleOffset(1.5);
+    hs_ee_MET2016MCbg->GetYaxis()->SetLabelSize(0.04);
+    cout << "number of Events with DY = " << ee_HT_Met->Integral() << "\n";
+    cout << "number of Events with Top = " << ee_Top_Met->Integral() << "\n";
+    cout << "number of Events with Diboson = " << ee_Diboson_Met->Integral() << "\n";
+    cout << "number of Events with Triboson = " << ee_Triboson_Met->Integral() << "\n";
     TLegend *l0 = new TLegend(0.4, 0.4, 0.90, 0.80);
     l0->SetFillStyle(0);
     l0->SetBorderSize(0);
     l0->SetTextSize(0.03);
     l0->SetHeader("2016MC Background");
-    l0->AddEntry(uu_HT_Met, "Drell-Yan process", "l");
-    l0->AddEntry(uu_Top_Met, "Top process", "l");
-    l0->AddEntry(uu_Diboson_Met, "Diboson process", "l");
-    l0->AddEntry(uu_Triboson_Met, "Triboson process", "l");
+    l0->AddEntry(ee_HT_Met, "Drell-Yan process", "l");
+    l0->AddEntry(ee_Top_Met, "Top process", "l");
+    l0->AddEntry(ee_Diboson_Met, "Diboson process", "l");
+    l0->AddEntry(ee_Triboson_Met, "Triboson process", "l");
     l0->Draw();
+    */
+    /*
+     hs_uu_MET2016MCbg->Draw("hist");
+     hs_uu_MET2016MCbg->GetXaxis()->SetLimits(0., 800.);
+
+     gPad->SetLogy();
+
+     hs_uu_MET2016MCbg->GetXaxis()->SetNdivisions(6, 5, 0);
+     hs_uu_MET2016MCbg->GetXaxis()->SetTitle("MET(GeV)");
+     // hs->GetXaxis()->SetTitleOffset(1.5);
+     hs_uu_MET2016MCbg->GetXaxis()->SetTitleSize(0.04);
+     hs_uu_MET2016MCbg->GetXaxis()->SetLabelSize(0.04);
+     hs_uu_MET2016MCbg->GetYaxis()->SetNdivisions(6, 5, 0);
+     hs_uu_MET2016MCbg->GetYaxis()->SetTitleOffset(1);
+     hs_uu_MET2016MCbg->GetYaxis()->SetTitle("nEvents");
+     hs_uu_MET2016MCbg->GetYaxis()->SetTitleSize(0.04);
+     hs_uu_MET2016MCbg->GetYaxis()->SetTitleOffset(1.5);
+     hs_uu_MET2016MCbg->GetYaxis()->SetLabelSize(0.04);
+     cout << "number of Events with DY = " << uu_HT_Met->Integral() << "\n";
+     cout << "number of Events with Top = " << uu_Top_Met->Integral() << "\n";
+     cout << "number of Events with Diboson = " << uu_Diboson_Met->Integral() << "\n";
+     cout << "number of Events with Triboson = " << uu_Triboson_Met->Integral() << "\n";
+     TLegend *l0 = new TLegend(0.4, 0.4, 0.90, 0.80);
+     l0->SetFillStyle(0);
+     l0->SetBorderSize(0);
+     l0->SetTextSize(0.03);
+     l0->SetHeader("2016MC Background");
+     l0->AddEntry(uu_HT_Met, "Drell-Yan process", "l");
+     l0->AddEntry(uu_Top_Met, "Top process", "l");
+     l0->AddEntry(uu_Diboson_Met, "Diboson process", "l");
+     l0->AddEntry(uu_Triboson_Met, "Triboson process", "l");
+     l0->Draw();
+     */
 
     /*
-    ee_Sig150_Met_cut->GetXaxis()->SetNdivisions(6, 5, 0);
-    ee_Sig150_Met_cut->GetXaxis()->SetTitleOffset(1.5);
-    ee_Sig150_Met_cut->GetXaxis()->SetTitle("Met");
-    ee_Sig150_Met_cut->GetYaxis()->SetNdivisions(6, 5, 0);
-    ee_Sig150_Met_cut->GetYaxis()->SetTitleOffset(1.5);
-    ee_Sig150_Met_cut->GetYaxis()->SetTitle("nEvents");
+    ee_Sig1_Met->GetXaxis()->SetNdivisions(6, 5, 0);
+    ee_Sig1_Met->GetXaxis()->SetTitleOffset(1.5);
+    ee_Sig1_Met->GetXaxis()->SetTitle("Met");
+    ee_Sig1_Met->GetYaxis()->SetNdivisions(6, 5, 0);
+    ee_Sig1_Met->GetYaxis()->SetTitleOffset(1.5);
+    ee_Sig1_Met->GetYaxis()->SetTitle("nEvents");
 
-    ee_Sig150_Met_cut->Draw("h same");
-    ee_Sig50_Met_cut->Draw("h same");
-    ee_Sig1_Met_cut->Draw("h same");
+    ee_Sig1_Met->Draw("h same");
+    ee_Sig150_Met->Draw("h same");
+    ee_Sig50_Met->Draw("h same");
+
 
     TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
     l1->SetBorderSize(0);
     l1->SetTextSize(0.03);
-    l1->AddEntry(ee_Sig1_Met_cut, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
-    l1->AddEntry(ee_Sig50_Met_cut, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
-    l1->AddEntry(ee_Sig150_Met_cut, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(ee_Sig1_Met, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(ee_Sig50_Met, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(ee_Sig150_Met, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
     l1->Draw();
     */
+    uu_Sig1_Met->GetXaxis()->SetNdivisions(6, 5, 0);
+    uu_Sig1_Met->GetXaxis()->SetTitleOffset(1.5);
+    uu_Sig1_Met->GetXaxis()->SetTitle("Met");
+    uu_Sig1_Met->GetYaxis()->SetNdivisions(6, 5, 0);
+    uu_Sig1_Met->GetYaxis()->SetTitleOffset(1.5);
+    uu_Sig1_Met->GetYaxis()->SetTitle("nEvents");
 
-    // canv->cd(2);
+    uu_Sig1_Met->Draw("h same");
+    uu_Sig150_Met->Draw("h same");
+    uu_Sig50_Met->Draw("h same");
+
+    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    l1->SetBorderSize(0);
+    l1->SetTextSize(0.03);
+    l1->AddEntry(uu_Sig1_Met, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(uu_Sig50_Met, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(uu_Sig150_Met, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+    l1->Draw();
     /*
     ee_Sig50_Met->GetXaxis()->SetNdivisions(6, 5, 0);
     ee_Sig50_Met->GetXaxis()->SetTitleOffset(1.5);
@@ -365,17 +448,6 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     ee_Sig50_dilepPT->Draw("h same");
     ee_Sig1_dilepPT->Draw("h same");
     ee_Sig150_dilepPT->Draw("h same");
-
-
-
-    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
-    l1->SetBorderSize(0);
-    l1->SetTextSize(0.03);
-    l1->AddEntry(uu_Sig1_Met, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
-    l1->AddEntry(uu_Sig50_Met, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
-    l1->AddEntry(uu_Sig150_Met, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
-    l1->Draw();
-
     */
 
     int iPeriod = 0;

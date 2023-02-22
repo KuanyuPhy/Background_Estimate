@@ -66,6 +66,23 @@ void ee_Top_var()
     h_Top_dilepPT->GetXaxis()->SetTitle("");
     h_Top_dilepPT->GetYaxis()->SetTitle("");
     h_Top_dilepPT->Sumw2();
+    //-------------------------------
+    // Each Top process
+    //--------------------------------
+    TH1D *h_TTTo2L2Nu_dilepPT = new TH1D("h_TTTo2L2Nu_dilepPT", "", 150, 0, 1500);
+    h_TTTo2L2Nu_dilepPT->Sumw2();
+    TH1D *h_ST_tW_top_dilepPT = new TH1D("h_ST_tW_top_dilepPT", "", 150, 0, 1500);
+    h_ST_tW_top_dilepPT->Sumw2();
+    TH1D *h_ST_tW_antitop_dilepPT = new TH1D("h_ST_tW_antitop_dilepPT", "", 150, 0, 1500);
+    h_ST_tW_antitop_dilepPT->Sumw2();
+    TH1D *h_TTWJetsToLNu_dilepPT = new TH1D("h_TTWJetsToLNu_dilepPT", "", 150, 0, 1500);
+    h_TTWJetsToLNu_dilepPT->Sumw2();
+    TH1D *h_TTWJetsToQQ_dilepPT = new TH1D("h_TTWJetsToQQ_dilepPT", "", 150, 0, 1500);
+    h_TTWJetsToQQ_dilepPT->Sumw2();
+    TH1D *h_TTZToQQ_dilepPT = new TH1D("h_TTZToQQ_dilepPT", "", 150, 0, 1500);
+    h_TTZToQQ_dilepPT->Sumw2();
+    TH1D *h_TTZToLLNuNu_dilepPT = new TH1D("h_TTZToLLNuNu_dilepPT", "", 150, 0, 1500);
+    h_TTZToLLNuNu_dilepPT->Sumw2();
 
     TH1D *h_Top_Met_cut = new TH1D("h_Top_Met_cut", "", 150, 0, 1500);
     h_Top_Met_cut->GetXaxis()->SetTitle("");
@@ -228,9 +245,11 @@ void ee_Top_var()
     {
         T_TTTo2L2Nu_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTTo2L2Nu_met, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+        h_Top_dilepPT->Fill(f_TTTo2L2Nu_dilepPT, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+        h_TTTo2L2Nu_dilepPT->Fill(f_TTTo2L2Nu_dilepPT, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
         if (f_TTTo2L2Nu_met > METcut)
         {
-            h_Top_dilepPT->Fill(f_TTTo2L2Nu_dilepPT, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+
             h_Top_Met_cut->Fill(f_TTTo2L2Nu_met, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
             h_TTTo2L2Nu_Met_cut->Fill(f_TTTo2L2Nu_met, I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
             for (size_t i = 0; i < v_TTTo2L2Nu_jetCSV->size(); i++)
@@ -261,6 +280,7 @@ void ee_Top_var()
             } // End of csv loop
         }
     }
+    //cout << "For total TTTo2L2Nu = " << h_TTTo2L2Nu_dilepPT->Integral() << endl;
     TTree *T_ST_tW_top_tree;
     Top_tW_topfile->GetObject("T_tree", T_ST_tW_top_tree);
     T_ST_tW_top_tree->SetBranchAddress("I_weight", &I_ST_tW_top_weight);
@@ -274,9 +294,11 @@ void ee_Top_var()
     {
         T_ST_tW_top_tree->GetEntry(evt);
         h_Top_Met->Fill(f_ST_tW_top_met, I_ST_tW_top_weight * ST_tW_topWeight);
+        h_Top_dilepPT->Fill(f_ST_tW_top_dilepPT, I_ST_tW_top_weight * ST_tW_topWeight);
+        h_ST_tW_top_dilepPT->Fill(f_ST_tW_top_dilepPT, I_ST_tW_top_weight * ST_tW_topWeight);
         if (f_ST_tW_top_met > METcut)
         {
-            h_Top_dilepPT->Fill(f_ST_tW_top_dilepPT, I_ST_tW_top_weight * ST_tW_topWeight);
+
             h_Top_Met_cut->Fill(f_ST_tW_top_met, I_ST_tW_top_weight * ST_tW_topWeight);
             h_ST_tW_top_Met_cut->Fill(f_ST_tW_top_met, I_ST_tW_top_weight * ST_tW_topWeight);
             for (size_t i = 0; i < v_ST_tW_top_jetCSV->size(); i++)
@@ -307,6 +329,7 @@ void ee_Top_var()
             } // End of csv loop
         }
     }
+    //cout << "For total ST_tW_top = " << h_ST_tW_top_dilepPT->Integral() << endl;
     TTree *T_ST_tW_antitop_tree;
     Top_tW_antitopfile->GetObject("T_tree", T_ST_tW_antitop_tree);
     T_ST_tW_antitop_tree->SetBranchAddress("I_weight", &I_ST_tW_antitop_weight);
@@ -320,9 +343,12 @@ void ee_Top_var()
     {
         T_ST_tW_antitop_tree->GetEntry(evt);
         h_Top_Met->Fill(f_ST_tW_antitop_met, I_ST_tW_antitop_weight * ST_tW_antitopWeight);
+        h_Top_dilepPT->Fill(f_ST_tW_antitop_dilepPT, I_ST_tW_antitop_weight * ST_tW_antitopWeight);
+        h_ST_tW_antitop_dilepPT->Fill(f_ST_tW_antitop_dilepPT, I_ST_tW_antitop_weight * ST_tW_antitopWeight);
+        
         if (f_ST_tW_antitop_met > METcut)
         {
-            h_Top_dilepPT->Fill(f_ST_tW_antitop_dilepPT, I_ST_tW_antitop_weight * ST_tW_antitopWeight);
+
             h_Top_Met_cut->Fill(f_ST_tW_antitop_met, I_ST_tW_antitop_weight * ST_tW_antitopWeight);
             h_ST_tW_antitop_Met_cut->Fill(f_ST_tW_antitop_met, I_ST_tW_antitop_weight * ST_tW_antitopWeight);
             for (size_t i = 0; i < v_ST_tW_antitop_jetCSV->size(); i++)
@@ -353,6 +379,8 @@ void ee_Top_var()
             } // End of csv loop
         }
     }
+    cout << "For total ST_tW_antitop_dilepPT = " << h_ST_tW_antitop_dilepPT->Integral() << endl;
+
     TTree *T_TTWJetsToLNu_tree;
     Top_TTWJetsToLNufile->GetObject("T_tree", T_TTWJetsToLNu_tree);
     T_TTWJetsToLNu_tree->SetBranchAddress("I_weight", &I_TTWJetsToLNu_weight);
@@ -366,12 +394,14 @@ void ee_Top_var()
     {
         T_TTWJetsToLNu_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTWJetsToLNu_met, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+        h_Top_dilepPT->Fill(f_TTWJetsToLNu_dilepPT, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+        h_TTWJetsToLNu_dilepPT->Fill(f_TTWJetsToLNu_dilepPT, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
         if (f_TTWJetsToLNu_met > METcut)
         {
-            h_Top_dilepPT->Fill(f_TTWJetsToLNu_dilepPT, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+
             h_Top_Met_cut->Fill(f_TTWJetsToLNu_met, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
             h_TTWJetsToLNu_Met_cut->Fill(f_TTWJetsToLNu_met, I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
-            //cout << "weight = " << TTWJetsToLNuWeight << endl;
+            // cout << "weight = " << TTWJetsToLNuWeight << endl;
             for (size_t i = 0; i < v_TTWJetsToLNu_jetCSV->size(); i++)
             {
                 h_Top_jetcsv->Fill((*v_TTWJetsToLNu_jetCSV)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
@@ -400,6 +430,8 @@ void ee_Top_var()
             } // End of csv loop
         }
     }
+    cout << "For total h_TTWJetsToLNu_dilepPT = " << h_TTWJetsToLNu_dilepPT->Integral() << endl;
+
     TTree *T_TTWJetsToQQ_tree;
     Top_TTWJetsToQQfile->GetObject("T_tree", T_TTWJetsToQQ_tree);
     T_TTWJetsToQQ_tree->SetBranchAddress("I_weight", &I_TTWJetsToQQ_weight);
@@ -414,9 +446,11 @@ void ee_Top_var()
     {
         T_TTWJetsToQQ_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTWJetsToQQ_met, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+        h_Top_dilepPT->Fill(f_TTWJetsToQQ_dilepPT, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+        h_TTWJetsToQQ_dilepPT->Fill(f_TTWJetsToQQ_dilepPT, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
         if (f_TTWJetsToQQ_met > METcut)
         {
-            h_Top_dilepPT->Fill(f_TTWJetsToQQ_dilepPT, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+
             h_Top_Met_cut->Fill(f_TTWJetsToQQ_met, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
             h_TTWJetsToQQ_Met_cut->Fill(f_TTWJetsToQQ_met, I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
             for (size_t i = 0; i < v_TTWJetsToQQ_jetCSV->size(); i++)
@@ -447,6 +481,8 @@ void ee_Top_var()
             } // End of csv loop
         }
     }
+    cout << "For total h_TTWJetsToQQ_dilepPT = " << h_TTWJetsToQQ_dilepPT->Integral() << endl;
+
     TTree *T_TTZToQQ_tree;
     Top_TTZToQQfile->GetObject("T_tree", T_TTZToQQ_tree);
     T_TTZToQQ_tree->SetBranchAddress("I_weight", &I_TTZToQQ_weight);
@@ -460,9 +496,11 @@ void ee_Top_var()
     {
         T_TTZToQQ_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTZToQQ_met, I_TTZToQQ_weight * TTZToQQWeight);
+        h_Top_dilepPT->Fill(f_TTZToQQ_dilepPT, I_TTZToQQ_weight * TTZToQQWeight);
+        h_TTZToQQ_dilepPT->Fill(f_TTZToQQ_dilepPT, I_TTZToQQ_weight * TTZToQQWeight);
         if (f_TTZToQQ_met > METcut)
         {
-            h_Top_dilepPT->Fill(f_TTZToQQ_dilepPT, I_TTZToQQ_weight * TTZToQQWeight);
+
             h_Top_Met_cut->Fill(f_TTZToQQ_met, I_TTZToQQ_weight * TTZToQQWeight);
             h_TTZToQQ_Met_cut->Fill(f_TTZToQQ_met, I_TTZToQQ_weight * TTZToQQWeight);
             for (size_t i = 0; i < v_TTZToQQ_jetCSV->size(); i++)
@@ -493,6 +531,8 @@ void ee_Top_var()
             } // End of csv loop
         }
     }
+    cout << "For total h_TTZToQQ_dilepPT = " << h_TTZToQQ_dilepPT->Integral() << endl;
+
     TTree *T_TTZToLLNuNu_tree;
     Top_TTZToLLNuNufile->GetObject("T_tree", T_TTZToLLNuNu_tree);
     T_TTZToLLNuNu_tree->SetBranchAddress("I_weight", &I_TTZToLLNuNu_weight);
@@ -506,9 +546,11 @@ void ee_Top_var()
     {
         T_TTZToLLNuNu_tree->GetEntry(evt);
         h_Top_Met->Fill(f_TTZToLLNuNu_met, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+        h_Top_dilepPT->Fill(f_TTZToLLNuNu_dilepPT, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+        h_TTZToLLNuNu_dilepPT->Fill(f_TTZToLLNuNu_dilepPT, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
         if (f_TTZToLLNuNu_met > METcut)
         {
-            h_Top_dilepPT->Fill(f_TTZToLLNuNu_dilepPT, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+
             h_Top_Met_cut->Fill(f_TTZToLLNuNu_met, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
             h_TTZToLLNuNu_Met_cut->Fill(f_TTZToLLNuNu_met, I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
             for (size_t i = 0; i < v_TTZToLLNuNu_jetCSV->size(); i++)
@@ -539,7 +581,9 @@ void ee_Top_var()
             } // End of csv loop
         }
     }
-    h_Top_dilepPT->Draw();
+    cout << "For total h_TTZToLLNuNu_dilepPT = " << h_TTZToLLNuNu_dilepPT->Integral() << endl;
+
+    // h_Top_dilepPT->Draw();
     TString outputfile1 = "./ee_Top_Met.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_Top_dilepPT->Write();

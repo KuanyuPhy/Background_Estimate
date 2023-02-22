@@ -8,6 +8,10 @@ class GlobalConstants
 public:
     // Unit pb^-1
     static constexpr float Lumi2016 = 35.9;
+    // For Signal
+    static constexpr float Mx2_1CS = 1.;
+    static constexpr float Mx2_50CS = 1.;
+    static constexpr float Mx2_150CS = 1.;
     // For DY Background
     static constexpr float HT0CS = 4274.424946;
     static constexpr float HT70CS = 149.9710714;

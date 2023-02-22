@@ -70,8 +70,8 @@ double diboson_gg_ZZ_2mu2tau_Weight = (GlobalConstants::Lumi2016) * (GlobalConst
 double diboson_gg_ZZ_4e_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::gg_ZZ_4e / (gg_ZZ_4e_totevt)) * 1000;
 double diboson_gg_ZZ_4mu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::gg_ZZ_4mu / (gg_ZZ_4mu_totevt)) * 1000;
 double diboson_gg_ZZ_4tau_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::gg_ZZ_4tau / (gg_ZZ_4tau_totevt)) * 1000;
-double diboson_gg_WW_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_WW_2L2Nu / (gg_WW_2L2Nu_totevt)) * 1000;
-double diboson_qq_WW_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_ZZ_2L2Nu / (qq_WW_2L2Nu_totevt)) * 1000;
+double diboson_gg_WW_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::gg_WW_2L2Nu / (gg_WW_2L2Nu_totevt)) * 1000;
+double diboson_qq_WW_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_WW_2L2Nu / (qq_WW_2L2Nu_totevt)) * 1000;
 double diboson_qq_WZ_2L2Q_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_WZ_2L2Q / (qq_WZ_2L2Q_totevt)) * 1000;
 double diboson_qq_WZ_3LNu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_WZ_3LNu / (qq_WZ_3LNu_totevt)) * 1000;
 double diboson_qq_ZZ_2L2Nu_Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::qq_ZZ_2L2Nu / (qq_ZZ_2L2Nu_totevt)) * 1000;
@@ -89,10 +89,15 @@ void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, double Weig
 void uu_Diboson_var()
 {
 
-    TH1D *h_Diboson_Met = new TH1D("h_Diboson_Met", "", 50, 0, 500);
+    TH1D *h_Diboson_Met = new TH1D("h_Diboson_Met", "", 150, 0, 1500);
     h_Diboson_Met->GetXaxis()->SetTitle("");
     h_Diboson_Met->GetYaxis()->SetTitle("");
     h_Diboson_Met->Sumw2();
+
+    TH1D *h_Diboson_dilepPT = new TH1D("h_Diboson_dilepPT", "", 150, 0, 1500);
+    h_Diboson_dilepPT->GetXaxis()->SetTitle("");
+    h_Diboson_dilepPT->GetYaxis()->SetTitle("");
+    h_Diboson_dilepPT->Sumw2();
 
     TH1D *h_Diboson_Met_cut = new TH1D("h_Diboson_Met_cut", "", 50, 0, 500);
     h_Diboson_Met_cut->GetXaxis()->SetTitle("");
@@ -128,6 +133,11 @@ void uu_Diboson_var()
         f_gg_ZZ_2mu2tau_met, f_gg_ZZ_4e_met, f_gg_ZZ_4mu_met, f_gg_ZZ_4tau_met, f_gg_WW_2L2Nu_met,
         f_qq_WW_2L2Nu_met, f_qq_WZ_2L2Q_met, f_qq_WZ_3LNu_met, f_qq_ZZ_2L2Nu_met, f_qq_ZZ_2L2Q_met,
         f_qq_ZZ_4L_met;
+
+    float_t f_gg_ZZ_2e2mu_dilepPT, f_gg_ZZ_2e2nu_dilepPT, f_gg_ZZ_2e2tau_dilepPT, f_gg_ZZ_2mu2nu_dilepPT,
+        f_gg_ZZ_2mu2tau_dilepPT, f_gg_ZZ_4e_dilepPT, f_gg_ZZ_4mu_dilepPT, f_gg_ZZ_4tau_dilepPT, f_gg_WW_2L2Nu_dilepPT,
+        f_qq_WW_2L2Nu_dilepPT, f_qq_WZ_2L2Q_dilepPT, f_qq_WZ_3LNu_dilepPT, f_qq_ZZ_2L2Nu_dilepPT, f_qq_ZZ_2L2Q_dilepPT,
+        f_qq_ZZ_4L_dilepPT;
 
     vector<float> *v_gg_ZZ_2e2mu_alpha = new vector<float>();
     vector<float> *v_gg_ZZ_2e2nu_alpha = new vector<float>();
@@ -231,6 +241,7 @@ void uu_Diboson_var()
     diboson_gg_ZZ_2e2mu->GetObject("T_tree", T_event);
     T_event->SetBranchAddress("I_weight", &f_gg_ZZ_2e2mu_weight);
     T_event->SetBranchAddress("f_Met", &f_gg_ZZ_2e2mu_met);
+    T_event->SetBranchAddress("f_dileptonPT", &f_gg_ZZ_2e2mu_dilepPT);
     T_event->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2e2mu_alpha);
     T_event->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2e2mu_jetCSV);
     T_event->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2e2mu_Jethadronflavor);
@@ -238,6 +249,7 @@ void uu_Diboson_var()
     {
         T_event->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2e2mu_met, f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2mu_met, f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
         if (f_gg_ZZ_2e2mu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2e2mu_met, f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
@@ -248,6 +260,7 @@ void uu_Diboson_var()
     diboson_gg_ZZ_2e2nu->GetObject("T_tree", T_event1);
     T_event1->SetBranchAddress("I_weight", &f_gg_ZZ_2e2nu_weight);
     T_event1->SetBranchAddress("f_Met", &f_gg_ZZ_2e2nu_met);
+    T_event1->SetBranchAddress("f_dileptonPT", &f_gg_ZZ_2e2nu_dilepPT);
     T_event1->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2e2nu_alpha);
     T_event1->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2e2nu_jetCSV);
     T_event1->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2e2nu_Jethadronflavor);
@@ -255,6 +268,7 @@ void uu_Diboson_var()
     {
         T_event1->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2e2nu_met, f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2nu_dilepPT, f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
         if (f_gg_ZZ_2e2nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2e2nu_met, f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
@@ -265,6 +279,7 @@ void uu_Diboson_var()
     diboson_gg_ZZ_2e2tau->GetObject("T_tree", T_event2);
     T_event2->SetBranchAddress("I_weight", &f_gg_ZZ_2e2tau_weight);
     T_event2->SetBranchAddress("f_Met", &f_gg_ZZ_2e2tau_met);
+    T_event2->SetBranchAddress("f_dileptonPT", &f_gg_ZZ_2e2tau_dilepPT);
     T_event2->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2e2tau_alpha);
     T_event2->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2e2tau_jetCSV);
     T_event2->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2e2tau_Jethadronflavor);
@@ -273,6 +288,7 @@ void uu_Diboson_var()
     {
         T_event2->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2e2tau_met, f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_2e2tau_dilepPT, f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
         if (f_gg_ZZ_2e2tau_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2e2tau_met, f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
@@ -283,6 +299,7 @@ void uu_Diboson_var()
     diboson_gg_ZZ_2mu2nu->GetObject("T_tree", T_event3);
     T_event3->SetBranchAddress("I_weight", &f_gg_ZZ_2mu2nu_weight);
     T_event3->SetBranchAddress("f_Met", &f_gg_ZZ_2mu2nu_met);
+    T_event3->SetBranchAddress("f_dileptonPT", &f_gg_ZZ_2mu2nu_dilepPT);
     T_event3->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2mu2nu_alpha);
     T_event3->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2mu2nu_jetCSV);
     T_event3->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2mu2nu_Jethadronflavor);
@@ -291,6 +308,8 @@ void uu_Diboson_var()
     {
         T_event3->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2mu2nu_met, f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_2mu2nu_dilepPT, f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
+
         if (f_gg_ZZ_2mu2nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2mu2nu_met, f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
@@ -301,6 +320,7 @@ void uu_Diboson_var()
     diboson_gg_ZZ_2mu2tau->GetObject("T_tree", T_event4);
     T_event4->SetBranchAddress("I_weight", &f_gg_ZZ_2mu2tau_weight);
     T_event4->SetBranchAddress("f_Met", &f_gg_ZZ_2mu2tau_met);
+    T_event4->SetBranchAddress("f_dileptonPT", &f_gg_ZZ_2mu2tau_dilepPT);
     T_event4->SetBranchAddress("v_fakealpha", &v_gg_ZZ_2mu2tau_alpha);
     T_event4->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_2mu2tau_jetCSV);
     T_event4->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_2mu2tau_Jethadronflavor);
@@ -309,6 +329,8 @@ void uu_Diboson_var()
     {
         T_event4->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_2mu2tau_met, f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_2mu2tau_dilepPT, f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
+
         if (f_gg_ZZ_2mu2tau_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_2mu2tau_met, f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
@@ -319,14 +341,16 @@ void uu_Diboson_var()
     diboson_gg_ZZ_4e->GetObject("T_tree", T_event5);
     T_event5->SetBranchAddress("I_weight", &f_gg_ZZ_4e_weight);
     T_event5->SetBranchAddress("f_Met", &f_gg_ZZ_4e_met);
+    T_event5->SetBranchAddress("f_dileptonPT", &f_gg_ZZ_4e_dilepPT);
     T_event5->SetBranchAddress("v_fakealpha", &v_gg_ZZ_4e_alpha);
     T_event5->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_4e_jetCSV);
     T_event5->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_4e_Jethadronflavor);
-
     for (int evt = 0; evt < T_event5->GetEntries(); evt++)
     {
         T_event5->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_4e_met, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_4e_dilepPT, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+
         if (f_gg_ZZ_4e_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_4e_met, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
@@ -337,14 +361,16 @@ void uu_Diboson_var()
     diboson_gg_ZZ_4mu->GetObject("T_tree", T_event6);
     T_event6->SetBranchAddress("I_weight", &f_gg_ZZ_4mu_weight);
     T_event6->SetBranchAddress("f_Met", &f_gg_ZZ_4mu_met);
+    T_event6->SetBranchAddress("f_dileptonPT", &f_gg_ZZ_4mu_dilepPT);
     T_event6->SetBranchAddress("v_fakealpha", &v_gg_ZZ_4mu_alpha);
     T_event6->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_4mu_jetCSV);
     T_event6->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_4mu_Jethadronflavor);
-
     for (int evt = 0; evt < T_event6->GetEntries(); evt++)
     {
         T_event6->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_4mu_met, f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_4mu_dilepPT, f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
+
         if (f_gg_ZZ_4mu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_4mu_met, f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
@@ -355,14 +381,16 @@ void uu_Diboson_var()
     diboson_gg_ZZ_4tau->GetObject("T_tree", T_event7);
     T_event7->SetBranchAddress("I_weight", &f_gg_ZZ_4tau_weight);
     T_event7->SetBranchAddress("f_Met", &f_gg_ZZ_4tau_met);
+    T_event7->SetBranchAddress("f_dileptonPT", &f_gg_ZZ_4tau_dilepPT);
     T_event7->SetBranchAddress("v_fakealpha", &v_gg_ZZ_4tau_alpha);
     T_event7->SetBranchAddress("f_thinjetCSV", &v_gg_ZZ_4tau_jetCSV);
     T_event7->SetBranchAddress("v_fakeJethadronflavor", &v_gg_ZZ_4tau_Jethadronflavor);
-
     for (int evt = 0; evt < T_event7->GetEntries(); evt++)
     {
         T_event7->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_ZZ_4tau_met, f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_4tau_dilepPT, f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
+
         if (f_gg_ZZ_4tau_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_ZZ_4tau_met, f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
@@ -373,14 +401,16 @@ void uu_Diboson_var()
     diboson_gg_WW_2L2Nu->GetObject("T_tree", T_event8);
     T_event8->SetBranchAddress("I_weight", &f_gg_WW_2L2Nu_weight);
     T_event8->SetBranchAddress("f_Met", &f_gg_WW_2L2Nu_met);
+    T_event8->SetBranchAddress("f_dileptonPT", &f_gg_WW_2L2Nu_dilepPT);
     T_event8->SetBranchAddress("v_fakealpha", &v_gg_WW_2L2Nu_alpha);
     T_event8->SetBranchAddress("f_thinjetCSV", &v_gg_WW_2L2Nu_jetCSV);
     T_event8->SetBranchAddress("v_fakeJethadronflavor", &v_gg_WW_2L2Nu_Jethadronflavor);
-
     for (int evt = 0; evt < T_event8->GetEntries(); evt++)
     {
         T_event8->GetEntry(evt);
         h_Diboson_Met->Fill(f_gg_WW_2L2Nu_met, f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_WW_2L2Nu_dilepPT, f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
+
         if (f_gg_WW_2L2Nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_gg_WW_2L2Nu_met, f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
@@ -391,14 +421,16 @@ void uu_Diboson_var()
     diboson_qq_WW_2L2Nu->GetObject("T_tree", T_event9);
     T_event9->SetBranchAddress("I_weight", &f_qq_WW_2L2Nu_weight);
     T_event9->SetBranchAddress("f_Met", &f_qq_WW_2L2Nu_met);
+    T_event9->SetBranchAddress("f_dileptonPT", &f_qq_WW_2L2Nu_dilepPT);
     T_event9->SetBranchAddress("v_fakealpha", &v_qq_WW_2L2Nu_alpha);
     T_event9->SetBranchAddress("f_thinjetCSV", &v_qq_WW_2L2Nu_jetCSV);
     T_event9->SetBranchAddress("v_fakeJethadronflavor", &v_qq_WW_2L2Nu_Jethadronflavor);
-
     for (int evt = 0; evt < T_event9->GetEntries(); evt++)
     {
         T_event9->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_WW_2L2Nu_met, f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
+        h_Diboson_dilepPT->Fill(f_qq_WW_2L2Nu_dilepPT, f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
+
         if (f_qq_WW_2L2Nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_WW_2L2Nu_met, f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
@@ -409,14 +441,16 @@ void uu_Diboson_var()
     diboson_qq_WZ_2L2Q->GetObject("T_tree", T_event10);
     T_event10->SetBranchAddress("I_weight", &f_qq_WZ_2L2Q_weight);
     T_event10->SetBranchAddress("f_Met", &f_qq_WZ_2L2Q_met);
+    T_event10->SetBranchAddress("f_dileptonPT", &f_qq_WZ_2L2Q_dilepPT);
     T_event10->SetBranchAddress("v_fakealpha", &v_qq_WZ_2L2Q_alpha);
     T_event10->SetBranchAddress("f_thinjetCSV", &v_qq_WZ_2L2Q_jetCSV);
     T_event10->SetBranchAddress("v_fakeJethadronflavor", &v_qq_WZ_2L2Q_Jethadronflavor);
-
     for (int evt = 0; evt < T_event10->GetEntries(); evt++)
     {
         T_event10->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_WZ_2L2Q_met, f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
+        h_Diboson_dilepPT->Fill(f_qq_WZ_2L2Q_dilepPT, f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
+
         if (f_qq_WZ_2L2Q_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_WZ_2L2Q_met, f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
@@ -427,14 +461,16 @@ void uu_Diboson_var()
     diboson_qq_WZ_3LNu->GetObject("T_tree", T_event11);
     T_event11->SetBranchAddress("I_weight", &f_qq_WZ_3LNu_weight);
     T_event11->SetBranchAddress("f_Met", &f_qq_WZ_3LNu_met);
+    T_event11->SetBranchAddress("f_dileptonPT", &f_qq_WZ_3LNu_dilepPT);
     T_event11->SetBranchAddress("v_fakealpha", &v_qq_WZ_3LNu_alpha);
     T_event11->SetBranchAddress("f_thinjetCSV", &v_qq_WZ_3LNu_jetCSV);
     T_event11->SetBranchAddress("v_fakeJethadronflavor", &v_qq_WZ_3LNu_Jethadronflavor);
-
     for (int evt = 0; evt < T_event11->GetEntries(); evt++)
     {
         T_event11->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_WZ_3LNu_met, f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
+        h_Diboson_dilepPT->Fill(f_qq_WZ_3LNu_dilepPT, f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
+
         if (f_qq_WZ_3LNu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_WZ_3LNu_met, f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
@@ -445,14 +481,15 @@ void uu_Diboson_var()
     diboson_qq_ZZ_2L2Nu->GetObject("T_tree", T_event12);
     T_event12->SetBranchAddress("I_weight", &f_qq_ZZ_2L2Nu_weight);
     T_event12->SetBranchAddress("f_Met", &f_qq_ZZ_2L2Nu_met);
+    T_event12->SetBranchAddress("f_dileptonPT", &f_qq_ZZ_2L2Nu_dilepPT);
     T_event12->SetBranchAddress("v_fakealpha", &v_qq_ZZ_2L2Nu_alpha);
     T_event12->SetBranchAddress("f_thinjetCSV", &v_qq_ZZ_2L2Nu_jetCSV);
     T_event12->SetBranchAddress("v_fakeJethadronflavor", &v_qq_ZZ_2L2Nu_Jethadronflavor);
-
     for (int evt = 0; evt < T_event12->GetEntries(); evt++)
     {
         T_event12->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_ZZ_2L2Nu_met, f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
+        h_Diboson_dilepPT->Fill(f_qq_ZZ_2L2Nu_dilepPT, f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
         if (f_qq_ZZ_2L2Nu_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_ZZ_2L2Nu_met, f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
@@ -471,6 +508,8 @@ void uu_Diboson_var()
     {
         T_event13->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_ZZ_2L2Q_met, f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_4e_met, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+
         if (f_qq_ZZ_2L2Q_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_ZZ_2L2Q_met, f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
@@ -489,6 +528,8 @@ void uu_Diboson_var()
     {
         T_event14->GetEntry(evt);
         h_Diboson_Met->Fill(f_qq_ZZ_4L_met, f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
+        h_Diboson_dilepPT->Fill(f_gg_ZZ_4e_met, f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+
         if (f_qq_ZZ_4L_met > METcut)
         {
             h_Diboson_Met_cut->Fill(f_qq_ZZ_4L_met, f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
@@ -497,6 +538,7 @@ void uu_Diboson_var()
     TString outputfile1 = "./uu_Diboson_Met.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_Diboson_Met->Write();
+    h_Diboson_dilepPT->Write();
     h_Diboson_Met_cut->Write();
     outfile_HT0->Close();
 }

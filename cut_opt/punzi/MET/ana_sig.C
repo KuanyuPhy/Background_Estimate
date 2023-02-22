@@ -30,22 +30,22 @@ void ana_sig()
 
     TH1D *h_bgall_nMET_cut = ((TH1D *)Bgfile->Get("h_pass_Bg_nMetcut"));
 
-    TH1D *h_pass_Mx2_1 = new TH1D("h_pass_Mx2_1", "", 160, 1, 160);
+    TH1D *h_pass_Mx2_1 = new TH1D("h_pass_Mx2_1", "", 160, 0, 160);
     h_pass_Mx2_1->Sumw2();
 
-    TH1D *h_pass_Mx2_1_nMetcut = new TH1D("h_pass_Mx2_1_nMetcut", "", 160, 1, 160);
+    TH1D *h_pass_Mx2_1_nMetcut = new TH1D("h_pass_Mx2_1_nMetcut", "", 160, 0, 160);
     h_pass_Mx2_1_nMetcut->Sumw2();
 
-    TH1D *h_pass_Mx2_50 = new TH1D("h_pass_Mx2_50", "", 160, 1, 160);
+    TH1D *h_pass_Mx2_50 = new TH1D("h_pass_Mx2_50", "", 160, 0, 160);
     h_pass_Mx2_50->Sumw2();
 
-    TH1D *h_pass_Mx2_50_nMetcut = new TH1D("h_pass_Mx2_50_nMetcut", "", 160, 1, 160);
+    TH1D *h_pass_Mx2_50_nMetcut = new TH1D("h_pass_Mx2_50_nMetcut", "", 160, 0, 160);
     h_pass_Mx2_50_nMetcut->Sumw2();
 
-    TH1D *h_pass_Mx2_150 = new TH1D("h_pass_Mx2_150", "", 160, 1, 160);
+    TH1D *h_pass_Mx2_150 = new TH1D("h_pass_Mx2_150", "", 160, 0, 160);
     h_pass_Mx2_150->Sumw2();
 
-    TH1D *h_pass_Mx2_150_nMetcut = new TH1D("h_pass_Mx2_150_nMetcut", "", 160, 1, 160);
+    TH1D *h_pass_Mx2_150_nMetcut = new TH1D("h_pass_Mx2_150_nMetcut", "", 160, 0, 160);
     h_pass_Mx2_150_nMetcut->Sumw2();
 
     Int_t I_Mx1_weight, I_Mx50_weight, I_Mx150_weight;
@@ -144,9 +144,9 @@ void ana_sig()
         cout << "punzi =" << Sig150_punzi[i] << endl;
     }
 
-    TH1D *h_punzisig1 = new TH1D("h_punzisig1", "", 160, 1, 160);
-    TH1D *h_punzisig50 = new TH1D("h_punzisig50", "", 160, 1, 160);
-    TH1D *h_punzisig150 = new TH1D("h_punzisig150", "", 160, 1, 160);
+    TH1D *h_punzisig1 = new TH1D("h_punzisig1", "", 160, 0, 160);
+    TH1D *h_punzisig50 = new TH1D("h_punzisig50", "", 160, 0, 160);
+    TH1D *h_punzisig150 = new TH1D("h_punzisig150", "", 160, 0, 160);
     for (int i = 1; i <= 150; i++)
     {
         h_punzisig1->SetBinContent(i, Sig1_punzi[i]);

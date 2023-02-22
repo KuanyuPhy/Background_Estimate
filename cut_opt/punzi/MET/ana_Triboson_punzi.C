@@ -41,10 +41,10 @@ void ana_Triboson_punzi(const char *scanMet_step = "tmp", TString outputfile = "
     float metcut = atoi(scanMet_step) * 10;
     cout << "metcut" << metcut << endl;
 
-    TH1D *h_pass_Bg = new TH1D("h_pass_Bg", "", 160, 1, 160);
+    TH1D *h_pass_Bg = new TH1D("h_pass_Bg", "", 160, 0, 160);
     h_pass_Bg->Sumw2();
 
-    TH1D *h_pass_Bg_nMetcut = new TH1D("h_pass_Bg_nMetcut", "", 160, 1, 160);
+    TH1D *h_pass_Bg_nMetcut = new TH1D("h_pass_Bg_nMetcut", "", 160, 0, 160);
     h_pass_Bg_nMetcut->Sumw2();
 
     Int_t I_WWZ_weight, I_WZZ_weight, I_ZZZ_weight;

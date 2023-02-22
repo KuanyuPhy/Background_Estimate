@@ -32,10 +32,15 @@ double ZZZWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ZZZ_TuneCUETP
 
 void uu_Triboson_var()
 {
-    TH1D *h_Triboson_Met = new TH1D("h_Triboson_Met", "", 50, 0, 500);
+    TH1D *h_Triboson_Met = new TH1D("h_Triboson_Met", "", 150, 0, 1500);
     h_Triboson_Met->GetXaxis()->SetTitle("");
     h_Triboson_Met->GetYaxis()->SetTitle("");
     h_Triboson_Met->Sumw2();
+
+    TH1D *h_Triboson_dilepPT = new TH1D("h_Triboson_dilepPT", "", 150, 0, 1500);
+    h_Triboson_dilepPT->GetXaxis()->SetTitle("");
+    h_Triboson_dilepPT->GetYaxis()->SetTitle("");
+    h_Triboson_dilepPT->Sumw2();
 
     TH1D *h_Triboson_Met_cut = new TH1D("h_Triboson_Met_cut", "", 50, 0, 500);
     h_Triboson_Met_cut->GetXaxis()->SetTitle("");
@@ -45,6 +50,8 @@ void uu_Triboson_var()
     Int_t I_WWZ_weight, I_WZZ_weight, I_ZZZ_weight;
 
     float_t f_WWZ_met, f_WZZ_met, f_ZZZ_met;
+
+    float_t f_WWZ_dilepPT, f_WZZ_dilepPT, f_ZZZ_dilepPT;
 
     vector<float> *v_WWZ_alpha = new vector<float>();
     vector<float> *v_WZZ_alpha = new vector<float>();
@@ -60,11 +67,14 @@ void uu_Triboson_var()
     triboson_WWZfile->GetObject("T_tree", T_tree);
     T_tree->SetBranchAddress("I_weight", &I_WWZ_weight);
     T_tree->SetBranchAddress("f_Met", &f_WWZ_met);
+    T_tree->SetBranchAddress("f_dileptonPT", &f_WWZ_dilepPT);
     T_tree->SetBranchAddress("v_fakealpha", &v_WWZ_alpha);
     for (int evt = 0; evt < T_tree->GetEntries(); evt++)
     {
         T_tree->GetEntry(evt);
         h_Triboson_Met->Fill(f_WWZ_met, I_WWZ_weight * WWZWeight);
+        h_Triboson_dilepPT->Fill(f_WWZ_dilepPT, I_WWZ_weight * WWZWeight);
+
         if (f_WWZ_met > METcut)
         {
             h_Triboson_Met_cut->Fill(f_WWZ_met, I_WWZ_weight * WWZWeight);
@@ -74,11 +84,14 @@ void uu_Triboson_var()
     triboson_WZZfile->GetObject("T_tree", T_tree2);
     T_tree2->SetBranchAddress("I_weight", &I_WZZ_weight);
     T_tree2->SetBranchAddress("f_Met", &f_WZZ_met);
+    T_tree2->SetBranchAddress("f_dileptonPT", &f_WZZ_dilepPT);
     T_tree2->SetBranchAddress("v_fakealpha", &v_WZZ_alpha);
     for (int evt = 0; evt < T_tree2->GetEntries(); evt++)
     {
         T_tree2->GetEntry(evt);
         h_Triboson_Met->Fill(f_WZZ_met, I_WZZ_weight * WZZWeight);
+        h_Triboson_dilepPT->Fill(f_WZZ_dilepPT, I_WZZ_weight * WZZWeight);
+
         if (f_WZZ_met > METcut)
         {
             h_Triboson_Met_cut->Fill(f_WZZ_met, I_WZZ_weight * WZZWeight);
@@ -89,17 +102,20 @@ void uu_Triboson_var()
     triboson_ZZZfile->GetObject("T_tree", T_tree3);
     T_tree3->SetBranchAddress("I_weight", &I_ZZZ_weight);
     T_tree3->SetBranchAddress("f_Met", &f_ZZZ_met);
+    T_tree3->SetBranchAddress("f_dileptonPT", &f_ZZZ_dilepPT);
     T_tree3->SetBranchAddress("v_fakealpha", &v_ZZZ_alpha);
     for (int evt = 0; evt < T_tree3->GetEntries(); evt++)
     {
         T_tree3->GetEntry(evt);
         h_Triboson_Met->Fill(f_ZZZ_met, I_ZZZ_weight * ZZZWeight);
+        h_Triboson_dilepPT->Fill(f_ZZZ_dilepPT, I_ZZZ_weight * ZZZWeight);
+
         if (f_ZZZ_met > METcut)
         {
             h_Triboson_Met_cut->Fill(f_ZZZ_met, I_ZZZ_weight * ZZZWeight);
         }
     }
-    //_Bg_Met->Draw();
+    h_Triboson_dilepPT->Draw();
     TString outputfile1 = "./uu_Triboson_Met.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_Triboson_Met->Write();

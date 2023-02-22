@@ -50,6 +50,7 @@ int HT2500_Inf_event = h_HT_eventCout->GetBinContent(10);
 //---------------------
 // Define the HTWeight
 //---------------------
+
 double HT0Weight = (GlobalConstants::Lumi2016) * ((GlobalConstants::HT0CS) / (HT0_70_event)) * 1000;
 double HT70Weight = (GlobalConstants::Lumi2016) * ((GlobalConstants::HT70CS) / (HT70_100_event)) * 1000;
 double HT100Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT100CS / (DYHT100_totevt + HT100_200_event)) * 1000;
@@ -59,6 +60,18 @@ double HT600Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT600CS / (
 double HT800Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT800CS / (DYHT800_totevt + HT800_1200_event)) * 1000;
 double HT1200Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT1200CS / (DYHT1200_totevt + HT1200_2500_event)) * 1000;
 double HT2500Weight = (GlobalConstants::Lumi2016) * (GlobalConstants::HT2500CS / (DYHT2500_totevt + HT2500_Inf_event)) * 1000;
+
+/*
+double HT0Weight = 1;
+double HT70Weight =  1;
+double HT100Weight =  1;
+double HT200Weight =  1;
+double HT400Weight =  1;
+double HT600Weight =  1;
+double HT800Weight =  1;
+double HT1200Weight =  1;
+double HT2500Weight =  1;
+*/
 
 void for_inclusive_sample(float HT, float i_tmp, double Weight, TH1D *h_tmp)
 {
@@ -173,38 +186,82 @@ void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, double Weig
     }
 }
 
-void ee_HT_var()
+void ee_DY_var()
 {
-    TH1D *h_DY_Met = new TH1D("h_DY_Met", "", 50, 0, 500);
+    TH1D *h_DY_Met = new TH1D("h_DY_Met", "", 150, 0, 1500);
     h_DY_Met->Sumw2();
 
-    TH1D *h_DY_Met_cut = new TH1D("h_DY_Met_cut", "", 50, 0, 500);
+    TH1D *h_DY_Met_cut = new TH1D("h_DY_Met_cut", "", 150, 0, 1500);
     h_DY_Met_cut->Sumw2();
 
-    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 50, -5, 5);
-    h_bg_3DSig->Sumw2();
+    TH1D *h_DY_jetcsv = new TH1D("h_DY_jetcsv", "", 20, 0, 1);
+    h_DY_jetcsv->Sumw2();
 
-    TH1D *h_bg_alpha1 = new TH1D("h_bg_alpha1", "", 20, 0, 1);
-    h_bg_alpha1->Sumw2();
+    TH1D *h_DYht0_70_dilepPT = new TH1D("h_DYht0_70_dilepPT", "", 100, 0, 1000);
+h_DYht0_70_dilepPT->Sumw2();
 
-    TH1D *h_bg_alpha2 = new TH1D("h_bg_alpha2", "", 20, 0, 1);
-    h_bg_alpha2->Sumw2();
+TH1D *h_DYht70_100_dilepPT = new TH1D("h_DYht0_70_dilepPT", "", 100, 0, 1000);
+h_DYht0_70_dilepPT->Sumw2();
 
-    TH1D *h_bg_alpha3 = new TH1D("h_bg_alpha3", "", 20, 0, 1);
-    h_bg_alpha3->Sumw2();
+TH1D *h_DYht100_200_dilepPT = new TH1D("h_DYht0_70_dilepPT", "", 100, 0, 1000);
+h_DYht0_70_dilepPT->Sumw2();
 
-    TH1D *h_bg_alpha4 = new TH1D("h_bg_alpha4", "", 20, 0, 1);
-    h_bg_alpha4->Sumw2();
+TH1D *h_DYht200_400_dilepPT = new TH1D("h_DYht0_70_dilepPT", "", 100, 0, 1000);
+h_DYht0_70_dilepPT->Sumw2();
+
+TH1D *h_DYht400_600_dilepPT = new TH1D("h_DYht0_70_dilepPT", "", 100, 0, 1000);
+h_DYht0_70_dilepPT->Sumw2();
+
+TH1D *h_DYht600_800_dilepPT = new TH1D("h_DYht600_800_dilepPT", "", 100, 0, 1000);
+h_DYht600_800_dilepPT->Sumw2();
+
+TH1D *h_DYht800_1200_dilepPT = new TH1D("h_DYht800_1200_dilepPT", "", 100, 0, 1000);
+h_DYht800_1200_dilepPT->Sumw2();
+
+TH1D *h_DYht1200_2500_dilepPT = new TH1D("h_DYht1200_2500_dilepPT", "", 100, 0, 1000);
+h_DYht1200_2500_dilepPT->Sumw2();
+
+    TH1D *h_DY_dilepPT = new TH1D("h_DY_dilepPT", "", 100, 0, 1000);
+    h_DY_dilepPT->Sumw2();
+
+    TH1D *h_DY_bjetcsv = new TH1D("h_DY_bjetcsv", "", 20, 0, 1);
+    h_DY_bjetcsv->Sumw2();
+
+    TH1D *h_DY_cjetCSV = new TH1D("h_DY_cjetCSV", "", 20, 0, 1);
+    h_DY_cjetCSV->Sumw2();
+
+    TH1D *h_DY_ljetcsv = new TH1D("h_DY_ljetcsv", "", 20, 0, 1);
+    h_DY_ljetcsv->Sumw2();
+
+    // Cut alpha
+    TH1D *h_DY_jetcsv_cutalpha = new TH1D("h_DY_jetcsv_cutalpha", "", 20, 0, 1);
+    h_DY_jetcsv_cutalpha->Sumw2();
+
+    TH1D *h_DY_bjetcsv_cutalpha = new TH1D("h_DY_bjetcsv_cutalpha", "", 20, 0, 1);
+    h_DY_bjetcsv_cutalpha->Sumw2();
+
+    TH1D *h_DY_ljetcsv_cutalpha = new TH1D("h_DY_ljetcsv_cutalpha", "", 20, 0, 1);
+    h_DY_ljetcsv_cutalpha->Sumw2();
+
+    TH1D *h_DY_bJetMass = new TH1D("h_DY_bJetMass", "", 50, 0., 150.);
+    h_DY_bJetMass->Sumw2();
+
+    TH1D *h_DY_lJetMass = new TH1D("h_DY_lJetMass", "", 50, 0., 150.);
+    h_DY_lJetMass->Sumw2();
 
     float_t HT;
 
     float_t f_ht0_Met, f_ht70_Met, f_ht100_Met, f_ht200_Met, f_ht400_Met, f_ht600_Met, f_ht800_Met,
         f_ht1200_Met, f_ht2500_Met;
 
+    float_t f_ht0_dilepPT, f_ht100_dilepPT, f_ht200_dilepPT, f_ht400_dilepPT, f_ht600_dilepPT, f_ht800_dilepPT,
+        f_ht1200_dilepPT, f_ht2500_dilepPT;
+
     Int_t I_ht0_weight, I_ht70_weight, I_ht100_weight, I_ht200_weight, I_ht400_weight, I_ht600_weight,
         I_ht800_weight, I_ht1200_weight, I_ht2500_weight;
 
     vector<float> *v_ht0_alpha = new vector<float>();
+    vector<float> *v_ht70_alpha = new vector<float>();
     vector<float> *v_ht100_alpha = new vector<float>();
     vector<float> *v_ht200_alpha = new vector<float>();
     vector<float> *v_ht400_alpha = new vector<float>();
@@ -214,6 +271,7 @@ void ee_HT_var()
     vector<float> *v_ht2500_alpha = new vector<float>();
 
     v_ht0_alpha->clear();
+    v_ht70_alpha->clear();
     v_ht100_alpha->clear();
     v_ht200_alpha->clear();
     v_ht400_alpha->clear();
@@ -221,60 +279,6 @@ void ee_HT_var()
     v_ht800_alpha->clear();
     v_ht1200_alpha->clear();
     v_ht2500_alpha->clear();
-
-    vector<float> *v_ht0_alpha2 = new vector<float>();
-    vector<float> *v_ht100_alpha2 = new vector<float>();
-    vector<float> *v_ht200_alpha2 = new vector<float>();
-    vector<float> *v_ht400_alpha2 = new vector<float>();
-    vector<float> *v_ht600_alpha2 = new vector<float>();
-    vector<float> *v_ht800_alpha2 = new vector<float>();
-    vector<float> *v_ht1200_alpha2 = new vector<float>();
-    vector<float> *v_ht2500_alpha2 = new vector<float>();
-
-    v_ht0_alpha2->clear();
-    v_ht100_alpha2->clear();
-    v_ht200_alpha2->clear();
-    v_ht400_alpha2->clear();
-    v_ht600_alpha2->clear();
-    v_ht800_alpha2->clear();
-    v_ht1200_alpha2->clear();
-    v_ht2500_alpha2->clear();
-
-    vector<float> *v_ht0_alpha3 = new vector<float>();
-    vector<float> *v_ht100_alpha3 = new vector<float>();
-    vector<float> *v_ht200_alpha3 = new vector<float>();
-    vector<float> *v_ht400_alpha3 = new vector<float>();
-    vector<float> *v_ht600_alpha3 = new vector<float>();
-    vector<float> *v_ht800_alpha3 = new vector<float>();
-    vector<float> *v_ht1200_alpha3 = new vector<float>();
-    vector<float> *v_ht2500_alpha3 = new vector<float>();
-
-    v_ht0_alpha3->clear();
-    v_ht100_alpha3->clear();
-    v_ht200_alpha3->clear();
-    v_ht400_alpha3->clear();
-    v_ht600_alpha3->clear();
-    v_ht800_alpha3->clear();
-    v_ht1200_alpha3->clear();
-    v_ht2500_alpha3->clear();
-
-    vector<float> *v_ht0_alpha4 = new vector<float>();
-    vector<float> *v_ht100_alpha4 = new vector<float>();
-    vector<float> *v_ht200_alpha4 = new vector<float>();
-    vector<float> *v_ht400_alpha4 = new vector<float>();
-    vector<float> *v_ht600_alpha4 = new vector<float>();
-    vector<float> *v_ht800_alpha4 = new vector<float>();
-    vector<float> *v_ht1200_alpha4 = new vector<float>();
-    vector<float> *v_ht2500_alpha4 = new vector<float>();
-
-    v_ht0_alpha4->clear();
-    v_ht100_alpha4->clear();
-    v_ht200_alpha4->clear();
-    v_ht400_alpha4->clear();
-    v_ht600_alpha4->clear();
-    v_ht800_alpha4->clear();
-    v_ht1200_alpha4->clear();
-    v_ht2500_alpha4->clear();
 
     vector<float> *v_ht0_jetcsv = new vector<float>();
     vector<float> *v_ht70_jetcsv = new vector<float>();
@@ -296,25 +300,25 @@ void ee_HT_var()
     v_ht1200_jetcsv->clear();
     v_ht2500_jetcsv->clear();
 
-    vector<float> *v_ht0_log3Dsig = new vector<float>();
-    vector<float> *v_ht70_log3Dsig = new vector<float>();
-    vector<float> *v_ht100_log3Dsig = new vector<float>();
-    vector<float> *v_ht200_log3Dsig = new vector<float>();
-    vector<float> *v_ht400_log3Dsig = new vector<float>();
-    vector<float> *v_ht600_log3Dsig = new vector<float>();
-    vector<float> *v_ht800_log3Dsig = new vector<float>();
-    vector<float> *v_ht1200_log3Dsig = new vector<float>();
-    vector<float> *v_ht2500_log3Dsig = new vector<float>();
+    vector<float> *v_ht0_jetMass = new vector<float>();
+    vector<float> *v_ht70_jetMass = new vector<float>();
+    vector<float> *v_ht100_jetMass = new vector<float>();
+    vector<float> *v_ht200_jetMass = new vector<float>();
+    vector<float> *v_ht400_jetMass = new vector<float>();
+    vector<float> *v_ht600_jetMass = new vector<float>();
+    vector<float> *v_ht800_jetMass = new vector<float>();
+    vector<float> *v_ht1200_jetMass = new vector<float>();
+    vector<float> *v_ht2500_jetMass = new vector<float>();
 
-    v_ht0_log3Dsig->clear();
-    v_ht70_log3Dsig->clear();
-    v_ht100_log3Dsig->clear();
-    v_ht200_log3Dsig->clear();
-    v_ht400_log3Dsig->clear();
-    v_ht600_log3Dsig->clear();
-    v_ht800_log3Dsig->clear();
-    v_ht1200_log3Dsig->clear();
-    v_ht2500_log3Dsig->clear();
+    v_ht0_jetMass->clear();
+    v_ht70_jetMass->clear();
+    v_ht100_jetMass->clear();
+    v_ht200_jetMass->clear();
+    v_ht400_jetMass->clear();
+    v_ht600_jetMass->clear();
+    v_ht800_jetMass->clear();
+    v_ht1200_jetMass->clear();
+    v_ht2500_jetMass->clear();
 
     vector<float> *v_ht0_Jethadronflavor = new vector<float>();
     vector<float> *v_ht70_Jethadronflavor = new vector<float>();
@@ -336,257 +340,133 @@ void ee_HT_var()
     v_ht1200_Jethadronflavor->clear();
     v_ht2500_Jethadronflavor->clear();
 
-    double metcut = 0.;
+    double metcut = 130.;
 
     TTree *T_inclusive;
     DYincli->GetObject("T_tree", T_inclusive);
     T_inclusive->SetBranchAddress("I_weight", &I_ht0_weight);
     T_inclusive->SetBranchAddress("f_HT", &HT);
     T_inclusive->SetBranchAddress("f_Met", &f_ht0_Met);
-    T_inclusive->SetBranchAddress("v_Chi3Dlog", &v_ht0_log3Dsig);
+    T_inclusive->SetBranchAddress("f_dileptonPT", &f_ht0_dilepPT);
     T_inclusive->SetBranchAddress("v_fakealpha", &v_ht0_alpha);
-    T_inclusive->SetBranchAddress("v_fakealpha2", &v_ht0_alpha2);
-    T_inclusive->SetBranchAddress("v_fakealpha3", &v_ht0_alpha3);
-    T_inclusive->SetBranchAddress("v_fakealpha4", &v_ht0_alpha4);
+    T_inclusive->SetBranchAddress("v_fakeJetMass", &v_ht0_jetMass);
     T_inclusive->SetBranchAddress("f_thinjetCSV", &v_ht0_jetcsv);
     T_inclusive->SetBranchAddress("v_fakeJethadronflavor", &v_ht0_Jethadronflavor);
     for (int evt = 0; evt < T_inclusive->GetEntries(); evt++)
     {
         T_inclusive->GetEntry(evt);
-        /*if (f_ht0_Met < metcut)
-        {
-            continue;
-        }*/
-        for (size_t i = 0; i < v_ht0_log3Dsig->size(); i++)
-        {
-            for_inclusive_sample(HT, (*v_ht0_log3Dsig)[i], I_ht0_weight, h_bg_3DSig);
-        }
-        for (size_t i = 0; i < v_ht0_alpha->size(); i++)
-        {
-            for_inclusive_sample(HT, (*v_ht0_alpha)[i], I_ht0_weight, h_bg_alpha1);
-            for_inclusive_sample(HT, (*v_ht0_alpha2)[i], I_ht0_weight, h_bg_alpha2);
-            for_inclusive_sample(HT, (*v_ht0_alpha3)[i], I_ht0_weight, h_bg_alpha3);
-            for_inclusive_sample(HT, (*v_ht0_alpha4)[i], I_ht0_weight, h_bg_alpha4);
-        }
+        for_inclusive_sample(HT, f_ht0_Met, I_ht0_weight, h_DY_Met);
+        for_inclusive_sample(HT, f_ht0_dilepPT, I_ht0_weight, h_DY_dilepPT);
     }
     TTree *T_HT100;
     DYHT100->GetObject("T_tree", T_HT100);
     T_HT100->SetBranchAddress("I_weight", &I_ht100_weight);
     T_HT100->SetBranchAddress("f_Met", &f_ht100_Met);
-    T_HT100->SetBranchAddress("v_Chi3Dlog", &v_ht100_log3Dsig);
+    T_HT100->SetBranchAddress("f_dileptonPT", &f_ht100_dilepPT);
     T_HT100->SetBranchAddress("v_fakealpha", &v_ht100_alpha);
-    T_HT100->SetBranchAddress("v_fakealpha2", &v_ht100_alpha2);
-    T_HT100->SetBranchAddress("v_fakealpha3", &v_ht100_alpha3);
-    T_HT100->SetBranchAddress("v_fakealpha4", &v_ht100_alpha4);
+    T_HT100->SetBranchAddress("v_fakeJetMass", &v_ht100_jetMass);
     T_HT100->SetBranchAddress("f_thinjetCSV", &v_ht100_jetcsv);
     T_HT100->SetBranchAddress("v_fakeJethadronflavor", &v_ht100_Jethadronflavor);
     for (int evt = 0; evt < T_HT100->GetEntries(); evt++)
     {
         T_HT100->GetEntry(evt);
-        /*if (f_ht100_Met < metcut)
-        {
-            continue;
-        }*/
-        for (size_t i = 0; i < v_ht100_log3Dsig->size(); i++)
-        {
-            h_bg_3DSig->Fill((*v_ht100_log3Dsig)[i], I_ht100_weight * HT100Weight);
-        }
-        for (size_t i = 0; i < v_ht100_alpha->size(); i++)
-        {
-            h_bg_alpha1->Fill((*v_ht100_alpha)[i], I_ht100_weight * HT100Weight);
-            h_bg_alpha2->Fill((*v_ht100_alpha2)[i], I_ht100_weight * HT100Weight);
-            h_bg_alpha3->Fill((*v_ht100_alpha3)[i], I_ht100_weight * HT100Weight);
-            h_bg_alpha4->Fill((*v_ht100_alpha4)[i], I_ht100_weight * HT100Weight);
-        }
+        h_DY_Met->Fill(f_ht100_Met, I_ht100_weight * HT100Weight);
+        h_DY_dilepPT->Fill(f_ht100_dilepPT, I_ht100_weight * HT100Weight);
     }
     TTree *T_HT200;
     DYHT200->GetObject("T_tree", T_HT200);
     T_HT200->SetBranchAddress("I_weight", &I_ht200_weight);
     T_HT200->SetBranchAddress("f_Met", &f_ht200_Met);
-    T_HT200->SetBranchAddress("v_Chi3Dlog", &v_ht200_log3Dsig);
+    T_HT200->SetBranchAddress("f_dileptonPT", &f_ht200_dilepPT);
     T_HT200->SetBranchAddress("v_fakealpha", &v_ht200_alpha);
-    T_HT200->SetBranchAddress("v_fakealpha2", &v_ht200_alpha2);
-    T_HT200->SetBranchAddress("v_fakealpha3", &v_ht200_alpha3);
-    T_HT200->SetBranchAddress("v_fakealpha4", &v_ht200_alpha4);
+    T_HT200->SetBranchAddress("v_fakeJetMass", &v_ht200_jetMass);
     T_HT200->SetBranchAddress("f_thinjetCSV", &v_ht200_jetcsv);
     T_HT200->SetBranchAddress("v_fakeJethadronflavor", &v_ht200_Jethadronflavor);
     for (int evt = 0; evt < T_HT200->GetEntries(); evt++)
     {
         T_HT200->GetEntry(evt);
-        /*if (f_ht200_Met < metcut)
-        {
-            continue;
-        }*/
-        for (size_t i = 0; i < v_ht200_log3Dsig->size(); i++)
-        {
-            h_bg_3DSig->Fill((*v_ht200_log3Dsig)[i], I_ht200_weight * HT200Weight);
-        }
-        for (size_t i = 0; i < v_ht200_alpha->size(); i++)
-        {
-            h_bg_alpha1->Fill((*v_ht200_alpha)[i], I_ht200_weight * HT200Weight);
-            h_bg_alpha2->Fill((*v_ht200_alpha2)[i], I_ht200_weight * HT200Weight);
-            h_bg_alpha3->Fill((*v_ht200_alpha3)[i], I_ht200_weight * HT200Weight);
-            h_bg_alpha4->Fill((*v_ht200_alpha4)[i], I_ht200_weight * HT200Weight);
-        }
+        h_DY_Met->Fill(f_ht200_Met, I_ht200_weight * HT200Weight);
+        h_DY_dilepPT->Fill(f_ht200_dilepPT, I_ht200_weight * HT200Weight);
     }
     TTree *T_HT400;
     DYHT400->GetObject("T_tree", T_HT400);
     T_HT400->SetBranchAddress("I_weight", &I_ht400_weight);
     T_HT400->SetBranchAddress("f_Met", &f_ht400_Met);
-    T_HT400->SetBranchAddress("v_Chi3Dlog", &v_ht400_log3Dsig);
+    T_HT400->SetBranchAddress("f_dileptonPT", &f_ht400_dilepPT);
     T_HT400->SetBranchAddress("v_fakealpha", &v_ht400_alpha);
-    T_HT400->SetBranchAddress("v_fakealpha2", &v_ht400_alpha2);
-    T_HT400->SetBranchAddress("v_fakealpha3", &v_ht400_alpha3);
-    T_HT400->SetBranchAddress("v_fakealpha4", &v_ht400_alpha4);
+    T_HT400->SetBranchAddress("v_fakeJetMass", &v_ht400_jetMass);
     T_HT400->SetBranchAddress("f_thinjetCSV", &v_ht400_jetcsv);
     T_HT400->SetBranchAddress("v_fakeJethadronflavor", &v_ht400_Jethadronflavor);
     for (int evt = 0; evt < T_HT400->GetEntries(); evt++)
     {
         T_HT400->GetEntry(evt);
-        /*if (f_ht400_Met < metcut)
-        {
-            continue;
-        }*/
-        for (size_t i = 0; i < v_ht400_log3Dsig->size(); i++)
-        {
-            h_bg_3DSig->Fill((*v_ht400_log3Dsig)[i], I_ht400_weight * HT400Weight);
-        }
-        for (size_t i = 0; i < v_ht400_alpha->size(); i++)
-        {
-            h_bg_alpha1->Fill((*v_ht400_alpha)[i], I_ht400_weight * HT400Weight);
-            h_bg_alpha2->Fill((*v_ht400_alpha2)[i], I_ht400_weight * HT400Weight);
-            h_bg_alpha3->Fill((*v_ht400_alpha3)[i], I_ht400_weight * HT400Weight);
-            h_bg_alpha4->Fill((*v_ht400_alpha4)[i], I_ht400_weight * HT400Weight);
-        }
+        h_DY_Met->Fill(f_ht400_Met, I_ht400_weight * HT400Weight);
+        h_DY_dilepPT->Fill(f_ht400_dilepPT, I_ht400_weight * HT400Weight);
     }
     TTree *T_HT600;
     DYHT600->GetObject("T_tree", T_HT600);
     T_HT600->SetBranchAddress("I_weight", &I_ht600_weight);
     T_HT600->SetBranchAddress("f_Met", &f_ht600_Met);
-    T_HT600->SetBranchAddress("v_Chi3Dlog", &v_ht600_log3Dsig);
+    T_HT600->SetBranchAddress("f_dileptonPT", &f_ht600_dilepPT);
     T_HT600->SetBranchAddress("v_fakealpha", &v_ht600_alpha);
-    T_HT600->SetBranchAddress("v_fakealpha2", &v_ht600_alpha2);
-    T_HT600->SetBranchAddress("v_fakealpha3", &v_ht600_alpha3);
-    T_HT600->SetBranchAddress("v_fakealpha4", &v_ht600_alpha4);
+    T_HT600->SetBranchAddress("v_fakeJetMass", &v_ht600_jetMass);
     T_HT600->SetBranchAddress("f_thinjetCSV", &v_ht600_jetcsv);
     T_HT600->SetBranchAddress("v_fakeJethadronflavor", &v_ht600_Jethadronflavor);
     for (int evt = 0; evt < T_HT600->GetEntries(); evt++)
     {
         T_HT600->GetEntry(evt);
-        /*if (f_ht600_Met < metcut)
-        {
-            continue;
-        }*/
-        for (size_t i = 0; i < v_ht600_log3Dsig->size(); i++)
-        {
-            h_bg_3DSig->Fill((*v_ht600_log3Dsig)[i], I_ht600_weight * HT600Weight);
-        }
-        for (size_t i = 0; i < v_ht600_alpha->size(); i++)
-        {
-            h_bg_alpha1->Fill((*v_ht600_alpha)[i], I_ht600_weight * HT600Weight);
-            h_bg_alpha2->Fill((*v_ht600_alpha2)[i], I_ht600_weight * HT600Weight);
-            h_bg_alpha3->Fill((*v_ht600_alpha3)[i], I_ht600_weight * HT600Weight);
-            h_bg_alpha4->Fill((*v_ht600_alpha4)[i], I_ht600_weight * HT600Weight);
-        }
+        h_DY_Met->Fill(f_ht600_Met, I_ht600_weight * HT600Weight);
+        h_DY_dilepPT->Fill(f_ht600_dilepPT, I_ht600_weight * HT600Weight);
     }
     TTree *T_HT800;
     DYHT800->GetObject("T_tree", T_HT800);
     T_HT800->SetBranchAddress("I_weight", &I_ht800_weight);
     T_HT800->SetBranchAddress("f_Met", &f_ht800_Met);
-    T_HT800->SetBranchAddress("v_Chi3Dlog", &v_ht800_log3Dsig);
+    T_HT800->SetBranchAddress("f_dileptonPT", &f_ht800_dilepPT);
     T_HT800->SetBranchAddress("v_fakealpha", &v_ht800_alpha);
-    T_HT800->SetBranchAddress("v_fakealpha2", &v_ht800_alpha2);
-    T_HT800->SetBranchAddress("v_fakealpha3", &v_ht800_alpha3);
-    T_HT800->SetBranchAddress("v_fakealpha4", &v_ht800_alpha4);
+    T_HT800->SetBranchAddress("v_fakeJetMass", &v_ht800_jetMass);
     T_HT800->SetBranchAddress("f_thinjetCSV", &v_ht800_jetcsv);
     T_HT800->SetBranchAddress("v_fakeJethadronflavor", &v_ht800_Jethadronflavor);
     for (int evt = 0; evt < T_HT800->GetEntries(); evt++)
     {
         T_HT800->GetEntry(evt);
-        /*if (f_ht800_Met < metcut)
-        {
-            continue;
-        }*/
-        for (size_t i = 0; i < v_ht800_log3Dsig->size(); i++)
-        {
-            h_bg_3DSig->Fill((*v_ht800_log3Dsig)[i], I_ht800_weight * HT800Weight);
-        }
-        for (size_t i = 0; i < v_ht600_alpha->size(); i++)
-        {
-            h_bg_alpha1->Fill((*v_ht800_alpha)[i], I_ht800_weight * HT800Weight);
-            h_bg_alpha2->Fill((*v_ht800_alpha2)[i], I_ht800_weight * HT800Weight);
-            h_bg_alpha3->Fill((*v_ht800_alpha3)[i], I_ht800_weight * HT800Weight);
-            h_bg_alpha4->Fill((*v_ht800_alpha4)[i], I_ht800_weight * HT800Weight);
-        }
+        h_DY_Met->Fill(f_ht800_Met, I_ht800_weight * HT800Weight);
+        h_DY_dilepPT->Fill(f_ht800_dilepPT, I_ht800_weight * HT800Weight);
     }
     TTree *T_HT1200;
     DYHT1200->GetObject("T_tree", T_HT1200);
     T_HT1200->SetBranchAddress("I_weight", &I_ht1200_weight);
     T_HT1200->SetBranchAddress("f_Met", &f_ht1200_Met);
-    T_HT1200->SetBranchAddress("v_Chi3Dlog", &v_ht1200_log3Dsig);
+    T_HT1200->SetBranchAddress("f_dileptonPT", &f_ht1200_dilepPT);
     T_HT1200->SetBranchAddress("v_fakealpha", &v_ht1200_alpha);
-    T_HT1200->SetBranchAddress("v_fakealpha2", &v_ht1200_alpha2);
-    T_HT1200->SetBranchAddress("v_fakealpha3", &v_ht1200_alpha3);
-    T_HT1200->SetBranchAddress("v_fakealpha4", &v_ht1200_alpha4);
+    T_HT1200->SetBranchAddress("v_fakeJetMass", &v_ht1200_jetMass);
     T_HT1200->SetBranchAddress("f_thinjetCSV", &v_ht1200_jetcsv);
     T_HT1200->SetBranchAddress("v_fakeJethadronflavor", &v_ht1200_Jethadronflavor);
     for (int evt = 0; evt < T_HT1200->GetEntries(); evt++)
     {
         T_HT1200->GetEntry(evt);
-        /*if (f_ht1200_Met < metcut)
-        {
-            continue;
-        }*/
-        for (size_t i = 0; i < v_ht1200_log3Dsig->size(); i++)
-        {
-            h_bg_3DSig->Fill((*v_ht1200_log3Dsig)[i], I_ht1200_weight * HT1200Weight);
-        }
-        for (size_t i = 0; i < v_ht1200_alpha->size(); i++)
-        {
-            h_bg_alpha1->Fill((*v_ht1200_alpha)[i], I_ht1200_weight * HT1200Weight);
-            h_bg_alpha2->Fill((*v_ht1200_alpha2)[i], I_ht1200_weight * HT1200Weight);
-            h_bg_alpha3->Fill((*v_ht1200_alpha3)[i], I_ht1200_weight * HT1200Weight);
-            h_bg_alpha4->Fill((*v_ht1200_alpha4)[i], I_ht1200_weight * HT1200Weight);
-        }
+        h_DY_Met->Fill(f_ht1200_Met, I_ht1200_weight * HT1200Weight);
+        h_DY_dilepPT->Fill(f_ht1200_dilepPT, I_ht1200_weight * HT1200Weight);
     }
     TTree *T_HT2500;
     DYHT2500->GetObject("T_tree", T_HT2500);
     T_HT2500->SetBranchAddress("I_weight", &I_ht2500_weight);
     T_HT2500->SetBranchAddress("f_Met", &f_ht2500_Met);
-    T_HT2500->SetBranchAddress("v_Chi3Dlog", &v_ht2500_log3Dsig);
+    T_HT2500->SetBranchAddress("f_dileptonPT", &f_ht2500_dilepPT);
     T_HT2500->SetBranchAddress("v_fakealpha", &v_ht2500_alpha);
-    T_HT2500->SetBranchAddress("v_fakealpha2", &v_ht2500_alpha2);
-    T_HT2500->SetBranchAddress("v_fakealpha3", &v_ht2500_alpha3);
-    T_HT2500->SetBranchAddress("v_fakealpha4", &v_ht2500_alpha4);
+    T_HT2500->SetBranchAddress("v_fakeJetMass", &v_ht2500_jetMass);
     T_HT2500->SetBranchAddress("f_thinjetCSV", &v_ht2500_jetcsv);
     T_HT2500->SetBranchAddress("v_fakeJethadronflavor", &v_ht2500_Jethadronflavor);
     for (int evt = 0; evt < T_HT2500->GetEntries(); evt++)
     {
         T_HT2500->GetEntry(evt);
-        /*if (f_ht2500_Met < metcut)
-        {
-            continue;
-        }*/
-        for (size_t i = 0; i < v_ht2500_log3Dsig->size(); i++)
-        {
-            h_bg_3DSig->Fill((*v_ht2500_log3Dsig)[i], I_ht2500_weight * HT2500Weight);
-        }
-        for (size_t i = 0; i < v_ht2500_alpha->size(); i++)
-        {
-            h_bg_alpha1->Fill((*v_ht2500_alpha)[i], I_ht2500_weight * HT2500Weight);
-            h_bg_alpha2->Fill((*v_ht2500_alpha2)[i], I_ht2500_weight * HT2500Weight);
-            h_bg_alpha3->Fill((*v_ht2500_alpha3)[i], I_ht2500_weight * HT2500Weight);
-            h_bg_alpha4->Fill((*v_ht2500_alpha4)[i], I_ht2500_weight * HT2500Weight);
-        }
+        h_DY_Met->Fill(f_ht2500_Met, I_ht2500_weight * HT2500Weight);
+        h_DY_dilepPT->Fill(f_ht2500_dilepPT, I_ht2500_weight * HT2500Weight);
     }
-    h_bg_3DSig->Draw();
-    gStyle->SetGridStyle();
-    TString outputfile1 = "./ee_DY_alpha.root";
-    TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
-    h_bg_3DSig->Write();
-    h_bg_alpha1->Write();
-    h_bg_alpha2->Write();
-    h_bg_alpha3->Write();
-    h_bg_alpha4->Write();
-    outfile_HT0->Close();
+
+    h_DY_dilepPT->SetLineWidth(2);
+    h_DY_dilepPT->Draw("h");
+
+    // TString outputfile1 = "./ee_DY_Met.root";
+    // TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
 }

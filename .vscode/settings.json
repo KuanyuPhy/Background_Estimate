@@ -91,6 +91,9 @@
         "ee_3Dsig.C": "cpp",
         "Sig_eu_corr.C": "cpp",
         "Sig_ee_corr.C": "cpp",
-        "draw_Sig_muon_info.C": "cpp"
+        "draw_Sig_muon_info.C": "cpp",
+        "ee_Top_split.C": "cpp",
+        "Signal_yield.C": "cpp",
+        "ee_DY_var.C": "cpp"
     }
 }

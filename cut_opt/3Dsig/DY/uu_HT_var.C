@@ -181,7 +181,7 @@ void uu_HT_var()
     TH1D *h_DY_Met_cut = new TH1D("h_DY_Met_cut", "", 50, 0, 500);
     h_DY_Met_cut->Sumw2();
 
-    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 20, -5, 5);
+    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 50, -5, 5);
     h_bg_3DSig->Sumw2();
 
     TH1D *h_bg_alpha1 = new TH1D("h_bg_alpha1", "", 20, 0, 1);
@@ -353,10 +353,10 @@ void uu_HT_var()
     for (int evt = 0; evt < T_inclusive->GetEntries(); evt++)
     {
         T_inclusive->GetEntry(evt);
-        if (f_ht0_Met < 140)
+        /*if (f_ht0_Met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ht0_log3Dsig->size(); i++)
         {
             for_inclusive_sample(HT, (*v_ht0_log3Dsig)[i], I_ht0_weight, h_bg_3DSig);
@@ -383,10 +383,10 @@ void uu_HT_var()
     for (int evt = 0; evt < T_HT100->GetEntries(); evt++)
     {
         T_HT100->GetEntry(evt);
-        if (f_ht100_Met < 140)
+        /*if (f_ht100_Met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ht100_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht100_log3Dsig)[i], I_ht100_weight * HT100Weight);
@@ -413,10 +413,10 @@ void uu_HT_var()
     for (int evt = 0; evt < T_HT200->GetEntries(); evt++)
     {
         T_HT200->GetEntry(evt);
-        if (f_ht200_Met < 140)
+        /*if (f_ht200_Met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ht200_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht200_log3Dsig)[i], I_ht200_weight * HT200Weight);
@@ -443,10 +443,10 @@ void uu_HT_var()
     for (int evt = 0; evt < T_HT400->GetEntries(); evt++)
     {
         T_HT400->GetEntry(evt);
-        if (f_ht400_Met < 140)
+        /*if (f_ht400_Met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ht400_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht400_log3Dsig)[i], I_ht400_weight * HT400Weight);
@@ -473,10 +473,10 @@ void uu_HT_var()
     for (int evt = 0; evt < T_HT600->GetEntries(); evt++)
     {
         T_HT600->GetEntry(evt);
-        if (f_ht600_Met < 140)
+        /*if (f_ht600_Met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ht600_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht600_log3Dsig)[i], I_ht600_weight * HT600Weight);
@@ -503,10 +503,10 @@ void uu_HT_var()
     for (int evt = 0; evt < T_HT800->GetEntries(); evt++)
     {
         T_HT800->GetEntry(evt);
-        if (f_ht800_Met < 140)
+        /*if (f_ht800_Met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ht800_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht800_log3Dsig)[i], I_ht800_weight * HT800Weight);
@@ -533,10 +533,10 @@ void uu_HT_var()
     for (int evt = 0; evt < T_HT1200->GetEntries(); evt++)
     {
         T_HT1200->GetEntry(evt);
-        if (f_ht1200_Met < 140)
+        /*if (f_ht1200_Met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ht1200_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht1200_log3Dsig)[i], I_ht1200_weight * HT1200Weight);
@@ -563,10 +563,10 @@ void uu_HT_var()
     for (int evt = 0; evt < T_HT2500->GetEntries(); evt++)
     {
         T_HT2500->GetEntry(evt);
-        if (f_ht2500_Met < 140)
+        /*if (f_ht2500_Met < 140)
         {
             continue;
-        }
+        }*/
         for (size_t i = 0; i < v_ht2500_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht2500_log3Dsig)[i], I_ht2500_weight * HT2500Weight);

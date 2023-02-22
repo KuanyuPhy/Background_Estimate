@@ -89,10 +89,10 @@ void ana_Diboson_punzi(const char *scanMet_step = "tmp", TString outputfile = ".
     float metcut = atoi(scanMet_step) * 10;
     cout << "metcut" << metcut << endl;
 
-    TH1D *h_pass_Bg = new TH1D("h_pass_Bg", "", 160, 1, 160);
+    TH1D *h_pass_Bg = new TH1D("h_pass_Bg", "", 160, 0, 160);
     h_pass_Bg->Sumw2();
 
-    TH1D *h_pass_Bg_nMetcut = new TH1D("h_pass_Bg_nMetcut", "", 160, 1, 160);
+    TH1D *h_pass_Bg_nMetcut = new TH1D("h_pass_Bg_nMetcut", "", 160, 0, 160);
     h_pass_Bg_nMetcut->Sumw2();
 
     Int_t f_gg_ZZ_2e2mu_weight, f_gg_ZZ_2e2nu_weight, f_gg_ZZ_2e2tau_weight, f_gg_ZZ_2mu2nu_weight,

@@ -67,7 +67,7 @@ void CL_scan(double target_ns = 5., int ntoys = 1000, bool display = false)
         h_stat1->GetYaxis()->SetTitleSize(0.06);
         h_stat1->GetYaxis()->SetTitleOffset(1.0);
         h_stat1->Draw();
-        h_stat0->SetFillColor(kRed);
+        h_stat0->SetFillColor();
         h_stat0->SetFillStyle(3365);
         h_stat0->Draw("same");
         TLine l1;
