@@ -163,11 +163,7 @@ void ee_Top_split(TString inputfile = "./../../../root_file/Ztoee/2016BKGMC/DY/e
     for (int evt = 0; evt < T_tree->GetEntries(); evt++)
     {
         T_tree->GetEntry(evt);
-        // if (evt % 100000 == 0)
-        //{
-        //     cout << evt << endl;
-        //  fprintf(stderr, "Processing event %lli of %lli\n", T_tree + 1, data.GetEntriesFast());
-        //}
+
         v_Top_eventId_1.clear();
         v_Top_alpha_1.clear();
         v_Top_alpha2_1.clear();

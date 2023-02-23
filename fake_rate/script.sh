@@ -15,9 +15,9 @@ done
 #echo $Top_list
 for file in ${Top_list[*]}; do
     Topoutputfile="$(basename -s ".root" "$file")"
-    #echo $Topoutputfile
-    #./top/ee_Top_split.o "$file" "/home/kuanyu/Documents/root_file/BgEstimation/top/${Topoutputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/top/${Topoutputfile}_2.root" 
-    #echo ./$outputfile;
+    echo $Topoutputfile
+    ./top/ee_Top_split.o "$file" "/home/kuanyu/Documents/root_file/BgEstimation/top/${Topoutputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/top/${Topoutputfile}_2.root" 
+    echo ./$Topoutputfile;
 done
 for file in ${Diboson_list[*]}; do
     Dibosonoutputfile="$(basename -s ".root" "$file")"
@@ -29,7 +29,7 @@ wait
 for file in ${Top_emu_list[*]}; do
     outputfile="$(basename -s ".root" "$file")"
     #echo $outputfile
-    ./top/ee_Top_split.o "$file" "/home/kuanyu/Documents/root_file/BgEstimation/top_emu/${outputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/top_emu/${outputfile}_2.root" 
+    #./top/ee_Top_split.o "$file" "/home/kuanyu/Documents/root_file/BgEstimation/top_emu/${outputfile}_1.root" "/home/kuanyu/Documents/root_file/BgEstimation/top_emu/${outputfile}_2.root" 
     #echo ./$outputfile;
 done
 echo $SECONDS

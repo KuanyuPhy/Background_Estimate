@@ -628,69 +628,85 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                     h_Top_nTrk_jet_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                     h_Top_JetPt_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
                     h_Top_JetEta_lowDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
+                    //----------------------
+                    // only consider flavor
+                    //----------------------
                     //  For b jet
                     for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_lowDilepPt);
                     // For light flavor
                     for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_lowDilepPt);
-                    if (v_thinjet[i].GetAlpha() < 0.15)
-                    {
-                        h_Top_nTrk_jet_cut_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
-                        h_Top_JetPt_cut_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
-                        h_Top_JetEta_cut_lowDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
-
-                        //  For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_lowDilepPt);
-                        // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_lowDilepPt);
-                    }
-                    //--------------------
-                    // Consider eta
-                    //--------------------
-                    // For Region |eta| < 1
+                    //----------------------
+                    // consider flavor & eta
+                    //----------------------
+                    // For Region |eta| <= 1
                     if (abs(v_thinjet[i].GetEta()) <= 1)
                     {
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_lowDilepPt[0]);
                         // For light flavor
                         for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_lowDilepPt[0]);
-                        if (v_thinjet[i].GetAlpha() < 0.15)
-                        {
-                            //  For b jet
-                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_lowDilepPt[0]);
-                            // For light flavor
-                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_lowDilepPt[0]);
-                        }
                     }
-                    // For Region 1 < |eta| < 2
+                    // For Region 1 < |eta| <= 2
                     else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) <= 2)
                     {
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_lowDilepPt[1]);
                         // For light flavor
                         for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_lowDilepPt[1]);
-                        if (v_thinjet[i].GetAlpha() < 0.15)
+                    }
+                    // For Region 2 < |eta| < 2.5
+                    else
+                    {
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_lowDilepPt[2]);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_lowDilepPt[2]);
+                    }
+
+                    //-------------------------
+                    // For SR
+                    //-------------------------
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        h_Top_nTrk_jet_cut_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
+                        h_Top_JetPt_cut_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
+                        h_Top_JetEta_cut_lowDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
+                        //----------------------
+                        // only consider flavor
+                        //----------------------
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_lowDilepPt);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_lowDilepPt);
+                        //----------------------
+                        // consider flavor & eta
+                        //----------------------
+                        // For Region |eta| <= 1
+                        if (abs(v_thinjet[i].GetEta()) <= 1)
+                        {
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_lowDilepPt[0]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_lowDilepPt[0]);
+                        }
+                        // For Region 1 < |eta| <= 2
+                        else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) <= 2)
                         {
                             //  For b jet
                             for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_lowDilepPt[1]);
                             // For light flavor
                             for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_lowDilepPt[1]);
                         }
-                    }
-                    // For Region 2 < |eta| < 2.5
-                    else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) <= 2.5)
-                    {
-                        //  For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_lowDilepPt[2]);
-                        // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_lowDilepPt[2]);
-                        if (v_thinjet[i].GetAlpha() < 0.15)
+                        // For Region 2 < |eta| < 2.5
+                        else
                         {
                             //  For b jet
                             for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_lowDilepPt[2]);
                             // For light flavor
                             for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_lowDilepPt[2]);
                         }
-                    }
+                    } // End of alpha cut
+
                 } // End of v_thinjet loop
             }     // End of low dilepton PT cut
             else
@@ -700,62 +716,76 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                     h_Top_nTrk_jet_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                     h_Top_JetPt_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
                     h_Top_JetEta_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
-
+                    //----------------------
+                    // only consider flavor
+                    //----------------------
                     //  For b jet
                     for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_highDilepPt);
                     // For light flavor
                     for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_highDilepPt);
-                    if (v_thinjet[i].GetAlpha() < 0.15)
-                    {
-                        h_Top_nTrk_jet_cut_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
-                        h_Top_JetPt_cut_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
-                        h_Top_JetEta_cut_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
-                        //  For b jet
-                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_highDilepPt);
-                        // For light flavor
-                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_highDilepPt);
-                    }
-                    //--------------------
-                    // Consider eta
-                    //--------------------
-                    // For Region |eta| < 1
+                    //----------------------
+                    // consider flavor & eta
+                    //----------------------
+                    // For Region |eta| <= 1
                     if (abs(v_thinjet[i].GetEta()) <= 1)
                     {
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[0]);
                         // For light flavor
                         for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_highDilepPt[0]);
-                        if (v_thinjet[i].GetAlpha() < 0.15)
-                        {
-                            //  For b jet
-                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[0]);
-                            // For light flavor
-                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_highDilepPt[0]);
-                        }
                     }
-                    // For Region 1 < |eta| < 2
+                    // For Region 1 < |eta| <= 2
                     else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) <= 2)
                     {
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[1]);
                         // For light flavor
                         for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_highDilepPt[1]);
-                        if (v_thinjet[i].GetAlpha() < 0.15)
-                        {
-                            //  For b jet
-                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[1]);
-                            // For light flavor
-                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_highDilepPt[1]);
-                        }
                     }
                     // For Region 2 < |eta| < 2.5
-                    else if (abs(v_thinjet[i].GetEta()) > 2 && abs(v_thinjet[i].GetEta()) <= 2.5)
+                    else
                     {
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[2]);
                         // For light flavor
                         for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_difeta_highDilepPt[2]);
-                        if (v_thinjet[i].GetAlpha() < 0.15)
+                    }
+                    //-------------------------
+                    // For SR
+                    //-------------------------
+                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    {
+                        h_Top_nTrk_jet_cut_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
+                        h_Top_JetPt_cut_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
+                        h_Top_JetEta_cut_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
+                        //----------------------
+                        // only consider flavor
+                        //----------------------
+                        //  For b jet
+                        for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_highDilepPt);
+                        // For light flavor
+                        for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_highDilepPt);
+                        //----------------------
+                        // consider flavor & eta
+                        //----------------------
+                        if (abs(v_thinjet[i].GetEta()) <= 1)
+                        {
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[0]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_highDilepPt[0]);
+                        }
+                        // For Region 1 < |eta| < 2
+                        else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) <= 2)
+                        {
+
+                            //  For b jet
+                            for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[1]);
+                            // For light flavor
+                            for_signalflavor_jet(0, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_ljet_cut_difeta_highDilepPt[1]);
+                        }
+                        // For Region 2 < |eta| < 2.5
+                        else
                         {
                             //  For b jet
                             for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[2]);
