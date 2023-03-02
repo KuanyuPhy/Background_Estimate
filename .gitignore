@@ -1,1 +1,5 @@
 *.root
+*.o
+*.png
+*.svg
+*.pdf

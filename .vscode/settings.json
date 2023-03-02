@@ -94,6 +94,7 @@
         "draw_Sig_muon_info.C": "cpp",
         "ee_Top_split.C": "cpp",
         "Signal_yield.C": "cpp",
-        "ee_DY_var.C": "cpp"
+        "ee_DY_var.C": "cpp",
+        "ee_HT3D.C": "cpp"
     }
 }
