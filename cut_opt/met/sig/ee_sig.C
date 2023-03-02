@@ -205,6 +205,7 @@ void ee_sig()
     h_Mx2_150_eff->Divide(h_pass_Mx2_150_nMetcut, h_pass_Mx2_150, 1, 1);
 
     */
+   h_Mx2_150_Met->Draw();
 
     TString outputfile1 = "./ee_Sig_Met.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");

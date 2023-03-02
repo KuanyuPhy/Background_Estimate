@@ -104,9 +104,9 @@ void draw_LO()
     h3->GetXaxis()->SetTitleOffset(1.);
     h3->GetXaxis()->SetLabelFont(43); // Absolute font size in pixel (precision 3)
     h3->GetXaxis()->SetLabelSize(15);
-
     */
-    /*
+    
+    
     TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
 
     pad1->SetBottomMargin(0); // Upper and lower plot are joined
@@ -159,7 +159,8 @@ void draw_LO()
     h3->GetXaxis()->SetTitleOffset(1.);
     h3->GetXaxis()->SetLabelFont(43); // Absolute font size in pixel (precision 3)
     h3->GetXaxis()->SetLabelSize(15);
-    */
+    
+    /*
     TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
 
     pad1->SetBottomMargin(0); // Upper and lower plot are joined
@@ -212,5 +213,6 @@ void draw_LO()
     h3->GetXaxis()->SetTitleOffset(1.);
     h3->GetXaxis()->SetLabelFont(43); // Absolute font size in pixel (precision 3)
     h3->GetXaxis()->SetLabelSize(15);
+    */
     gStyle->SetOptStat(0);
 }

@@ -57,7 +57,7 @@ void ana_punzi()
         Sig50_punzi[i] = punzi(h_Mx2_50_eff->GetBinContent(i + 1), h_pass_Bg_nMetcut->GetBinContent(i + 1));
         Sig150_punzi[i] = punzi(h_Mx2_150_eff->GetBinContent(i + 1), h_pass_Bg_nMetcut->GetBinContent(i + 1));
         cout << "i =" << i << endl;
-        cout << "Sig_eff =" << h_Mx2_1_eff->GetBinContent(i + 1) << endl;
+        cout << "Sig150_punzi =" << Sig150_punzi[i] << endl;
     }
 
     TH1D *h_punzisig1 = new TH1D("h_punzisig1", "", 50, 0, 50);
@@ -126,14 +126,15 @@ void ana_punzi()
 
     gStyle->SetOptStat(0);
 
-    TLegend *l1 = new TLegend(0.55, 0.55, 0.9, 0.88);
+    TLegend *l1 = new TLegend(0.6, 0.5, 0.9, 0.75);
     l1->SetHeader("Signal & 2016MC background");
     l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
     l1->SetTextSize(0.03);
     l1->AddEntry(h_punzisig1, "m_{#chi_{2}} = 1 GeV, ctau = 1mm ", "El");
     l1->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, ctau = 10mm ", "El");
     l1->AddEntry(h_punzisig150, "m_{#chi_{2}} = 150 GeV, ctau = 1mm ", "El");
-    // l1->AddEntry(h_TTTo2L2Nu_Median_2DIPsig, "Top process", "l");
+   
     l1->Draw();
     //c1->SetGrid();
     //c1->SetGridx();

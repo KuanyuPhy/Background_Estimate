@@ -251,8 +251,13 @@ void ee_Top_ee_half(TString file = "tmp.root", TString outputfile = "output.root
         if (f_Top_dileppt < DilepPTcut)
         {
             // Only consider LO & NLO Jet PT
-            for (size_t i = 0; i < 2; i++)
+            for (size_t i = 0; i <  v_thinjet.size(); i++)
             {
+                /*if (abs(v_thinjet[i].GetEta()) >= 1.442 && abs(v_thinjet[i].GetEta()) <= 1.566)
+                {
+                    continue;
+                }*/
+
                 h_Top_nTrk_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                 h_Top_JetPt_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
                 h_Top_JetEta_lowDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
@@ -270,8 +275,13 @@ void ee_Top_ee_half(TString file = "tmp.root", TString outputfile = "output.root
         //----------------------------
         else
         {
-            for (size_t i = 0; i < 2; i++)
+            for (size_t i = 0; i <  v_thinjet.size(); i++)
             {
+                /*if (abs(v_thinjet[i].GetEta()) >= 1.442 && abs(v_thinjet[i].GetEta()) <= 1.566)
+                {
+                    continue;
+                }*/
+
                 h_Top_nTrk_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                 h_Top_JetPt_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
                 h_Top_JetEta_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);

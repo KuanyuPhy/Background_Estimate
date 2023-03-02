@@ -64,7 +64,7 @@ TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BK
 // Get fake rate
 //----------------------
 TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top_emu/top_emu_fakerate.root");
-// TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top/top_ee_fakerate.root");
+//TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top/top_ee_fakerate.root");
 
 TH1D *Top_nTrk_fakeRate_lowDilepPt = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_lowDilepPt"));
 TH1D *Top_nTrk_fakeRate_highDilepPt = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt"));
@@ -172,7 +172,7 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
     const Int_t NJet_Nbins = 10;
     Double_t NJet_edges[NJet_Nbins + 1] = {0., 30., 60., 90., 120., 150., 210., 270., 350., 450., 1500.};
 
-    const Int_t JetEta_Nbins = 30.;
+    const Int_t JetEta_Nbins = 60.;
     Double_t JetEta_low_bound = -3.;
     Double_t JetEta_upper_bound = 3.;
 
@@ -272,8 +272,13 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
 
         if (f_Top_dileppt >= DilepPTcut)
         {
-            for (size_t i = 0; i < 2; i++)
+            for (size_t i = 0; i < v_thinjet.size(); i++)
             {
+                /*if (abs(v_thinjet[i].GetEta()) >= 1.442 && abs(v_thinjet[i].GetEta()) <= 1.566)
+                {
+                    continue;
+                }*/
+
                 int fk_bin_pos = getbinfakerate(v_thinjet[i].GetNtrk());
                 // cout << "fk_bin_pos = " << fk_bin_pos << endl;
                 double no_flavor_fk = Top_nTrk_fakeRate_highDilepPt->GetBinContent(fk_bin_pos) * Top_weight;

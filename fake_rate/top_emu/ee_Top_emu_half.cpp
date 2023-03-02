@@ -711,8 +711,13 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
             }     // End of low dilepton PT cut
             else
             {
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < v_thinjet.size(); i++)
                 {
+                    if (abs(v_thinjet[i].GetEta()) >= 1.442 && abs(v_thinjet[i].GetEta()) <= 1.566)
+                    {
+                        continue;
+                    }
+
                     h_Top_nTrk_jet_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                     h_Top_JetPt_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
                     h_Top_JetEta_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
