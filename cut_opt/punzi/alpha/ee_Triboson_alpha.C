@@ -9,158 +9,159 @@
 #include <TAttLine.h>
 #include <TStyle.h>
 #include "./../../../lib/Cross_section.h"
+#include "./../../../lib/kuan_ana_utils.h"
 using namespace std;
 
-TFile *triboson_WWZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_WWZ.root");
-TFile *triboson_WZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_WZZ.root");
-TFile *triboson_ZZZfile = TFile::Open("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/triboson/ee_triboson_ZZZ.root");
-
-TH1D *WWZ_sumevt = ((TH1D *)triboson_WWZfile->Get("Event_Variable/h_totevent"));
-TH1D *WZZ_sumevt = ((TH1D *)triboson_WZZfile->Get("Event_Variable/h_totevent"));
-TH1D *ZZZ_sumevt = ((TH1D *)triboson_ZZZfile->Get("Event_Variable/h_totevent"));
-
-int WWZ_totevt = WWZ_sumevt->Integral();
-int WZZ_totevt = WZZ_sumevt->Integral();
-int ZZZ_totevt = ZZZ_sumevt->Integral();
-
-//---------------------
-// Define Triboson Weight
-//---------------------
-double WWZWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::WWZ_TuneCUETP8M1 / (WWZ_totevt)) * 1000;
-double WZZWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::WZZ_TuneCUETP8M1 / (WZZ_totevt)) * 1000;
-double ZZZWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::ZZZ_TuneCUETP8M1 / (ZZZ_totevt)) * 1000;
-
-void ee_Triboson_alpha()
+void ee_Triboson_alpha(const char *scanalpha_step = "tmp", TString outputfile = "./output/tmp.root")
 {
+    double alphacut = atoi(scanalpha_step) * 0.05;
 
-    int sumstep = 20;
-    TH1D *h_Bg_nJet_cut[sumstep];
-    TH1D *h_Bg_nJet_[sumstep];
-    TH1D *h_Bg_alpha = new TH1D("h_Bg_alpha", "", 20, 0, 1);
+    /*Open source root file*/
+    MergeBFiles merge_bfiles;
+    MergeWeight merge_weight(&merge_bfiles);
 
-    for (int i = 0; i < sumstep; i++)
+    double METcut = 140.;
+
+    TH1D *h_Bg_nJet = new TH1D("h_Bg_nJet", "", 30, 0., 30.);
+    TH1D *h_Bg_nJet_cuted = new TH1D("h_Bg_nJet_cuted", "at least two jets pass alpha cut", 30, 0., 30.);
+
+    Int_t I_WWZ_weight, I_WZZ_weight, I_ZZZ_weight;
+    float_t f_WWZ_met, f_WZZ_met, f_ZZZ_met;
+
+    vector<float> *v_WWZ_alpha = new vector<float>();
+    vector<float> *v_WZZ_alpha = new vector<float>();
+    vector<float> *v_ZZZ_alpha = new vector<float>();
+
+    v_WWZ_alpha->clear();
+    v_WZZ_alpha->clear();
+    v_ZZZ_alpha->clear();
+
+    TTree *T_tree;
+    merge_bfiles.ee_triboson_WWZfile->GetObject("T_tree", T_tree);
+    T_tree->SetBranchAddress("I_weight", &I_WWZ_weight);
+    T_tree->SetBranchAddress("f_Met", &f_WWZ_met);
+    T_tree->SetBranchAddress("v_fakealpha3", &v_WWZ_alpha);
+    for (int evt = 0; evt < T_tree->GetEntries(); evt++)
     {
-        float alphacut = (i + 1) * 0.05;
-        cout << "alphacut = " << alphacut << endl;
+        T_tree->GetEntry(evt);
 
-        h_Bg_nJet_[i] = new TH1D(Form("h_Bg_nJet_%i", i + 1), "", 30, 0, 30);
-        h_Bg_nJet_cut[i] = new TH1D(Form("h_Bg_nJet_cut_%i", i + 1), "", 30, 0, 30);
-
-        Int_t I_WWZ_weight, I_WZZ_weight, I_ZZZ_weight;
-        float_t f_WWZ_met, f_WZZ_met, f_ZZZ_met;
-
-        vector<float> *v_WWZ_alpha = new vector<float>();
-        vector<float> *v_WZZ_alpha = new vector<float>();
-        vector<float> *v_ZZZ_alpha = new vector<float>();
-
-        v_WWZ_alpha->clear();
-        v_WZZ_alpha->clear();
-        v_ZZZ_alpha->clear();
-
-        TTree *T_tree;
-        triboson_WWZfile->GetObject("T_tree", T_tree);
-        T_tree->SetBranchAddress("I_weight", &I_WWZ_weight);
-        T_tree->SetBranchAddress("f_Met", &f_WWZ_met);
-        T_tree->SetBranchAddress("v_fakealpha3", &v_WWZ_alpha);
-        for (int evt = 0; evt < T_tree->GetEntries(); evt++)
+        if (f_WWZ_met <= METcut)
         {
-            T_tree->GetEntry(evt);
-            int jet_passalpha_cut = 0;
-            for (int i = 0; i < v_WWZ_alpha->size(); i++)
-            {
-                h_Bg_alpha->Fill((*v_WWZ_alpha)[i], I_WWZ_weight * WWZWeight);
-                if ((*v_WWZ_alpha)[i] < alphacut)
-                {
-                    jet_passalpha_cut++;
-                }
-            }
-            
-            if (jet_passalpha_cut == 0)
-            {
-                continue;
-            }
-            
-            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_WWZ_weight * WWZWeight);
-
-            if (jet_passalpha_cut < 2)
-            {
-                continue;
-            }
-            h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_WWZ_weight * WWZWeight);
-        }
-        TTree *T_tree2;
-        triboson_WZZfile->GetObject("T_tree", T_tree2);
-        T_tree2->SetBranchAddress("I_weight", &I_WZZ_weight);
-        T_tree2->SetBranchAddress("f_Met", &f_WZZ_met);
-        T_tree2->SetBranchAddress("v_fakealpha3", &v_WZZ_alpha);
-        for (int evt = 0; evt < T_tree2->GetEntries(); evt++)
-        {
-            T_tree2->GetEntry(evt);
-            int jet_passalpha_cut = 0;
-            for (int i = 0; i < v_WZZ_alpha->size(); i++)
-            {
-                h_Bg_alpha->Fill((*v_WZZ_alpha)[i], I_WZZ_weight * WZZWeight);
-                if ((*v_WZZ_alpha)[i] < alphacut)
-                {
-                    jet_passalpha_cut++;
-                }
-            }
-            
-            if (jet_passalpha_cut == 0)
-            {
-                continue;
-            }
-            
-            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_WZZ_weight * WZZWeight);
-
-            if (jet_passalpha_cut < 2)
-            {
-                continue;
-            }
-            h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_WZZ_weight * WZZWeight);
+            continue;
         }
 
-        TTree *T_tree3;
-        triboson_ZZZfile->GetObject("T_tree", T_tree3);
-        T_tree3->SetBranchAddress("I_weight", &I_ZZZ_weight);
-        T_tree3->SetBranchAddress("f_Met", &f_ZZZ_met);
-        T_tree3->SetBranchAddress("v_fakealpha3", &v_ZZZ_alpha);
-        for (int evt = 0; evt < T_tree3->GetEntries(); evt++)
+        int jet_passalpha_cut = 0;
+        for (int ijet = 0; ijet < v_WWZ_alpha->size(); ijet++)
         {
-            T_tree3->GetEntry(evt);
-            int jet_passalpha_cut = 0;
-            for (int i = 0; i < v_ZZZ_alpha->size(); i++)
+            // h_Bg_alpha->Fill((*v_WWZ_alpha)[i], I_WWZ_weight * merge_weight.ee_WWZWeight);
+            if ((*v_WWZ_alpha)[ijet] < alphacut)
             {
-                h_Bg_alpha->Fill((*v_ZZZ_alpha)[i], I_ZZZ_weight * ZZZWeight);
-                if ((*v_ZZZ_alpha)[i] < alphacut)
-                {
-                    jet_passalpha_cut++;
-                }
+                jet_passalpha_cut++;
             }
-            
-            if (jet_passalpha_cut == 0)
-            {
-                continue;
-            }
-            
-            h_Bg_nJet_[i]->Fill(jet_passalpha_cut, I_ZZZ_weight * ZZZWeight);
-            if (jet_passalpha_cut < 2)
-            {
-                continue;
-            }
-            h_Bg_nJet_cut[i]->Fill(jet_passalpha_cut, I_ZZZ_weight * ZZZWeight);
         }
-        double bgeff = (h_Bg_nJet_cut[i]->Integral()) / (h_Bg_nJet_[i]->Integral());
-        cout << "bgeff = " << bgeff << endl;
+
+        // if (jet_passalpha_cut == 0)
+        // {
+        //     continue;
+        // }
+
+        h_Bg_nJet->Fill(jet_passalpha_cut, I_WWZ_weight * merge_weight.ee_WWZWeight);
+
+        if (jet_passalpha_cut < 2)
+        {
+            continue;
+        }
+        h_Bg_nJet_cuted->Fill(jet_passalpha_cut, I_WWZ_weight * merge_weight.ee_WWZWeight);
     }
-    //_Bg_Met->Draw();
-    TString outputfile1 = "./output/Triboson_output.root";
-    TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
-    for (int i = 0; i < sumstep; i++)
+    TTree *T_tree2;
+    merge_bfiles.ee_triboson_WZZfile->GetObject("T_tree", T_tree2);
+    T_tree2->SetBranchAddress("I_weight", &I_WZZ_weight);
+    T_tree2->SetBranchAddress("f_Met", &f_WZZ_met);
+    T_tree2->SetBranchAddress("v_fakealpha3", &v_WZZ_alpha);
+    for (int evt = 0; evt < T_tree2->GetEntries(); evt++)
     {
-        h_Bg_nJet_cut[i]->Write();
-        h_Bg_nJet_[i]->Write();
+        T_tree2->GetEntry(evt);
+
+        if (f_WZZ_met <= METcut)
+        {
+            continue;
+        }
+
+        int jet_passalpha_cut = 0;
+        for (int ijet = 0; ijet < v_WZZ_alpha->size(); ijet++)
+        {
+            // h_Bg_alpha->Fill((*v_WZZ_alpha)[i], I_WZZ_weight * merge_weight.ee_WZZWeight);
+            if ((*v_WZZ_alpha)[ijet] < alphacut)
+            {
+                jet_passalpha_cut++;
+            }
+        }
+
+        // if (jet_passalpha_cut == 0)
+        // {
+        //     continue;
+        // }
+
+        h_Bg_nJet->Fill(jet_passalpha_cut, I_WZZ_weight * merge_weight.ee_WZZWeight);
+
+        if (jet_passalpha_cut < 2)
+        {
+            continue;
+        }
+        h_Bg_nJet_cuted->Fill(jet_passalpha_cut, I_WZZ_weight * merge_weight.ee_WZZWeight);
     }
-    h_Bg_alpha->Write();
+
+    TTree *T_tree3;
+    merge_bfiles.ee_triboson_ZZZfile->GetObject("T_tree", T_tree3);
+    T_tree3->SetBranchAddress("I_weight", &I_ZZZ_weight);
+    T_tree3->SetBranchAddress("f_Met", &f_ZZZ_met);
+    T_tree3->SetBranchAddress("v_fakealpha3", &v_ZZZ_alpha);
+    for (int evt = 0; evt < T_tree3->GetEntries(); evt++)
+    {
+        T_tree3->GetEntry(evt);
+
+        if (f_ZZZ_met <= METcut)
+        {
+            continue;
+        }
+
+        int jet_passalpha_cut = 0;
+        for (int ijet = 0; ijet < v_ZZZ_alpha->size(); ijet++)
+        {
+            // h_Bg_alpha->Fill((*v_ZZZ_alpha)[i], I_ZZZ_weight * merge_weight.ee_ZZZWeight);
+            if ((*v_ZZZ_alpha)[ijet] < alphacut)
+            {
+                jet_passalpha_cut++;
+            }
+        }
+
+        // if (jet_passalpha_cut == 0)
+        // {
+        //     continue;
+        // }
+
+        h_Bg_nJet->Fill(jet_passalpha_cut, I_ZZZ_weight * merge_weight.ee_ZZZWeight);
+        if (jet_passalpha_cut < 2)
+        {
+            continue;
+        }
+        h_Bg_nJet_cuted->Fill(jet_passalpha_cut, I_ZZZ_weight * merge_weight.ee_ZZZWeight);
+    }
+
+    TFile *outfile_HT0 = TFile::Open(outputfile, "RECREATE");
+    h_Bg_nJet->Write();
+    h_Bg_nJet_cuted->Write();
+
     outfile_HT0->Close();
+}
+int main(int argc, char *argv[])
+{
+    if (argc == 3)
+    {
+        ee_Triboson_alpha(argv[1], argv[2]);
+    }
+    else
+    {
+        cout << "ERROR" << endl;
+    }
 }

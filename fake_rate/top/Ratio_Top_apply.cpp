@@ -63,11 +63,11 @@ TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BK
 //----------------------
 // Get fake rate
 //----------------------
-TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top_emu/top_emu_fakerate.root");
+TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top_emu/top_emu_all_fakerate.root");
 //TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top/top_ee_fakerate.root");
 
-TH1D *Top_nTrk_fakeRate_lowDilepPt = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_lowDilepPt"));
-TH1D *Top_nTrk_fakeRate_highDilepPt = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt"));
+TH1D *Topemu_nTrk_fakeRate_lowDilepPt = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_lowDilepPt"));
+TH1D *Topemu_nTrk_fakeRate_highDilepPt = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt"));
 
 TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
@@ -165,14 +165,17 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
 {
     TFile *Topfile = TFile::Open(file);
     cout << "Top weight = " << getWeight(file) << endl;
+ 
+    //const Int_t NBINS = 16;
+    //Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15., 25., 40.};
 
-    const Int_t NBINS = 16;
-    Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15., 25., 40.};
+    const Int_t NBINS = 14;
+    Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15.};
 
     const Int_t NJet_Nbins = 10;
     Double_t NJet_edges[NJet_Nbins + 1] = {0., 30., 60., 90., 120., 150., 210., 270., 350., 450., 1500.};
 
-    const Int_t JetEta_Nbins = 60.;
+    const Int_t JetEta_Nbins = 30.;
     Double_t JetEta_low_bound = -3.;
     Double_t JetEta_upper_bound = 3.;
 
@@ -194,8 +197,6 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
     TH1D *h_Top_JetEta_HighDilepPt_predict = new TH1D("h_Top_JetEta_HighDilepPt_predict", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
     h_Top_JetEta_HighDilepPt_predict->Sumw2();
 
-    // TH1D *h_Top_nTrk_hjet = new TH1D("h_Top_nTrk_hjet", "", 30, 1, 30);
-    // TH1D *h_Top_nTrk_hjet_cut = new TH1D("h_Top_nTrk_hjet_cut", "", 30, 1, 30);
 
     Int_t I_Top_nJets;
 
@@ -225,7 +226,7 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
     v_Top_JetCsv->clear();
     v_Top_JetMass->clear();
 
-    float METcut = 130.;
+    float METcut = 140.;
 
     float DilepPTcut = 60.;
 
@@ -245,7 +246,6 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
     T_Top_tree->SetBranchAddress("v_fakeJetEta", &v_Top_JetEta);
     T_Top_tree->SetBranchAddress("v_fakeJetCSV", &v_Top_JetCsv);
     T_Top_tree->SetBranchAddress("v_fakeJetMass", &v_Top_JetMass);
-
     for (int evt = 0; evt < T_Top_tree->GetEntries(); evt++)
     {
         T_Top_tree->GetEntry(evt);
@@ -272,25 +272,22 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
 
         if (f_Top_dileppt >= DilepPTcut)
         {
-            for (size_t i = 0; i < v_thinjet.size(); i++)
+            //v_thinjet.size()
+            for (size_t ijet = 0; ijet < v_thinjet.size(); ijet++)
             {
-                /*if (abs(v_thinjet[i].GetEta()) >= 1.442 && abs(v_thinjet[i].GetEta()) <= 1.566)
-                {
-                    continue;
-                }*/
 
-                int fk_bin_pos = getbinfakerate(v_thinjet[i].GetNtrk());
+                int fk_bin_pos = getbinfakerate(v_thinjet[ijet].GetNtrk());
                 // cout << "fk_bin_pos = " << fk_bin_pos << endl;
-                double no_flavor_fk = Top_nTrk_fakeRate_highDilepPt->GetBinContent(fk_bin_pos) * Top_weight;
-                h_Top_nTrk_HighDilepPt_predict->Fill(v_thinjet[i].GetNtrk(), no_flavor_fk);
-                h_Top_JetPt_HighDilepPt_predict->Fill(v_thinjet[i].GetPt(), no_flavor_fk);
-                h_Top_JetEta_HighDilepPt_predict->Fill(v_thinjet[i].GetEta(), no_flavor_fk);
+                double no_flavor_fk = Topemu_nTrk_fakeRate_lowDilepPt->GetBinContent(fk_bin_pos) * Top_weight;
+                h_Top_nTrk_HighDilepPt_predict->Fill(v_thinjet[ijet].GetNtrk(), no_flavor_fk);
+                h_Top_JetPt_HighDilepPt_predict->Fill(v_thinjet[ijet].GetPt(), no_flavor_fk);
+                h_Top_JetEta_HighDilepPt_predict->Fill(v_thinjet[ijet].GetEta(), no_flavor_fk);
 
-                if (v_thinjet[i].GetAlpha() < 0.15)
+                if (v_thinjet[ijet].GetAlpha() < 0.1)
                 {
-                    h_Top_nTrk_HighDilepPt_true->Fill(v_thinjet[i].GetNtrk(), Top_weight);
-                    h_Top_JetPt_HighDilepPt_true->Fill(v_thinjet[i].GetPt(), Top_weight);
-                    h_Top_JetEta_HighDilepPt_true->Fill(v_thinjet[i].GetEta(), Top_weight);
+                    h_Top_nTrk_HighDilepPt_true->Fill(v_thinjet[ijet].GetNtrk(), Top_weight);
+                    h_Top_JetPt_HighDilepPt_true->Fill(v_thinjet[ijet].GetPt(), Top_weight);
+                    h_Top_JetEta_HighDilepPt_true->Fill(v_thinjet[ijet].GetEta(), Top_weight);
                 }
             }
 

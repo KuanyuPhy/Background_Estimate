@@ -11,13 +11,10 @@
 #include <TAxis.h>
 #include <TLine.h>
 #include "./../../lib/setNCUStyle.C"
+#include "./../../../lib/kuan_ana_utils.h"
+
 using namespace std;
 
-// define punzi_eq
-double punzi(double sigeff, double bg)
-{
-    return sigeff / (1 + TMath::Power(abs(bg), 0.5));
-}
 
 void ana_punzi()
 {

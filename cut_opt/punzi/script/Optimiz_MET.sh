@@ -6,10 +6,10 @@ set -eu -o pipefail
 FileMainLocation=/home/kuanyu/Documents/CMS/Background_Estimate/cut_opt/punzi/MET
 
 
-g++ -o $FileMainLocation/ana_DY_punzi.o $(root-config --cflags) $FileMainLocation/ana_DY_punzi.C $(root-config --glibs)
-g++ -o $FileMainLocation/ana_Top_punzi.o $(root-config --cflags) $FileMainLocation/ana_Top_punzi.C $(root-config --glibs)
-g++ -o $FileMainLocation/ana_Diboson_punzi.o $(root-config --cflags) $FileMainLocation/ana_Diboson_punzi.C $(root-config --glibs)
-g++ -o $FileMainLocation/ana_Triboson_punzi.o $(root-config --cflags) $FileMainLocation/ana_Triboson_punzi.C $(root-config --glibs)
+g++ -o $FileMainLocation/ee_DY_punzi.o $(root-config --cflags) $FileMainLocation/ana_DY_punzi.C $(root-config --glibs)
+g++ -o $FileMainLocation/ee_Top_punzi.o $(root-config --cflags) $FileMainLocation/ana_Top_punzi.C $(root-config --glibs)
+g++ -o $FileMainLocation/ee_Diboson_punzi.o $(root-config --cflags) $FileMainLocation/ana_Diboson_punzi.C $(root-config --glibs)
+g++ -o $FileMainLocation/ee_Triboson_punzi.o $(root-config --cflags) $FileMainLocation/ana_Triboson_punzi.C $(root-config --glibs)
 
 #---------------------
 #  Run background
@@ -61,13 +61,13 @@ MaxStep=150
 # Use parallel to contral njob to prevent computer memory reach max 
 #--------------------------------------------------------------------
 
-parallel -j 50 --link ::: $FileMainLocation/ana_DY_punzi.o ::: $(seq "$StartStep" "$MaxStep") ::: $(seq "$StartStep" "$MaxStep" | xargs printf "${DYoutputfile}_%s.root\n")
+parallel -j 50 --link ::: $FileMainLocation/ee_DY_punzi.o ::: $(seq "$StartStep" "$MaxStep") ::: $(seq "$StartStep" "$MaxStep" | xargs printf "${DYoutputfile}_%s.root\n")
 echo "Finish Scan Drell-Yan process"
-parallel -j 50 --link ::: $FileMainLocation/ana_Top_punzi.o ::: $(seq "$StartStep" "$MaxStep") ::: $(seq "$StartStep" "$MaxStep" | xargs printf "${Topoutputfile}_%s.root\n")
+parallel -j 50 --link ::: $FileMainLocation/ee_Top_punzi.o ::: $(seq "$StartStep" "$MaxStep") ::: $(seq "$StartStep" "$MaxStep" | xargs printf "${Topoutputfile}_%s.root\n")
 echo "Finish Scan Top process"
-parallel -j 50 --link ::: $FileMainLocation/ana_Diboson_punzi.o ::: $(seq "$StartStep" "$MaxStep") ::: $(seq "$StartStep" "$MaxStep" | xargs printf "${Dibosonoutputfile}_%s.root\n")
+parallel -j 50 --link ::: $FileMainLocation/ee_Diboson_punzi.o ::: $(seq "$StartStep" "$MaxStep") ::: $(seq "$StartStep" "$MaxStep" | xargs printf "${Dibosonoutputfile}_%s.root\n")
 echo "Finish Scan Diboson process"
-parallel -j 50 --link ::: $FileMainLocation/ana_Triboson_punzi.o ::: $(seq "$StartStep" "$MaxStep") ::: $(seq "$StartStep" "$MaxStep" | xargs printf "${Tribosonoutputfile}_%s.root\n")
+parallel -j 50 --link ::: $FileMainLocation/ee_Triboson_punzi.o ::: $(seq "$StartStep" "$MaxStep") ::: $(seq "$StartStep" "$MaxStep" | xargs printf "${Tribosonoutputfile}_%s.root\n")
 echo "Finish Scan Triboson process"
 
 hadd $FileMainLocation/ee_DY_punzi_MET.root $DYoutputfile*.root 
@@ -105,3 +105,4 @@ test -e "$FileMainLocation/ana_Top_punzi.o" && { echo "Delete ana_Top_punzi.o"; 
 test -e "$FileMainLocation/ana_Diboson_punzi.o" && { echo "Delete ana_Diboson_punzi.o"; rm $FileMainLocation/ana_Diboson_punzi.o ;}
 test -e "$FileMainLocation/ana_Triboson_punzi.o" && { echo "Delete ana_Triboson_punzi.o"; rm $FileMainLocation/ana_Triboson_punzi.o ;}
 
+root -l $FileMainLocation/ana_sig.C

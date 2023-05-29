@@ -57,6 +57,13 @@ test -e "$FileMainLocation/Ratio_apply.root" && { echo "Delete old Ratio_apply.r
 
 hadd Ratio_apply.root $FileMainLocation/output/*.root
 
+if [ "ls -A $FileMainLocation/output/*" = "" ]; then
+    echo "$FileMainLocation/output/* is indeed empty"
+else
+    echo "$FileMainLocation/output/* is not empty"
+    echo "Clear output directory" && rm $FileMainLocation/output/*
+fi
+
 
 
 

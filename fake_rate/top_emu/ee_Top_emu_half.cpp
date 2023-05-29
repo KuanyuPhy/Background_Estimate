@@ -369,7 +369,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     v_Top_JetCsv->clear();
     v_Top_JetMass->clear();
 
-    float METcut = 130.;
+    float METcut = 140.;
 
     float DilepPTcut = 60.;
 
@@ -623,7 +623,8 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         {
             if (f_Top_dileppt < DilepPTcut)
             {
-                for (int i = 0; i < 2; i++)
+                //v_thinjet.size()
+                for (int i = 0; i < v_thinjet.size(); i++)
                 {
                     h_Top_nTrk_jet_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                     h_Top_JetPt_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
@@ -666,7 +667,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                     //-------------------------
                     // For SR
                     //-------------------------
-                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    if (v_thinjet[i].GetAlpha() < 0.1)
                     {
                         h_Top_nTrk_jet_cut_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                         h_Top_JetPt_cut_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
@@ -713,10 +714,6 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
             {
                 for (int i = 0; i < v_thinjet.size(); i++)
                 {
-                    if (abs(v_thinjet[i].GetEta()) >= 1.442 && abs(v_thinjet[i].GetEta()) <= 1.566)
-                    {
-                        continue;
-                    }
 
                     h_Top_nTrk_jet_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                     h_Top_JetPt_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
@@ -758,7 +755,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                     //-------------------------
                     // For SR
                     //-------------------------
-                    if (v_thinjet[i].GetAlpha() < 0.15)
+                    if (v_thinjet[i].GetAlpha() < 0.1)
                     {
                         h_Top_nTrk_jet_cut_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                         h_Top_JetPt_cut_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);

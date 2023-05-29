@@ -3,21 +3,17 @@
 #include <TTree.h>
 #include <TMath.h>
 #include <TFile.h>
-#include <TH3D.h>
+#include <TH1D.h>
 #include <TROOT.h>
 #include <TCanvas.h>
 #include <TLegend.h>
 #include <TLatex.h>
 #include <TAxis.h>
 #include <TLine.h>
-
+#include "./../../../lib/kuan_ana_utils.h"
+#include "tdrstyle.C"
+#include "CMS_lumi.C"
 using namespace std;
-
-// define punzi_eq
-double punzi(double sigeff, double bg)
-{
-    return sigeff / (1 + TMath::Power(abs(bg), 0.5));
-}
 
 void ana_sig()
 {
@@ -26,7 +22,7 @@ void ana_sig()
     TFile *Mx2_50 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_50_old_remove_0alpha.root");
     TFile *Mx2_150 = new TFile("/home/kuanyu/Documents/root_file/Ztoee/ee_Mx2_150_old_remove_0alpha.root");
 
-    TFile *Bgfile = new TFile("./ee_bgall_punzi_MET.root");
+    TFile *Bgfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/cut_opt/punzi/MET/ee_bgall_punzi_MET.root");
 
     TH1D *h_bgall_nMET_cut = ((TH1D *)Bgfile->Get("h_pass_Bg_nMetcut"));
 
@@ -162,7 +158,15 @@ void ana_sig()
     h_punzisig50->SetLineColor(kBlack);
     h_punzisig150->SetLineColor(kBlue);
 
-    Double_t w = 600;
+    //-------------------------
+    // CMS style
+    //-------------------------
+    //writeExtraText = true;
+    //extraText = "Simulation";
+    //lumi_sqrtS = "13 TeV";
+
+    
+    /*Double_t w = 600;
     Double_t h = 600;
 
     int H_ref = 600;
@@ -183,29 +187,54 @@ void ana_sig()
     canv->SetTopMargin(T / h);
     canv->SetBottomMargin(B / h);
     canv->SetTickx(0);
-    canv->SetTicky(0);
+    canv->SetTicky(0);*/
 
-    h_punzisig150->GetYaxis()->SetTitle("punzi significance");
-    h_punzisig150->GetXaxis()->SetTitle("MET cut");
 
-    //h_punzisig150->GetXaxis()->SetRangeUser(10, 20);
+    int W = 800;
+    int H = 600;
+
+    int H_ref = 600;
+    int W_ref = 800;
+
+    TCanvas *canv = new TCanvas("canv", "", 50, 50, W, H);
+
+    h_punzisig150->GetYaxis()->SetTitle("Punzi Significance");
+    h_punzisig150->GetXaxis()->SetTitle("MET(GeV)");
+    h_punzisig150->GetXaxis()->SetTitleOffset(1.5);
+
+    h_punzisig150->GetXaxis()->SetRangeUser(0, 50);
+    h_punzisig150->GetXaxis()->SetBinLabel(1,"MET > 10");
+    h_punzisig150->GetXaxis()->SetBinLabel(5,"MET > 50");
+    h_punzisig150->GetXaxis()->SetBinLabel(10,"MET > 100");
+    h_punzisig150->GetXaxis()->SetBinLabel(14,"MET > 140");
+    h_punzisig150->GetXaxis()->SetBinLabel(20,"MET > 200");
+    h_punzisig150->GetXaxis()->SetBinLabel(30,"MET > 300");
+    h_punzisig150->GetXaxis()->SetBinLabel(40,"MET > 400");
 
     h_punzisig150->Draw();
-    //h_punzisig50->Draw("same");
-    //h_punzisig1->Draw("same");
+    h_punzisig50->Draw("same");
+    h_punzisig1->Draw("same");
 
-    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    TLegend *l1 = new TLegend(0.5, 0.55, 0.7, 0.85);
     l1->SetBorderSize(0);
     l1->SetFillStyle(0);
     l1->SetTextSize(0.03);
-    //l1->AddEntry(h_punzisig1, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
-    //l1->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
-    l1->AddEntry(h_punzisig150, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(h_punzisig1, "m_{#chi_{2}} = 1 GeV, c#tau = 1 mm", "lE");
+    l1->AddEntry(h_punzisig50, "m_{#chi_{2}} = 50 GeV, c#tau = 10 mm", "lE");
+    l1->AddEntry(h_punzisig150, "m_{#chi_{2}} = 150 GeV, c#tau = 1 mm", "lE");
     l1->Draw();
 
     gStyle->SetOptStat(0);
 
-    //gPad->SetLogy();
+    int iPeriod = 0;
+    int iPos = 33;
+    //CMS_lumi(canv, iPeriod, iPos);
+    //canv->Update();
+    //canv->RedrawAxis();
+
+    //canv->SaveAs("ee_MET_punzi.png");
+
+    // gPad->SetLogy();
 
     // auto c1 = new TCanvas("c", "BPRE");
     /*
@@ -218,13 +247,13 @@ void ana_sig()
     h_Mx2_150_eff->Draw("");
     */
 
-    TString outputfile1 = "./ee_Sig_punzi.root";
-    TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
-    h_pass_Mx2_1->Write();
-    h_pass_Mx2_50->Write();
-    h_pass_Mx2_150->Write();
-    h_Mx2_1_eff->Write();
-    h_Mx2_50_eff->Write();
-    h_Mx2_150_eff->Write();
-    outfile_HT0->Close();
+    //TString outputfile1 = "./ee_Sig_punzi.root";
+    //TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
+    //h_pass_Mx2_1->Write();
+    //h_pass_Mx2_50->Write();
+    //h_pass_Mx2_150->Write();
+    //h_Mx2_1_eff->Write();
+    //h_Mx2_50_eff->Write();
+    //h_Mx2_150_eff->Write();
+    //outfile_HT0->Close();
 }

@@ -3,7 +3,6 @@ set -eu -o pipefail
 
 FileMainLocation=/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top_emu
 
-
 #-----------------------
 #    For 1D fake rate  
 #-----------------------
@@ -30,7 +29,6 @@ for file in ${Top_emu_list_1[*]}; do
     ./ee_Top_emu_half.o "$file" "./output/${Topoutputfile}_output.root" 
     #echo ./$outputfile;
 done
-wait
 
 hadd top_all.root ./output/*.root
 

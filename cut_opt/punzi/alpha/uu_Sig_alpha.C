@@ -10,8 +10,8 @@
 #include <TLatex.h>
 #include <TAxis.h>
 #include <TLine.h>
-#include "./../../met/tdrstyle.C"
-#include "./../../met/CMS_lumi.C"
+#include "tdrstyle.C"
+#include "./CMS_lumi.C"
 using namespace std;
 double punzi(double sigeff, double bg)
 {
