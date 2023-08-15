@@ -72,6 +72,15 @@ void ee_Top_var()
     TH1D *h_bg_alpha4 = new TH1D("h_bg_alpha4", "", 20, 0, 1);
     h_bg_alpha4->Sumw2();
 
+    TH1D *h_bg_alpha1_metcut = new TH1D("h_bg_alpha1_metcut", "", 20, 0, 1);
+    h_bg_alpha1_metcut->Sumw2();
+
+    TH1D *h_bg_bcalpha1_metcut = new TH1D("h_bg_bcalpha1_metcut", "", 20, 0, 1);
+    h_bg_bcalpha1_metcut->Sumw2();
+
+    TH1D *h_bg_lalpha1_metcut = new TH1D("h_bg_lalpha1_metcut", "", 20, 0, 1);
+    h_bg_lalpha1_metcut->Sumw2();
+
     Int_t I_TTTo2L2Nu_weight;
     Int_t I_ST_tW_top_weight;
     Int_t I_ST_tW_antitop_weight;
@@ -200,7 +209,7 @@ void ee_Top_var()
     v_TTZToQQ_log3Dsig->clear();
     v_TTZToLLNuNu_log3Dsig->clear();
 
-    double METcut = 0.;
+    double METcut = 140.;
 
     TTree *T_TTTo2L2Nu_tree;
     TTTo2L2Nufile->GetObject("T_tree", T_TTTo2L2Nu_tree);
@@ -217,10 +226,21 @@ void ee_Top_var()
     for (int evt = 0; evt < T_TTTo2L2Nu_tree->GetEntries(); evt++)
     {
         T_TTTo2L2Nu_tree->GetEntry(evt);
-        /*if (f_TTTo2L2Nu_met < METcut)
+        if (f_TTTo2L2Nu_met > METcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_TTTo2L2Nu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_TTTo2L2Nu_alpha)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                if ((*v_TTTo2L2Nu_Jethadronflavor)[i] == 5 || (*v_TTTo2L2Nu_Jethadronflavor)[i] == 4)
+                {
+                    h_bg_bcalpha1_metcut->Fill((*v_TTTo2L2Nu_alpha)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                }
+                else
+                {
+                    h_bg_lalpha1_metcut->Fill((*v_TTTo2L2Nu_alpha)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
+                }
+            }
+        }
         for (size_t i = 0; i < v_TTTo2L2Nu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTTo2L2Nu_log3Dsig)[i], I_TTTo2L2Nu_weight * TTTo2L2NuWeight);
@@ -248,10 +268,21 @@ void ee_Top_var()
     for (int evt = 0; evt < T_ST_tW_top_tree->GetEntries(); evt++)
     {
         T_ST_tW_top_tree->GetEntry(evt);
-        /*if (f_ST_tW_top_met < METcut)
+        if (f_ST_tW_top_met > METcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ST_tW_top_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ST_tW_top_alpha)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                if ((*v_ST_tW_top_Jethadronflavor)[i] == 5 || (*v_ST_tW_top_Jethadronflavor)[i] == 4)
+                {
+                    h_bg_bcalpha1_metcut->Fill((*v_ST_tW_top_alpha)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                }
+                else
+                {
+                    h_bg_lalpha1_metcut->Fill((*v_ST_tW_top_alpha)[i], I_ST_tW_top_weight * ST_tW_topWeight);
+                }
+            }
+        }
         for (size_t i = 0; i < v_ST_tW_top_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ST_tW_top_log3Dsig)[i], I_ST_tW_top_weight * ST_tW_topWeight);
@@ -278,10 +309,21 @@ void ee_Top_var()
     for (int evt = 0; evt < T_ST_tW_antitop_tree->GetEntries(); evt++)
     {
         T_ST_tW_antitop_tree->GetEntry(evt);
-        /*if (f_ST_tW_antitop_met < METcut)
+        if (f_ST_tW_antitop_met > METcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ST_tW_antitop_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ST_tW_antitop_alpha)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                if ((*v_ST_tW_antitop_Jethadronflavor)[i] == 5 || (*v_ST_tW_antitop_Jethadronflavor)[i] == 4)
+                {
+                    h_bg_bcalpha1_metcut->Fill((*v_ST_tW_antitop_alpha)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                }
+                else
+                {
+                    h_bg_lalpha1_metcut->Fill((*v_ST_tW_antitop_alpha)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
+                }
+            }
+        }
         for (size_t i = 0; i < v_ST_tW_antitop_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ST_tW_antitop_log3Dsig)[i], I_ST_tW_antitop_weight * I_ST_tW_antitop_weight);
@@ -308,10 +350,21 @@ void ee_Top_var()
     for (int evt = 0; evt < T_TTWJetsToLNu_tree->GetEntries(); evt++)
     {
         T_TTWJetsToLNu_tree->GetEntry(evt);
-        /*if (f_TTWJetsToLNu_met < METcut)
+        if (f_TTWJetsToLNu_met > METcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_TTWJetsToLNu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_TTWJetsToLNu_alpha)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                if ((*v_TTWJetsToLNu_Jethadronflavor)[i] == 5 || (*v_TTWJetsToLNu_Jethadronflavor)[i] == 4)
+                {
+                    h_bg_bcalpha1_metcut->Fill((*v_TTWJetsToLNu_alpha)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                }
+                else
+                {
+                    h_bg_lalpha1_metcut->Fill((*v_TTWJetsToLNu_alpha)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
+                }
+            }
+        }
         for (size_t i = 0; i < v_TTWJetsToLNu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTWJetsToLNu_log3Dsig)[i], I_TTWJetsToLNu_weight * TTWJetsToLNuWeight);
@@ -339,10 +392,21 @@ void ee_Top_var()
     for (int evt = 0; evt < T_TTWJetsToQQ_tree->GetEntries(); evt++)
     {
         T_TTWJetsToQQ_tree->GetEntry(evt);
-        /*if (f_TTWJetsToQQ_met < METcut)
+        if (f_TTWJetsToQQ_met > METcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_TTWJetsToQQ_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_TTWJetsToQQ_alpha)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                if ((*v_TTWJetsToQQ_Jethadronflavor)[i] == 5 || (*v_TTWJetsToQQ_Jethadronflavor)[i] == 4)
+                {
+                    h_bg_bcalpha1_metcut->Fill((*v_TTWJetsToQQ_alpha)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                }
+                else
+                {
+                    h_bg_lalpha1_metcut->Fill((*v_TTWJetsToQQ_alpha)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
+                }
+            }
+        }
         for (size_t i = 0; i < v_TTWJetsToQQ_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTWJetsToQQ_log3Dsig)[i], I_TTWJetsToQQ_weight * TTWJetsToQQWeight);
@@ -369,10 +433,21 @@ void ee_Top_var()
     for (int evt = 0; evt < T_TTZToQQ_tree->GetEntries(); evt++)
     {
         T_TTZToQQ_tree->GetEntry(evt);
-        /*if (f_TTZToQQ_met < METcut)
+        if (f_TTZToQQ_met > METcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_TTZToQQ_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_TTZToQQ_alpha)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                if ((*v_TTZToQQ_Jethadronflavor)[i] == 5 || (*v_TTZToQQ_Jethadronflavor)[i] == 4)
+                {
+                    h_bg_bcalpha1_metcut->Fill((*v_TTZToQQ_alpha)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                }
+                else
+                {
+                    h_bg_lalpha1_metcut->Fill((*v_TTZToQQ_alpha)[i], I_TTZToQQ_weight * TTZToQQWeight);
+                }
+            }
+        }
         for (size_t i = 0; i < v_TTZToQQ_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTZToQQ_log3Dsig)[i], I_TTZToQQ_weight * TTZToQQWeight);
@@ -399,10 +474,21 @@ void ee_Top_var()
     for (int evt = 0; evt < T_TTZToLLNuNu_tree->GetEntries(); evt++)
     {
         T_TTZToLLNuNu_tree->GetEntry(evt);
-        /*if (f_TTZToLLNuNu_met < METcut)
+        if (f_TTZToLLNuNu_met > METcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_TTZToLLNuNu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_TTZToLLNuNu_alpha)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                if ((*v_TTZToLLNuNu_Jethadronflavor)[i] == 5 || (*v_TTZToLLNuNu_Jethadronflavor)[i] == 4)
+                {
+                    h_bg_bcalpha1_metcut->Fill((*v_TTZToLLNuNu_alpha)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                }
+                else
+                {
+                    h_bg_lalpha1_metcut->Fill((*v_TTZToLLNuNu_alpha)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
+                }
+            }
+        }
         for (size_t i = 0; i < v_TTZToLLNuNu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_TTZToLLNuNu_log3Dsig)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
@@ -415,7 +501,8 @@ void ee_Top_var()
             h_bg_alpha4->Fill((*v_TTZToLLNuNu_alpha4)[i], I_TTZToLLNuNu_weight * TTZToLLNuNuWeight);
         }
     }
-    h_bg_3DSig->Draw();
+    h_bg_lalpha1_metcut->Draw();
+
     TString outputfile1 = "./ee_Top_alpha.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_bg_3DSig->Write();
@@ -423,6 +510,9 @@ void ee_Top_var()
     h_bg_alpha2->Write();
     h_bg_alpha3->Write();
     h_bg_alpha4->Write();
+    h_bg_alpha1_metcut->Write();
+    h_bg_bcalpha1_metcut->Write();
+    h_bg_lalpha1_metcut->Write();
     outfile_HT0->Close();
 }
 int main()

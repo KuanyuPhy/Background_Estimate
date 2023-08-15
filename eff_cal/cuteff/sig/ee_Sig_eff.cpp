@@ -15,6 +15,8 @@
 #include <TError.h>
 #include "TLegend.h"
 #include <cstring>
+#include "./../../../lib/tdrstyle.C"
+#include "./../../../lib/CMS_lumi.h"
 using namespace std;
 
 void ee_Sig_eff()
@@ -208,6 +210,35 @@ void ee_Sig_eff()
         y_Mx250[i] = Mx2_50eff;
         y_Mx2150[i] = Mx2_150eff;
     }
+
+    int W = 600;
+    int H = 600;
+
+    int H_ref = 600;
+    int W_ref = 600;
+
+    float T = 0.08 * H_ref;
+    float B = 0.12 * H_ref;
+    float L = 0.12 * W_ref;
+    float R = 0.04 * W_ref;
+
+    // visualize the fitting result
+    setTDRStyle();
+    auto c1 = new TCanvas("c", "c", 800, 800);
+    c1->cd();
+    c1->SetRightMargin(0.08);
+    //c1->SetBottomMargin(0.5);
+    c1->SetTopMargin(0.07);
+    c1->SetLeftMargin(0.12);
+
+    auto pad1 = new TPad("pad1", " ", 0, 0.3, 1, 1.0);
+    pad1->SetTopMargin(0.08);
+    pad1->SetRightMargin(0.05);
+    pad1->SetLeftMargin(0.13);
+    pad1->SetBottomMargin(0.2);
+    pad1->Draw();
+    pad1->cd();
+
     TGraph *grMx21 = new TGraph(n, x_Mx21, y_Mx21);
     TGraph *grMx250 = new TGraph(n, x_Mx250, y_Mx250);
     TGraph *grMx2150 = new TGraph(n, x_Mx2150, y_Mx2150);

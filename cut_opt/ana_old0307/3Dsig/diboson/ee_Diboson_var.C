@@ -89,7 +89,7 @@ void for_signalflavor_jet(int flavor, float hadronflavor, float tmp, double Weig
 void ee_Diboson_var()
 {
 
-    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "",200, -10., 10.);
+    TH1D *h_bg_3DSig = new TH1D("h_bg_3DSig", "", 200, -10., 10.);
     h_bg_3DSig->Sumw2();
 
     TH1D *h_bg_alpha1 = new TH1D("h_bg_alpha1", "", 20, 0, 1);
@@ -103,6 +103,9 @@ void ee_Diboson_var()
 
     TH1D *h_bg_alpha4 = new TH1D("h_bg_alpha4", "", 20, 0, 1);
     h_bg_alpha4->Sumw2();
+
+    TH1D *h_bg_alpha1_metcut = new TH1D("h_bg_alpha1_metcut", "", 20, 0, 1);
+    h_bg_alpha1_metcut->Sumw2();
 
     Int_t f_gg_ZZ_2e2mu_weight, f_gg_ZZ_2e2nu_weight, f_gg_ZZ_2e2tau_weight, f_gg_ZZ_2mu2nu_weight,
         f_gg_ZZ_2mu2tau_weight, f_gg_ZZ_4e_weight, f_gg_ZZ_4mu_weight, f_gg_ZZ_4tau_weight, f_gg_WW_2L2Nu_weight,
@@ -338,7 +341,7 @@ void ee_Diboson_var()
     v_qq_ZZ_2L2Q_log3Dsig->clear();
     v_qq_ZZ_4L_log3Dsig->clear();
 
-    double METcut = 0.;
+    double METcut = 140.;
 
     TTree *T_event;
     diboson_gg_ZZ_2e2mu->GetObject("T_tree", T_event);
@@ -354,10 +357,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event->GetEntries(); evt++)
     {
         T_event->GetEntry(evt);
-    /*     if (f_gg_ZZ_2e2mu_met < METcut)
+        if (f_gg_ZZ_2e2mu_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_ZZ_2e2mu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_ZZ_2e2mu_alpha)[i], f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_ZZ_2e2mu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_ZZ_2e2mu_log3Dsig)[i], f_gg_ZZ_2e2mu_weight * diboson_gg_ZZ_2e2mu_Weight);
@@ -385,10 +391,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event1->GetEntries(); evt++)
     {
         T_event1->GetEntry(evt);
-/*         if (f_gg_ZZ_2e2nu_met < METcut)
+        if (f_gg_ZZ_2e2nu_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_ZZ_2e2nu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_ZZ_2e2nu_alpha)[i], f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_ZZ_2e2nu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_ZZ_2e2nu_log3Dsig)[i], f_gg_ZZ_2e2nu_weight * diboson_gg_ZZ_2e2nu_Weight);
@@ -416,10 +425,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event2->GetEntries(); evt++)
     {
         T_event2->GetEntry(evt);
-/*         if (f_gg_ZZ_2e2tau_met < METcut)
+        if (f_gg_ZZ_2e2tau_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_ZZ_2e2tau_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_ZZ_2e2tau_alpha)[i], f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_ZZ_2e2tau_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_ZZ_2e2tau_log3Dsig)[i], f_gg_ZZ_2e2tau_weight * diboson_gg_ZZ_2e2tau_Weight);
@@ -447,10 +459,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event3->GetEntries(); evt++)
     {
         T_event3->GetEntry(evt);
-/*         if (f_gg_ZZ_2mu2nu_met < METcut)
+        if (f_gg_ZZ_2mu2nu_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_ZZ_2mu2nu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_ZZ_2mu2nu_alpha)[i], f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_ZZ_2mu2nu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_ZZ_2mu2nu_log3Dsig)[i], f_gg_ZZ_2mu2nu_weight * diboson_gg_ZZ_2mu2nu_Weight);
@@ -478,10 +493,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event4->GetEntries(); evt++)
     {
         T_event4->GetEntry(evt);
-/*         if (f_gg_ZZ_2mu2tau_met < METcut)
+        if (f_gg_ZZ_2mu2tau_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_ZZ_2mu2tau_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_ZZ_2mu2tau_alpha)[i], f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_ZZ_2mu2tau_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_ZZ_2mu2tau_log3Dsig)[i], f_gg_ZZ_2mu2tau_weight * diboson_gg_ZZ_2mu2tau_Weight);
@@ -509,10 +527,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event5->GetEntries(); evt++)
     {
         T_event5->GetEntry(evt);
-/*         if (f_gg_ZZ_4e_met < METcut)
+        if (f_gg_ZZ_4e_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_ZZ_4e_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_ZZ_4e_alpha)[i], f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_ZZ_4e_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_ZZ_4e_log3Dsig)[i], f_gg_ZZ_4e_weight * diboson_gg_ZZ_4e_Weight);
@@ -540,10 +561,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event6->GetEntries(); evt++)
     {
         T_event6->GetEntry(evt);
-/*         if (f_gg_ZZ_4mu_met < METcut)
+        if (f_gg_ZZ_4mu_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_ZZ_4mu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_ZZ_4mu_alpha)[i], f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_ZZ_4mu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_ZZ_4mu_log3Dsig)[i], f_gg_ZZ_4mu_weight * diboson_gg_ZZ_4mu_Weight);
@@ -571,10 +595,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event7->GetEntries(); evt++)
     {
         T_event7->GetEntry(evt);
-/*         if (f_gg_ZZ_4tau_met < METcut)
+        if (f_gg_ZZ_4tau_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_ZZ_4tau_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_ZZ_4tau_alpha)[i], f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_ZZ_4tau_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_ZZ_4tau_log3Dsig)[i], f_gg_ZZ_4tau_weight * diboson_gg_ZZ_4tau_Weight);
@@ -602,10 +629,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event8->GetEntries(); evt++)
     {
         T_event8->GetEntry(evt);
-/*         if (f_gg_WW_2L2Nu_met < METcut)
+        if (f_gg_WW_2L2Nu_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_gg_WW_2L2Nu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_gg_WW_2L2Nu_alpha)[i], f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
+            }
+        }
         for (size_t i = 0; i < v_gg_WW_2L2Nu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_gg_WW_2L2Nu_log3Dsig)[i], f_gg_WW_2L2Nu_weight * diboson_gg_WW_2L2Nu_Weight);
@@ -633,10 +663,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event9->GetEntries(); evt++)
     {
         T_event9->GetEntry(evt);
-/*         if (f_qq_WW_2L2Nu_met < METcut)
+        if (f_qq_WW_2L2Nu_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_qq_WW_2L2Nu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_qq_WW_2L2Nu_alpha)[i], f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
+            }
+        }
         for (size_t i = 0; i < v_qq_WW_2L2Nu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_qq_WW_2L2Nu_log3Dsig)[i], f_qq_WW_2L2Nu_weight * diboson_qq_WW_2L2Nu_Weight);
@@ -664,10 +697,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event10->GetEntries(); evt++)
     {
         T_event10->GetEntry(evt);
- /*        if (f_qq_WZ_2L2Q_met < METcut)
+        if (f_qq_WZ_2L2Q_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_qq_WZ_2L2Q_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_qq_WZ_2L2Q_alpha)[i], f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
+            }
+        }
         for (size_t i = 0; i < v_qq_WZ_2L2Q_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_qq_WZ_2L2Q_log3Dsig)[i], f_qq_WZ_2L2Q_weight * diboson_qq_WZ_2L2Q_Weight);
@@ -695,10 +731,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event11->GetEntries(); evt++)
     {
         T_event11->GetEntry(evt);
- /*        if (f_qq_WZ_3LNu_met < METcut)
+        if (f_qq_WZ_3LNu_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_qq_WZ_3LNu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_qq_WZ_3LNu_alpha)[i], f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
+            }
+        }
         for (size_t i = 0; i < v_qq_WZ_3LNu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_qq_WZ_3LNu_log3Dsig)[i], f_qq_WZ_3LNu_weight * diboson_qq_WZ_3LNu_Weight);
@@ -726,10 +765,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event12->GetEntries(); evt++)
     {
         T_event12->GetEntry(evt);
- /*        if (f_qq_ZZ_2L2Nu_met < METcut)
+        if (f_qq_ZZ_2L2Nu_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_qq_ZZ_2L2Nu_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_qq_ZZ_2L2Nu_alpha)[i], f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
+            }
+        }
         for (size_t i = 0; i < v_qq_ZZ_2L2Nu_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_qq_ZZ_2L2Nu_log3Dsig)[i], f_qq_ZZ_2L2Nu_weight * diboson_qq_ZZ_2L2Nu_Weight);
@@ -757,10 +799,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event13->GetEntries(); evt++)
     {
         T_event13->GetEntry(evt);
- /*        if (f_qq_ZZ_2L2Q_met < METcut)
+        if (f_qq_ZZ_2L2Q_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_qq_ZZ_2L2Q_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_qq_ZZ_2L2Q_alpha)[i], f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
+            }
+        }
         for (size_t i = 0; i < v_qq_ZZ_2L2Q_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_qq_ZZ_2L2Q_log3Dsig)[i], f_qq_ZZ_2L2Q_weight * diboson_qq_ZZ_2L2Q_Weight);
@@ -788,10 +833,13 @@ void ee_Diboson_var()
     for (int evt = 0; evt < T_event14->GetEntries(); evt++)
     {
         T_event14->GetEntry(evt);
-    /*     if (f_qq_ZZ_4L_met < METcut)
+        if (f_qq_ZZ_4L_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_qq_ZZ_4L_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_qq_ZZ_4L_alpha)[i], f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
+            }
+        }
         for (size_t i = 0; i < v_qq_ZZ_4L_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_qq_ZZ_4L_log3Dsig)[i], f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
@@ -802,9 +850,9 @@ void ee_Diboson_var()
             h_bg_alpha2->Fill((*v_qq_ZZ_4L_alpha2)[i], f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
             h_bg_alpha3->Fill((*v_qq_ZZ_4L_alpha3)[i], f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
             h_bg_alpha4->Fill((*v_qq_ZZ_4L_alpha4)[i], f_qq_ZZ_4L_weight * diboson_qq_ZZ_4L_Weight);
-        } 
+        }
     }
-    h_bg_3DSig->Draw();
+    h_bg_alpha1_metcut->Draw();
     TString outputfile1 = "./ee_Diboson_alpha.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_bg_3DSig->Write();
@@ -812,6 +860,7 @@ void ee_Diboson_var()
     h_bg_alpha2->Write();
     h_bg_alpha3->Write();
     h_bg_alpha4->Write();
+    h_bg_alpha1_metcut->Write();
     outfile_HT0->Close();
 }
 int main()

@@ -171,8 +171,7 @@ void draw_LO()
      h3->GetYaxis()->SetLabelSize(15);
 
      // X axis ratio plot settings
-     h3->GetXaxis()->SetTitle("Jet PT");
-
+     h3->GetXaxis()->SetTitle("Jet PT"
      h3->GetXaxis()->SetTitleSize(18);
      h3->GetXaxis()->SetTitleFont(43);
      h3->GetXaxis()->SetTitleOffset(1.);

@@ -10,7 +10,6 @@
 #include <TLatex.h>
 #include <TAxis.h>
 #include <TLine.h>
-#include "./../../lib/setNCUStyle.C"
 #include "./../../../lib/kuan_ana_utils.h"
 
 using namespace std;

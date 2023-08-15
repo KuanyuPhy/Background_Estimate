@@ -48,6 +48,9 @@ void ee_Triboson_var()
     TH1D *h_bg_alpha4 = new TH1D("h_bg_alpha4", "", 20, 0, 1);
     h_bg_alpha4->Sumw2();
 
+    TH1D *h_bg_alpha1_metcut = new TH1D("h_bg_alpha1_metcut", "", 20, 0, 1);
+    h_bg_alpha1_metcut->Sumw2();
+
     Int_t I_WWZ_weight, I_WZZ_weight, I_ZZZ_weight;
 
     float_t f_WWZ_met, f_WZZ_met, f_ZZZ_met;
@@ -92,7 +95,7 @@ void ee_Triboson_var()
     v_WZZ_log3Dsig->clear();
     v_ZZZ_log3Dsig->clear();
 
-    double METcut = 0.;
+    double METcut = 140.;
 
     TTree *T_tree;
     triboson_WWZfile->GetObject("T_tree", T_tree);
@@ -106,10 +109,13 @@ void ee_Triboson_var()
     for (int evt = 0; evt < T_tree->GetEntries(); evt++)
     {
         T_tree->GetEntry(evt);
-/*         if (f_WWZ_met < METcut)
+        if (f_WWZ_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_WWZ_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_WWZ_alpha)[i], I_WWZ_weight * WWZWeight);
+            }
+        }
         for (size_t i = 0; i < v_WWZ_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_WWZ_log3Dsig)[i], I_WWZ_weight * WWZWeight);
@@ -134,10 +140,13 @@ void ee_Triboson_var()
     for (int evt = 0; evt < T_tree2->GetEntries(); evt++)
     {
         T_tree2->GetEntry(evt);
- /*        if (f_WZZ_met < METcut)
+        if (f_WZZ_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_WZZ_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_WZZ_alpha)[i], I_WZZ_weight * WZZWeight);
+            }
+        }
         for (size_t i = 0; i < v_WZZ_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_WZZ_log3Dsig)[i], I_WZZ_weight * WZZWeight);
@@ -163,10 +172,13 @@ void ee_Triboson_var()
     for (int evt = 0; evt < T_tree3->GetEntries(); evt++)
     {
         T_tree3->GetEntry(evt);
-  /*       if (f_ZZZ_met < METcut)
+        if (f_ZZZ_met > METcut)
         {
-            continue;
-        } */
+            for (size_t i = 0; i < v_ZZZ_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ZZZ_alpha)[i], I_ZZZ_weight * ZZZWeight);
+            }
+        }
         for (size_t i = 0; i < v_ZZZ_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ZZZ_log3Dsig)[i], I_ZZZ_weight * ZZZWeight);
@@ -179,7 +191,7 @@ void ee_Triboson_var()
             h_bg_alpha4->Fill((*v_ZZZ_alpha4)[i], I_ZZZ_weight * ZZZWeight);
         }
     }
-    h_bg_3DSig->Draw();
+    h_bg_alpha1_metcut->Draw();
     TString outputfile1 = "./ee_Triboson_alpha.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_bg_3DSig->Write();
@@ -187,6 +199,7 @@ void ee_Triboson_var()
     h_bg_alpha2->Write();
     h_bg_alpha3->Write();
     h_bg_alpha4->Write();
+    h_bg_alpha1_metcut->Write();
     outfile_HT0->Close();
 }
 int main()

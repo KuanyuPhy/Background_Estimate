@@ -65,26 +65,26 @@ void ee_punzi()
 
     std::vector<double> nBg_alphacut;
 
-    nBg_alphacut.push_back(ee_bg_alphacut1_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut2_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut3_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut4_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut5_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut6_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut7_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut8_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut9_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut10_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut11_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut12_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut13_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut14_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut15_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut16_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut17_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut18_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut19_nJets->Integral(2., 30.));
-    nBg_alphacut.push_back(ee_bg_alphacut20_nJets->Integral(2., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut1_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut2_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut3_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut4_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut5_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut6_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut7_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut8_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut9_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut10_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut11_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut12_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut13_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut14_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut15_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut16_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut17_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut18_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut19_nJets->Integral(3., 30.));
+    nBg_alphacut.push_back(ee_bg_alphacut20_nJets->Integral(3., 30.));
 
     std::cout << "nBg_alphacut.size = " << nBg_alphacut.size() << std::endl;
 
@@ -161,6 +161,10 @@ void ee_punzi()
                     jet_passalpha_cut++;
                 }
             }
+            if (jet_passalpha_cut != 0)
+            {
+                std::cout << "Sig150 njet cut = " << jet_passalpha_cut << " Sig150 weight = " << I_Sig1_weight << std::endl;
+            }
             h_Sig1_nJet[i]->Fill(jet_passalpha_cut, I_Sig1_weight);
         }
 
@@ -228,29 +232,37 @@ void ee_punzi()
 
     for (int i = 0; i < 20; i++)
     {
-        double eff_Sig1 = static_cast<double>(h_Sig1_nJet[i]->Integral(3., 30.)) / (h_Sig1_nJet[i]->Integral(2., 30.));
-        double eff_Sig50 = static_cast<double>(h_Sig50_nJet[i]->Integral(3., 30.)) / (h_Sig50_nJet[i]->Integral(2., 30.));
-        double eff_Sig150 = static_cast<double>(h_Sig150_nJet[i]->Integral(3., 30.)) / (h_Sig150_nJet[i]->Integral(2., 30.));
+        double eff_Sig1 = static_cast<double>(h_Sig1_nJet[i]->Integral(3., 30.)) / (h_Sig1_nJet[i]->Integral(1., 30.));
+        double eff_Sig50 = static_cast<double>(h_Sig50_nJet[i]->Integral(3., 30.)) / (h_Sig50_nJet[i]->Integral(1., 30.));
+        double eff_Sig150 = static_cast<double>(h_Sig150_nJet[i]->Integral(3., 30.)) / (h_Sig150_nJet[i]->Integral(1., 30.));
 
         v_eff_Sig1.push_back(eff_Sig1);
         v_eff_Sig50.push_back(eff_Sig50);
         v_eff_Sig150.push_back(eff_Sig150);
 
+        std::cout << "eff Sig1 = " << eff_Sig1 << std::endl;
+        std::cout << "eff Sig50 = " << eff_Sig50 << std::endl;
+        std::cout << "eff Sig150 = " << eff_Sig150 << std::endl;
+
         double punzi_Sig1 = static_cast<double>(punzi(eff_Sig1, nBg_alphacut[i]));
         double punzi_Sig50 = static_cast<double>(punzi(eff_Sig50, nBg_alphacut[i]));
         double punzi_Sig150 = static_cast<double>(punzi(eff_Sig150, nBg_alphacut[i]));
 
+        std::cout << "punzi Sig1 = " << punzi_Sig1 << std::endl;
         std::cout << "punzi Sig50 = " << punzi_Sig50 << std::endl;
+        std::cout << "punzi Sig150 = " << punzi_Sig150 << std::endl;
 
         h_punzi_Sig1->SetBinContent(i + 1, punzi_Sig1);
         h_punzi_Sig50->SetBinContent(i + 1, punzi_Sig50);
         h_punzi_Sig150->SetBinContent(i + 1, punzi_Sig150);
     }
+
     TString outputfile = "./../alpha/ee_alpha_punzi.root";
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
     h_punzi_Sig1->Write();
     h_punzi_Sig50->Write();
     h_punzi_Sig150->Write();
+    h_Sig1_nJet[0]->Write();
     outfile->Close();
 
     // h_punzi_Sig1->Draw("text45");

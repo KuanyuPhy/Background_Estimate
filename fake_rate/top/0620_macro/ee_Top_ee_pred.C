@@ -9,13 +9,15 @@
 #include <TString.h>
 #include <TLegend.h>
 #include <TLatex.h>
+#include <TH2.h>
 #include <TAxis.h>
 #include <TLine.h>
 #include <TError.h>
 #include "TLegend.h"
 #include <cstring>
-#include "./../../lib/Cross_section.h"
+#include "./../../../lib/Cross_section.h"
 using namespace std;
+
 //-------------------
 // Create New class
 //-------------------
@@ -46,6 +48,7 @@ public:
         return a.GetPt() > b.GetPt();
     }
 };
+
 //------------------
 // Calculate weight
 //------------------
@@ -57,6 +60,15 @@ TFile *Top_TTZToLLNuNufile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2
 TFile *Top_tW_antitopfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_tW_antitop.root");
 TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BKGMC/top/ee_top_tW_top.root");
 
+//----------------------
+// Get fake rate
+//----------------------
+TFile *Topemu_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top_emu/top_emu_fakerate.root");
+// TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top/top_ee_fakerate.root");
+
+TH1D *Topemu_nTrk_fakeRate_lowDilepPt = ((TH1D *)Topemu_fakerate_topfile->Get("Top_nTrk_fakeRate_lowDilepPt"));
+TH1D *Topemu_nTrk_fakeRate_highDilepPt = ((TH1D *)Topemu_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt"));
+
 TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToQQ_sumevt = ((TH1D *)Top_TTWJetsToQQfile->Get("Event_Variable/h_totevent"));
@@ -65,13 +77,13 @@ TH1D *TTZToLLNuNu_sumevt = ((TH1D *)Top_TTZToLLNuNufile->Get("Event_Variable/h_t
 TH1D *tW_antitop_sumevt = ((TH1D *)Top_tW_antitopfile->Get("Event_Variable/h_totevent"));
 TH1D *tW_top_sumevt = ((TH1D *)Top_tW_topfile->Get("Event_Variable/h_totevent"));
 
-double TTTo2L2Nu_totevt = TTTo2L2Nu_sumevt->Integral();
-double TTWJetsToLNu_totevt = TTWJetsToLNu_sumevt->Integral();
-double TTWJetsToQQ_totevt = TTWJetsToQQ_sumevt->Integral();
-double TTZToQQ_totevt = TTZToQQ_sumevt->Integral();
-double TTZToLLNuNu_totevt = TTZToLLNuNu_sumevt->Integral();
-double tW_antitop_totevt = tW_antitop_sumevt->Integral();
-double tW_top_totevt = tW_top_sumevt->Integral();
+int TTTo2L2Nu_totevt = TTTo2L2Nu_sumevt->Integral();
+int TTWJetsToLNu_totevt = TTWJetsToLNu_sumevt->Integral();
+int TTWJetsToQQ_totevt = TTWJetsToQQ_sumevt->Integral();
+int TTZToQQ_totevt = TTZToQQ_sumevt->Integral();
+int TTZToLLNuNu_totevt = TTZToLLNuNu_sumevt->Integral();
+int tW_antitop_totevt = tW_antitop_sumevt->Integral();
+int tW_top_totevt = tW_top_sumevt->Integral();
 
 //---------------------
 // Define TopWeight
@@ -86,9 +98,6 @@ double TTZToLLNuNuWeight = (GlobalConstants::Lumi2016) * (GlobalConstants::TTZTo
 
 vector<double> v_xs_Weight = {TTTo2L2NuWeight, ST_tW_topWeight, ST_tW_antitopWeight, TTWJetsToLNuWeight, TTWJetsToQQWeight, TTZToQQWeight, TTZToLLNuNuWeight};
 vector<const char *> v_top_filename = {"TTTo2L2Nu", "tW_top", "tW_antitop", "TTWJetsToLNu", "TTWJetsToQQ", "TTZToQQ", "TTZToLLNuNu"};
-//-------------------------------------------
-// Get Weight Function
-//-------------------------------------------
 double getWeight(const char *file_name_tmp)
 {
     TString file_name = file_name_tmp;
@@ -103,15 +112,65 @@ double getWeight(const char *file_name_tmp)
     return -100000;
 }
 
-void ee_Top_ee_half(TString file = "tmp.root", TString outputfile = "output.root")
+int getfakerate(float tmp1, float start, float Binwidth)
+{
+    int quotient;
+    quotient = floor((tmp1 - start) / (Binwidth));
+
+    return quotient + 1;
+}
+//---------------
+// void Function
+//---------------
+int getbinfakerate(float tmp_ntrk)
+{
+    int bin_pos_info;
+    if (tmp_ntrk >= 15 && tmp_ntrk < 25)
+    {
+        bin_pos_info = 15;
+    }
+    else if (tmp_ntrk >= 25 && tmp_ntrk < 40)
+    {
+        bin_pos_info = 16;
+    }
+    else
+    {
+        bin_pos_info = tmp_ntrk;
+    }
+    return bin_pos_info;
+}
+void for_signalflavor_jet2d(int flavor, float hadronflavor, float tmp1, float tmp2, double Weight, TH2D *h_tmp)
+{
+    if (hadronflavor == flavor)
+    {
+        h_tmp->Fill(tmp1, tmp2, Weight);
+    }
+}
+void for_signalflavor_jet(int flavor, float hadronflavor, float tmp1, double Weight, TH1D *h_tmp)
+{
+    if (hadronflavor == flavor)
+    {
+        h_tmp->Fill(tmp1, Weight);
+    }
+}
+void for_doubleflavor_jet(int flavor1, int flavor2, int hadronflavor, float tmp, float Weight, TH1D *h_tmp)
+{
+    if (hadronflavor == flavor1 || hadronflavor == flavor2)
+    {
+        h_tmp->Fill(tmp, Weight);
+    }
+}
+
+void ee_Top_ee_pred(TString file = "/home/kuanyu/Documents/root_file/BgEstimation/top_TTTo2L2Nu_2.root", TString outputfile = "output.root")
 {
     TFile *Topfile = TFile::Open(file);
+    cout << "Top weight = " << getWeight(file) << endl;
 
     const Int_t NBINS = 16;
     Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15., 25., 40.};
 
-    //const Int_t NBINS = 14;
-    //Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15.};
+    // const Int_t NBINS = 14;
+    // Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15.};
 
     const Int_t NJet_Nbins = 10;
     Double_t NJet_edges[NJet_Nbins + 1] = {0., 30., 60., 90., 120., 150., 210., 270., 350., 450., 1500.};
@@ -120,38 +179,23 @@ void ee_Top_ee_half(TString file = "tmp.root", TString outputfile = "output.root
     Double_t JetEta_low_bound = -3.;
     Double_t JetEta_upper_bound = 3.;
 
-    // 1. nTrk
-    TH1D *h_Top_nTrk_lowDilepPt = new TH1D("h_Top_nTrk_lowDilepPt", "", NBINS, edges);
-    h_Top_nTrk_lowDilepPt->Sumw2();
-    TH1D *h_Top_nTrk_cut_lowDilepPt = new TH1D("h_Top_nTrk_cut_lowDilepPt", "", NBINS, edges);
-    h_Top_nTrk_cut_lowDilepPt->Sumw2();
+    TH1D *h_Top_nTrk_HighDilepPt_true = new TH1D("h_Top_nTrk_HighDilepPt_true", "", NBINS, edges);
+    h_Top_nTrk_HighDilepPt_true->Sumw2();
 
-    TH1D *h_Top_nTrk_highDilepPt = new TH1D("h_Top_nTrk_highDilepPt", "", NBINS, edges);
-    h_Top_nTrk_highDilepPt->Sumw2();
-    TH1D *h_Top_nTrk_cut_highDilepPt = new TH1D("h_Top_nTrk_cut_highDilepPt", "", NBINS, edges);
-    h_Top_nTrk_cut_highDilepPt->Sumw2();
+    TH1D *h_Top_nTrk_HighDilepPt_predict = new TH1D("h_Top_nTrk_HighDilepPt_predict", "", NBINS, edges);
+    h_Top_nTrk_HighDilepPt_predict->Sumw2();
 
-    // 2. JetPt
-    TH1D *h_Top_JetPt_lowDilepPt = new TH1D("h_Top_JetPt_lowDilepPt", "", NJet_Nbins, NJet_edges);
-    h_Top_JetPt_lowDilepPt->Sumw2();
-    TH1D *h_Top_JetPt_cut_lowDilepPt = new TH1D("h_Top_JetPt_cut_lowDilepPt", "", NJet_Nbins, NJet_edges);
-    h_Top_JetPt_cut_lowDilepPt->Sumw2();
+    TH1D *h_Top_JetPt_HighDilepPt_true = new TH1D("h_Top_JetPt_HighDilepPt_true", "", NJet_Nbins, NJet_edges);
+    h_Top_JetPt_HighDilepPt_true->Sumw2();
 
-    TH1D *h_Top_JetPt_highDilepPt = new TH1D("h_Top_JetPt_highDilepPt", "", NJet_Nbins, NJet_edges);
-    h_Top_JetPt_highDilepPt->Sumw2();
-    TH1D *h_Top_JetPt_cut_highDilepPt = new TH1D("h_Top_JetPt_cut_highDilepPt", "", NJet_Nbins, NJet_edges);
-    h_Top_JetPt_cut_highDilepPt->Sumw2();
+    TH1D *h_Top_JetPt_HighDilepPt_predict = new TH1D("h_Top_JetPt_HighDilepPt_predict", "", NJet_Nbins, NJet_edges);
+    h_Top_JetPt_HighDilepPt_predict->Sumw2();
 
-    // 3. JetEta
-    TH1D *h_Top_JetEta_lowDilepPt = new TH1D("h_Top_JetEta_lowDilepPt", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
-    h_Top_JetEta_lowDilepPt->Sumw2();
-    TH1D *h_Top_JetEta_cut_lowDilepPt = new TH1D("h_Top_JetEta_cut_lowDilepPt", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
-    h_Top_JetEta_cut_lowDilepPt->Sumw2();
+    TH1D *h_Top_JetEta_HighDilepPt_true = new TH1D("h_Top_JetEta_HighDilepPt_true", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_JetEta_HighDilepPt_true->Sumw2();
 
-    TH1D *h_Top_JetEta_highDilepPt = new TH1D("h_Top_JetEta_highDilepPt", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
-    h_Top_JetEta_highDilepPt->Sumw2();
-    TH1D *h_Top_JetEta_cut_highDilepPt = new TH1D("h_Top_JetEta_cut_highDilepPt", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
-    h_Top_JetEta_cut_highDilepPt->Sumw2();
+    TH1D *h_Top_JetEta_HighDilepPt_predict = new TH1D("h_Top_JetEta_HighDilepPt_predict", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
+    h_Top_JetEta_HighDilepPt_predict->Sumw2();
 
     Int_t I_Top_nJets;
 
@@ -182,10 +226,11 @@ void ee_Top_ee_half(TString file = "tmp.root", TString outputfile = "output.root
     v_Top_JetMass->clear();
 
     float METcut = 140.;
+
     float DilepPTcut = 60.;
 
     TTree *T_Top_tree;
-    Topfile->GetObject("h1", T_Top_tree);
+    Topfile->GetObject("h2", T_Top_tree);
     T_Top_tree->SetBranchAddress("I_weight", &I_Top_weight);
     T_Top_tree->SetBranchAddress("I_nJets", &I_Top_nJets);
     T_Top_tree->SetBranchAddress("v_N_Tracks", &v_Top_nTrack);
@@ -203,126 +248,76 @@ void ee_Top_ee_half(TString file = "tmp.root", TString outputfile = "output.root
     for (int evt = 0; evt < T_Top_tree->GetEntries(); evt++)
     {
         T_Top_tree->GetEntry(evt);
+        if (f_Top_met < 0)
+        {
+            continue;
+        }
         double Top_weight = getWeight(file) * I_Top_weight;
-
         vector<ThinJet> v_thinjet;
         if (v_Top_nTrack->size() < 2)
         {
-            // cout << "v_thinjet.size() == " << v_Top_nTrack->size() << endl;
-            // cout << "bug" << endl;
             continue;
         }
         for (size_t i = 0; i < v_Top_nTrack->size(); i++)
         {
             v_thinjet.push_back(ThinJet((*v_Top_Jethadronflavor)[i], (*v_Top_JetPT)[i], (*v_Top_JetEta)[i], (*v_Top_alpha)[i], (*v_Top_nTrack)[i], (*v_Top_JetMass)[i], (*v_Top_JetCsv)[i]));
         }
-        //--------------
-        // Sort by Jet Pt
-        //--------------
         sort(v_thinjet.begin(), v_thinjet.end(), greater<ThinJet>());
-        for (size_t i = 0; i < v_Top_JetPT->size() - 1; i++)
-        {
-            float a_pt = (*v_Top_JetPT)[i];
-            float b_pt = (*v_Top_JetPT)[i + 1];
-            if (b_pt > a_pt)
-            {
-                cout << "a_pt = " << a_pt << endl;
-                cout << "b_pt = " << b_pt << endl;
-            }
-        }
-        for (size_t i = 0; i < v_thinjet.size(); i++)
-        {
-            if (v_thinjet[i].GetPt() < 30)
-            {
-                cout << "JetPT= " << v_thinjet[i].GetPt() << endl;
-            }
-            else
-            {
-                continue;
-            }
-        }
-        //------------------
-        // Apply MET cut
-        //------------------
+
         if (f_Top_met <= METcut)
         {
             continue;
-        }
-        //-----------------------
-        // For Low dilepPT region
-        //-----------------------
-        if (f_Top_dileppt < DilepPTcut)
+        } // MET Cut
+
+        if (f_Top_dileppt >= DilepPTcut)
         {
-            // Only consider LO & NLO Jet PT
-            for (size_t i = 0; i < v_thinjet.size(); i++)
+            // v_thinjet.size()
+            for (size_t ijet = 0; ijet < v_thinjet.size(); ijet++)
             {
-                /*if (abs(v_thinjet[i].GetEta()) >= 1.442 && abs(v_thinjet[i].GetEta()) <= 1.566)
-                {
-                    continue;
-                }*/
 
-                h_Top_nTrk_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
-                h_Top_JetPt_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
-                h_Top_JetEta_lowDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
+                int fk_bin_pos = getbinfakerate(v_thinjet[ijet].GetNtrk());
+                // cout << "fk_bin_pos = " << fk_bin_pos << endl;
+                double no_flavor_fk = Topemu_nTrk_fakeRate_lowDilepPt->GetBinContent(fk_bin_pos) * Top_weight;
+                h_Top_nTrk_HighDilepPt_predict->Fill(v_thinjet[ijet].GetNtrk(), no_flavor_fk);
+                h_Top_JetPt_HighDilepPt_predict->Fill(v_thinjet[ijet].GetPt(), no_flavor_fk);
+                h_Top_JetEta_HighDilepPt_predict->Fill(v_thinjet[ijet].GetEta(), no_flavor_fk);
 
-                if (v_thinjet[i].GetAlpha() < 0.1)
+                if (v_thinjet[ijet].GetAlpha() < 0.1)
                 {
-                    h_Top_nTrk_cut_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
-                    h_Top_JetPt_cut_lowDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
-                    h_Top_JetEta_cut_lowDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
+                    h_Top_nTrk_HighDilepPt_true->Fill(v_thinjet[ijet].GetNtrk(), Top_weight);
+                    h_Top_JetPt_HighDilepPt_true->Fill(v_thinjet[ijet].GetPt(), Top_weight);
+                    h_Top_JetEta_HighDilepPt_true->Fill(v_thinjet[ijet].GetEta(), Top_weight);
                 }
-            } // End of LO & NLO Jet loop
-        }     // End of low dilepPT region
-        //----------------------------
-        // For High dilepPT region
-        //----------------------------
+            }
+
+        } // For High dilepton PT
         else
         {
-            for (size_t i = 0; i < v_thinjet.size(); i++)
-            {
-                /*if (abs(v_thinjet[i].GetEta()) >= 1.442 && abs(v_thinjet[i].GetEta()) <= 1.566)
-                {
-                    continue;
-                }*/
+            continue;
+        }
 
-                h_Top_nTrk_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
-                h_Top_JetPt_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
-                h_Top_JetEta_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
-                if (v_thinjet[i].GetAlpha() < 0.1)
-                {
-                    h_Top_nTrk_cut_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
-                    h_Top_JetPt_cut_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
-                    h_Top_JetEta_cut_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
-                }
+    } // End of Top loop
 
-            } // End of LO & NLO Jet loop
-        }     // End of high dilepPT region
-    }
     TFile *outfile = TFile::Open(outputfile, "RECREATE");
     outfile->cd();
-    h_Top_nTrk_lowDilepPt->Write();
-    h_Top_nTrk_cut_lowDilepPt->Write();
-    h_Top_nTrk_highDilepPt->Write();
-    h_Top_nTrk_cut_highDilepPt->Write();
-    h_Top_JetPt_lowDilepPt->Write();
-    h_Top_JetPt_cut_lowDilepPt->Write();
-    h_Top_JetPt_highDilepPt->Write();
-    h_Top_JetPt_cut_highDilepPt->Write();
-    h_Top_JetEta_lowDilepPt->Write();
-    h_Top_JetEta_cut_lowDilepPt->Write();
-    h_Top_JetEta_highDilepPt->Write();
-    h_Top_JetEta_cut_highDilepPt->Write();
+    h_Top_nTrk_HighDilepPt_predict->Write();
+    h_Top_JetPt_HighDilepPt_predict->Write();
+    h_Top_JetEta_HighDilepPt_predict->Write();
+    h_Top_nTrk_HighDilepPt_true->Write();
+    h_Top_JetPt_HighDilepPt_true->Write();
+    h_Top_JetEta_HighDilepPt_true->Write();
     outfile->Close();
+    // h_Top_JetPt_bjet_SR->Draw();
 }
 int main(int argc, char **argv)
 {
     if (argc == 1)
     {
-        ee_Top_ee_half();
+        ee_Top_ee_pred();
     }
     else if (argc == 3)
     {
-        ee_Top_ee_half(argv[1], argv[2]);
+        ee_Top_ee_pred(argv[1], argv[2]);
     }
     else
     {

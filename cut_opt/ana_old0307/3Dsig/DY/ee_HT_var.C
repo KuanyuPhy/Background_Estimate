@@ -196,6 +196,9 @@ void ee_HT_var()
     TH1D *h_bg_alpha4 = new TH1D("h_bg_alpha4", "", 20, 0, 1);
     h_bg_alpha4->Sumw2();
 
+    TH1D *h_bg_alpha1_metcut = new TH1D("h_bg_alpha1_metcut", "", 20, 0, 1);
+    h_bg_alpha1_metcut->Sumw2();
+
     float_t HT;
 
     float_t f_ht0_Met, f_ht70_Met, f_ht100_Met, f_ht200_Met, f_ht400_Met, f_ht600_Met, f_ht800_Met,
@@ -336,7 +339,7 @@ void ee_HT_var()
     v_ht1200_Jethadronflavor->clear();
     v_ht2500_Jethadronflavor->clear();
 
-    double metcut = 0.;
+    double metcut = 140.;
 
     TTree *T_inclusive;
     DYincli->GetObject("T_tree", T_inclusive);
@@ -353,10 +356,13 @@ void ee_HT_var()
     for (int evt = 0; evt < T_inclusive->GetEntries(); evt++)
     {
         T_inclusive->GetEntry(evt);
-        /*if (f_ht0_Met < metcut)
+        if (f_ht0_Met > metcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ht0_alpha->size(); i++)
+            {
+                for_inclusive_sample(HT, (*v_ht0_alpha)[i], I_ht0_weight, h_bg_alpha1_metcut);
+            }
+        }
         for (size_t i = 0; i < v_ht0_log3Dsig->size(); i++)
         {
             for_inclusive_sample(HT, (*v_ht0_log3Dsig)[i], I_ht0_weight, h_bg_3DSig);
@@ -383,10 +389,13 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT100->GetEntries(); evt++)
     {
         T_HT100->GetEntry(evt);
-        /*if (f_ht100_Met < metcut)
+        if (f_ht100_Met > metcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ht100_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ht100_alpha)[i], I_ht100_weight * HT100Weight);
+            }
+        }
         for (size_t i = 0; i < v_ht100_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht100_log3Dsig)[i], I_ht100_weight * HT100Weight);
@@ -413,10 +422,13 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT200->GetEntries(); evt++)
     {
         T_HT200->GetEntry(evt);
-        /*if (f_ht200_Met < metcut)
+        if (f_ht200_Met > metcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ht200_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ht200_alpha)[i], I_ht200_weight * HT200Weight);
+            }
+        }
         for (size_t i = 0; i < v_ht200_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht200_log3Dsig)[i], I_ht200_weight * HT200Weight);
@@ -443,10 +455,13 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT400->GetEntries(); evt++)
     {
         T_HT400->GetEntry(evt);
-        /*if (f_ht400_Met < metcut)
+        if (f_ht400_Met > metcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ht400_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ht400_alpha)[i], I_ht400_weight * HT400Weight);
+            }
+        }
         for (size_t i = 0; i < v_ht400_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht400_log3Dsig)[i], I_ht400_weight * HT400Weight);
@@ -473,10 +488,13 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT600->GetEntries(); evt++)
     {
         T_HT600->GetEntry(evt);
-        /*if (f_ht600_Met < metcut)
+        if (f_ht400_Met > metcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ht600_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ht600_alpha)[i], I_ht600_weight * HT600Weight);
+            }
+        }
         for (size_t i = 0; i < v_ht600_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht600_log3Dsig)[i], I_ht600_weight * HT600Weight);
@@ -503,10 +521,13 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT800->GetEntries(); evt++)
     {
         T_HT800->GetEntry(evt);
-        /*if (f_ht800_Met < metcut)
+        if (f_ht800_Met > metcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ht800_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ht800_alpha)[i], I_ht800_weight * HT800Weight);
+            }
+        }
         for (size_t i = 0; i < v_ht800_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht800_log3Dsig)[i], I_ht800_weight * HT800Weight);
@@ -533,10 +554,13 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT1200->GetEntries(); evt++)
     {
         T_HT1200->GetEntry(evt);
-        /*if (f_ht1200_Met < metcut)
+        if (f_ht1200_Met > metcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ht1200_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ht1200_alpha)[i], I_ht1200_weight * HT1200Weight);
+            }
+        }
         for (size_t i = 0; i < v_ht1200_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht1200_log3Dsig)[i], I_ht1200_weight * HT1200Weight);
@@ -563,10 +587,13 @@ void ee_HT_var()
     for (int evt = 0; evt < T_HT2500->GetEntries(); evt++)
     {
         T_HT2500->GetEntry(evt);
-        /*if (f_ht2500_Met < metcut)
+        if (f_ht2500_Met > metcut)
         {
-            continue;
-        }*/
+            for (size_t i = 0; i < v_ht2500_alpha->size(); i++)
+            {
+                h_bg_alpha1_metcut->Fill((*v_ht2500_alpha)[i], I_ht2500_weight * HT2500Weight);
+            }
+        }
         for (size_t i = 0; i < v_ht2500_log3Dsig->size(); i++)
         {
             h_bg_3DSig->Fill((*v_ht2500_log3Dsig)[i], I_ht2500_weight * HT2500Weight);
@@ -579,7 +606,7 @@ void ee_HT_var()
             h_bg_alpha4->Fill((*v_ht2500_alpha4)[i], I_ht2500_weight * HT2500Weight);
         }
     }
-    h_bg_3DSig->Draw();
+    h_bg_alpha1_metcut->Draw();
     gStyle->SetGridStyle();
     TString outputfile1 = "./ee_DY_alpha.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
@@ -588,5 +615,6 @@ void ee_HT_var()
     h_bg_alpha2->Write();
     h_bg_alpha3->Write();
     h_bg_alpha4->Write();
+    h_bg_alpha1_metcut->Write();
     outfile_HT0->Close();
 }

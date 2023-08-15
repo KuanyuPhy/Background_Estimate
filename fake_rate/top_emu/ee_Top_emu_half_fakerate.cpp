@@ -142,16 +142,23 @@ void ee_Top_emu_half_fakerate(TString file = "tmp.root", TString outputfile = "o
     TH1D *h_Top_nTrk_ljet_difeta_lowDilepPt_3 = ((TH1D *)Topfile->Get("h_Top_nTrk_ljet_difeta_lowDilepPt_3"));
     TH1D *h_Top_nTrk_ljet_cut_difeta_lowDilepPt_3 = ((TH1D *)Topfile->Get("h_Top_nTrk_ljet_cut_difeta_lowDilepPt_3"));
 
+                                                                        
+    TH1D *h_Top_nTrk_jet_difeta_highDilepPt_1 = ((TH1D *)Topfile->Get("h_Top_nTrk_difeta_highDilepPt_1"));
+    TH1D *h_Top_nTrk_jet_cut_difeta_highDilepPt_1 = ((TH1D *)Topfile->Get("h_Top_nTrk_cut_difeta_highDilepPt_1"));
     TH1D *h_Top_nTrk_bjet_difeta_highDilepPt_1 = ((TH1D *)Topfile->Get("h_Top_nTrk_bjet_difeta_highDilepPt_1"));
     TH1D *h_Top_nTrk_bjet_cut_difeta_highDilepPt_1 = ((TH1D *)Topfile->Get("h_Top_nTrk_bjet_cut_difeta_highDilepPt_1"));
     TH1D *h_Top_nTrk_ljet_difeta_highDilepPt_1 = ((TH1D *)Topfile->Get("h_Top_nTrk_ljet_difeta_highDilepPt_1"));
     TH1D *h_Top_nTrk_ljet_cut_difeta_highDilepPt_1 = ((TH1D *)Topfile->Get("h_Top_nTrk_ljet_cut_difeta_highDilepPt_1"));
 
+    TH1D *h_Top_nTrk_jet_difeta_highDilepPt_2 = ((TH1D *)Topfile->Get("h_Top_nTrk_difeta_highDilepPt_2"));
+    TH1D *h_Top_nTrk_jet_cut_difeta_highDilepPt_2 = ((TH1D *)Topfile->Get("h_Top_nTrk_cut_difeta_highDilepPt_2"));
     TH1D *h_Top_nTrk_bjet_difeta_highDilepPt_2 = ((TH1D *)Topfile->Get("h_Top_nTrk_bjet_difeta_highDilepPt_2"));
     TH1D *h_Top_nTrk_bjet_cut_difeta_highDilepPt_2 = ((TH1D *)Topfile->Get("h_Top_nTrk_bjet_cut_difeta_highDilepPt_2"));
     TH1D *h_Top_nTrk_ljet_difeta_highDilepPt_2 = ((TH1D *)Topfile->Get("h_Top_nTrk_ljet_difeta_highDilepPt_2"));
     TH1D *h_Top_nTrk_ljet_cut_difeta_highDilepPt_2 = ((TH1D *)Topfile->Get("h_Top_nTrk_ljet_cut_difeta_highDilepPt_2"));
 
+    TH1D *h_Top_nTrk_jet_difeta_highDilepPt_3 = ((TH1D *)Topfile->Get("h_Top_nTrk_difeta_highDilepPt_3"));
+    TH1D *h_Top_nTrk_jet_cut_difeta_highDilepPt_3 = ((TH1D *)Topfile->Get("h_Top_nTrk_cut_difeta_highDilepPt_3"));
     TH1D *h_Top_nTrk_bjet_difeta_highDilepPt_3 = ((TH1D *)Topfile->Get("h_Top_nTrk_bjet_difeta_highDilepPt_3"));
     TH1D *h_Top_nTrk_bjet_cut_difeta_highDilepPt_3 = ((TH1D *)Topfile->Get("h_Top_nTrk_bjet_cut_difeta_highDilepPt_3"));
     TH1D *h_Top_nTrk_ljet_difeta_highDilepPt_3 = ((TH1D *)Topfile->Get("h_Top_nTrk_ljet_difeta_highDilepPt_3"));
@@ -257,17 +264,27 @@ void ee_Top_emu_half_fakerate(TString file = "tmp.root", TString outputfile = "o
     TH1D *Top_nTrk_lfakeRate_difeta_lowDilepPt_3 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_lowDilepPt_3->Clone("Top_nTrk_lfakeRate_difeta_lowDilepPt_3");
     DivideHistogram(Top_nTrk_lfakeRate_difeta_lowDilepPt_3, h_Top_nTrk_ljet_cut_difeta_lowDilepPt_3, h_Top_nTrk_ljet_difeta_lowDilepPt_3);
 
+    TH1D *Top_nTrk_fakeRate_difeta_highDilepPt_1 = (TH1D *)h_Top_nTrk_jet_cut_difeta_highDilepPt_1->Clone("Top_nTrk_fakeRate_difeta_highDilepPt_1");
+    DivideHistogram(Top_nTrk_fakeRate_difeta_highDilepPt_1, h_Top_nTrk_jet_cut_difeta_highDilepPt_1, h_Top_nTrk_jet_difeta_highDilepPt_1);
+
     TH1D *Top_nTrk_bfakeRate_difeta_highDilepPt_1 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_highDilepPt_1->Clone("Top_nTrk_bfakeRate_difeta_highDilepPt_1");
     DivideHistogram(Top_nTrk_bfakeRate_difeta_highDilepPt_1, h_Top_nTrk_bjet_cut_difeta_highDilepPt_1, h_Top_nTrk_bjet_difeta_highDilepPt_1);
 
     TH1D *Top_nTrk_lfakeRate_difeta_highDilepPt_1 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_highDilepPt_1->Clone("Top_nTrk_lfakeRate_difeta_highDilepPt_1");
     DivideHistogram(Top_nTrk_lfakeRate_difeta_highDilepPt_1, h_Top_nTrk_ljet_cut_difeta_highDilepPt_1, h_Top_nTrk_ljet_difeta_highDilepPt_1);
 
+    TH1D *Top_nTrk_fakeRate_difeta_highDilepPt_2 = (TH1D *)h_Top_nTrk_jet_cut_difeta_highDilepPt_2->Clone("Top_nTrk_fakeRate_difeta_highDilepPt_2");
+    DivideHistogram(Top_nTrk_fakeRate_difeta_highDilepPt_2, h_Top_nTrk_jet_cut_difeta_highDilepPt_2, h_Top_nTrk_jet_difeta_highDilepPt_2);
+
     TH1D *Top_nTrk_bfakeRate_difeta_highDilepPt_2 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_highDilepPt_2->Clone("Top_nTrk_bfakeRate_difeta_highDilepPt_2");
     DivideHistogram(Top_nTrk_bfakeRate_difeta_highDilepPt_2, h_Top_nTrk_bjet_cut_difeta_highDilepPt_2, h_Top_nTrk_bjet_difeta_highDilepPt_2);
 
     TH1D *Top_nTrk_lfakeRate_difeta_highDilepPt_2 = (TH1D *)h_Top_nTrk_ljet_cut_difeta_highDilepPt_2->Clone("Top_nTrk_lfakeRate_difeta_highDilepPt_2");
     DivideHistogram(Top_nTrk_lfakeRate_difeta_highDilepPt_2, h_Top_nTrk_ljet_cut_difeta_highDilepPt_2, h_Top_nTrk_ljet_difeta_highDilepPt_2);
+
+    TH1D *Top_nTrk_fakeRate_difeta_highDilepPt_3 = (TH1D *)h_Top_nTrk_jet_cut_difeta_highDilepPt_3->Clone("Top_nTrk_fakeRate_difeta_highDilepPt_3");
+    DivideHistogram(Top_nTrk_fakeRate_difeta_highDilepPt_3, h_Top_nTrk_jet_cut_difeta_highDilepPt_3, h_Top_nTrk_jet_difeta_highDilepPt_3);
+
 
     TH1D *Top_nTrk_bfakeRate_difeta_highDilepPt_3 = (TH1D *)h_Top_nTrk_bjet_cut_difeta_highDilepPt_3->Clone("Top_nTrk_bfakeRate_difeta_highDilepPt_3");
     DivideHistogram(Top_nTrk_bfakeRate_difeta_highDilepPt_3, h_Top_nTrk_bjet_cut_difeta_highDilepPt_3, h_Top_nTrk_bjet_difeta_highDilepPt_3);
@@ -308,12 +325,15 @@ void ee_Top_emu_half_fakerate(TString file = "tmp.root", TString outputfile = "o
     Top_nTrk_bfakeRate_difeta_lowDilepPt_3->Write();
     Top_nTrk_lfakeRate_difeta_lowDilepPt_3->Write();
 
+    Top_nTrk_fakeRate_difeta_highDilepPt_1->Write();
     Top_nTrk_bfakeRate_difeta_highDilepPt_1->Write();
     Top_nTrk_lfakeRate_difeta_highDilepPt_1->Write();
 
+    Top_nTrk_fakeRate_difeta_highDilepPt_2->Write();
     Top_nTrk_bfakeRate_difeta_highDilepPt_2->Write();
     Top_nTrk_lfakeRate_difeta_highDilepPt_2->Write();
 
+    Top_nTrk_fakeRate_difeta_highDilepPt_3->Write();
     Top_nTrk_bfakeRate_difeta_highDilepPt_3->Write();
     Top_nTrk_lfakeRate_difeta_highDilepPt_3->Write();
 

@@ -64,10 +64,14 @@ TFile *Top_tW_topfile = new TFile("/home/kuanyu/Documents/root_file/Ztoee/2016BK
 // Get fake rate
 //----------------------
 TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top_emu/top_emu_all_fakerate.root");
-//TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top/top_ee_fakerate.root");
+// TFile *Top_fakerate_topfile = new TFile("/home/kuanyu/Documents/CMS/Background_Estimate/fake_rate/top/top_ee_fakerate.root");
 
 TH1D *Topemu_nTrk_fakeRate_lowDilepPt = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_lowDilepPt"));
 TH1D *Topemu_nTrk_fakeRate_highDilepPt = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt"));
+
+TH1D *Top_nTrk_fakeRate_highDilepPt_1 = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt_1"));
+TH1D *Top_nTrk_fakeRate_highDilepPt_2 = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt_2"));
+TH1D *Top_nTrk_fakeRate_highDilepPt_3 = ((TH1D *)Top_fakerate_topfile->Get("Top_nTrk_fakeRate_highDilepPt_3"));
 
 TH1D *TTTo2L2Nu_sumevt = ((TH1D *)TTTo2L2Nufile->Get("Event_Variable/h_totevent"));
 TH1D *TTWJetsToLNu_sumevt = ((TH1D *)Top_TTWJetsToLNufile->Get("Event_Variable/h_totevent"));
@@ -165,9 +169,9 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
 {
     TFile *Topfile = TFile::Open(file);
     cout << "Top weight = " << getWeight(file) << endl;
- 
-    //const Int_t NBINS = 16;
-    //Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15., 25., 40.};
+
+    // const Int_t NBINS = 16;
+    // Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15., 25., 40.};
 
     const Int_t NBINS = 14;
     Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15.};
@@ -197,6 +201,19 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
     TH1D *h_Top_JetEta_HighDilepPt_predict = new TH1D("h_Top_JetEta_HighDilepPt_predict", "", JetEta_Nbins, JetEta_low_bound, JetEta_upper_bound);
     h_Top_JetEta_HighDilepPt_predict->Sumw2();
 
+    TH1D *h_Top_nTrk_HighDilepPt_region1_true = new TH1D("h_Top_nTrk_HighDilepPt_region1_true", "", NBINS, edges);
+    h_Top_nTrk_HighDilepPt_region1_true->Sumw2();
+    TH1D *h_Top_nTrk_HighDilepPt_region2_true = new TH1D("h_Top_nTrk_HighDilepPt_region2_true", "", NBINS, edges);
+    h_Top_nTrk_HighDilepPt_region2_true->Sumw2();
+    TH1D *h_Top_nTrk_HighDilepPt_region3_true = new TH1D("h_Top_nTrk_HighDilepPt_region3_true", "", NBINS, edges);
+    h_Top_nTrk_HighDilepPt_region3_true->Sumw2();
+
+    TH1D *h_Top_nTrk_region1_predict = new TH1D("h_Top_nTrk_region1_predict", "", NBINS, edges);
+    h_Top_nTrk_region1_predict->Sumw2();
+    TH1D *h_Top_nTrk_region2_predict = new TH1D("h_Top_nTrk_region2_predict", "", NBINS, edges);
+    h_Top_nTrk_region2_predict->Sumw2();
+    TH1D *h_Top_nTrk_region3_predict = new TH1D("h_Top_nTrk_region3_predict", "", NBINS, edges);
+    h_Top_nTrk_region3_predict->Sumw2();
 
     Int_t I_Top_nJets;
 
@@ -272,7 +289,7 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
 
         if (f_Top_dileppt >= DilepPTcut)
         {
-            //v_thinjet.size()
+            // v_thinjet.size()
             for (size_t ijet = 0; ijet < v_thinjet.size(); ijet++)
             {
 
@@ -288,6 +305,17 @@ void Ratio_Top_apply(TString file = "/home/kuanyu/Documents/root_file/BgEstimati
                     h_Top_nTrk_HighDilepPt_true->Fill(v_thinjet[ijet].GetNtrk(), Top_weight);
                     h_Top_JetPt_HighDilepPt_true->Fill(v_thinjet[ijet].GetPt(), Top_weight);
                     h_Top_JetEta_HighDilepPt_true->Fill(v_thinjet[ijet].GetEta(), Top_weight);
+
+                    if (abs(v_thinjet[ijet].GetEta()) < 1)
+                    {
+                        h_Top_nTrk_HighDilepPt_region1_true->Fill(v_thinjet[ijet].GetNtrk(), Top_weight);
+                    }
+                    else if (abs(v_thinjet[ijet].GetEta()) > 1 && abs(v_thinjet[ijet].GetEta()) < 2)
+                    {
+                    }
+                    else if (abs(v_thinjet[ijet].GetEta()) > 2 && abs(v_thinjet[ijet].GetEta()) < 2.5)
+                    {
+                    }
                 }
             }
 

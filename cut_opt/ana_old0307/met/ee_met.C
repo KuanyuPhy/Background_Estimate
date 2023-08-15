@@ -11,14 +11,11 @@
 #include <TAxis.h>
 #include <TLine.h>
 #include <THStack.h>
-#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/Cross_section.h"
-#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/setNCUStyle.C"
-#include "tdrstyle.C"
-#include "CMS_lumi.C"
+#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/tdrstyle.C"
+#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/CMS_lumi.h"
 using namespace std;
 void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
 {
-    setTDRStyle();
     TFile *ee_DYprocess = TFile::Open(inputfile);
     TFile *ee_Sigfile = new TFile("./sig/ee_Sig_Met.root");
     TFile *ee_Topprocess = new TFile("./top/ee_Top_Met.root");
@@ -41,6 +38,7 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     TH1D *ee_Sig1_Met = ((TH1D *)ee_Sigfile->Get("h_Mx2_1_Met"));
     TH1D *ee_Sig50_Met = ((TH1D *)ee_Sigfile->Get("h_Mx2_50_Met"));
     TH1D *ee_Sig150_Met = ((TH1D *)ee_Sigfile->Get("h_Mx2_150_Met"));
+    TH1D *ee_Sig150_Met_noweight = ((TH1D *)ee_Sigfile->Get("h_Mx2_150_Met_noweight"));
 
     TH1D *ee_Sig1_Met_cut = ((TH1D *)ee_Sigfile->Get("h_Mx2_1_Met_cut"));
     TH1D *ee_Sig50_Met_cut = ((TH1D *)ee_Sigfile->Get("h_Mx2_50_Met_cut"));
@@ -71,13 +69,6 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     TH1D *ee_Sig1_dilepPT = ((TH1D *)ee_Sigfile->Get("h_Mx2_1_dilepPT"));
     TH1D *ee_Sig50_dilepPT = ((TH1D *)ee_Sigfile->Get("h_Mx2_50_dilepPT"));
     TH1D *ee_Sig150_dilepPT = ((TH1D *)ee_Sigfile->Get("h_Mx2_150_dilepPT"));
-
-    //-------------------------
-    // CMS style
-    //-------------------------
-    writeExtraText = true;
-    extraText = "Simulation";
-    lumi_sqrtS = "13 TeV";
 
     ee_HT_Met->SetLineColor(kOrange - 3);
     ee_Top_Met->SetLineColor(kGreen + 3);
@@ -132,6 +123,7 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     ee_Sig1_Met->SetLineColor(kRed);
     ee_Sig50_Met->SetLineColor(kGray + 2);
     ee_Sig150_Met->SetLineColor(kBlue);
+    ee_Sig150_Met_noweight->SetLineColor(kBlue);
 
     ee_Sig1_Met_cut->SetLineColor(kRed);
     ee_Sig50_Met_cut->SetLineColor(kGray + 2);
@@ -152,6 +144,7 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     ee_Sig1_Met->SetLineWidth(2);
     ee_Sig50_Met->SetLineWidth(2);
     ee_Sig150_Met->SetLineWidth(2);
+    ee_Sig150_Met_noweight->SetLineWidth(2);
 
     ee_Sig1_Met_cut->SetLineWidth(2);
     ee_Sig50_Met_cut->SetLineWidth(2);
@@ -246,59 +239,168 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     hs->Add(ee_Top_Met_cut);
     hs->Add(ee_Triboson_Met_cut);
     */
-    int W = 800;
-    int H = 600;
-
-    int H_ref = 600;
-    int W_ref = 800;
-
-    float T = 0.08 * H_ref;
-    float B = 0.12 * H_ref;
-    float L = 0.12 * W_ref;
-    float R = 0.04 * W_ref;
-
-    TCanvas *canv = new TCanvas("canv", "", 50, 50, W, H);
-    canv->SetFillColor(0);
-    canv->SetBorderMode(0);
-    canv->SetFrameFillStyle(0);
-    canv->SetFrameBorderMode(0);
-    canv->SetLeftMargin(L / W);
-    canv->SetRightMargin(R / W);
-    canv->SetTopMargin(T / H);
-    canv->SetBottomMargin(B / H);
-    canv->SetTickx(0);
-    canv->SetTicky(0);
-
-    // canv->Divide(2, 2);
-    // canv->cd(1);
-    // ee_Diboson_dilepPT->Add(ee_Top_dilepPT);
-    // ee_Diboson_dilepPT->Add(ee_Triboson_dilepPT);
-    // ee_Diboson_dilepPT->Add(ee_HT_dilepPT);
-    // ee_Diboson_dilepPT->Draw();
+    setTDRStyle();
     /*
-    int W = 800;
-    int H = 600;
+    TCanvas *canv = new TCanvas("canv", "canv", 800, 700);
+    canv->cd();
+    canv->SetRightMargin(0.08);
+    canv->SetBottomMargin(0.12);
+    canv->SetTopMargin(0.07);
+    canv->SetLeftMargin(0.12);
 
-    int H_ref = 600;
-    int W_ref = 800;
+    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
 
-    float T = 0.08 * H_ref;
-    float B = 0.12 * H_ref;
-    float L = 0.12 * W_ref;
-    float R = 0.04 * W_ref;
+    pad1->SetBottomMargin(0); // Upper and lower plot are joined
+    pad1->SetGridx();         // Vertical grid
+    pad1->Draw();             // Draw the upper pad: pad1
 
-    TCanvas *canv = new TCanvas("canv", "", 50, 50, W, H);
-    canv->SetFillColor(0);
-    canv->SetBorderMode(0);
-    canv->SetFrameFillStyle(0);
-    canv->SetFrameBorderMode(0);
-    canv->SetLeftMargin(L / W);
-    canv->SetRightMargin(R / W);
-    canv->SetTopMargin(T / H);
-    canv->SetBottomMargin(B / H);
-    canv->SetTickx(0);
-    canv->SetTicky(0);
+    hs_ee_MET2016MCbg->Draw("hist");
+    hs_ee_MET2016MCbg->GetXaxis()->SetTitleSize(0.045);
+    hs_ee_MET2016MCbg->GetXaxis()->SetLabelSize(0.045);
+    hs_ee_MET2016MCbg->GetXaxis()->SetLabelOffset(0.02);
+    hs_ee_MET2016MCbg->GetXaxis()->SetTitleOffset(1.3);
+    hs_ee_MET2016MCbg->GetXaxis()->SetTitle("MET [GeV]");
+    hs_ee_MET2016MCbg->GetYaxis()->SetTitleSize(0.045);
+    hs_ee_MET2016MCbg->GetYaxis()->SetLabelSize(0.045);
+    hs_ee_MET2016MCbg->GetYaxis()->SetTitleOffset(1.4);
+    hs_ee_MET2016MCbg->GetYaxis()->SetTitle("Events");
+    hs_ee_MET2016MCbg->GetXaxis()->SetLimits(0., 800.);
+
+    TLegend *l0 = new TLegend(0.5, 0.60, 0.92, 0.88);
+    l0->SetFillStyle(0);
+    l0->SetBorderSize(0);
+    l0->SetTextSize(0.04);
+    l0->SetHeader("2016MC Background");
+    l0->AddEntry(ee_HT_Met, "Drell-Yan process", "l");
+    l0->AddEntry(ee_Top_Met, "Top process", "l");
+    l0->AddEntry(ee_Diboson_Met, "Diboson process", "l");
+    l0->AddEntry(ee_Triboson_Met, "Triboson process", "l");
+    l0->Draw();
     */
+    /*
+    hs_ee_MET2016MCbg_cut->Draw("hist");
+    hs_ee_MET2016MCbg_cut->GetXaxis()->SetTitleSize(0.045);
+    hs_ee_MET2016MCbg_cut->GetXaxis()->SetLabelSize(0.045);
+    hs_ee_MET2016MCbg_cut->GetXaxis()->SetLabelOffset(0.02);
+    hs_ee_MET2016MCbg_cut->GetXaxis()->SetTitleOffset(1.3);
+    hs_ee_MET2016MCbg_cut->GetXaxis()->SetTitle("MET [GeV]");
+    hs_ee_MET2016MCbg_cut->GetYaxis()->SetTitleSize(0.045);
+    hs_ee_MET2016MCbg_cut->GetYaxis()->SetLabelSize(0.045);
+    hs_ee_MET2016MCbg_cut->GetYaxis()->SetTitleOffset(1.4);
+    hs_ee_MET2016MCbg_cut->GetYaxis()->SetTitle("Events");
+    hs_ee_MET2016MCbg_cut->GetXaxis()->SetLimits(140., 800.);
+
+    TLegend *l0 = new TLegend(0.5, 0.60, 0.92, 0.88);
+    l0->SetFillStyle(0);
+    l0->SetBorderSize(0);
+    l0->SetTextSize(0.04);
+    l0->SetHeader("2016MC Background");
+    l0->AddEntry(ee_HT_Met, "Drell-Yan process", "l");
+    l0->AddEntry(ee_Top_Met, "Top process", "l");
+    l0->AddEntry(ee_Diboson_Met, "Diboson process", "l");
+    l0->AddEntry(ee_Triboson_Met, "Triboson process", "l");
+    l0->Draw();
+    */
+    /*
+    ee_Sig1_Met->GetXaxis()->SetNdivisions(6, 5, 0);
+    ee_Sig1_Met->GetXaxis()->SetTitle("MET(GeV)");
+    ee_Sig1_Met->GetXaxis()->SetTitleSize(0.04);
+    ee_Sig1_Met->GetXaxis()->SetLabelSize(0.04);
+    ee_Sig1_Met->GetYaxis()->SetNdivisions(6, 5, 0);
+    ee_Sig1_Met->GetYaxis()->SetTitleOffset(1);
+    ee_Sig1_Met->GetYaxis()->SetTitle("nEvents");
+    ee_Sig1_Met->GetYaxis()->SetTitleSize(0.04);
+    ee_Sig1_Met->GetYaxis()->SetTitleOffset(1.5);
+    ee_Sig1_Met->GetYaxis()->SetLabelSize(0.04);
+    ee_Sig1_Met->GetXaxis()->SetRangeUser(0., 800.);
+
+    ee_Sig1_Met->Draw("h ");
+    ee_Sig150_Met->Draw("h same");
+    ee_Sig50_Met->Draw("h same");
+
+    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    l1->SetTextSize(0.04);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->AddEntry(ee_Sig1_Met, "m_{#chi_{2}} = 1 GeV, c#tau = 1 mm", "lE");
+    l1->AddEntry(ee_Sig50_Met, "m_{#chi_{2}} = 50 GeV, c#tau = 10 mm", "lE");
+    l1->AddEntry(ee_Sig150_Met, "m_{#chi_{2}} = 150 GeV, c#tau = 1 mm", "lE");
+    l1->Draw();
+    */
+    
+    TCanvas *canv = new TCanvas("canv", "canv", 800, 700);
+    canv->cd();
+    canv->SetRightMargin(0.08);
+    canv->SetBottomMargin(0.12);
+    canv->SetTopMargin(0.07);
+    canv->SetLeftMargin(0.12);
+
+    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
+
+    pad1->SetBottomMargin(0); // Upper and lower plot are joined
+    pad1->SetGridx();         // Vertical grid
+    pad1->Draw();             // Draw the upper pad: pad1
+
+    ee_Sig150_Met->GetXaxis()->SetNdivisions(6, 5, 0);
+    ee_Sig150_Met->GetXaxis()->SetTitle("MET(GeV)");
+    ee_Sig150_Met->GetXaxis()->SetTitleSize(0.04);
+    ee_Sig150_Met->GetXaxis()->SetLabelSize(0.04);
+    ee_Sig150_Met->GetYaxis()->SetNdivisions(6, 5, 0);
+    ee_Sig150_Met->GetYaxis()->SetTitleOffset(1);
+    ee_Sig150_Met->GetYaxis()->SetTitle("nEvents");
+    ee_Sig150_Met->GetYaxis()->SetTitleSize(0.04);
+    ee_Sig150_Met->GetYaxis()->SetTitleOffset(1.5);
+    ee_Sig150_Met->GetYaxis()->SetLabelSize(0.04);
+    ee_Sig150_Met->GetXaxis()->SetRangeUser(0., 800.);
+
+    ee_Sig150_Met->Draw("h ");
+    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    l1->SetTextSize(0.04);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetHeader("weighted");
+    l1->AddEntry(ee_Sig150_Met, "m_{#chi_{2}} = 150 GeV, c#tau = 1 mm", "lE");
+    l1->Draw();
+    
+    /*
+    TCanvas *canv = new TCanvas("canv", "canv", 800, 700);
+    canv->cd();
+    canv->SetRightMargin(0.08);
+    canv->SetBottomMargin(0.12);
+    canv->SetTopMargin(0.07);
+    canv->SetLeftMargin(0.12);
+
+    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
+
+    pad1->SetBottomMargin(0); // Upper and lower plot are joined
+    pad1->SetGridx();         // Vertical grid
+    pad1->Draw();             // Draw the upper pad: pad1
+
+    ee_Sig150_Met_noweight->GetXaxis()->SetNdivisions(6, 5, 0);
+    ee_Sig150_Met_noweight->GetXaxis()->SetTitle("MET(GeV)");
+    ee_Sig150_Met_noweight->GetXaxis()->SetTitleSize(0.04);
+    ee_Sig150_Met_noweight->GetXaxis()->SetLabelSize(0.04);
+    ee_Sig150_Met_noweight->GetYaxis()->SetNdivisions(6, 5, 0);
+    ee_Sig150_Met_noweight->GetYaxis()->SetTitleOffset(1);
+    ee_Sig150_Met_noweight->GetYaxis()->SetTitle("nEvents");
+    ee_Sig150_Met_noweight->GetYaxis()->SetTitleSize(0.04);
+    ee_Sig150_Met_noweight->GetYaxis()->SetTitleOffset(1.5);
+    ee_Sig150_Met_noweight->GetYaxis()->SetLabelSize(0.04);
+    ee_Sig150_Met_noweight->GetXaxis()->SetRangeUser(0., 800.);
+
+    ee_Sig150_Met_noweight->Draw("h ");
+    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    l1->SetTextSize(0.04);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetHeader("no weighted");
+    l1->AddEntry(ee_Sig150_Met_noweight, "m_{#chi_{2}} = 150 GeV, c#tau = 1 mm", "lE");
+    l1->Draw();
+    */
+    //gPad->SetLogy();
+
+    CMS_lumi((TPad *)canv, 5, 0, "35.9 fb^{-1}", 2016, true, "Simulation", "", "");
+
     /*
     canv->Divide(2, 2);
     canv->cd(1);
@@ -362,6 +464,7 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     l0->AddEntry(ee_Triboson_Met, "Triboson process", "l");
     l0->Draw();
     */
+    /*
     hs_ee_MET2016MCbg_cut->Draw("hist");
     hs_ee_MET2016MCbg_cut->GetXaxis()->SetLimits(0., 800.);
 
@@ -392,6 +495,8 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     l0->AddEntry(ee_Diboson_Met_cut, "Diboson process", "l");
     l0->AddEntry(ee_Triboson_Met_cut, "Triboson process", "l");
     l0->Draw();
+    */
+
     /*
      hs_uu_MET2016MCbg->Draw("hist");
      hs_uu_MET2016MCbg->GetXaxis()->SetLimits(0., 800.);
@@ -424,28 +529,6 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
      l0->AddEntry(uu_Triboson_Met, "Triboson process", "l");
      l0->Draw();
      */
-
-    /*
-    ee_Sig1_Met->GetXaxis()->SetNdivisions(6, 5, 0);
-    ee_Sig1_Met->GetXaxis()->SetTitleOffset(1.5);
-    ee_Sig1_Met->GetXaxis()->SetTitle("MET");
-    ee_Sig1_Met->GetYaxis()->SetNdivisions(6, 5, 0);
-    ee_Sig1_Met->GetYaxis()->SetTitleOffset(1.5);
-    ee_Sig1_Met->GetYaxis()->SetTitle("nEvents");
-
-    ee_Sig1_Met->Draw("h same");
-    ee_Sig150_Met->Draw("h same");
-    ee_Sig50_Met->Draw("h same");
-
-
-    TLegend *l1 = new TLegend(0.4, 0.4, 0.90, 0.80);
-    l1->SetBorderSize(0);
-    l1->SetTextSize(0.03);
-    l1->AddEntry(ee_Sig1_Met, "m_{#chi_{2}} = 1 GeV, c#tau = 1 mm", "lE");
-    l1->AddEntry(ee_Sig50_Met, "m_{#chi_{2}} = 50 GeV, c#tau = 10 mm", "lE");
-    l1->AddEntry(ee_Sig150_Met, "m_{#chi_{2}} = 150 GeV, c#tau = 1 mm", "lE");
-    l1->Draw();
-    */
 
     /*
     uu_Sig1_Met->GetXaxis()->SetNdivisions(6, 5, 0);
@@ -489,12 +572,6 @@ void ee_met(TString inputfile = "./DY/ee_DY_Met.root")
     ee_Sig150_dilepPT->Draw("h same");
     */
 
-    int iPeriod = 0;
-    int iPos = 33;
-    CMS_lumi(canv, iPeriod, iPos);
-    canv->Update();
-    canv->RedrawAxis();
-    TString canvName = "2016MCbg_Met";
     // canv->Print(canvName + ".pdf", ".pdf");
     //   canv->GetFrame()->Draw();
 

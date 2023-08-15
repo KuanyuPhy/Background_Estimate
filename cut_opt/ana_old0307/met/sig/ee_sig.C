@@ -42,8 +42,11 @@ void ee_sig()
     TH1D *h_Mx2_50_Met = new TH1D("h_Mx2_50_Met", "", 150, 0, 1500);
     h_Mx2_50_Met->Sumw2();
 
-    TH1D *h_Mx2_150_Met = new TH1D("h_Mx2_150_Met", "",  150, 0, 1500);
+    TH1D *h_Mx2_150_Met = new TH1D("h_Mx2_150_Met", "", 150, 0, 1500);
     h_Mx2_150_Met->Sumw2();
+
+    TH1D *h_Mx2_150_Met_noweight = new TH1D("h_Mx2_150_Met_noweight", "", 150, 0, 1500);
+    h_Mx2_150_Met_noweight->Sumw2();
 
     TH1D *h_Mx2_1_dilepPT = new TH1D("h_Mx2_1_dilepPT", "", 100, 0., 1000.);
     h_Mx2_1_dilepPT->Sumw2();
@@ -54,7 +57,7 @@ void ee_sig()
     TH1D *h_Mx2_150_dilepPT = new TH1D("h_Mx2_150_dilepPT", "", 100, 0., 1000.);
     h_Mx2_150_dilepPT->Sumw2();
 
-    TH1D *h_Mx2_1_Met_cut = new TH1D("h_Mx2_1_Met_cut", "",  150, 0, 1500);
+    TH1D *h_Mx2_1_Met_cut = new TH1D("h_Mx2_1_Met_cut", "", 150, 0, 1500);
     h_Mx2_1_Met_cut->Sumw2();
 
     TH1D *h_Mx2_50_Met_cut = new TH1D("h_Mx2_50_Met_cut", "", 150, 0, 1500);
@@ -62,6 +65,15 @@ void ee_sig()
 
     TH1D *h_Mx2_150_Met_cut = new TH1D("h_Mx2_150_Met_cut", "", 150, 0, 1500);
     h_Mx2_150_Met_cut->Sumw2();
+
+    TH1D *h_Mx2_1_nbJet = new TH1D("h_Mx2_1_nbJet", "", 30, 0, 30.);
+    h_Mx2_1_nbJet->Sumw2();
+
+    TH1D *h_Mx2_50_nbJet = new TH1D("h_Mx2_50_nbJet", "", 30, 0, 30.);
+    h_Mx2_50_nbJet->Sumw2();
+
+    TH1D *h_Mx2_150_nbJet = new TH1D("h_Mx2_150_nbJet", "", 30, 0, 30.);
+    h_Mx2_150_nbJet->Sumw2();
 
     Int_t I_Mx1_weight, I_Mx50_weight, I_Mx150_weight;
 
@@ -79,6 +91,14 @@ void ee_sig()
     v_Mx50_alpha->clear();
     v_Mx150_alpha->clear();
 
+    vector<float> *v_Mx1_Jethadronflavor = new vector<float>();
+    vector<float> *v_Mx50_Jethadronflavor = new vector<float>();
+    vector<float> *v_Mx150_Jethadronflavor = new vector<float>();
+
+    v_Mx1_Jethadronflavor->clear();
+    v_Mx50_Jethadronflavor->clear();
+    v_Mx150_Jethadronflavor->clear();
+
     float metcut = 140;
 
     TTree *T_Mx2_1;
@@ -87,6 +107,8 @@ void ee_sig()
     T_Mx2_1->SetBranchAddress("f_Met", &f_Mx1_Met);
     T_Mx2_1->SetBranchAddress("f_dileptonPT", &f_Mx1_dilepPT);
     T_Mx2_1->SetBranchAddress("v_fakealpha", &v_Mx1_alpha);
+    T_Mx2_1->SetBranchAddress("v_fakeJethadronflavor", &v_Mx1_Jethadronflavor);
+
     for (int evt = 0; evt < T_Mx2_1->GetEntries(); evt++)
     {
         T_Mx2_1->GetEntry(evt);
@@ -96,6 +118,16 @@ void ee_sig()
             h_Mx2_1_Met_cut->Fill(f_Mx1_Met, I_Mx1_weight);
             h_Mx2_1_dilepPT->Fill(f_Mx1_dilepPT, I_Mx1_weight);
         }
+        int nbJet = 0;
+        for (size_t ijet = 0; ijet < v_Mx1_Jethadronflavor->size(); ijet++)
+        {
+            if ((*v_Mx1_Jethadronflavor)[ijet] == 5)
+            {
+                nbJet++;
+            }
+        }
+        h_Mx2_1_nbJet->Fill(nbJet, I_Mx1_weight);
+
     } // End of Mx2_1 Entries loop
     TTree *T_Mx2_50;
     Mx2_50->GetObject("T_tree", T_Mx2_50);
@@ -103,6 +135,8 @@ void ee_sig()
     T_Mx2_50->SetBranchAddress("f_Met", &f_Mx50_Met);
     T_Mx2_50->SetBranchAddress("f_dileptonPT", &f_Mx50_dilepPT);
     T_Mx2_50->SetBranchAddress("v_fakealpha", &v_Mx50_alpha);
+    T_Mx2_50->SetBranchAddress("v_fakeJethadronflavor", &v_Mx50_Jethadronflavor);
+
     for (int evt = 0; evt < T_Mx2_50->GetEntries(); evt++)
     {
         T_Mx2_50->GetEntry(evt);
@@ -112,6 +146,15 @@ void ee_sig()
             h_Mx2_50_Met_cut->Fill(f_Mx50_Met, I_Mx50_weight);
             h_Mx2_50_dilepPT->Fill(f_Mx50_dilepPT, I_Mx50_weight);
         }
+        int nbJet = 0;
+        for (size_t ijet = 0; ijet < v_Mx50_Jethadronflavor->size(); ijet++)
+        {
+            if ((*v_Mx50_Jethadronflavor)[ijet] == 5)
+            {
+                nbJet++;
+            }
+        }
+        h_Mx2_50_nbJet->Fill(nbJet, I_Mx50_weight);
     } // End of Mx2_50 Entries loop
     TTree *T_Mx2_150;
     Mx2_150->GetObject("T_tree", T_Mx2_150);
@@ -119,15 +162,27 @@ void ee_sig()
     T_Mx2_150->SetBranchAddress("f_Met", &f_Mx150_Met);
     T_Mx2_150->SetBranchAddress("f_dileptonPT", &f_Mx150_dilepPT);
     T_Mx2_150->SetBranchAddress("v_fakealpha", &v_Mx150_alpha);
+    T_Mx2_150->SetBranchAddress("v_fakeJethadronflavor", &v_Mx150_Jethadronflavor);
+
     for (int evt = 0; evt < T_Mx2_150->GetEntries(); evt++)
     {
         T_Mx2_150->GetEntry(evt);
         h_Mx2_150_Met->Fill(f_Mx150_Met, I_Mx150_weight);
+        h_Mx2_150_Met_noweight->Fill(f_Mx150_Met, 1);
         if (f_Mx150_Met > metcut)
         {
             h_Mx2_150_Met_cut->Fill(f_Mx150_Met, I_Mx150_weight);
             h_Mx2_150_dilepPT->Fill(f_Mx150_dilepPT, I_Mx150_weight);
         }
+        int nbJet = 0;
+        for (size_t ijet = 0; ijet < v_Mx150_Jethadronflavor->size(); ijet++)
+        {
+            if ((*v_Mx150_Jethadronflavor)[ijet] == 5)
+            {
+                nbJet++;
+            }
+        }
+        h_Mx2_150_nbJet->Fill(nbJet, I_Mx150_weight);
     } // End of Mx2_150 Entries loop
 
     /*
@@ -205,13 +260,27 @@ void ee_sig()
     h_Mx2_150_eff->Divide(h_pass_Mx2_150_nMetcut, h_pass_Mx2_150, 1, 1);
 
     */
-   h_Mx2_150_Met->Draw();
+
+    h_Mx2_1_nbJet->GetXaxis()->SetRangeUser(0, 10);
+    h_Mx2_1_nbJet->SetLineWidth(2);
+    h_Mx2_50_nbJet->SetLineWidth(2);
+    h_Mx2_150_nbJet->SetLineWidth(2);
+
+    h_Mx2_1_nbJet->SetLineColor(kRed);
+    h_Mx2_50_nbJet->SetLineColor(kGray);
+    h_Mx2_150_nbJet->SetLineColor(kBlue);
+    h_Mx2_1_nbJet->Draw();
+    h_Mx2_50_nbJet->Draw("same");
+    h_Mx2_150_nbJet->Draw("same");
+
+    gPad->SetLogy();
 
     TString outputfile1 = "./ee_Sig_Met.root";
     TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
     h_Mx2_1_Met->Write();
     h_Mx2_50_Met->Write();
     h_Mx2_150_Met->Write();
+    h_Mx2_150_Met_noweight->Write();
     h_Mx2_1_Met_cut->Write();
     h_Mx2_50_Met_cut->Write();
     h_Mx2_150_Met_cut->Write();

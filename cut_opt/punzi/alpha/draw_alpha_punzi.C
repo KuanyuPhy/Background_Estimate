@@ -12,7 +12,8 @@
 #include <TAttLine.h>
 #include <TStyle.h>
 #include "./../../../lib/kuan_ana_utils.h"
-
+#include "./../../../lib/tdrstyle.C"
+#include "./../../../lib/CMS_lumi.h"
 void draw_alpha_punzi()
 {
     TFile *ee_punzi_result = TFile::Open("/home/kuanyu/Documents/CMS/Background_Estimate/cut_opt/punzi/alpha/ee_alpha_punzi.root");
@@ -21,13 +22,13 @@ void draw_alpha_punzi()
     TH1D *h_ee_punzi_Sig50 = ee_punzi_result->Get<TH1D>("h_punzi_Sig50");
     TH1D *h_ee_punzi_Sig150 = ee_punzi_result->Get<TH1D>("h_punzi_Sig150");
 
-    int W = 800;
-    int H = 600;
-
-    int H_ref = 600;
-    int W_ref = 800;
-
-    TCanvas *canv = new TCanvas("canv", "", 50, 50, W, H);
+    setTDRStyle();
+    auto canv = new TCanvas("c", "c", 800, 700);
+    canv->cd();
+    canv->SetRightMargin(0.08);
+    canv->SetBottomMargin(0.12);
+    canv->SetTopMargin(0.07);
+    canv->SetLeftMargin(0.12);
 
     h_ee_punzi_Sig1->SetLineWidth(2);
     h_ee_punzi_Sig50->SetLineWidth(2);
@@ -40,23 +41,30 @@ void draw_alpha_punzi()
     h_ee_punzi_Sig50->GetYaxis()->SetTitle("Punzi Significance");
     h_ee_punzi_Sig50->GetYaxis()->SetTitleOffset(1.5);
 
-    h_ee_punzi_Sig50->GetXaxis()->SetBinLabel(1,"#alpha<0.05");
-    h_ee_punzi_Sig50->GetXaxis()->SetBinLabel(4,"#alpha<0.2");
-    h_ee_punzi_Sig50->GetXaxis()->SetBinLabel(10,"#alpha<0.5");
-    h_ee_punzi_Sig50->GetXaxis()->SetBinLabel(15,"#alpha<0.75");
+    h_ee_punzi_Sig50->GetXaxis()->SetBinLabel(1, "#alpha<0.05");
+    h_ee_punzi_Sig50->GetXaxis()->SetBinLabel(4, "#alpha<0.2");
+    h_ee_punzi_Sig50->GetXaxis()->SetBinLabel(10, "#alpha<0.5");
+    h_ee_punzi_Sig50->GetXaxis()->SetBinLabel(15, "#alpha<0.75");
 
     h_ee_punzi_Sig50->GetXaxis()->SetTitle("#alpha_{3D}");
-    h_ee_punzi_Sig50->SetAxisRange(-0.06, 0.045, "Y");
-    
+    //h_ee_punzi_Sig50->SetAxisRange(-0.002, 0.12, "Y");
+    h_ee_punzi_Sig50->SetAxisRange(-0.002, 0.01, "Y");
+
+    h_ee_punzi_Sig50->GetXaxis()->SetTitleSize(0.045);
+    h_ee_punzi_Sig50->GetXaxis()->SetLabelSize(0.045);
+    h_ee_punzi_Sig50->GetXaxis()->SetLabelOffset(0.02);
+    h_ee_punzi_Sig50->GetXaxis()->SetTitleOffset(1.3);
+    h_ee_punzi_Sig50->GetYaxis()->SetTitleSize(0.045);
+    h_ee_punzi_Sig50->GetYaxis()->SetLabelSize(0.045);
+    h_ee_punzi_Sig50->GetYaxis()->SetTitleOffset(1.4);
+
     // h_ee_punzi_Sig50->GetXaxis()->SetTitleOffset(1.5);
 
     h_ee_punzi_Sig50->Draw();
     h_ee_punzi_Sig150->Draw("same");
     h_ee_punzi_Sig1->Draw("same");
 
-    
-
-    TLegend *l1 = new TLegend(0.5, 0.7, 0.90, 0.90);
+    TLegend *l1 = new TLegend(0.4, 0.7, 0.80, 0.90);
     l1->SetBorderSize(0);
     l1->SetFillStyle(0);
     l1->SetTextSize(0.03);
@@ -67,7 +75,10 @@ void draw_alpha_punzi()
 
     gStyle->SetOptStat(0);
 
-    //canv->SaveAs("ee_alpha3_punzi_Metcut.png");
+    CMS_lumi((TPad *)canv, 5, 0, "35.9 fb^{-1}", 2016, true, "Simulation", "", "");
+
+
+    // canv->SaveAs("ee_alpha3_punzi_Metcut.png");
 }
 
 int main()

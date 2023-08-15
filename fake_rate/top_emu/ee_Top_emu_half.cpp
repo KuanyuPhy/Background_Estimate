@@ -169,6 +169,9 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
     TH1D *h_Top_nTrk_ljet_difeta_highDilepPt[3];
     TH1D *h_Top_nTrk_ljet_cut_difeta_highDilepPt[3];
 
+    TH1D *h_Top_nTrk_difeta_highDilepPt[3];
+    TH1D *h_Top_nTrk_cut_difeta_highDilepPt[3];
+
     const Int_t NBINS = 16;
     Double_t edges[NBINS + 1] = {1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13, 14, 15., 25., 40.};
 
@@ -224,6 +227,10 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_ljet_difeta_highDilepPt[i] = new TH1D(Form("h_Top_nTrk_ljet_difeta_highDilepPt_%i", i + 1), "", NBINS, edges);
         h_Top_nTrk_ljet_cut_difeta_highDilepPt[i] = new TH1D(Form("h_Top_nTrk_ljet_cut_difeta_highDilepPt_%i", i + 1), "", NBINS, edges);
 
+        h_Top_nTrk_difeta_highDilepPt[i] = new TH1D(Form("h_Top_nTrk_difeta_highDilepPt_%i", i + 1), "", NBINS, edges);
+        h_Top_nTrk_cut_difeta_highDilepPt[i] = new TH1D(Form("h_Top_nTrk_cut_difeta_highDilepPt_%i", i + 1), "", NBINS, edges);
+
+
         h_Top_nTrk_difeta[i]->Sumw2();
         h_Top_nTrk_cut_difeta[i]->Sumw2();
         h_Top_nTrk_bjet_difeta[i]->Sumw2();
@@ -265,6 +272,9 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_bjet_cut_difeta_highDilepPt[i]->Sumw2();
         h_Top_nTrk_ljet_difeta_highDilepPt[i]->Sumw2();
         h_Top_nTrk_ljet_cut_difeta_highDilepPt[i]->Sumw2();
+
+        h_Top_nTrk_difeta_highDilepPt[i]->Sumw2();
+        h_Top_nTrk_cut_difeta_highDilepPt[i]->Sumw2();
     }
     //-----------------------------
     // Not consider eta
@@ -623,7 +633,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         {
             if (f_Top_dileppt < DilepPTcut)
             {
-                //v_thinjet.size()
+                // v_thinjet.size()
                 for (int i = 0; i < v_thinjet.size(); i++)
                 {
                     h_Top_nTrk_jet_lowDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
@@ -714,7 +724,6 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
             {
                 for (int i = 0; i < v_thinjet.size(); i++)
                 {
-
                     h_Top_nTrk_jet_highDilepPt->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                     h_Top_JetPt_highDilepPt->Fill(v_thinjet[i].GetPt(), Top_weight);
                     h_Top_JetEta_highDilepPt->Fill(v_thinjet[i].GetEta(), Top_weight);
@@ -731,6 +740,8 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                     // For Region |eta| <= 1
                     if (abs(v_thinjet[i].GetEta()) <= 1)
                     {
+                        h_Top_nTrk_difeta_highDilepPt[0]->Fill(v_thinjet[i].GetNtrk(), Top_weight);
+
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[0]);
                         // For light flavor
@@ -739,6 +750,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                     // For Region 1 < |eta| <= 2
                     else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) <= 2)
                     {
+                        h_Top_nTrk_difeta_highDilepPt[1]->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[1]);
                         // For light flavor
@@ -747,6 +759,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                     // For Region 2 < |eta| < 2.5
                     else
                     {
+                        h_Top_nTrk_difeta_highDilepPt[2]->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_difeta_highDilepPt[2]);
                         // For light flavor
@@ -763,6 +776,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                         //----------------------
                         // only consider flavor
                         //----------------------
+                        h_Top_nTrk_cut_difeta_highDilepPt[0]->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                         //  For b jet
                         for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_highDilepPt);
                         // For light flavor
@@ -772,6 +786,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                         //----------------------
                         if (abs(v_thinjet[i].GetEta()) <= 1)
                         {
+                            h_Top_nTrk_cut_difeta_highDilepPt[1]->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                             //  For b jet
                             for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[0]);
                             // For light flavor
@@ -780,7 +795,7 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
                         // For Region 1 < |eta| < 2
                         else if (abs(v_thinjet[i].GetEta()) > 1 && abs(v_thinjet[i].GetEta()) <= 2)
                         {
-
+                            h_Top_nTrk_cut_difeta_highDilepPt[2]->Fill(v_thinjet[i].GetNtrk(), Top_weight);
                             //  For b jet
                             for_signalflavor_jet(5, v_thinjet[i].GetFlavor(), v_thinjet[i].GetNtrk(), Top_weight, h_Top_nTrk_bjet_cut_difeta_highDilepPt[1]);
                             // For light flavor
@@ -840,6 +855,9 @@ void ee_Top_emu_half(TString file = "tmp.root", TString outputfile = "output.roo
         h_Top_nTrk_bjet_cut_difeta_lowDilepPt[i]->Write();
         h_Top_nTrk_ljet_difeta_lowDilepPt[i]->Write();
         h_Top_nTrk_ljet_cut_difeta_lowDilepPt[i]->Write();
+
+        h_Top_nTrk_difeta_highDilepPt[i]->Write();
+        h_Top_nTrk_cut_difeta_highDilepPt[i]->Write();
 
         h_Top_nTrk_bjet_difeta_highDilepPt[i]->Write();
         h_Top_nTrk_bjet_cut_difeta_highDilepPt[i]->Write();

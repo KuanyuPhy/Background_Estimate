@@ -142,6 +142,12 @@
         "draw_3Dsig.C": "cpp",
         "ee_Top_ee_all.C": "cpp",
         "ana_DY_dilep.C": "cpp",
-        "ana_DY_dilep_match.C": "cpp"
+        "ana_DY_dilep_match.C": "cpp",
+        "ee_Top_ee_TrueBG.C": "cpp",
+        "ee_Top_ee_pred.C": "cpp",
+        "draw_comp_pred_TrueBG.C": "cpp",
+        "ee_btag.C": "cpp",
+        "draw_trk.C": "cpp",
+        "ee_sig_2017.C": "cpp"
     }
 }

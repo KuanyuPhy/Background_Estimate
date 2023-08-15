@@ -11,8 +11,8 @@
 #include <TAxis.h>
 #include <TLine.h>
 #include "./../../../lib/kuan_ana_utils.h"
-#include "tdrstyle.C"
-#include "CMS_lumi.C"
+#include "./../../../lib/tdrstyle.C"
+#include "./../../../lib/CMS_lumi.h"
 using namespace std;
 
 void ana_sig()
@@ -158,64 +158,43 @@ void ana_sig()
     h_punzisig50->SetLineColor(kBlack);
     h_punzisig150->SetLineColor(kBlue);
 
-    //-------------------------
-    // CMS style
-    //-------------------------
-    //writeExtraText = true;
-    //extraText = "Simulation";
-    //lumi_sqrtS = "13 TeV";
+    setTDRStyle();
+    auto canv = new TCanvas("c", "c", 800, 700);
+    canv->cd();
+    canv->SetRightMargin(0.08);
+    canv->SetBottomMargin(0.12);
+    canv->SetTopMargin(0.07);
+    canv->SetLeftMargin(0.12);
 
-    
-    /*Double_t w = 600;
-    Double_t h = 600;
+    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
+    pad1->SetBottomMargin(0); // Upper and lower plot are joined
+    pad1->SetGridx();         // Vertical grid
+    pad1->Draw();             // Draw the upper pad: pad1
 
-    int H_ref = 600;
-    int W_ref = 600;
-
-    float T = 0.08 * H_ref;
-    float B = 0.12 * H_ref;
-    float L = 0.12 * W_ref;
-    float R = 0.04 * W_ref;
-
-    auto canv = new TCanvas("c1", "c1", w, h);
-    canv->SetFillColor(0);
-    canv->SetBorderMode(0);
-    canv->SetFrameFillStyle(0);
-    canv->SetFrameBorderMode(0);
-    canv->SetLeftMargin(L / w);
-    canv->SetRightMargin(R / w);
-    canv->SetTopMargin(T / h);
-    canv->SetBottomMargin(B / h);
-    canv->SetTickx(0);
-    canv->SetTicky(0);*/
-
-
-    int W = 800;
-    int H = 600;
-
-    int H_ref = 600;
-    int W_ref = 800;
-
-    TCanvas *canv = new TCanvas("canv", "", 50, 50, W, H);
-
+    h_punzisig150->GetXaxis()->SetTitleSize(0.045);
+    h_punzisig150->GetXaxis()->SetLabelSize(0.045);
+    h_punzisig150->GetXaxis()->SetLabelOffset(0.02);
+    h_punzisig150->GetXaxis()->SetTitleOffset(1.3);
+    h_punzisig150->GetYaxis()->SetTitleSize(0.045);
+    h_punzisig150->GetYaxis()->SetLabelSize(0.045);
+    h_punzisig150->GetYaxis()->SetTitleOffset(1.4);
     h_punzisig150->GetYaxis()->SetTitle("Punzi Significance");
-    h_punzisig150->GetXaxis()->SetTitle("MET(GeV)");
-    h_punzisig150->GetXaxis()->SetTitleOffset(1.5);
+    h_punzisig150->GetXaxis()->SetTitle("MET [GeV]");
 
     h_punzisig150->GetXaxis()->SetRangeUser(0, 50);
-    h_punzisig150->GetXaxis()->SetBinLabel(1,"MET > 10");
-    h_punzisig150->GetXaxis()->SetBinLabel(5,"MET > 50");
-    h_punzisig150->GetXaxis()->SetBinLabel(10,"MET > 100");
-    h_punzisig150->GetXaxis()->SetBinLabel(14,"MET > 140");
-    h_punzisig150->GetXaxis()->SetBinLabel(20,"MET > 200");
-    h_punzisig150->GetXaxis()->SetBinLabel(30,"MET > 300");
-    h_punzisig150->GetXaxis()->SetBinLabel(40,"MET > 400");
+    h_punzisig150->GetXaxis()->SetBinLabel(1, "MET > 10");
+    h_punzisig150->GetXaxis()->SetBinLabel(5, "MET > 50");
+    h_punzisig150->GetXaxis()->SetBinLabel(10, "MET > 100");
+    h_punzisig150->GetXaxis()->SetBinLabel(14, "MET > 140");
+    h_punzisig150->GetXaxis()->SetBinLabel(20, "MET > 200");
+    h_punzisig150->GetXaxis()->SetBinLabel(30, "MET > 300");
+    //h_punzisig150->GetXaxis()->SetBinLabel(40, "MET > 400");
 
     h_punzisig150->Draw();
     h_punzisig50->Draw("same");
     h_punzisig1->Draw("same");
 
-    TLegend *l1 = new TLegend(0.5, 0.55, 0.7, 0.85);
+    TLegend *l1 = new TLegend(0.55, 0.7, 0.80, 0.90);
     l1->SetBorderSize(0);
     l1->SetFillStyle(0);
     l1->SetTextSize(0.03);
@@ -226,13 +205,13 @@ void ana_sig()
 
     gStyle->SetOptStat(0);
 
-    int iPeriod = 0;
-    int iPos = 33;
-    //CMS_lumi(canv, iPeriod, iPos);
-    //canv->Update();
-    //canv->RedrawAxis();
+    CMS_lumi((TPad *)canv, 5, 0, "35.9 fb^{-1}", 2016, true, "Simulation", "", "");
 
-    //canv->SaveAs("ee_MET_punzi.png");
+    // CMS_lumi(canv, iPeriod, iPos);
+    // canv->Update();
+    // canv->RedrawAxis();
+
+    // canv->SaveAs("ee_MET_punzi.png");
 
     // gPad->SetLogy();
 
@@ -247,13 +226,13 @@ void ana_sig()
     h_Mx2_150_eff->Draw("");
     */
 
-    //TString outputfile1 = "./ee_Sig_punzi.root";
-    //TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
-    //h_pass_Mx2_1->Write();
-    //h_pass_Mx2_50->Write();
-    //h_pass_Mx2_150->Write();
-    //h_Mx2_1_eff->Write();
-    //h_Mx2_50_eff->Write();
-    //h_Mx2_150_eff->Write();
-    //outfile_HT0->Close();
+    // TString outputfile1 = "./ee_Sig_punzi.root";
+    // TFile *outfile_HT0 = TFile::Open(outputfile1, "RECREATE");
+    // h_pass_Mx2_1->Write();
+    // h_pass_Mx2_50->Write();
+    // h_pass_Mx2_150->Write();
+    // h_Mx2_1_eff->Write();
+    // h_Mx2_50_eff->Write();
+    // h_Mx2_150_eff->Write();
+    // outfile_HT0->Close();
 }

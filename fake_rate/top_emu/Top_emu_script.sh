@@ -48,6 +48,7 @@ test -e "$FileMainLocation/top_emu_fakerate.root" && { echo "Delete old top_emu_
 
 ./ee_Top_emu_half_fakerate.o "./top_all.root" "./top_emu_fakerate.root"
 
+echo "Finish fake rate calculation"
 
 for file in ${Top_emu_list_2[*]}; do
     Topoutputfile="$(basename -s ".root" "$file")"

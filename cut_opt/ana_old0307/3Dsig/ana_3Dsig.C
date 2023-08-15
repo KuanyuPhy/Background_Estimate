@@ -12,13 +12,14 @@
 #include <TLine.h>
 #include <THStack.h>
 #include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/Cross_section.h"
-//#include "./../../lib/setNCUStyle.C"
-#include "tdrstyle.C"
-#include "CMS_lumi.C"
+// #include "./../../lib/setNCUStyle.C"
+#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/tdrstyle.C"
+#include "/home/kuanyu/Documents/CMS/Background_Estimate/lib/CMS_lumi.h"
+
 using namespace std;
 void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
 {
-    setTDRStyle();
+
     TFile *ee_DYprocess = TFile::Open(inputfile);
     TFile *ee_Sigfile = new TFile("./sig/ee_Sig_alpha.root");
     TFile *ee_Topprocess = new TFile("./top/ee_Top_alpha.root");
@@ -38,6 +39,15 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     TH1D *ee_Top_alpha = ((TH1D *)ee_Topprocess->Get("h_bg_alpha1"));
     TH1D *ee_Diboson_alpha = ((TH1D *)ee_Dibosonprocess->Get("h_bg_alpha1"));
     TH1D *ee_Triboson_alpha = ((TH1D *)ee_Tribosonprocess->Get("h_bg_alpha1"));
+
+    TH1D *ee_HT_alpha_metcut = ((TH1D *)ee_DYprocess->Get("h_bg_alpha1_metcut"));
+    TH1D *ee_Top_alpha_metcut = ((TH1D *)ee_Topprocess->Get("h_bg_alpha1_metcut"));
+    TH1D *ee_Diboson_alpha_metcut = ((TH1D *)ee_Dibosonprocess->Get("h_bg_alpha1_metcut"));
+    TH1D *ee_Triboson_alpha_metcut = ((TH1D *)ee_Tribosonprocess->Get("h_bg_alpha1_metcut"));
+
+    TH1D *ee_Top_heav_alpha_metcut = ((TH1D *)ee_Topprocess->Get("h_bg_bcalpha1_metcut"));
+    TH1D *ee_Top_light_alpha_metcut = ((TH1D *)ee_Topprocess->Get("h_bg_lalpha1_metcut"));
+
     TH1D *ee_Sig1_alpha = ((TH1D *)ee_Sigfile->Get("h_Mx2_1_alpha"));
     TH1D *ee_Sig50_alpha = ((TH1D *)ee_Sigfile->Get("h_Mx2_50_alpha"));
     TH1D *ee_Sig150_alpha = ((TH1D *)ee_Sigfile->Get("h_Mx2_150_alpha"));
@@ -117,33 +127,81 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     TH1D *uu_Sig50_3Dsig = ((TH1D *)uu_Sigfile->Get("h_Mx2_50_3DSig"));
     TH1D *uu_Sig150_3Dsig = ((TH1D *)uu_Sigfile->Get("h_Mx2_150_3DSig"));
 
-    //-------------------------
-    // CMS style
-    //-------------------------
-    writeExtraText = true;
-    extraText = "Simulation";
-    lumi_sqrtS = "13 TeV";
+    TH1D *h_ee_3Dsig2016MCbg = (TH1D *)ee_HT_3Dsig->Clone("h_ee_3Dsig2016MCbg");
+    h_ee_3Dsig2016MCbg->Add(ee_Top_3Dsig);
+    h_ee_3Dsig2016MCbg->Add(ee_Diboson_3Dsig);
+    h_ee_3Dsig2016MCbg->Add(ee_Triboson_3Dsig);
 
-    ee_HT_alpha->Add(ee_Top_alpha);
-    ee_HT_alpha->Add(ee_Diboson_alpha);
-    ee_HT_alpha->Add(ee_Triboson_alpha);
+    TH1D *h_ee_alpha2016MCbg = (TH1D *)ee_HT_alpha->Clone("h_ee_alpha2016MCbg");
+    h_ee_alpha2016MCbg->Add(ee_Top_alpha);
+    h_ee_alpha2016MCbg->Add(ee_Diboson_alpha);
+    h_ee_alpha2016MCbg->Add(ee_Triboson_alpha);
 
-    ee_HT_alpha2->Add(ee_Top_alpha2);
-    ee_HT_alpha2->Add(ee_Diboson_alpha2);
-    ee_HT_alpha2->Add(ee_Triboson_alpha2);
+    TH1D *h_ee_alpha22016MCbg = (TH1D *)ee_HT_alpha2->Clone("h_ee_alpha22016MCbg");
+    h_ee_alpha22016MCbg->Add(ee_Top_alpha2);
+    h_ee_alpha22016MCbg->Add(ee_Diboson_alpha2);
+    h_ee_alpha22016MCbg->Add(ee_Triboson_alpha2);
 
-    ee_HT_alpha3->Add(ee_Top_alpha3);
-    ee_HT_alpha3->Add(ee_Diboson_alpha3);
-    ee_HT_alpha3->Add(ee_Triboson_alpha3);
+    TH1D *h_ee_alpha32016MCbg = (TH1D *)ee_HT_alpha3->Clone("h_ee_alpha32016MCbg");
+    h_ee_alpha32016MCbg->Add(ee_Top_alpha3);
+    h_ee_alpha32016MCbg->Add(ee_Diboson_alpha3);
+    h_ee_alpha32016MCbg->Add(ee_Triboson_alpha3);
 
-    ee_HT_alpha4->Add(ee_Top_alpha4);
-    ee_HT_alpha4->Add(ee_Diboson_alpha4);
-    ee_HT_alpha4->Add(ee_Triboson_alpha4);
+    TH1D *h_ee_alpha42016MCbg = (TH1D *)ee_HT_alpha4->Clone("h_ee_alpha42016MCbg");
+    h_ee_alpha42016MCbg->Add(ee_Top_alpha4);
+    h_ee_alpha42016MCbg->Add(ee_Diboson_alpha4);
+    h_ee_alpha42016MCbg->Add(ee_Triboson_alpha4);
 
-    //ee_HT_3Dsig->Add(ee_Top_3Dsig);
-    //ee_HT_3Dsig->Add(ee_Diboson_3Dsig);
-    //ee_HT_3Dsig->Add(ee_Triboson_3Dsig);
+    ee_HT_alpha->SetLineWidth(2);
+    ee_Top_alpha->SetLineWidth(2);
+    ee_Diboson_alpha->SetLineWidth(2);
+    ee_Triboson_alpha->SetLineWidth(2);
 
+    ee_HT_alpha->SetFillColor(kOrange - 3);
+    ee_Top_alpha->SetFillColor(kGreen + 3);
+    ee_Diboson_alpha->SetFillColor(kAzure + 7);
+    ee_Triboson_alpha->SetFillColor(kMagenta - 3);
+
+    ee_HT_alpha->SetLineColor(kOrange - 3);
+    ee_Top_alpha->SetLineColor(kGreen + 3);
+    ee_Diboson_alpha->SetLineColor(kAzure + 7);
+    ee_Triboson_alpha->SetLineColor(kMagenta - 3);
+
+    ee_HT_alpha_metcut->SetLineWidth(2);
+    ee_Top_alpha_metcut->SetLineWidth(2);
+    ee_Diboson_alpha_metcut->SetLineWidth(2);
+    ee_Triboson_alpha_metcut->SetLineWidth(2);
+
+    ee_HT_alpha_metcut->SetFillColor(kOrange - 3);
+    ee_Top_alpha_metcut->SetFillColor(kGreen + 3);
+    ee_Diboson_alpha_metcut->SetFillColor(kAzure + 7);
+    ee_Triboson_alpha_metcut->SetFillColor(kMagenta - 3);
+
+    ee_HT_alpha_metcut->SetLineColor(kOrange - 3);
+    ee_Top_alpha_metcut->SetLineColor(kGreen + 3);
+    ee_Diboson_alpha_metcut->SetLineColor(kAzure + 7);
+    ee_Triboson_alpha_metcut->SetLineColor(kMagenta - 3);
+
+    ee_Top_heav_alpha_metcut->SetLineWidth(2);
+    ee_Top_light_alpha_metcut->SetLineWidth(2);
+
+    ee_Top_heav_alpha_metcut->SetLineColor(kRed);
+    ee_Top_light_alpha_metcut->SetLineColor(kBlue);
+
+    ee_Top_heav_alpha_metcut->SetMarkerColor(kRed);
+    ee_Top_light_alpha_metcut->SetMarkerColor(kBlue);
+
+    ee_Top_heav_alpha_metcut->SetMarkerStyle(20);
+    ee_Top_light_alpha_metcut->SetMarkerStyle(21);
+
+    /*Create THstack*/
+    THStack *hs_ee_alpha2016MCbg = new THStack("hs_ee_alpha2016MCbg", "");
+    hs_ee_alpha2016MCbg->Add(ee_HT_alpha_metcut);
+    hs_ee_alpha2016MCbg->Add(ee_Top_alpha_metcut);
+    hs_ee_alpha2016MCbg->Add(ee_Diboson_alpha_metcut);
+    hs_ee_alpha2016MCbg->Add(ee_Triboson_alpha_metcut);
+
+    /*
     uu_HT_alpha->Add(uu_Top_alpha);
     uu_HT_alpha->Add(uu_Diboson_alpha);
     uu_HT_alpha->Add(uu_Triboson_alpha);
@@ -163,17 +221,24 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     uu_HT_3Dsig->Add(uu_Top_3Dsig);
     uu_HT_3Dsig->Add(uu_Diboson_3Dsig);
     uu_HT_3Dsig->Add(uu_Triboson_3Dsig);
+    */
 
-    ee_HT_alpha->SetLineColor(kGreen - 2);
+    h_ee_alpha2016MCbg->SetLineColor(kGreen - 2);
+    h_ee_alpha2016MCbg->SetFillColor(kGreen - 2);
+    h_ee_alpha2016MCbg->SetFillStyle(3001);
+    h_ee_alpha32016MCbg->SetLineColor(kGreen - 2);
+    h_ee_alpha32016MCbg->SetFillColor(kGreen - 2);
+    h_ee_alpha32016MCbg->SetFillStyle(3001);
+
     // ee_HT_alpha->SetFillColor(kOrange - 3);
 
-    ee_HT_alpha2->SetLineColor(kOrange - 3);
+    h_ee_alpha22016MCbg->SetLineColor(kOrange - 3);
     // ee_HT_alpha2->SetFillColor(kOrange - 3);
 
-    ee_HT_alpha3->SetLineColor(kOrange - 3);
-    // ee_HT_alpha3->SetFillColor(kOrange - 3);
+    // h_ee_alpha32016MCbg->SetLineColor(kOrange - 3);
+    //  ee_HT_alpha3->SetFillColor(kOrange - 3);
 
-    ee_HT_alpha4->SetLineColor(kOrange - 3);
+    h_ee_alpha42016MCbg->SetLineColor(kOrange - 3);
     // ee_HT_alpha4->SetFillColor(kOrange - 3);
 
     uu_HT_alpha->SetLineColor(kGreen - 2);
@@ -192,9 +257,9 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     uu_HT_alpha4->SetFillColor(kOrange - 3);
     uu_HT_alpha4->SetFillStyle(3001);
 
-    ee_HT_3Dsig->SetLineColor(kGreen - 2);
-    ee_HT_3Dsig->SetFillColor(kGreen - 2);
-    ee_HT_3Dsig->SetFillStyle(3001);
+    h_ee_3Dsig2016MCbg->SetLineColor(kGreen - 2);
+    h_ee_3Dsig2016MCbg->SetFillColor(kGreen - 2);
+    h_ee_3Dsig2016MCbg->SetFillStyle(3001);
 
     uu_HT_3Dsig->SetLineColor(kGreen - 2);
     uu_HT_3Dsig->SetFillColor(kGreen - 2);
@@ -240,8 +305,8 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     uu_Sig50_3Dsig->SetLineColor(kGray + 2);
     uu_Sig150_3Dsig->SetLineColor(kBlue);
 
-    ee_HT_alpha->SetLineWidth(2);
-    ee_HT_alpha->SetFillColor(kGreen - 2);
+    // ee_HT_alpha->SetLineWidth(2);
+    // ee_HT_alpha->SetFillColor(kGreen - 2);
     ee_HT_alpha->SetFillStyle(3001);
 
     ee_HT_alpha2->SetLineWidth(2);
@@ -255,6 +320,10 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     ee_HT_alpha4->SetLineWidth(2);
     ee_HT_alpha4->SetFillColor(kOrange - 3);
     ee_HT_alpha4->SetFillStyle(3001);
+
+    ee_Sig1_alpha3->SetLineWidth(2);
+    ee_Sig50_alpha3->SetLineWidth(2);
+    ee_Sig150_alpha3->SetLineWidth(2);
 
     uu_HT_alpha->SetLineWidth(2);
     uu_HT_alpha->SetLineWidth(2);
@@ -311,63 +380,240 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     uu_Sig50_3Dsig->SetLineWidth(2);
     uu_Sig150_3Dsig->SetLineWidth(2);
 
-    int W = 800;
-    int H = 600;
+    setTDRStyle();
+    TCanvas *canv = new TCanvas("canv", "canv", 800, 700);
+    canv->cd();
+    canv->SetRightMargin(0.08);
+    canv->SetBottomMargin(0.12);
+    canv->SetTopMargin(0.07);
+    canv->SetLeftMargin(0.12);
 
-    int H_ref = 600;
-    int W_ref = 800;
+    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
 
-    float T = 0.08 * H_ref;
-    float B = 0.12 * H_ref;
-    float L = 0.12 * W_ref;
-    float R = 0.04 * W_ref;
+    pad1->SetBottomMargin(0); // Upper and lower plot are joined
+    pad1->SetGridx();         // Vertical grid
+    pad1->Draw();             // Draw the upper pad: pad1
 
-    TCanvas *canv = new TCanvas("canv", "", 50, 50, W, H);
-    canv->SetFillColor(0);
-    canv->SetBorderMode(0);
-    canv->SetFrameFillStyle(0);
-    canv->SetFrameBorderMode(0);
-    canv->SetLeftMargin(L / W);
-    canv->SetRightMargin(R / W);
-    canv->SetTopMargin(T / H);
-    canv->SetBottomMargin(B / H);
-    canv->SetTickx(0);
-    canv->SetTicky(0);
-    // canv->Divide(2, 2);
-    // canv->cd(1);
+    h_ee_3Dsig2016MCbg->GetXaxis()->SetTitleSize(0.045);
+    h_ee_3Dsig2016MCbg->GetXaxis()->SetLabelSize(0.045);
+    h_ee_3Dsig2016MCbg->GetXaxis()->SetLabelOffset(0.02);
+    h_ee_3Dsig2016MCbg->GetXaxis()->SetTitleOffset(1.3);
+    h_ee_3Dsig2016MCbg->GetYaxis()->SetTitleSize(0.045);
+    h_ee_3Dsig2016MCbg->GetYaxis()->SetLabelSize(0.045);
+    h_ee_3Dsig2016MCbg->GetYaxis()->SetTitleOffset(1.4);
+    h_ee_3Dsig2016MCbg->GetYaxis()->SetTitle("nTracks / Normalized");
+    h_ee_3Dsig2016MCbg->GetXaxis()->SetTitle("log_{10}(#Chi_{3D})");
+    h_ee_3Dsig2016MCbg->GetXaxis()->SetRangeUser(-4, 5);
+
     /*
-    hs->Draw("hist");
-    hs->GetXaxis()->SetNdivisions(6, 5, 0);
-    hs->GetXaxis()->SetTitle("MET");
-    // hs->GetXaxis()->SetTitleOffset(1.5);
-    hs->GetXaxis()->SetTitleSize(0.04);
-    hs->GetXaxis()->SetLabelSize(0.04);
-    hs->GetYaxis()->SetNdivisions(6, 5, 0);
-    hs->GetYaxis()->SetTitleOffset(1);
-    hs->GetYaxis()->SetTitle("nEvents");
-    hs->GetYaxis()->SetTitleSize(0.04);
-    hs->GetYaxis()->SetTitleOffset(1.5);
-    hs->GetYaxis()->SetLabelSize(0.04);
-    cout << "number of Events with DY = " << ee_HT_Met->Integral() << "\n";
-    cout << "number of Events with Top = " << ee_Top_Met->Integral() << "\n";
-    cout << "number of Events with Diboson = " << ee_Diboson_Met->Integral() << "\n";
-    cout << "number of Events with Triboson = " << ee_Triboson_Met->Integral() << "\n";
-    TLegend *l0 = new TLegend(0.4, 0.4, 0.90, 0.80);
+    h_ee_3Dsig2016MCbg->DrawNormalized("h");
+    ee_Sig1_3Dsig->DrawNormalized("h same");
+    ee_Sig50_3Dsig->DrawNormalized("h same");
+    ee_Sig150_3Dsig->DrawNormalized("h same");
+
+    TLegend *l1 = new TLegend(0.52, 0.7, 0.80, 0.90);
+    l1->SetTextSize(0.03);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->AddEntry(h_ee_3Dsig2016MCbg, "2016 MC background", "f");
+    l1->AddEntry(ee_Sig1_3Dsig, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(ee_Sig50_3Dsig, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(ee_Sig150_3Dsig, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+    l1->Draw();
+    */
+
+    ee_Sig150_alpha3->GetXaxis()->SetTitleSize(0.045);
+    ee_Sig150_alpha3->GetXaxis()->SetLabelSize(0.045);
+    ee_Sig150_alpha3->GetXaxis()->SetLabelOffset(0.02);
+    ee_Sig150_alpha3->GetXaxis()->SetTitleOffset(1.3);
+    ee_Sig150_alpha3->GetYaxis()->SetTitleSize(0.045);
+    ee_Sig150_alpha3->GetYaxis()->SetLabelSize(0.045);
+    ee_Sig150_alpha3->GetYaxis()->SetTitleOffset(1.4);
+    ee_Sig150_alpha3->GetYaxis()->SetTitle("nJets / Normalized");
+    ee_Sig150_alpha3->GetXaxis()->SetTitle("#alpha_{3D}");
+
+    /*
+    ee_Sig150_alpha3->DrawNormalized("h");
+    h_ee_alpha32016MCbg->DrawNormalized("h same");
+    ee_Sig1_alpha3->DrawNormalized("h same");
+    ee_Sig50_alpha3->DrawNormalized("h same");
+
+    TLegend *l1 = new TLegend(0.3, 0.7, 0.80, 0.90);
+    l1->SetTextSize(0.04);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->AddEntry(h_ee_alpha32016MCbg, "2016 MC background", "f");
+    l1->AddEntry(ee_Sig1_alpha3, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(ee_Sig50_alpha3, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(ee_Sig150_alpha3, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+    l1->Draw();
+    */
+
+    ee_Sig50_alpha->GetXaxis()->SetTitleSize(0.045);
+    ee_Sig50_alpha->GetXaxis()->SetLabelSize(0.045);
+    ee_Sig50_alpha->GetXaxis()->SetLabelOffset(0.02);
+    ee_Sig50_alpha->GetXaxis()->SetTitleOffset(1.3);
+    ee_Sig50_alpha->GetYaxis()->SetTitleSize(0.045);
+    ee_Sig50_alpha->GetYaxis()->SetLabelSize(0.045);
+    ee_Sig50_alpha->GetYaxis()->SetTitleOffset(1.4);
+    ee_Sig50_alpha->GetYaxis()->SetTitle("nJets / Normalized");
+    ee_Sig50_alpha->GetXaxis()->SetTitle("#alpha_{3D}");
+
+    /*
+    ee_Sig50_alpha->DrawNormalized("h ");
+    ee_Sig150_alpha->DrawNormalized("h same");
+    h_ee_alpha2016MCbg->DrawNormalized("h same");
+    ee_Sig1_alpha->DrawNormalized("h same");
+
+    TLegend *l1 = new TLegend(0.3, 0.7, 0.80, 0.90);
+    l1->SetTextSize(0.04);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->AddEntry(h_ee_alpha2016MCbg, "2016 MC background", "f");
+    l1->AddEntry(ee_Sig1_alpha, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+    l1->AddEntry(ee_Sig50_alpha, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+    l1->AddEntry(ee_Sig150_alpha, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+    l1->Draw();
+    */
+
+    /*
+    hs_ee_alpha2016MCbg->Draw("hist");
+
+    hs_ee_alpha2016MCbg->GetXaxis()->SetTitleSize(0.045);
+    hs_ee_alpha2016MCbg->GetXaxis()->SetLabelSize(0.045);
+    hs_ee_alpha2016MCbg->GetXaxis()->SetLabelOffset(0.02);
+    hs_ee_alpha2016MCbg->GetXaxis()->SetTitleOffset(1.3);
+    hs_ee_alpha2016MCbg->GetXaxis()->SetTitle("alpha_{3D}");
+    hs_ee_alpha2016MCbg->GetYaxis()->SetTitleSize(0.045);
+    hs_ee_alpha2016MCbg->GetYaxis()->SetLabelSize(0.045);
+    hs_ee_alpha2016MCbg->GetYaxis()->SetTitleOffset(1.4);
+    hs_ee_alpha2016MCbg->GetYaxis()->SetTitle("nJets");
+
+    TLegend *l0 = new TLegend(0.3, 0.60, 0.92, 0.88);
+    l0->SetFillStyle(0);
     l0->SetBorderSize(0);
-    l0->SetTextSize(0.03);
-    l0->SetHeader("2016MC Background");
-    l0->AddEntry(uu_HT_Met, "Drell-Yan process", "l");
-    l0->AddEntry(uu_Top_Met, "Top process", "l");
-    l0->AddEntry(uu_Diboson_Met, "Diboson process", "l");
-    l0->AddEntry(uu_Triboson_Met, "Triboson process", "l");
+    l0->SetTextSize(0.04);
+    l0->SetHeader("2016 MC Background");
+    l0->AddEntry(ee_HT_alpha_metcut, "Drell-Yan process", "f");
+    l0->AddEntry(ee_Top_alpha_metcut, "Top process", "f");
+    l0->AddEntry(ee_Diboson_alpha_metcut, "Diboson process", "f");
+    l0->AddEntry(ee_Triboson_alpha_metcut, "Triboson process", "f");
     l0->Draw();
     */
+
+    /*
+    ee_Top_alpha_metcut->GetXaxis()->SetTitleSize(0.045);
+    ee_Top_alpha_metcut->GetXaxis()->SetLabelSize(0.045);
+    ee_Top_alpha_metcut->GetXaxis()->SetLabelOffset(0.02);
+    ee_Top_alpha_metcut->GetXaxis()->SetTitleOffset(1.3);
+    ee_Top_alpha_metcut->GetYaxis()->SetTitleSize(0.045);
+    ee_Top_alpha_metcut->GetYaxis()->SetLabelSize(0.045);
+    ee_Top_alpha_metcut->GetYaxis()->SetTitleOffset(1.4);
+    ee_Top_alpha_metcut->GetYaxis()->SetTitle("nJets");
+    ee_Top_alpha_metcut->GetXaxis()->SetTitle("#alpha_{3D}");
+    ee_Top_alpha_metcut->Draw();
+
+    TLegend *l1 = new TLegend(0.2, 0.6, 0.60, 0.90);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->AddEntry(ee_Top_alpha_metcut, "Top process", "l");
+    l1->Draw();
+    */
+    /*
+    ee_HT_alpha_metcut->GetXaxis()->SetTitleSize(0.045);
+    ee_HT_alpha_metcut->GetXaxis()->SetLabelSize(0.045);
+    ee_HT_alpha_metcut->GetXaxis()->SetLabelOffset(0.02);
+    ee_HT_alpha_metcut->GetXaxis()->SetTitleOffset(1.3);
+    ee_HT_alpha_metcut->GetYaxis()->SetTitleSize(0.045);
+    ee_HT_alpha_metcut->GetYaxis()->SetLabelSize(0.045);
+    ee_HT_alpha_metcut->GetYaxis()->SetTitleOffset(1.4);
+    ee_HT_alpha_metcut->GetYaxis()->SetTitle("nJets");
+    ee_HT_alpha_metcut->GetXaxis()->SetTitle("#alpha_{3D}");
+    ee_HT_alpha_metcut->Draw();
+
+    TLegend *l1 = new TLegend(0.2, 0.6, 0.60, 0.90);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->AddEntry(ee_HT_alpha_metcut, "Drell-Yan process", "l");
+    l1->Draw();
+    */
+    /*
+    ee_Diboson_alpha_metcut->GetXaxis()->SetTitleSize(0.045);
+    ee_Diboson_alpha_metcut->GetXaxis()->SetLabelSize(0.045);
+    ee_Diboson_alpha_metcut->GetXaxis()->SetLabelOffset(0.02);
+    ee_Diboson_alpha_metcut->GetXaxis()->SetTitleOffset(1.3);
+    ee_Diboson_alpha_metcut->GetYaxis()->SetTitleSize(0.045);
+    ee_Diboson_alpha_metcut->GetYaxis()->SetLabelSize(0.045);
+    ee_Diboson_alpha_metcut->GetYaxis()->SetTitleOffset(1.4);
+    ee_Diboson_alpha_metcut->GetYaxis()->SetTitle("nJets");
+    ee_Diboson_alpha_metcut->GetXaxis()->SetTitle("#alpha_{3D}");
+    ee_Diboson_alpha_metcut->Draw();
+
+    TLegend *l1 = new TLegend(0.2, 0.6, 0.60, 0.90);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->AddEntry(ee_Diboson_alpha_metcut, "Diboson process", "l");
+    l1->Draw();
+    */
+    ee_Triboson_alpha_metcut->GetXaxis()->SetTitleSize(0.045);
+    ee_Triboson_alpha_metcut->GetXaxis()->SetLabelSize(0.045);
+    ee_Triboson_alpha_metcut->GetXaxis()->SetLabelOffset(0.02);
+    ee_Triboson_alpha_metcut->GetXaxis()->SetTitleOffset(1.3);
+    ee_Triboson_alpha_metcut->GetYaxis()->SetTitleSize(0.045);
+    ee_Triboson_alpha_metcut->GetYaxis()->SetLabelSize(0.045);
+    ee_Triboson_alpha_metcut->GetYaxis()->SetTitleOffset(1.4);
+    ee_Triboson_alpha_metcut->GetYaxis()->SetTitle("nJets");
+    ee_Triboson_alpha_metcut->GetXaxis()->SetTitle("#alpha_{3D}");
+    /*
+    ee_Triboson_alpha_metcut->Draw();
+
+    TLegend *l1 = new TLegend(0.2, 0.6, 0.60, 0.90);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.04);
+    l1->AddEntry(ee_Triboson_alpha_metcut, "Triboson process", "l");
+    l1->Draw();
+    */
+    /*
+    ee_Top_alpha_metcut->DrawNormalized("");
+    ee_Diboson_alpha_metcut->DrawNormalized(" same");
+    ee_Triboson_alpha_metcut->DrawNormalized(" same");
+    ee_HT_alpha_metcut->DrawNormalized(" same");
+    */
+    ee_Top_alpha_metcut->GetXaxis()->SetTitleSize(0.045);
+    ee_Top_alpha_metcut->GetXaxis()->SetLabelSize(0.045);
+    ee_Top_alpha_metcut->GetXaxis()->SetLabelOffset(0.02);
+    ee_Top_alpha_metcut->GetXaxis()->SetTitleOffset(1.3);
+    ee_Top_alpha_metcut->GetYaxis()->SetTitleSize(0.045);
+    ee_Top_alpha_metcut->GetYaxis()->SetLabelSize(0.045);
+    ee_Top_alpha_metcut->GetYaxis()->SetTitleOffset(1.4);
+    ee_Top_alpha_metcut->GetYaxis()->SetTitle("nJets");
+    ee_Top_alpha_metcut->GetXaxis()->SetTitle("#alpha_{3D}");
+
+    ee_Top_alpha_metcut->Draw();
+    ee_Top_heav_alpha_metcut->Draw("p same");
+    ee_Top_light_alpha_metcut->Draw("p same");
+
+    gPad->SetLogy();
+
+    TLegend *l1 = new TLegend(0.2, 0.6, 0.70, 0.90);
+    l1->SetBorderSize(0);
+    l1->SetFillStyle(0);
+    l1->SetTextSize(0.03);
+    l1->AddEntry(ee_Top_alpha_metcut, "All jet", "lEp");
+    l1->AddEntry(ee_Top_heav_alpha_metcut, "heavy flavor", "lEp");
+    l1->AddEntry(ee_Top_light_alpha_metcut, "light flavor", "lEp");
+    l1->Draw();
+
+    CMS_lumi((TPad *)canv, 5, 0, "35.9 fb^{-1}", 2016, true, "Simulation", "", "");
+
+    // gPad->SetLogy();
+
     // canv->cd(2);
-
-    //
     //  uu_HT_alpha2->GetYaxis()->SetRangeUser(-0.1,0.5);
-    //
-
     // uu_Sig150_alpha3->DrawNormalized("h same");
     // uu_HT_alpha3->DrawNormalized("h same");
 
@@ -376,7 +622,7 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     // ee_Sig1_alpha->DrawNormalized("h same");
     // ee_Sig150_alpha->DrawNormalized("h same");
     //  uu_Sig1_alpha3->DrawNormalized("h same");
-    
+    /*
             ee_HT_3Dsig->GetXaxis()->SetNdivisions(6, 5, 0);
             ee_HT_3Dsig->GetXaxis()->SetTitleOffset(1.5);
             ee_HT_3Dsig->GetXaxis()->SetTitle("log_{10}(#Chi_{3D})");
@@ -390,9 +636,7 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
             ee_HT_3Dsig->Add(ee_Triboson_3Dsig);
 
             ee_HT_3Dsig->DrawNormalized("h same");
-            ee_Sig1_3Dsig->DrawNormalized("h same");
-            ee_Sig50_3Dsig->DrawNormalized("h same");
-            ee_Sig150_3Dsig->DrawNormalized("h same");
+
 
              TLegend *l1 = new TLegend(0.15, 0.4, 0.50, 0.80);
             l1->SetBorderSize(0);
@@ -402,58 +646,59 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
             l1->AddEntry(ee_Sig1_3Dsig, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
             l1->AddEntry(ee_Sig50_3Dsig, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
             l1->AddEntry(ee_Sig150_3Dsig, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
-            l1->Draw();   
+            l1->Draw();
+            */
 
-/*     uu_HT_3Dsig->GetXaxis()->SetNdivisions(6, 5, 0);
-    uu_HT_3Dsig->GetXaxis()->SetTitleOffset(1.5);
-    uu_HT_3Dsig->GetXaxis()->SetTitle("log_{10}(#Chi_{3D})");
-    uu_HT_3Dsig->GetYaxis()->SetNdivisions(6, 5, 0);
-    uu_HT_3Dsig->GetYaxis()->SetTitleOffset(1.5);
-    uu_HT_3Dsig->GetYaxis()->SetRangeUser(-0.02, 0.17);
-    uu_HT_3Dsig->GetYaxis()->SetTitle("nTracks / Normalized");
+    /*     uu_HT_3Dsig->GetXaxis()->SetNdivisions(6, 5, 0);
+        uu_HT_3Dsig->GetXaxis()->SetTitleOffset(1.5);
+        uu_HT_3Dsig->GetXaxis()->SetTitle("log_{10}(#Chi_{3D})");
+        uu_HT_3Dsig->GetYaxis()->SetNdivisions(6, 5, 0);
+        uu_HT_3Dsig->GetYaxis()->SetTitleOffset(1.5);
+        uu_HT_3Dsig->GetYaxis()->SetRangeUser(-0.02, 0.17);
+        uu_HT_3Dsig->GetYaxis()->SetTitle("nTracks / Normalized");
 
-    uu_HT_3Dsig->Add(uu_Top_3Dsig);
-    uu_HT_3Dsig->Add(uu_Diboson_3Dsig);
-    uu_HT_3Dsig->Add(uu_Triboson_3Dsig);
+        uu_HT_3Dsig->Add(uu_Top_3Dsig);
+        uu_HT_3Dsig->Add(uu_Diboson_3Dsig);
+        uu_HT_3Dsig->Add(uu_Triboson_3Dsig);
 
-    uu_HT_3Dsig->DrawNormalized("h e same");
-    uu_Sig1_3Dsig->DrawNormalized("h same");
-    uu_Sig50_3Dsig->DrawNormalized("h same");
-    uu_Sig150_3Dsig->DrawNormalized("h same");
+        uu_HT_3Dsig->DrawNormalized("h e same");
+        uu_Sig1_3Dsig->DrawNormalized("h same");
+        uu_Sig50_3Dsig->DrawNormalized("h same");
+        uu_Sig150_3Dsig->DrawNormalized("h same");
 
-    TLegend *l1 = new TLegend(0.15, 0.4, 0.50, 0.80);
-    l1->SetBorderSize(0);
-    l1->SetFillStyle(0);
-    l1->SetTextSize(0.03);
-    l1->AddEntry(uu_HT_3Dsig, "2016 MC background", "f");
-    l1->AddEntry(uu_Sig1_3Dsig, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
-    l1->AddEntry(uu_Sig50_3Dsig, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
-    l1->AddEntry(uu_Sig150_3Dsig, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
-    l1->Draw(); */
-/*
-      ee_Sig50_alpha->GetXaxis()->SetNdivisions(6, 5, 0);
-        ee_Sig50_alpha->GetXaxis()->SetTitleOffset(1.5);
-        ee_Sig50_alpha->GetXaxis()->SetTitle("#alpha_{3D}");
-        ee_Sig50_alpha->GetYaxis()->SetNdivisions(6, 5, 0);
-        ee_Sig50_alpha->GetYaxis()->SetTitleOffset(1.5);
-        ee_Sig50_alpha->GetYaxis()->SetTitle("nJets / Normalized");
-
-        ee_Sig50_alpha->DrawNormalized("h same");
-        ee_HT_alpha->DrawNormalized("h same");
-        ee_Sig1_alpha->DrawNormalized("h same");
-        ee_Sig150_alpha->DrawNormalized("h same");
-
-        TLegend *l1 = new TLegend(0.3, 0.4, 0.50, 0.80);
+        TLegend *l1 = new TLegend(0.15, 0.4, 0.50, 0.80);
         l1->SetBorderSize(0);
         l1->SetFillStyle(0);
         l1->SetTextSize(0.03);
-        l1->AddEntry(ee_HT_alpha, "2016 MC background", "f");
-        l1->AddEntry(ee_Sig1_alpha, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
-        l1->AddEntry(ee_Sig50_alpha, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
-        l1->AddEntry(ee_Sig150_alpha, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
-        l1->Draw();
-        */
-     
+        l1->AddEntry(uu_HT_3Dsig, "2016 MC background", "f");
+        l1->AddEntry(uu_Sig1_3Dsig, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+        l1->AddEntry(uu_Sig50_3Dsig, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+        l1->AddEntry(uu_Sig150_3Dsig, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+        l1->Draw(); */
+    /*
+          ee_Sig50_alpha->GetXaxis()->SetNdivisions(6, 5, 0);
+            ee_Sig50_alpha->GetXaxis()->SetTitleOffset(1.5);
+            ee_Sig50_alpha->GetXaxis()->SetTitle("#alpha_{3D}");
+            ee_Sig50_alpha->GetYaxis()->SetNdivisions(6, 5, 0);
+            ee_Sig50_alpha->GetYaxis()->SetTitleOffset(1.5);
+            ee_Sig50_alpha->GetYaxis()->SetTitle("nJets / Normalized");
+
+            ee_Sig50_alpha->DrawNormalized("h same");
+            ee_HT_alpha->DrawNormalized("h same");
+            ee_Sig1_alpha->DrawNormalized("h same");
+            ee_Sig150_alpha->DrawNormalized("h same");
+
+            TLegend *l1 = new TLegend(0.3, 0.4, 0.50, 0.80);
+            l1->SetBorderSize(0);
+            l1->SetFillStyle(0);
+            l1->SetTextSize(0.03);
+            l1->AddEntry(ee_HT_alpha, "2016 MC background", "f");
+            l1->AddEntry(ee_Sig1_alpha, "m_{#chi_{2}} = 1 GeV, ctau = 1 mm", "lE");
+            l1->AddEntry(ee_Sig50_alpha, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
+            l1->AddEntry(ee_Sig150_alpha, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
+            l1->Draw();
+            */
+
     /* uu_Sig50_alpha->GetXaxis()->SetNdivisions(6, 5, 0);
     uu_Sig50_alpha->GetXaxis()->SetTitleOffset(1.5);
     uu_Sig50_alpha->GetXaxis()->SetTitle("#alpha_{3D}");
@@ -475,12 +720,7 @@ void ana_3Dsig(TString inputfile = "./DY/ee_DY_alpha.root")
     l1->AddEntry(uu_Sig50_alpha, "m_{#chi_{2}} = 50 GeV, ctau = 10 mm", "lE");
     l1->AddEntry(uu_Sig150_alpha, "m_{#chi_{2}} = 150 GeV, ctau = 1 mm", "lE");
     l1->Draw(); */
-    int iPeriod = 0;
-    int iPos = 33;
-    CMS_lumi(canv, iPeriod, iPos);
-    canv->Update();
-    canv->RedrawAxis();
-    TString canvName = "2016MCbg_Met";
+
     // canv->Print(canvName + ".pdf", ".pdf");
     //   canv->GetFrame()->Draw();
 
